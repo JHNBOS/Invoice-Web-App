@@ -1,16 +1,15 @@
 export default class Address {
-    street: string;
-    number: number;
-    suffix: string;
-    postal_code: string;
-    city: string;
-    country: string;
+    street: string = null;
+    number: number = null;
+    suffix: string = null;
+    postal_code: string = null;
+    city: string = null;
+    country: string = null;
 
     public isValid(): boolean {
-        let valid = false;
         if (this.street != null && this.number != null && this.postal_code != null && this.city != null && this.country != null) {
-            valid = true;
+            return true;
         }
-        return valid;
+        return false;
     }
 }

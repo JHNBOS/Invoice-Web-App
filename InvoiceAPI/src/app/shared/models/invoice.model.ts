@@ -1,11 +1,12 @@
-import InvoiceRow from './invoice-row.model';
+import InvoiceItem from './invoice_item.model';
 
 export default class Invoice {
     invoice_number: number;
-    debtor_ssn: number;
+    customer_id: string;
     created_on: Date;
     expired_on: Date;
     total: number;
     discount: number;
     comment: string;
+    items: InvoiceItem[] = [];
 }

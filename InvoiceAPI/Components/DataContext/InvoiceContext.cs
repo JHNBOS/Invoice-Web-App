@@ -212,6 +212,10 @@ namespace InvoiceAPI.Components.DataContext
                 entity.Property(e => e.Quantity)
                     .HasColumnName("quantity")
                     .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tax)
+                    .HasColumnName("tax")
+                    .HasColumnType("int(11)");
             });
 
             modelBuilder.Entity<User>(entity =>
