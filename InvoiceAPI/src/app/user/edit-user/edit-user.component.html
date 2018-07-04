@@ -1,0 +1,52 @@
+<div class="container">
+
+  <!-- Row -->
+  <div class="row">
+
+    <div class="col-sm-12 col-md-10 offset-md-1">
+      <div class="form-horizontal" *ngIf="currentUser">
+
+        <!-- User ID and email -->
+        <div class="form-row my-4">
+          <div class="col-sm-12 col-md-6">
+            <label for="userId">User ID</label>
+            <input type="text" class="form-control" id="userId" name="user_id" [(ngModel)]="currentUser.user_id" readonly>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label for="email">E-mail</label>
+            <input type="text" class="form-control" id="email" [(ngModel)]="currentUser.email" readonly>
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- Names -->
+        <div class="form-row my-4">
+          <div class="col-sm-12 col-md-6">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" [(ngModel)]="currentUser.first_name">
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" [(ngModel)]="currentUser.last_name">
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- Password -->
+        <div class="form-row my-4">
+          <div class="col-sm-12 col-md-6">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" [(ngModel)]="currentUser.password">
+          </div>
+          <div class="col-sm-12 col-md-6">
+          </div>
+        </div>
+
+        <button [disabled]="!currentUser.isValid()" id="btnSave" type="button" class="btn btn-primary float-right my-4" (click)="submitForm()">Save</button>
+
+      </div>
+
+      <!-- End of container -->
+    </div>

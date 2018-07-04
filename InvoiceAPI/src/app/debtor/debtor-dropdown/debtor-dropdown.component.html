@@ -1,0 +1,3 @@
+<div class="mx-auto" *ngIf="isReady">
+  <ng-select [items]="debtors" bindLabel="full" [(ngModel)]="selectedDebtor" (change)="setDebtor($event)" placeholder="Select a debtor"></ng-select>
+</div>

@@ -1,0 +1,83 @@
+<div class="container">
+
+  <!-- Row -->
+  <div class="row">
+
+    <div class="col-sm-12 col-md-10 offset-md-1">
+      <div class="form-horizontal" *ngIf="company && address">
+
+        <!-- Business Number and email -->
+        <div class="form-row my-4">
+          <div class="col-sm-12 col-md-6">
+            <label for="businessNumber">Business Number</label>
+            <input type="number" class="form-control" id="businessNumber" [(ngModel)]="company.business_number" readonly>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label for="email">E-mail</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="company.email" readonly>
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- Name -->
+        <div class="form-row my-4">
+          <div class="col-sm-12 col-md-6">
+            <label for="companyName">Name of Company</label>
+            <input type="text" class="form-control" id="companyName" [(ngModel)]="company.company_name" readonly>
+          </div>
+        </div>
+
+        <!-- Phone and a bank account -->
+        <div class="form-row my-4">
+          <div class="col-sm-12 col-md-6">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" id="phone" [(ngModel)]="company.phone" readonly>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label for="bank">Bank Account</label>
+            <input type="text" class="form-control" id="bank" [(ngModel)]="company.bank_account" readonly>
+          </div>
+        </div>
+
+
+        <hr />
+
+        <!-- Address -->
+        <div class="form-row my-4">
+          <div class="col-sm-12 col-md-6">
+            <label for="street">Street</label>
+            <input type="text" class="form-control" id="street" [(ngModel)]="address.street" readonly>
+          </div>
+          <div class="col-sm-12 col-md-3">
+            <label for="number">Number</label>
+            <input type="number" class="form-control" id="number" [(ngModel)]="address.number" readonly>
+          </div>
+          <div class="col-sm-12 col-md-3">
+            <label for="suffix">Suffix</label>
+            <input type="text" class="form-control" id="suffix" [(ngModel)]="address.suffix" readonly>
+          </div>
+        </div>
+
+        <div class="form-row my-4">
+          <div class="col-sm-12 col-md-3">
+            <label for="postal">Postal Code</label>
+            <input type="text" class="form-control" id="postal" [(ngModel)]="address.postal_code" readonly>
+          </div>
+          <div class="col-sm-12 col-md-5">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" [(ngModel)]="address.city" readonly>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <label for="country">Country</label>
+            <input type="text" class="form-control" id="country" [(ngModel)]="address.country" readonly>
+          </div>
+        </div>
+
+
+        <a id="btnChange" class="btn btn-primary float-right my-4" [routerLink]="['../../edit', company.business_number]">Edit</a>
+
+      </div>
+
+      <!-- End of container -->
+    </div>

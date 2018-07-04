@@ -10,7 +10,7 @@ namespace InvoiceAPI.Components.Services.Interfaces
         Task<ICollection<Address>> GetAddresses();
         Task<ICollection<Address>> GetAddressesByCity(string city);
         Task<ICollection<Address>> GetAddressesByPostal(string postal);
-        Task<Address> GetAddressByPostalAndNumber(int number, string suffix, string postal);
+        Task<Address> GetAddressByPostalAndNumber(int number, string postal);
         Task<Address> Insert(Address address);
         Task<bool> Delete(int number, string suffix, string postal);
     }

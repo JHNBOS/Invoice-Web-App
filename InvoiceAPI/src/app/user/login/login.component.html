@@ -1,0 +1,27 @@
+<div class="container">
+
+  <!-- Row -->
+  <div class="row">
+
+    <div class="col-sm-12 col-md-10 offset-md-1">
+      <div class="form-horizontal">
+
+        <!-- User ID and email -->
+        <div class="form-row mb-2">
+          <div class="col-sm-12 col-md-8 offset-md-2 my-3">
+            <label for="email">E-mail</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="email">
+          </div>
+          <div class="col-sm-12 col-md-8 offset-md-2 my-3">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" [(ngModel)]="password">
+          </div>
+          <div class="col-sm-12 col-md-8 offset-md-2 mt-4 text-center">
+            <input id="btnLogin" type="button" class="btn btn-primary mb-4 mx-auto" value="Sign In" (click)="checkCredentials()" />
+          </div>
+        </div>
+
+      </div>
+
+      <!-- End of container -->
+    </div>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -40,8 +40,8 @@ namespace InvoiceAPI
                 c.SwaggerDoc("v1", new Info { Title = "Invoice App API", Version = "v1" });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 
-                // Set the comments path for the Swagger JSON and UI.
-                var xmlFile = $"{Assembly.GetEntryAssembly().GetName().Name}.xml";
+          // Set the comments path for the Swagger JSON and UI.
+          var xmlFile = $"{Assembly.GetEntryAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
@@ -58,10 +58,17 @@ namespace InvoiceAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
+            app.Use(async (context, next) =>
             {
-                app.UseDeveloperExceptionPage();
-            }
+                await next();
+                if (context.Response.StatusCode == 404 &&
+             !Path.HasExtension(context.Request.Path.Value) &&
+             !context.Request.Path.Value.StartsWith("/api/"))
+                {
+                    context.Request.Path = "/index.html";
+                    await next();
+                }
+            });
 
             app.UseMvcWithDefaultRoute();
             app.UseDefaultFiles();
@@ -71,7 +78,7 @@ namespace InvoiceAPI
             app.UseSwaggerUI(c =>
             {
                 c.RoutePrefix = "api";
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Invoice App API");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HINT Reservation System API");
             });
 
             app.UseCors("AllowAll");
@@ -79,9 +86,14 @@ namespace InvoiceAPI
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "api",
-                    template: "api/{controller}/{action}/{id?}"
-                );
+              name: "readings",
+              template: "api/readings/{action}/{id?}",
+              defaults: new { controller = "RoomReadings" }
+          );
+                routes.MapRoute(
+              name: "api",
+              template: "api/{controller}/{action}/{id?}"
+          );
             });
         }
     }

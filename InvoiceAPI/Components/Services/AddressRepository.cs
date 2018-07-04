@@ -36,10 +36,9 @@ namespace InvoiceAPI.Components.Services
             return response;
         }
 
-        public async Task<Address> GetAddressByPostalAndNumber(int number, string suffix, string postal)
+        public async Task<Address> GetAddressByPostalAndNumber(int number, string postal)
         {
-            var response = await _context.Addresses.FirstOrDefaultAsync(q => q.PostalCode.ToLower() == postal.ToLower() && q.Suffix.ToLower() == suffix.ToLower()
-                && q.Number == number);
+            var response = await _context.Addresses.FirstOrDefaultAsync(q => q.PostalCode.ToLower() == postal.ToLower() && q.Number == number);
             return response;
         }
 

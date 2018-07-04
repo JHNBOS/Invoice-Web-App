@@ -18,9 +18,9 @@ namespace InvoiceAPI
                 .UseIISIntegration()
                 .UseKestrel(options =>
                 {
-                    options.Listen(IPAddress.Any, 89);
+                    options.Listen(IPAddress.Any, 80);
                 })
-                .UseUrls("http://*:89/")
+                .UseUrls("http://*:80/")
                 .Build();
     }
 }
