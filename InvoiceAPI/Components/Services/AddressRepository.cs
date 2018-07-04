@@ -52,8 +52,17 @@ namespace InvoiceAPI.Components.Services
 
         public async Task<bool> Delete(int number, string suffix, string postal)
         {
-            Address address = await _context.Addresses.FirstOrDefaultAsync(q => q.PostalCode.ToLower() == postal.ToLower() && q.Suffix.ToLower() == suffix.ToLower()
-                && q.Number == number);
+            Address address = null;
+            if (!String.IsNullOrEmpty(suffix))
+            {
+                address = await _context.Addresses.FirstOrDefaultAsync(q => q.PostalCode.ToLower() == postal.ToLower() && q.Suffix.ToLower() == suffix.ToLower()
+                        && q.Number == number);
+            }
+            else
+            {
+                address = await _context.Addresses.FirstOrDefaultAsync(q => q.PostalCode.ToLower() == postal.ToLower() && q.Number == number);
+            }
+
             _context.Addresses.Remove(address);
 
             var result = await _context.SaveChangesAsync();

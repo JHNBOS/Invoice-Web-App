@@ -16,7 +16,7 @@ namespace ShareListAPI.Controllers
 {
     [EnableCors("AllowAll")]
     [Produces("application/json")]
-    [Route("api/users")]
+    [Route("api/debtors")]
     public class DebtorsController : Controller
     {
         private IDebtorRepository _repo;
