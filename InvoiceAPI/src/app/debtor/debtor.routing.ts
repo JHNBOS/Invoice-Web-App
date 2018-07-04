@@ -13,7 +13,7 @@ const routes: Routes = [
         path: 'debtors',
         children: [
             { path: '', component: DebtorComponent, canActivate: [AuthGuard], data: { title: 'Debtors' } },
-            { path: 'add', component: AddDebtorComponent, canActivate: [AuthGuard], data: { title: 'Add Debtor' } },
+            { path: 'add/:company', component: AddDebtorComponent, canActivate: [AuthGuard], data: { title: 'Add Debtor' } },
             { path: 'details/:id', component: DetailDebtorComponent, canActivate: [AuthGuard], data: { title: 'Debtor Details' } },
             { path: 'edit/:id', component: EditDebtorComponent, canActivate: [AuthGuard], data: { title: 'Edit Debtor' } },
             { path: 'import', component: ImportDebtorComponent, canActivate: [AuthGuard], data: { title: 'Import Debtors' } }

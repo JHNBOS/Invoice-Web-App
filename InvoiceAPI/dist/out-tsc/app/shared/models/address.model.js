@@ -2,13 +2,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var Address = /** @class */ (function () {
     function Address() {
+        this.street = null;
+        this.number = null;
+        this.suffix = null;
+        this.postal_code = null;
+        this.city = null;
+        this.country = null;
     }
     Address.prototype.isValid = function () {
-        var valid = false;
         if (this.street != null && this.number != null && this.postal_code != null && this.city != null && this.country != null) {
-            valid = true;
+            return true;
         }
-        return valid;
+        return false;
     };
     return Address;
 }());

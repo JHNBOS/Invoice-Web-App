@@ -19,7 +19,7 @@ var routes = [
         path: 'debtors',
         children: [
             { path: '', component: debtor_component_1.DebtorComponent, canActivate: [authguard_service_1.AuthGuard], data: { title: 'Debtors' } },
-            { path: 'add', component: add_debtor_component_1.AddDebtorComponent, canActivate: [authguard_service_1.AuthGuard], data: { title: 'Add Debtor' } },
+            { path: 'add/:company', component: add_debtor_component_1.AddDebtorComponent, canActivate: [authguard_service_1.AuthGuard], data: { title: 'Add Debtor' } },
             { path: 'details/:id', component: detail_debtor_component_1.DetailDebtorComponent, canActivate: [authguard_service_1.AuthGuard], data: { title: 'Debtor Details' } },
             { path: 'edit/:id', component: edit_debtor_component_1.EditDebtorComponent, canActivate: [authguard_service_1.AuthGuard], data: { title: 'Edit Debtor' } },
             { path: 'import', component: import_debtor_component_1.ImportDebtorComponent, canActivate: [authguard_service_1.AuthGuard], data: { title: 'Import Debtors' } }

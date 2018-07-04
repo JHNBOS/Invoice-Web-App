@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var Invoice = /** @class */ (function () {
     function Invoice() {
+        this.items = [];
     }
     return Invoice;
 }());

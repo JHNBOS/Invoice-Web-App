@@ -12,45 +12,41 @@ import Address from '../models/address.model';
 @Injectable()
 export class AddressService {
 
-  private apiUrl = 'http://jhnbos.nl/invoice-api/addresses/';
+    private apiUrl = 'http://localhost/api/address/';
 
-  constructor(public http: HttpClient) { }
+    constructor(public http: HttpClient) { }
 
-  getAddress(postal: string, number: number): Observable<Address> {
-    return this.http.get<any>(this.apiUrl + 'read.php?postal=' + postal + '&number=' + number)
-      .map(res => res[0] as Address)
-      .share()
-      .catch(this.handleError);
-  }
-
-  getAllAddresses(): Observable<Address[]> {
-    return this.http.get<any>(this.apiUrl + 'readAll.php')
-      .map(res => res as Address[])
-      .share()
-      .catch(this.handleError);
-  }
-
-  createAddress(address: Address): Observable<any> {
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-
-    return this.http.post(this.apiUrl + 'create.php', address)
-      .map(res => res as Address[])
-      .share()
-      .catch(this.handleError);
-  }
-
-  private handleError(error) {
-    // In a real world app, you might use a remote logging infrastructure
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
+    getAll(): Observable<Address[]> {
+        return this.http.get(this.apiUrl + 'getAll')
+            .catch(this.handleError);
     }
-    console.log(errMsg);
-    return Observable.throw(errMsg);
-  }
+
+    getByCity(city: string): Observable<Address[]> {
+        return this.http.get(this.apiUrl + 'getByCity?city=' + city)
+            .catch(this.handleError);
+    }
+
+    getByPostal(postal: string): Observable<Address[]> {
+        return this.http.get(this.apiUrl + 'getByPostal?postal=' + postal)
+            .catch(this.handleError);
+    }
+
+    getAddress(postal: string, number: number): Observable<Address> {
+        return this.http.get<any>(this.apiUrl + 'getByNumberAndPostalCode?number=' + number + '&postal=' + postal)
+            .catch(this.handleError);
+    }
+
+    create(address: Address): Observable<any> {
+        return this.http.post(this.apiUrl + 'create', address)
+            .catch(this.handleError);
+    }
+
+    delete(number: number, suffix: string, postal: string): Observable<boolean> {
+        return this.http.delete(this.apiUrl + 'delete?number=' + number + '&suffix=' + suffix + '&postal=' + postal)
+            .catch(this.handleError);
+    }
+
+    private handleError(error: any) {
+        return Observable.throw(error);
+    }
 }

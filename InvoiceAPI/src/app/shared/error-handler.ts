@@ -9,7 +9,7 @@ export class CustomErrorHandler implements ErrorHandler {
 
     constructor(private ngZone: NgZone, private toastyService: ToastyService) {
         this.toastOptions = {
-            title: 'Oops, an error occured',
+            title: 'Error',
             msg: '',
             theme: ' bootstrap',
             showClose: true,
@@ -25,17 +25,15 @@ export class CustomErrorHandler implements ErrorHandler {
 
                 // Set message based on error
                 if (error instanceof HttpErrorResponse) {
-                    this.toastOptions.msg = 'An error occured while your request was being processed, please try again!';
-                    console.error(date, 'HTTP Error.', error.message, 'Status code:', (<HttpErrorResponse>error).status);
+                    this.toastOptions.msg = error.error;
                 } else if (error instanceof TypeError) {
-                    this.toastOptions.msg = 'An error occured, please try again!';
-                    console.error(date, 'Typescript Error', error.message);
+                    this.toastOptions.msg = error.message;
                 } else if (error instanceof Error) {
-                    this.toastOptions.msg = 'An error occured, please try again!';
-                    console.error(date, 'General Error', error.message);
+                    this.toastOptions.msg = error.message;
+                } else if (error instanceof Response) {
+                    this.toastOptions.msg = error.statusText;
                 } else {
-                    this.toastOptions.msg = 'Something unexpected happened, please try again!';
-                    console.error(date, 'Unexpected Error', error.message);
+                    this.toastOptions.msg = error;
                 }
 
                 // Show message
@@ -43,5 +41,4 @@ export class CustomErrorHandler implements ErrorHandler {
             }
         });
     }
-
 }

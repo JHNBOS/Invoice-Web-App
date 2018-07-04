@@ -29,10 +29,10 @@ namespace ShareListAPI.Controllers
         /// <summary>
         /// Gets a list with all users.
         /// </summary>
-        [HttpGet("getUsers")]
+        [HttpGet("getAll")]
         [ProducesResponseType(typeof(IEnumerable<UserViewModel>), 200)]
         [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> GetAll()
         {
             //Get data
             var data = await _repo.GetUsers();

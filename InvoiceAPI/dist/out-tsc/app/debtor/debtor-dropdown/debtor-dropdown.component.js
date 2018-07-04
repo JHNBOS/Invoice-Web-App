@@ -83,10 +83,10 @@ var DebtorDropdownComponent = /** @class */ (function () {
             templateUrl: './debtor-dropdown.component.html',
             styleUrls: ['./debtor-dropdown.component.scss']
         }),
-        __metadata("design:paramtypes", [debtor_service_1.DebtorService, lives_at_service_1.LivesAtService,
-            address_service_1.AddressService])
+        __metadata("design:paramtypes", [debtor_service_1.DebtorService, typeof (_a = typeof lives_at_service_1.LivesAtService !== "undefined" && lives_at_service_1.LivesAtService) === "function" && _a || Object, address_service_1.AddressService])
     ], DebtorDropdownComponent);
     return DebtorDropdownComponent;
+    var _a;
 }());
 exports.DebtorDropdownComponent = DebtorDropdownComponent;
 //# sourceMappingURL=debtor-dropdown.component.js.map

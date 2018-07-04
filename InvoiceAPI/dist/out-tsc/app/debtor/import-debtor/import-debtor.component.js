@@ -128,10 +128,10 @@ var ImportDebtorComponent = /** @class */ (function () {
             styleUrls: ['./import-debtor.component.scss']
         }),
         __metadata("design:paramtypes", [platform_browser_1.Title, debtor_service_1.DebtorService,
-            address_service_1.AddressService, lives_at_service_1.LivesAtService,
-            ng2_toasty_1.ToastyService, router_1.ActivatedRoute, router_1.Router])
+            address_service_1.AddressService, typeof (_a = typeof lives_at_service_1.LivesAtService !== "undefined" && lives_at_service_1.LivesAtService) === "function" && _a || Object, ng2_toasty_1.ToastyService, router_1.ActivatedRoute, router_1.Router])
     ], ImportDebtorComponent);
     return ImportDebtorComponent;
+    var _a;
 }());
 exports.ImportDebtorComponent = ImportDebtorComponent;
 //# sourceMappingURL=import-debtor.component.js.map

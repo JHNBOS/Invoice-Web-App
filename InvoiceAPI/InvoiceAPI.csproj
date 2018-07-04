@@ -33,7 +33,6 @@
   <ItemGroup>
     <TypeScriptCompile Include="src\app\shared\models\address.model.ts" />
     <TypeScriptCompile Include="src\app\shared\models\debtor.model.ts" />
-    <TypeScriptCompile Include="src\app\shared\models\viewmodels\debtor.viewmodel.ts" />
     <TypeScriptCompile Include="src\app\shared\models\invoice.model.ts" />
     <TypeScriptCompile Include="src\app\shared\models\user.model.ts" />
     <TypeScriptCompile Include="src\app\shared\authentication.service.ts" />

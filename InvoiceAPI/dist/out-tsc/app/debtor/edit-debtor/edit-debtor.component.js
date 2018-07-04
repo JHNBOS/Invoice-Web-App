@@ -76,10 +76,11 @@ var EditDebtorComponent = /** @class */ (function () {
             styleUrls: ['./edit-debtor.component.scss']
         }),
         __metadata("design:paramtypes", [platform_browser_1.Title, router_1.ActivatedRoute,
-            debtor_service_1.DebtorService, lives_at_service_1.LivesAtService, address_service_1.AddressService,
+            debtor_service_1.DebtorService, typeof (_a = typeof lives_at_service_1.LivesAtService !== "undefined" && lives_at_service_1.LivesAtService) === "function" && _a || Object, address_service_1.AddressService,
             router_1.Router])
     ], EditDebtorComponent);
     return EditDebtorComponent;
+    var _a;
 }());
 exports.EditDebtorComponent = EditDebtorComponent;
 //# sourceMappingURL=edit-debtor.component.js.map

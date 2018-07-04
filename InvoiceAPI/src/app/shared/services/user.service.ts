@@ -13,69 +13,41 @@ import User from '../models/user.model';
 @Injectable()
 export class UserService {
 
-  private apiUrl = 'http://jhnbos.nl/invoice-api/users/';
+    private apiUrl = 'http://localhost/api/users/';
 
-  constructor(public http: HttpClient) {}
+    constructor(public http: HttpClient) { }
 
-  getUserByEmail(email: string): Observable<User> {
-    return this.http.get<any>(this.apiUrl + 'read.php?email=' + email)
-      .map(res => res[0] as User)
-      .share()
-      .catch(this.handleError);
-  }
+    getByEmail(email: string): Observable<User> {
+        return this.http.get(this.apiUrl + 'getByEmail?email=' + email)
+            .catch(this.handleError);
+    }
 
-  getUserById(id: number): Observable<User> {
-    return this.http.get<any>(this.apiUrl + 'read.php?id=' + id)
-      .map(res => res[0] as User)
-      .share()
-      .catch(this.handleError);
-  }
+    getAll(): Observable<User[]> {
+        return this.http.get<any>(this.apiUrl + 'getAll')
+            .catch(this.handleError);
+    }
 
-  getAllUsers(): Observable<any> {
-    return this.http.get<any>(this.apiUrl + 'readAll.php')
-      .map(res => res as User[])
-      .catch(this.handleError);
-  }
+    checkCredentials(email: string, password: string): Observable<User> {
+        return this.http.get(this.apiUrl + 'authenticate?email=' + email + '&password=' + password)
+            .catch(this.handleError);
+    }
 
-  checkCredentials(email: string, password: string): Observable<User> {
-    return this.http.post<any>(this.apiUrl + 'login.php', { email: email, password: password})
-      .map(res => res as User[])
-      .share()
-      .catch(this.handleError);
-  }
+    create(user: User): Observable<User> {
+        return this.http.post(this.apiUrl + 'create', user)
+            .catch(this.handleError);
+    }
 
-  createUser(user: User): Observable<any> {
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
+    update(user: User): Observable<User> {
+        return this.http.put(this.apiUrl + 'update', user)
+            .catch(this.handleError);
+    }
 
-    return this.http.post(this.apiUrl + 'create.php', user)
-      .map(res => res as User[])
-      .share()
-      .catch(this.handleError);
-  }
+    delete(email: string): Observable<boolean> {
+        return this.http.delete(this.apiUrl + 'delete?email=' + email)
+            .catch(this.handleError);
+    }
 
-  updateUser(user: User): Observable<any> {
-    return this.http.post(this.apiUrl + 'update.php', user)
-      .map(res => res as User[])
-      .share()
-      .catch(this.handleError);
-  }
-
-  deleteUserByEmail(email: string) {
-    return this.http.post(this.apiUrl + 'delete.php?email=' + email, {})
-      .map(res => res)
-      .share()
-      .catch(this.handleError);
-  }
-
-  deleteUserById(id: number) {
-    return this.http.post(this.apiUrl + 'delete.php?id=' + id, {})
-      .map(res => res)
-      .share()
-      .catch(this.handleError);
-  }
-
-  private handleError(error: Response) {
-    return Observable.throw(error.statusText);
-  }
+    private handleError(error: any) {
+        return Observable.throw(error);
+    }
 }

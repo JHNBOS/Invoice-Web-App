@@ -19,59 +19,34 @@ require("rxjs/add/operator/share");
 var UserService = /** @class */ (function () {
     function UserService(http) {
         this.http = http;
-        this.apiUrl = 'http://jhnbos.nl/invoice-api/users/';
+        this.apiUrl = 'http://localhost/api/users/';
     }
-    UserService.prototype.getUserByEmail = function (email) {
-        return this.http.get(this.apiUrl + 'read.php?email=' + email)
-            .map(function (res) { return res[0]; })
-            .share()
+    UserService.prototype.getByEmail = function (email) {
+        return this.http.get(this.apiUrl + 'getByEmail?email=' + email)
             .catch(this.handleError);
     };
-    UserService.prototype.getUserById = function (id) {
-        return this.http.get(this.apiUrl + 'read.php?id=' + id)
-            .map(function (res) { return res[0]; })
-            .share()
-            .catch(this.handleError);
-    };
-    UserService.prototype.getAllUsers = function () {
-        return this.http.get(this.apiUrl + 'readAll.php')
-            .map(function (res) { return res; })
+    UserService.prototype.getAll = function () {
+        return this.http.get(this.apiUrl + 'getAll')
             .catch(this.handleError);
     };
     UserService.prototype.checkCredentials = function (email, password) {
-        return this.http.post(this.apiUrl + 'login.php', { email: email, password: password })
-            .map(function (res) { return res; })
-            .share()
+        return this.http.get(this.apiUrl + 'authenticate?email=' + email + '&password=' + password)
             .catch(this.handleError);
     };
-    UserService.prototype.createUser = function (user) {
-        var headers = new http_1.HttpHeaders();
-        headers.append('Content-Type', 'application/json');
-        return this.http.post(this.apiUrl + 'create.php', user)
-            .map(function (res) { return res; })
-            .share()
+    UserService.prototype.create = function (user) {
+        return this.http.post(this.apiUrl + 'create', user)
             .catch(this.handleError);
     };
-    UserService.prototype.updateUser = function (user) {
-        return this.http.post(this.apiUrl + 'update.php', user)
-            .map(function (res) { return res; })
-            .share()
+    UserService.prototype.update = function (user) {
+        return this.http.put(this.apiUrl + 'update', user)
             .catch(this.handleError);
     };
-    UserService.prototype.deleteUserByEmail = function (email) {
-        return this.http.post(this.apiUrl + 'delete.php?email=' + email, {})
-            .map(function (res) { return res; })
-            .share()
-            .catch(this.handleError);
-    };
-    UserService.prototype.deleteUserById = function (id) {
-        return this.http.post(this.apiUrl + 'delete.php?id=' + id, {})
-            .map(function (res) { return res; })
-            .share()
+    UserService.prototype.delete = function (email) {
+        return this.http.delete(this.apiUrl + 'delete?email=' + email)
             .catch(this.handleError);
     };
     UserService.prototype.handleError = function (error) {
-        return Observable_1.Observable.throw(error.statusText);
+        return Observable_1.Observable.throw(error);
     };
     UserService = __decorate([
         core_1.Injectable(),

@@ -28,10 +28,10 @@ namespace ShareListAPI.Controllers
         /// <summary>
         /// Gets a list with all addresses.
         /// </summary>
-        [HttpGet("getAddresses")]
+        [HttpGet("getAll")]
         [ProducesResponseType(typeof(IEnumerable<AddressViewModel>), 200)]
         [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> GetAddresses()
+        public async Task<IActionResult> GetAll()
         {
             //Get data
             var data = await _repo.GetAddresses();
@@ -58,10 +58,10 @@ namespace ShareListAPI.Controllers
         /// Gets a list with all addresses by city.
         /// </summary>
         /// <param name="city">Name of city</param>
-        [HttpGet("getAddressesByCity")]
+        [HttpGet("getByCity")]
         [ProducesResponseType(typeof(IEnumerable<AddressViewModel>), 200)]
         [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> GetAddressesByCity(string city)
+        public async Task<IActionResult> GetByCity(string city)
         {
             if (String.IsNullOrEmpty(city))
             {
@@ -93,10 +93,10 @@ namespace ShareListAPI.Controllers
         /// Gets a list with all addresses by postal code.
         /// </summary>
         /// <param name="postal">Postal code of addresses</param>
-        [HttpGet("getAddressesByCity")]
+        [HttpGet("getByPostal")]
         [ProducesResponseType(typeof(IEnumerable<AddressViewModel>), 200)]
         [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> GetAddressesByPostal(string postal)
+        public async Task<IActionResult> GetByPostal(string postal)
         {
             if (String.IsNullOrEmpty(postal))
             {

@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
 var Observable_1 = require("rxjs/Observable");
-var http_2 = require("@angular/http");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/map");
 require("rxjs/add/observable/throw");
@@ -20,41 +19,34 @@ require("rxjs/add/operator/share");
 var AddressService = /** @class */ (function () {
     function AddressService(http) {
         this.http = http;
-        this.apiUrl = 'http://jhnbos.nl/invoice-api/addresses/';
+        this.apiUrl = 'http://localhost/api/address/';
     }
+    AddressService.prototype.getAll = function () {
+        return this.http.get(this.apiUrl + 'getAll')
+            .catch(this.handleError);
+    };
+    AddressService.prototype.getByCity = function (city) {
+        return this.http.get(this.apiUrl + 'getByCity?city=' + city)
+            .catch(this.handleError);
+    };
+    AddressService.prototype.getByPostal = function (postal) {
+        return this.http.get(this.apiUrl + 'getByPostal?postal=' + postal)
+            .catch(this.handleError);
+    };
     AddressService.prototype.getAddress = function (postal, number) {
-        return this.http.get(this.apiUrl + 'read.php?postal=' + postal + '&number=' + number)
-            .map(function (res) { return res[0]; })
-            .share()
+        return this.http.get(this.apiUrl + 'getByNumberAndPostalCode?number=' + number + '&postal=' + postal)
             .catch(this.handleError);
     };
-    AddressService.prototype.getAllAddresses = function () {
-        return this.http.get(this.apiUrl + 'readAll.php')
-            .map(function (res) { return res; })
-            .share()
+    AddressService.prototype.create = function (address) {
+        return this.http.post(this.apiUrl + 'create', address)
             .catch(this.handleError);
     };
-    AddressService.prototype.createAddress = function (address) {
-        var headers = new http_1.HttpHeaders();
-        headers.append('Content-Type', 'application/json');
-        return this.http.post(this.apiUrl + 'create.php', address)
-            .map(function (res) { return res; })
-            .share()
+    AddressService.prototype.delete = function (number, suffix, postal) {
+        return this.http.delete(this.apiUrl + 'delete?number=' + number + '&suffix=' + suffix + '&postal=' + postal)
             .catch(this.handleError);
     };
     AddressService.prototype.handleError = function (error) {
-        // In a real world app, you might use a remote logging infrastructure
-        var errMsg;
-        if (error instanceof http_2.Response) {
-            var body = error.json() || '';
-            var err = body.error || JSON.stringify(body);
-            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
-        }
-        else {
-            errMsg = error.message ? error.message : error.toString();
-        }
-        console.log(errMsg);
-        return Observable_1.Observable.throw(errMsg);
+        return Observable_1.Observable.throw(error);
     };
     AddressService = __decorate([
         core_1.Injectable(),

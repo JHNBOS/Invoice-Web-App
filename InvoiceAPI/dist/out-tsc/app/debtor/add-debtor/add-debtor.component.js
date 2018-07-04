@@ -10,45 +10,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var debtor_model_1 = require("../../shared/models/debtor.model");
 var router_1 = require("@angular/router");
-var debtor_service_1 = require("../../shared/services/debtor.service");
-var address_model_1 = require("../../shared/models/address.model");
-var lives_at_service_1 = require("../../shared/services/lives-at.service");
-var lives_at_model_1 = require("../../shared/models/lives_at.model");
 var platform_browser_1 = require("@angular/platform-browser");
+var debtor_service_1 = require("../../shared/services/debtor.service");
 var address_service_1 = require("../../shared/services/address.service");
+var debtorHasAddress_service_1 = require("../../shared/services/debtorHasAddress.service");
+var debtor_model_1 = require("../../shared/models/debtor.model");
+var address_model_1 = require("../../shared/models/address.model");
+var debtor_has_address_model_1 = require("../../shared/models/debtor_has_address.model");
 var AddDebtorComponent = /** @class */ (function () {
-    function AddDebtorComponent(titleService, route, debtorService, livesAtService, addressService, router) {
+    function AddDebtorComponent(titleService, route, debtorService, debtorAddressLinkService, addressService, router) {
         this.titleService = titleService;
         this.route = route;
         this.debtorService = debtorService;
-        this.livesAtService = livesAtService;
+        this.debtorAddressLinkService = debtorAddressLinkService;
         this.addressService = addressService;
         this.router = router;
+        this.forCompany = false;
         this.debtor = new debtor_model_1.default;
         this.address = new address_model_1.default;
     }
     AddDebtorComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.titleService.setTitle('Create Debtor - inVoice');
+        this.route.params.subscribe(function (params) {
+            _this.forCompany = params['company'] == 'yes' ? true : false;
+        });
     };
     AddDebtorComponent.prototype.submitForm = function () {
         var _this = this;
-        this.debtorService.createDebtor(this.debtor).subscribe(function (res) {
+        this.debtorService.create(this.debtor).subscribe(function (res) {
             _this.createAddress();
         }, function (err) { return console.log(err); });
     };
     AddDebtorComponent.prototype.createAddress = function () {
         var _this = this;
-        this.addressService.createAddress(this.address).subscribe(function (res) { return _this.linkAddress(); }, function (err) { return console.log(err); });
+        this.addressService.create(this.address).subscribe(function (res) { return _this.linkAddress(); }, function (err) { return console.log(err); });
     };
     AddDebtorComponent.prototype.linkAddress = function () {
         var _this = this;
-        var livesAt = new lives_at_model_1.default();
-        livesAt.debtor_ssn = this.debtor.ssn;
-        livesAt.address_postal = this.address.postal_code;
-        livesAt.address_number = this.address.number;
-        this.livesAtService.createLivesAt(livesAt).subscribe(function (resp) { return _this.router.navigate(['/debtors']); }, function (error) { return console.log(error); });
+        var debtorAddressLink = new debtor_has_address_model_1.default();
+        debtorAddressLink.debtor_id = this.debtor.id;
+        debtorAddressLink.address_postal = this.address.postal_code;
+        debtorAddressLink.address_number = this.address.number;
+        this.debtorAddressLinkService.create(debtorAddressLink).subscribe(function (resp) { return _this.router.navigate(['/debtors']); }, function (error) { return console.log(error); });
     };
     AddDebtorComponent = __decorate([
         core_1.Component({
@@ -56,9 +61,8 @@ var AddDebtorComponent = /** @class */ (function () {
             templateUrl: './add-debtor.component.html',
             styleUrls: ['./add-debtor.component.scss']
         }),
-        __metadata("design:paramtypes", [platform_browser_1.Title, router_1.ActivatedRoute,
-            debtor_service_1.DebtorService, lives_at_service_1.LivesAtService, address_service_1.AddressService,
-            router_1.Router])
+        __metadata("design:paramtypes", [platform_browser_1.Title, router_1.ActivatedRoute, debtor_service_1.DebtorService,
+            debtorHasAddress_service_1.DebtorHasAddressService, address_service_1.AddressService, router_1.Router])
     ], AddDebtorComponent);
     return AddDebtorComponent;
 }());

@@ -2,19 +2,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var Debtor = /** @class */ (function () {
     function Debtor() {
-        this.ssn = null;
+        this.id = null;
         this.first_name = null;
         this.last_name = null;
+        this.company_name = null;
         this.email = null;
         this.phone = null;
         this.bank_account = null;
+        this.address = null;
     }
     Debtor.prototype.isValid = function () {
-        var valid = false;
-        if (this.ssn != null && this.first_name != null && this.last_name != null && this.email != null && this.bank_account != null) {
-            valid = true;
+        if (this.id != null && ((this.first_name != null && this.last_name != null) || this.company_name != null) && (this.email != null || this.phone != null) && this.bank_account != null) {
+            return true;
         }
-        return valid;
+        return false;
     };
     return Debtor;
 }());
