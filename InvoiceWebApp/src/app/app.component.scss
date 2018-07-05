@@ -1,0 +1,108 @@
+$navbarHeight: 80px;
+$sidebarWidth: 16vw;
+$mainWidth: calc(100vw - #{$sidebarWidth});
+
+/* Navbar */
+.navbar {
+    height: $navbarHeight;
+    left: $sidebarWidth;
+    background: #fff;
+}
+
+.navbar .navbar-brand {
+    width: 100%;
+    margin-left: 50px;
+    color: #333;
+    font-size: 33px;
+    font-weight: 400;
+    line-height: $navbarHeight;
+}
+
+/* Main */
+main {
+    position: fixed;
+    left: $sidebarWidth;
+    top: $navbarHeight;
+    bottom: 0;
+    overflow-y: auto;
+    width: $mainWidth;
+    height: 100%;
+    padding: 30px 15px 5px 15px;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    width: $sidebarWidth;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background: #424c56;
+}
+  
+/* Sidebar navigation */
+.sidebar {
+    padding-left: 0;
+    padding-right: 0;
+}
+  
+.sidebar .nav-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $sidebarWidth;
+    height: $navbarHeight;
+    background: dodgerblue;
+    line-height: 75px;
+    padding: 0px 20px 0 15px;
+}
+
+.sidebar .nav-top a {
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.sidebar .nav {
+    margin-top: $navbarHeight;
+    margin-bottom: 20px;
+}
+
+.sidebar .nav-bottom {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.sidebar .nav-item {
+    width: 100%;
+    font-family: 'Nunito', sans-serif;
+}
+
+.sidebar .nav-item a {
+    color: #ddd;
+}
+
+.sidebar .nav-item:hover a {
+    background: #30373f;
+    color: #fff;
+}
+
+.sidebar .nav-item .nav-link.active {
+    background: #30373f;
+    color: #fff;
+}
+
+.sidebar .nav-item + .nav-item {
+    margin-left: 0;
+}
+
+.sidebar .nav-link {
+    border-radius: 0;
+}
