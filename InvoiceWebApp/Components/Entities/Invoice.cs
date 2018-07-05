@@ -14,10 +14,9 @@ namespace InvoiceAPI.Components.Entities
         public string CustomerId { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime ExpiredOn { get; set; }
-        public int Tax { get; set; }
         public double Total { get; set; }
+        public double Discount { get; set; }
         public string Comment { get; set; }
-        public int Discount { get; set; }
 
         public virtual ICollection<InvoiceItem> Items { get; set; }
     }

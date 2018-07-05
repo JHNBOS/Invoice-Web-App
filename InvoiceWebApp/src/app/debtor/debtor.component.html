@@ -1,35 +1,35 @@
 <div class="container">
 
-  <!-- Row -->
-  <h3 class="text-center" *ngIf="debtors.length == 0">No debtors.</h3>
-  <div class="row" *ngIf="debtors.length > 0">
-    <div class="col-sm-12 col-md-10 offset-md-1">
+    <!-- Row -->
+    <h3 class="text-center" *ngIf="debtors.length == 0">No debtors.</h3>
+    <div class="row" *ngIf="debtors.length > 0">
+        <div class="col-sm-12 col-md-10 offset-md-1">
 
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let debtor of debtors">
-          <a [routerLink]="['details', debtor.ssn]">
-            {{debtor.first_name}} {{debtor.last_name}} - {{debtor.email}}
-          </a>
-          <span class="list-icons">
-            <button class="btn-edit" [routerLink]="['edit', debtor.ssn]" title="Edit">
-              <i class="fa fa-edit"></i>
-            </button>
-            <button class="btn-delete" type="button" (click)="deleteDebtor(debtor.ssn)" title="Remove">
-              <i class="fa fa-trash"></i>
-            </button>
-          </span>
-        </li>
-      </ul>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let debtor of debtors">
+                    <a [routerLink]="['details', debtor.ssn]">
+                        {{debtor.first_name}} {{debtor.last_name}} - {{debtor.email}}
+                    </a>
+                    <span class="list-icons">
+                        <button class="btn-edit" [routerLink]="['edit', debtor.ssn]" title="Edit">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn-delete" type="button" (click)="deleteDebtor(debtor.ssn)" title="Remove">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </span>
+                </li>
+            </ul>
 
-      <a href="#" [routerLink]="['import']" class="btn btn-primary btn-sm mt-3" title="Add debtors by CSV">
-        <i class="fa fa-file-excel-o"></i>
-      </a>
-      <a href="#" [routerLink]="['add']" class="btn btn-primary btn-sm mt-3" title="Add debtor">
-        <i class="fa fa-plus"></i>
-      </a>
+            <a href="#" [routerLink]="['import']" class="btn btn-primary btn-sm mt-3" title="Add debtors by CSV">
+                <i class="fa fa-file-excel-o"></i>
+            </a>
+            <a href="#" [routerLink]="['add']" class="btn btn-primary btn-sm mt-3" title="Add debtor">
+                <i class="fa fa-plus"></i>
+            </a>
 
+        </div>
     </div>
-  </div>
 
-  <!-- End of container -->
+    <!-- End of container -->
 </div>

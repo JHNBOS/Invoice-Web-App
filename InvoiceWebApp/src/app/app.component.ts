@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import User from './shared/models/user.model';
-import { Title } from '@angular/platform-browser';
-import { AuthenticationService } from './shared/authentication.service';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
+import { AuthenticationService } from './shared/authentication.service';
+import User from './shared/models/user.model';
 
 @Component({
     selector: 'app-root',

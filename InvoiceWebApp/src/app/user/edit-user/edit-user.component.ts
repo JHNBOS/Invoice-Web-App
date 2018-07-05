@@ -1,49 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { Route, ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../../shared/services/user.service';
-import User from '../../shared/models/user.model';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import User from '../../shared/models/user.model';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
-  selector: 'app-edit-user',
-  templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.scss']
+    selector: 'app-edit-user',
+    templateUrl: './edit-user.component.html',
+    styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-  userId: number;
-  currentUser: User;
+    email: string;
+    currentUser: User;
 
-  constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService,
-    private router: Router) { }
+    constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService, private router: Router) { }
 
-  ngOnInit() {
-    this.titleService.setTitle('Edit User - inVoice');
-    this.route.params.subscribe(
-      (params) => {
-        this.userId = +params['id'];
-        this.getUser(this.userId);
-      }
-    );
-  }
+    ngOnInit() {
+        this.titleService.setTitle('Edit User - inVoice');
+        this.route.params.subscribe(
+            (params) => {
+                this.email = params['email'];
+                this.getUser(this.email);
+            }
+        );
+    }
 
-  submitForm() {
-    this.userService.updateUser(this.currentUser).subscribe(
-      res => { this.router.navigate(['/users']); },
-      (error) => {
-        console.log(error);
-        return Observable.throw(error);
-      }
-    );
-  }
+    submitForm() {
+        this.userService.update(this.currentUser).subscribe(
+            (response) => { this.router.navigate(['/users']); },
+            (error) => { throw error; }
+        );
+    }
 
-  getUser(id: number) {
-    this.userService.getUserById(id).subscribe(
-      res => this.currentUser = res,
-      (error) => {
-        console.log(error);
-        return Observable.throw(error);
-      }
-    );
-  }
+    getUser(email: string) {
+        this.userService.getByEmail(email).subscribe(
+            (response) => this.currentUser = response,
+            (error) => { throw error; }
+        );
+    }
 }

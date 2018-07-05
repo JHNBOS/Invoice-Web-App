@@ -1,12 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Response } from '@angular/http';
+import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/share';
-
 import Invoice from '../models/invoice.model';
 
 @Injectable()
@@ -17,7 +15,7 @@ export class InvoiceService {
     constructor(public http: HttpClient) { }
 
     getByNumber(id: number): Observable<Invoice> {
-        return this.http.get(this.apiUrl + 'getByNumber?number=' + id)
+        return this.http.get(this.apiUrl + 'getByNumber?invoice=' + id)
             .catch(this.handleError);
     }
 
@@ -52,7 +50,7 @@ export class InvoiceService {
     }
 
     delete(number: number): Observable<boolean> {
-        return this.http.delete(this.apiUrl + 'delete?number=' + number)
+        return this.http.delete(this.apiUrl + 'delete?invoice=' + number)
             .catch(this.handleError);
     }
 

@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
-import { ToastyService, ToastOptions } from 'ng2-toasty';
-import { ErrorHandler, NgZone } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorHandler, Injectable, NgZone } from '@angular/core';
+import { ToastOptions, ToastyService } from 'ng2-toasty';
 
 @Injectable()
 export class CustomErrorHandler implements ErrorHandler {

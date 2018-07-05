@@ -1,18 +1,15 @@
-import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
-import { DebtorService } from '../shared/services/debtor.service';
-import { AddressService } from '../shared/services/address.service';
-import { DebtorHasAddressService } from '../shared/services/debtorHasAddress.service';
-import { DebtorRoutingModule } from './debtor.routing';
-
 import { ToastyModule } from 'ng2-toasty';
 import { CustomErrorHandler } from '../shared/error-handler';
-
-import { DebtorComponent } from './debtor.component';
+import { AddressService } from '../shared/services/address.service';
+import { DebtorService } from '../shared/services/debtor.service';
+import { DebtorHasAddressService } from '../shared/services/debtor_has_address.service';
 import { AddDebtorComponent } from './add-debtor/add-debtor.component';
+import { DebtorComponent } from './debtor.component';
+import { DebtorRoutingModule } from './debtor.routing';
 import { DetailDebtorComponent } from './detail-debtor/detail-debtor.component';
 import { EditDebtorComponent } from './edit-debtor/edit-debtor.component';
 import { ImportDebtorComponent } from './import-debtor/import-debtor.component';

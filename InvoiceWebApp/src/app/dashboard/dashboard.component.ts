@@ -5,21 +5,21 @@ import User from '../shared/models/user.model';
 import { SharedService } from '../shared/services/shared.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  user: User = null;
+    user: User = null;
 
-  constructor(private titleService: Title, private userService: UserService) { }
+    constructor(private titleService: Title, private userService: UserService) { }
 
-  ngOnInit() {
-    this.titleService.setTitle('Home - inVoice');
-    this.getLoggedInUser();
-  }
+    ngOnInit() {
+        this.titleService.setTitle('Home - inVoice');
+        this.getLoggedInUser();
+    }
 
-  getLoggedInUser() {
-    this.user = JSON.parse(localStorage.getItem('loggedInUser'));
-  }
+    getLoggedInUser() {
+        this.user = JSON.parse(localStorage.getItem('loggedInUser'));
+    }
 }

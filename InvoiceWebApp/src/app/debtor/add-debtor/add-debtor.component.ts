@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-
-import { DebtorService } from '../../shared/services/debtor.service';
-import { AddressService } from '../../shared/services/address.service';
-import { DebtorHasAddressService } from '../../shared/services/debtorHasAddress.service';
-
-import Debtor from '../../shared/models/debtor.model';
+import { ActivatedRoute, Router } from '@angular/router';
 import Address from '../../shared/models/address.model';
+import Debtor from '../../shared/models/debtor.model';
 import DebtorHasAddress from '../../shared/models/debtor_has_address.model';
+import { AddressService } from '../../shared/services/address.service';
+import { DebtorService } from '../../shared/services/debtor.service';
+import { DebtorHasAddressService } from '../../shared/services/debtor_has_address.service';
 
 @Component({
     selector: 'app-add-debtor',
@@ -25,26 +23,26 @@ export class AddDebtorComponent implements OnInit {
 
     ngOnInit() {
         this.titleService.setTitle('Create Debtor - inVoice');
-        this.route.params.subscribe(
-            (params) => {
-                this.forCompany = params['company'] == 'yes' ? true : false;
-            }
-        );
+        //this.route.params.subscribe(
+        //    (params) => {
+        //        this.forCompany = params['company'] == 'yes' ? true : false;
+        //    }
+        //);
     }
 
     submitForm() {
         this.debtorService.create(this.debtor).subscribe(
-            res => {
+            (response) => {
                 this.createAddress();
             },
-            (err) => console.log(err)
+            (error) => { throw error; }
         );
     }
 
     private createAddress() {
         this.addressService.create(this.address).subscribe(
-            res => this.linkAddress(),
-            (err) => console.log(err)
+            (response) => this.linkAddress(),
+            (error) => { throw error; }
         );
     }
 
@@ -55,8 +53,8 @@ export class AddDebtorComponent implements OnInit {
         debtorAddressLink.address_number = this.address.number;
 
         this.debtorAddressLinkService.create(debtorAddressLink).subscribe(
-            resp => this.router.navigate(['/debtors']),
-            (error) => console.log(error)
+            (response) => this.router.navigate(['/debtors']),
+            (error) => { throw error; }
         );
     }
 }

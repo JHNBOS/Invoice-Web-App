@@ -14,14 +14,12 @@ namespace InvoiceAPI.Controllers.ViewModels
         public DateTime CreatedOn { get; set; }
         [JsonProperty("expired_on")]
         public DateTime ExpiredOn { get; set; }
-        [JsonProperty("tax")]
-        public int Tax { get; set; }
         [JsonProperty("total")]
         public double Total { get; set; }
         [JsonProperty("comment")]
         public string Comment { get; set; }
         [JsonProperty("discount")]
-        public int Discount { get; set; }
+        public double Discount { get; set; }
 
         public InvoiceViewModel()
         {
@@ -33,7 +31,6 @@ namespace InvoiceAPI.Controllers.ViewModels
             this.CustomerId = model.CustomerId;
             this.CreatedOn = model.CreatedOn;
             this.ExpiredOn = model.ExpiredOn;
-            this.Tax = model.Tax;
             this.Total = model.Total;
             this.Comment = model.Comment;
             this.Discount = model.Discount;

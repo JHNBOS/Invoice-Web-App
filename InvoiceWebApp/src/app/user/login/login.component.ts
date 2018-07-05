@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../../shared/services/user.service';
-import User from '../../shared/models/user.model';
-import { AuthenticationService } from '../../shared/authentication.service';
+import { ToastOptions, ToastyService } from 'ng2-toasty';
 import { Observable } from 'rxjs/Observable';
-import { ToastyService, ToastOptions } from 'ng2-toasty';
+import { AuthenticationService } from '../../shared/authentication.service';
+import User from '../../shared/models/user.model';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
     selector: 'app-login',
@@ -39,14 +39,11 @@ export class LoginComponent implements OnInit {
     checkCredentials() {
         this.authenticationService.login(this.email, this.password)
             .subscribe(
-                user => {
-                    localStorage.setItem('loggedInUser', JSON.stringify(user[0] as User));
+                (response) => {
+                    localStorage.setItem('loggedInUser', JSON.stringify(response as User));
                     this.router.navigate(['/']);
                 },
-                error => {
-                    this.toastyService.warning(this.toastOptions);
-                    return Observable.throw(error);
-                });
+                (error) => { throw (error); }
+            );
     }
-
 }

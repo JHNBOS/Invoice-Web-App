@@ -1,21 +1,17 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ErrorHandler, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { ToastyModule } from 'ng2-toasty';
-import { CustomErrorHandler } from './shared/error-handler';
-
 import { AppComponent } from './app.component';
-
+import { AppRoutingModule } from './app.routing';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { UserModule } from './user/user.module';
 import { DebtorModule } from './debtor/debtor.module';
 import { InvoiceModule } from './invoice/invoice.module';
-
-import { AppRoutingModule } from './app.routing';
-import { SharedService } from './shared/services/shared.service';
-import { AuthGuard } from './shared/authguard.service';
 import { AuthenticationService } from './shared/authentication.service';
+import { AuthGuard } from './shared/authguard.service';
+import { CustomErrorHandler } from './shared/error-handler';
+import { SharedService } from './shared/services/shared.service';
+import { UserModule } from './user/user.module';
 
 @NgModule({
     declarations: [

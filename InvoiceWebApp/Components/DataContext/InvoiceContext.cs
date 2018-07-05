@@ -20,6 +20,7 @@ namespace InvoiceAPI.Components.DataContext
         public virtual DbSet<DebtorHasAddress> DebtorHasAddresses { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<InvoiceItem> InvoiceItems { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -27,6 +28,7 @@ namespace InvoiceAPI.Components.DataContext
             if (!optionsBuilder.IsConfigured)
             {
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseMySql("Server=jhnbos.nl;Port=3306;Database=invoice_app;User=jhnbos;Password=johanbos13579");
             }
         }
 
@@ -36,7 +38,7 @@ namespace InvoiceAPI.Components.DataContext
             {
                 entity.HasKey(e => new { e.Number, e.PostalCode });
 
-                entity.ToTable("address");
+                entity.ToTable("addresses");
 
                 entity.Property(e => e.Number)
                     .HasColumnName("number")
@@ -69,7 +71,7 @@ namespace InvoiceAPI.Components.DataContext
 
             modelBuilder.Entity<Debtor>(entity =>
             {
-                entity.ToTable("debtor");
+                entity.ToTable("debtors");
 
                 entity.HasIndex(e => e.Id)
                     .HasName("id")
@@ -111,7 +113,7 @@ namespace InvoiceAPI.Components.DataContext
             {
                 entity.HasKey(e => new { e.DebtorId, e.PostalCode, e.Number });
 
-                entity.ToTable("debtor_has_address");
+                entity.ToTable("debtor_has_addresses");
 
                 entity.Property(e => e.DebtorId)
                     .HasColumnName("debtor_id")
@@ -143,7 +145,7 @@ namespace InvoiceAPI.Components.DataContext
             {
                 entity.HasKey(e => e.InvoiceNumber);
 
-                entity.ToTable("invoice");
+                entity.ToTable("invoices");
 
                 entity.Property(e => e.InvoiceNumber)
                     .HasColumnName("invoice_number")
@@ -162,17 +164,11 @@ namespace InvoiceAPI.Components.DataContext
                     .HasColumnName("customer_id")
                     .HasMaxLength(200);
 
-                entity.Property(e => e.Discount)
-                    .HasColumnName("discount")
-                    .HasColumnType("int(11)");
-
                 entity.Property(e => e.ExpiredOn)
                     .HasColumnName("expired_on")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.Tax)
-                    .HasColumnName("tax")
-                    .HasColumnType("int(11)");
+                entity.Property(e => e.Discount).HasColumnName("discount");
 
                 entity.Property(e => e.Total).HasColumnName("total");
             });
@@ -192,7 +188,7 @@ namespace InvoiceAPI.Components.DataContext
                     .WithMany(e => e.Items)
                     .HasForeignKey(e => e.InvoiceNumber)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("items_invoice_fk")
+                    .HasConstraintName("items_invoice_fk");
 
                 entity.Property(e => e.InvoiceNumber)
                     .HasColumnName("invoice_number")
@@ -218,11 +214,28 @@ namespace InvoiceAPI.Components.DataContext
                     .HasColumnType("int(11)");
             });
 
+            modelBuilder.Entity<Role>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.ToTable("roles");
+
+                entity.Property(e => e.Id)
+                    .IsRequired()
+                    .HasColumnName("id")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Type)
+                    .IsRequired()
+                    .HasColumnName("type")
+                    .HasMaxLength(200);
+            });
+
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => e.Email);
 
-                entity.ToTable("user");
+                entity.ToTable("users");
 
                 entity.Property(e => e.Email)
                     .HasColumnName("email")

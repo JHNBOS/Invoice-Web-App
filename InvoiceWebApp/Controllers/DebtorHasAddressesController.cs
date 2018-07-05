@@ -53,8 +53,6 @@ namespace ShareListAPI.Controllers
         }
 
         /// <summary>
-
-        /// <summary>
         /// Gets all relations between debtors and addresses by postal code.
         /// </summary>
         /// <param name="postal">Postal code of address</param>

@@ -40,8 +40,8 @@ namespace InvoiceAPI
                 c.SwaggerDoc("v1", new Info { Title = "Invoice App API", Version = "v1" });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 
-          // Set the comments path for the Swagger JSON and UI.
-          var xmlFile = $"{Assembly.GetEntryAssembly().GetName().Name}.xml";
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetEntryAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
@@ -61,9 +61,8 @@ namespace InvoiceAPI
             app.Use(async (context, next) =>
             {
                 await next();
-                if (context.Response.StatusCode == 404 &&
-             !Path.HasExtension(context.Request.Path.Value) &&
-             !context.Request.Path.Value.StartsWith("/api/"))
+                if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value) &&
+                     !context.Request.Path.Value.StartsWith("/api/"))
                 {
                     context.Request.Path = "/index.html";
                     await next();
@@ -86,14 +85,9 @@ namespace InvoiceAPI
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-              name: "readings",
-              template: "api/readings/{action}/{id?}",
-              defaults: new { controller = "RoomReadings" }
-          );
-                routes.MapRoute(
-              name: "api",
-              template: "api/{controller}/{action}/{id?}"
-          );
+                  name: "api",
+                  template: "api/{controller}/{action}/{id?}"
+                );
             });
         }
     }

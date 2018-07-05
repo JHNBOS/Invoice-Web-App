@@ -9,6 +9,10 @@
     <DocumentationFile>bin\Debug\netcoreapp2.0\InvoiceWebApp.xml</DocumentationFile>
     <NoWarn>1701;1702;1705;1591</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="src\app\shared\services\invoice_item.service.ts" />
+  </ItemGroup>
   
   <ItemGroup>
     <Folder Include="wwwroot\" />
@@ -36,6 +40,7 @@
     <TypeScriptCompile Include="src\app\shared\models\invoice.model.ts" />
     <TypeScriptCompile Include="src\app\shared\models\user.model.ts" />
     <TypeScriptCompile Include="src\app\shared\authentication.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\services\invoice_item.service.ts" />
     <TypeScriptCompile Include="src\app\shared\services\user.service.ts" />
     <TypeScriptCompile Include="src\app\shared\services\debtor.service.ts" />
     <TypeScriptCompile Include="src\app\shared\services\invoice.service.ts" />

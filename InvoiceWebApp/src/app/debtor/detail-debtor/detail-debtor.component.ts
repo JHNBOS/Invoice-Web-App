@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Router, ActivatedRoute } from '@angular/router';
-
-import { DebtorService } from '../../shared/services/debtor.service';
-import { AddressService } from '../../shared/services/address.service';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import Debtor from '../../shared/models/debtor.model';
-import Address from '../../shared/models/address.model';
-import DebtorHasAddress from '../../shared/models/debtor_has_address.model';
-import { DebtorHasAddressService } from '../../shared/services/debtorHasAddress.service';
+import { DebtorService } from '../../shared/services/debtor.service';
 
 @Component({
     selector: 'app-detail-debtor',
@@ -33,8 +27,8 @@ export class DetailDebtorComponent implements OnInit {
 
     getDebtor(id: string) {
         this.debtorService.getById(id).subscribe(
-            res => this.debtor = res,
-            (err) => console.log(err)
+            (response) => this.debtor = response,
+            (error) => { throw (error); }
         );
     }
 }
