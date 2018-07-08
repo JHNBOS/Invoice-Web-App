@@ -9,51 +9,51 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  user: User = null;
-  isLoggedIn = false;
-  title: string;
+    user: User = null;
+    isLoggedIn = false;
+    title: string;
 
-  constructor(private authService: AuthenticationService, private route: ActivatedRoute,
-    private router: Router) {}
+    constructor(private authService: AuthenticationService, private route: ActivatedRoute,
+        private router: Router) { }
 
-  ngOnInit() {
-    this.checkIfLoggedIn();
-    this.getCurrentRouteTitle();
-  }
-
-  checkIfLoggedIn() {
-    this.user = JSON.parse(localStorage.getItem('loggedInUser'));
-    if (this.user != null) {
-      this.isLoggedIn = true;
-    } else {
-      this.isLoggedIn = false;
+    ngOnInit() {
+        this.checkIfLoggedIn();
+        this.getCurrentRouteTitle();
     }
-  }
 
-  getCurrentRouteTitle() {
-    this.router.events
-      .filter(event => event instanceof NavigationEnd)
-      .map(() => this.route)
-      .map(route => {
-        while (route.firstChild) { route = route.firstChild; }
-        return route;
-      })
-      .filter(route => route.outlet === 'primary')
-      .mergeMap(route => route.data)
-      .subscribe((event) => this.title = event['title']);
-  }
-
-  signOut() {
-    this.authService.logout();
-    this.checkIfLoggedIn();
-
-    if (!this.isLoggedIn) {
-      this.router.navigate(['/login']);
+    checkIfLoggedIn() {
+        this.user = JSON.parse(localStorage.getItem('loggedInUser'));
+        if (this.user != null) {
+            this.isLoggedIn = true;
+        } else {
+            this.isLoggedIn = false;
+        }
     }
-  }
+
+    getCurrentRouteTitle() {
+        this.router.events
+            .filter(event => event instanceof NavigationEnd)
+            .map(() => this.route)
+            .map(route => {
+                while (route.firstChild) { route = route.firstChild; }
+                return route;
+            })
+            .filter(route => route.outlet === 'primary')
+            .mergeMap(route => route.data)
+            .subscribe((event) => this.title = event['title']);
+    }
+
+    signOut() {
+        this.authService.logout();
+        this.checkIfLoggedIn();
+
+        if (!this.isLoggedIn) {
+            this.router.navigate(['/login']);
+        }
+    }
 }

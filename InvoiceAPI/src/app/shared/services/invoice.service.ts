@@ -21,8 +21,23 @@ export class InvoiceService {
             .catch(this.handleError);
     }
 
+    getByDebtorId(id: string): Observable<Invoice> {
+        return this.http.get(this.apiUrl + 'getByDebtorId?debtor=' + id)
+            .catch(this.handleError);
+    }
+
+    getByCreationDate(date: Date): Observable<Invoice> {
+        return this.http.get(this.apiUrl + 'getByCreationDate?date=' + date)
+            .catch(this.handleError);
+    }
+
+    getNearlyExpired(): Observable<Invoice> {
+        return this.http.get(this.apiUrl + 'getNearlyExpired')
+            .catch(this.handleError);
+    }
+
     getAll(): Observable<Invoice[]> {
-        return this.http.get(this.apiUrl + 'readAll.php')
+        return this.http.get(this.apiUrl + 'getAll')
             .catch(this.handleError);
     }
 
@@ -36,13 +51,13 @@ export class InvoiceService {
             .catch(this.handleError);
     }
 
-    deleteByNumber(number: number): Observable<boolean> {
-        return this.http.delete(this.apiUrl + 'deleteByNumber?number=' + number)
+    delete(number: number): Observable<boolean> {
+        return this.http.delete(this.apiUrl + 'delete?number=' + number)
             .catch(this.handleError);
     }
 
     deleteByDebtor(id: number): Observable<boolean> {
-        return this.http.delete(this.apiUrl + 'deleteByDebtorId?id=' + id)
+        return this.http.delete(this.apiUrl + 'deleteByDebtorId?debtor=' + id)
             .catch(this.handleError);
     }
 

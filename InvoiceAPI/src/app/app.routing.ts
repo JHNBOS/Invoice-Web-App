@@ -5,7 +5,6 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DebtorComponent } from './debtor/debtor.component';
-import { CompanyComponent } from './company/company.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { AuthGuard } from './shared/authguard.service';
 
@@ -27,12 +26,6 @@ const routes: Routes = [
         component: DebtorComponent,
         canActivate: [AuthGuard],
         data: { title: 'Debtors' }
-    },
-    {
-        path: 'companies',
-        component: CompanyComponent,
-        canActivate: [AuthGuard],
-        data: { title: 'Companies' }
     },
     {
         path: 'invoices',

@@ -16,5 +16,6 @@ namespace InvoiceAPI.Components.Services.Interfaces
         Task<Invoice> Insert(Invoice invoice);
         Task<Invoice> Update(Invoice invoice);
         Task<bool> Delete(int id);
+        Task<bool> DeleteByDebtorId(string id);
     }
 }

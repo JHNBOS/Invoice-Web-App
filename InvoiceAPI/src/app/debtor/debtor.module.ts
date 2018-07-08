@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { DebtorService } from '../shared/services/debtor.service';
 import { AddressService } from '../shared/services/address.service';
-import { LivesAtService } from '../shared/services/lives-at.service';
+import { DebtorHasAddressService } from '../shared/services/debtorHasAddress.service';
 import { DebtorRoutingModule } from './debtor.routing';
 
 import { ToastyModule } from 'ng2-toasty';
@@ -18,28 +18,28 @@ import { EditDebtorComponent } from './edit-debtor/edit-debtor.component';
 import { ImportDebtorComponent } from './import-debtor/import-debtor.component';
 
 @NgModule({
-  declarations: [
-    DebtorComponent,
-    AddDebtorComponent,
-    DetailDebtorComponent,
-    EditDebtorComponent,
-    ImportDebtorComponent
-  ],
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    FormsModule,
-    ToastyModule.forRoot(),
-    DebtorRoutingModule
-  ],
-  providers: [
-    DebtorService,
-    AddressService,
-    LivesAtService,
-    { provide: ErrorHandler, useClass: CustomErrorHandler}
-  ],
-  exports: [
-    DebtorComponent
-  ]
+    declarations: [
+        DebtorComponent,
+        AddDebtorComponent,
+        DetailDebtorComponent,
+        EditDebtorComponent,
+        ImportDebtorComponent
+    ],
+    imports: [
+        CommonModule,
+        HttpClientModule,
+        FormsModule,
+        ToastyModule.forRoot(),
+        DebtorRoutingModule
+    ],
+    providers: [
+        DebtorService,
+        AddressService,
+        DebtorHasAddressService,
+        { provide: ErrorHandler, useClass: CustomErrorHandler }
+    ],
+    exports: [
+        DebtorComponent
+    ]
 })
 export class DebtorModule { }

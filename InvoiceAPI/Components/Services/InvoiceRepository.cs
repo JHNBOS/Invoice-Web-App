@@ -75,5 +75,14 @@ namespace InvoiceAPI.Components.Services
             var result = await _context.SaveChangesAsync();
             return result == 1 ? true : false;
         }
+
+        public async Task<bool> DeleteByDebtorId(string id)
+        {
+            List<Invoice> invoices = await _context.Invoices.Where(q => q.CustomerId == id).ToListAsync();
+            _context.Invoices.RemoveRange(invoices);
+
+            var result = await _context.SaveChangesAsync();
+            return result == 1 ? true : false;
+        }
     }
 }
