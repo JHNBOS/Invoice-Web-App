@@ -12,25 +12,25 @@ const routes: Routes = [
         path: '',
         component: DashboardComponent,
         canActivate: [AuthGuard],
-        data: { title: '' }
+        data: { title: '', roles: [1, 2] }
     },
     {
         path: 'users',
         component: UserComponent,
         canActivate: [AuthGuard],
-        data: { title: 'Users' }
+        data: { title: 'Users', roles: [1] }
     },
     {
         path: 'debtors',
         component: DebtorComponent,
         canActivate: [AuthGuard],
-        data: { title: 'Debtors' }
+        data: { title: 'Debtors', roles: [1] }
     },
     {
         path: 'invoices',
         component: InvoiceComponent,
         canActivate: [AuthGuard],
-        data: { title: 'Invoices' }
+        data: { title: 'Invoices', roles: [1, 2] }
     },
     {
         path: 'login',

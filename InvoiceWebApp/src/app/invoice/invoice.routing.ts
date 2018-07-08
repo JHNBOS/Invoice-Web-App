@@ -8,8 +8,8 @@ const routes: Routes = [
     {
         path: 'invoices',
         children: [
-            { path: '', component: InvoiceComponent, canActivate: [AuthGuard], data: { title: 'Invoices' } },
-            { path: 'create', component: CreateInvoiceComponent, canActivate: [AuthGuard], data: { title: 'Create Invoice' } }
+            { path: '', component: InvoiceComponent, canActivate: [AuthGuard], data: { title: 'Invoices', roles: [1, 2] } },
+            { path: 'create', component: CreateInvoiceComponent, canActivate: [AuthGuard], data: { title: 'Create Invoice', roles: [1] } }
         ]
     },
 ];

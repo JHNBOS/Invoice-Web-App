@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using InvoiceAPI.Components.Entities;
-using InvoiceAPI.Components.Services;
-using InvoiceAPI.Components.Services.Interfaces;
-using InvoiceAPI.Controllers.ViewModels;
+using InvoiceWebApp.Components.Entities;
+using InvoiceWebApp.Components.Services;
+using InvoiceWebApp.Components.Services.Interfaces;
+using InvoiceWebApp.Controllers.ViewModels;
 
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -193,7 +193,9 @@ namespace ShareListAPI.Controllers
         /// <summary>
         /// Deletes a address.
         /// </summary>
-        /// <param name="email">Id of user</param>
+        /// <param name="number">Number of address</param>
+        /// <param name="suffix">Number suffix of address</param>
+        /// <param name="postal">Postal code of address</param>
         [HttpDelete("delete")]
         [ProducesResponseType(typeof(void), 200)]
         [ProducesResponseType(typeof(void), 400)]

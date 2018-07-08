@@ -1,56 +1,51 @@
 <!-- Top navigation -->
 <nav class="navbar navbar-dark fixed-top flex-row-reverse">
-  <h1 class="navbar-brand">{{ title }}</h1>
+    <h1 class="navbar-brand">{{ title }}</h1>
 </nav>
 
 <!-- Begin of side navigation bar -->
 <nav class="bg-faded sidebar">
-  <div class="nav-top">
-      <a class="navbar-brand" href="#">Invoice Panel</a>
-  </div>
-  <ul class="nav nav-pills flex-column" [hidden]="!isLoggedIn">
-    <li class="nav-item">
-      <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Home</a>
-    </li>
-    <li class="nav-item">
-      <a [routerLink]="['/debtors']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Debtors</a>
-    </li>
-    <li class="nav-item">
-      <a [routerLink]="['/companies']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Companies</a>
-    </li>
-    <li class="nav-item">
-    </li>
-    <li class="nav-item">
-      <a [routerLink]="['/invoices']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Invoices</a>
-    </li>
-  </ul>
-  <ul class="nav nav-pills flex-column nav-bottom" [hidden]="!isLoggedIn">
-    <li class="nav-item">
-      <a [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Users</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" style="cursor: pointer;" (click)="signOut()">Sign out</a>
-    </li>
-  </ul>
+    <div class="nav-top">
+        <a class="navbar-brand" href="#">Invoice Panel</a>
+    </div>
+    <ul class="nav nav-pills flex-column" [hidden]="!isLoggedIn">
+        <li class="nav-item">
+            <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+            <a [routerLink]="['/debtors']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Debtors</a>
+        </li>
+        <li class="nav-item">
+            <a [routerLink]="['/invoices']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Invoices</a>
+        </li>
+    </ul>
+    <ul class="nav nav-pills flex-column nav-bottom" [hidden]="!isLoggedIn">
+        <li class="nav-item">
+            <a [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Users</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="cursor: pointer;" (click)="signOut()">Sign out</a>
+        </li>
+    </ul>
 </nav>
 <!-- End of side navigation bar -->
 
 <div class="container-fluid">
-  <div class="row">
+    <div class="row">
 
-    <!-- Main content -->
-    <main>
-      <router-outlet (activate)="checkIfLoggedIn()"></router-outlet>
-      <ng2-toasty [position]="'bottom-right'"></ng2-toasty>
-    </main>
+        <!-- Main content -->
+        <main>
+            <router-outlet (activate)="checkIfLoggedIn()"></router-outlet>
+            <ng2-toasty [position]="'bottom-right'"></ng2-toasty>
+        </main>
 
-    <!-- Footer -->
-    <footer class="footer bg-primary">
-      <div class="container text-center">
-        <span class="text-white">Johan Bos &copy; 2018</span>
-      </div>
-    </footer>
-  </div>
-  <!-- End of row -->
+        <!-- Footer -->
+        <footer class="footer bg-primary">
+            <div class="container text-center">
+                <span class="text-white">Johan Bos &copy; 2018</span>
+            </div>
+        </footer>
+    </div>
+    <!-- End of row -->
 </div>
 <!-- End of container -->

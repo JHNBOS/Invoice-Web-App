@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace InvoiceAPI.Components.Helpers
+namespace InvoiceWebApp.Components.Helpers
 {
     public class Encryptor
     {

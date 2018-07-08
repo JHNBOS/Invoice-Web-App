@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using InvoiceWebApp.Components.Entities;
-using InvoiceWebApp.Components.Services;
-using InvoiceWebApp.Components.Services.Interfaces;
-using InvoiceWebApp.Controllers.ViewModels;
+using InvoiceAPI.Components.Entities;
+using InvoiceAPI.Components.Services;
+using InvoiceAPI.Components.Services.Interfaces;
+using InvoiceAPI.Controllers.ViewModels;
 
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -47,6 +47,7 @@ namespace ShareListAPI.Controllers
                 CustomerId = s.CustomerId,
                 Total = s.Total,
                 Discount = s.Discount,
+                Tax = s.Tax,
                 Comment = s.Comment,
                 CreatedOn = s.CreatedOn,
                 ExpiredOn = s.ExpiredOn
@@ -58,23 +59,23 @@ namespace ShareListAPI.Controllers
         /// <summary>
         /// Gets an invoice by invoice number
         /// </summary>
-        /// <param name="invoice">Number of invoice</param>
+        /// <param name="number">Number of invoice</param>
         [HttpGet("getByNumber")]
         [ProducesResponseType(typeof(InvoiceViewModel), 200)]
         [ProducesResponseType(typeof(void), 400)]
         [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> GetByNumber(int? invoice)
+        public async Task<IActionResult> GetByNumber(int? number)
         {
-            if (!invoice.HasValue)
+            if (!number.HasValue)
             {
                 return StatusCode(400, "Invalid parameter(s).");
             }
 
             //Get invoice
-            var data = await _repo.GetByNumber(invoice.Value);
+            var data = await _repo.GetByNumber(number.Value);
             if (data == null)
             {
-                return StatusCode(500, "Invoice with number " + invoice.Value + " could not be found.");
+                return StatusCode(500, "Invoice with number " + number.Value + " could not be found.");
             }
 
             //Convert to view model
@@ -113,6 +114,7 @@ namespace ShareListAPI.Controllers
                 CustomerId = s.CustomerId,
                 Total = s.Total,
                 Discount = s.Discount,
+                Tax = s.Tax,
                 Comment = s.Comment,
                 CreatedOn = s.CreatedOn,
                 ExpiredOn = s.ExpiredOn
@@ -150,6 +152,7 @@ namespace ShareListAPI.Controllers
                 CustomerId = s.CustomerId,
                 Total = s.Total,
                 Discount = s.Discount,
+                Tax = s.Tax,
                 Comment = s.Comment,
                 CreatedOn = s.CreatedOn,
                 ExpiredOn = s.ExpiredOn
@@ -181,6 +184,7 @@ namespace ShareListAPI.Controllers
                 CustomerId = s.CustomerId,
                 Total = s.Total,
                 Discount = s.Discount,
+                Tax = s.Tax,
                 Comment = s.Comment,
                 CreatedOn = s.CreatedOn,
                 ExpiredOn = s.ExpiredOn
@@ -209,6 +213,7 @@ namespace ShareListAPI.Controllers
                 InvoiceNumber = model.InvoiceNumber,
                 CreatedOn = model.CreatedOn,
                 ExpiredOn = model.ExpiredOn,
+                Tax = model.Tax,
                 Total = model.Total,
                 Discount = model.Discount,
                 Comment = model.Comment,
@@ -245,6 +250,7 @@ namespace ShareListAPI.Controllers
                 InvoiceNumber = model.InvoiceNumber,
                 CreatedOn = model.CreatedOn,
                 ExpiredOn = model.ExpiredOn,
+                Tax = model.Tax,
                 Total = model.Total,
                 Discount = model.Discount,
                 Comment = model.Comment,
@@ -267,20 +273,20 @@ namespace ShareListAPI.Controllers
         /// <summary>
         /// Deletes a invoice by number
         /// </summary>
-        /// <param name="invoice">Id of invoice</param>
+        /// <param name="number">Id of invoice</param>
         [HttpDelete("delete")]
         [ProducesResponseType(typeof(void), 200)]
         [ProducesResponseType(typeof(void), 400)]
         [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> Delete(int? invoice)
+        public async Task<IActionResult> Delete(int? number)
         {
-            if (!invoice.HasValue)
+            if (!number.HasValue)
             {
                 return StatusCode(400, "Invalid parameter(s).");
             }
 
             //Remove invoice
-            var succeeded = await _repo.Delete(invoice.Value);
+            var succeeded = await _repo.Delete(number.Value);
             if (!succeeded)
             {
                 return StatusCode(500, "A problem occured while removing the record. Please try again!");

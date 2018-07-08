@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using InvoiceWebApp.Components.Entities;
-using InvoiceWebApp.Components.Services;
-using InvoiceWebApp.Components.Services.Interfaces;
-using InvoiceWebApp.Controllers.ViewModels;
+using InvoiceAPI.Components.Entities;
+using InvoiceAPI.Components.Services;
+using InvoiceAPI.Components.Services.Interfaces;
+using InvoiceAPI.Controllers.ViewModels;
 
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -28,10 +28,10 @@ namespace ShareListAPI.Controllers
         /// <summary>
         /// Gets a list with all invoice items by invoice number.
         /// </summary>
-        [HttpGet("getByInvoice")]
+        [HttpGet("getAll")]
         [ProducesResponseType(typeof(IEnumerable<InvoiceItemViewModel>), 200)]
         [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> GetByInvoice(int? invoice)
+        public async Task<IActionResult> GetByInvoiceNumber(int? invoice)
         {
             if (!invoice.HasValue)
             {
@@ -42,64 +42,31 @@ namespace ShareListAPI.Controllers
             var data = await _repo.GetByInvoiceNumber(invoice.Value);
             if (data == null)
             {
-                return StatusCode(500, "Invoice items belonging to invoice '" + invoice.Value + "' could not be found.");
+                return StatusCode(500, "Invoice items belonging to invoice number '" + invoice.Value + "' could not be found.");
             }
 
             //Convert to viewmodel
             var result = data.Select(s => new InvoiceItemViewModel
             {
                 InvoiceNumber = s.InvoiceNumber,
-                Name = s.Name,
+                ItemNumber = s.ItemNumber,
                 Price = s.Price,
-                Description = s.Description,
                 Tax = s.Tax,
-                Quantity = s.Quantity,
-                ItemNumber = s.ItemNumber
+                Name = s.Name,
+                Description = s.Description,
+                Quantity = s.Quantity
             });
 
             return Ok(result);
         }
 
         /// <summary>
-        /// Gets an invoice item by number.
+        /// Gets an invoice item by name
         /// </summary>
-        [HttpGet("getByNumber")]
-        [ProducesResponseType(typeof(InvoiceItemViewModel), 200)]
-        [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> GetByNumber(int? number)
-        {
-            if (!number.HasValue)
-            {
-                return StatusCode(400, "Invalid parameter(s).");
-            }
-
-            //Get data
-            var data = await _repo.GetById(number.Value);
-            if (data == null)
-            {
-                return StatusCode(500, "Invoice item with item number '" + number.Value + "' could not be found.");
-            }
-
-            //Convert to viewmodel
-            var result = new InvoiceItemViewModel
-            {
-                InvoiceNumber = data.InvoiceNumber,
-                Name = data.Name,
-                Price = data.Price,
-                Description = data.Description,
-                Tax = data.Tax,
-                Quantity = data.Quantity,
-                ItemNumber = data.ItemNumber
-            };
-
-            return Ok(result);
-        }
-
-        /// <summary>
-        /// Gets an invoice item by name.
-        /// </summary>
+        /// <param name="name">Name of invoice item</param>
         [HttpGet("getByName")]
         [ProducesResponseType(typeof(InvoiceItemViewModel), 200)]
+        [ProducesResponseType(typeof(void), 400)]
         [ProducesResponseType(typeof(void), 500)]
         public async Task<IActionResult> GetByName(string name)
         {
@@ -108,30 +75,51 @@ namespace ShareListAPI.Controllers
                 return StatusCode(400, "Invalid parameter(s).");
             }
 
-            //Get data
+            //Get invoice
             var data = await _repo.GetByName(name);
             if (data == null)
             {
                 return StatusCode(500, "Invoice item named '" + name + "' could not be found.");
             }
 
-            //Convert to viewmodel
-            var result = new InvoiceItemViewModel
-            {
-                InvoiceNumber = data.InvoiceNumber,
-                Name = data.Name,
-                Price = data.Price,
-                Description = data.Description,
-                Tax = data.Tax,
-                Quantity = data.Quantity,
-                ItemNumber = data.ItemNumber
-            };
+            //Convert to view model
+            var result = new InvoiceItemViewModel();
+            result.SetProperties(data);
 
             return Ok(result);
         }
 
         /// <summary>
-        /// Creates a invoice item.
+        /// Gets an invoice item by id
+        /// </summary>
+        /// <param name="id">Id of invoice item</param>
+        [HttpGet("geyById")]
+        [ProducesResponseType(typeof(InvoiceItemViewModel), 200)]
+        [ProducesResponseType(typeof(void), 400)]
+        [ProducesResponseType(typeof(void), 500)]
+        public async Task<IActionResult> GetById(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return StatusCode(400, "Invalid parameter(s).");
+            }
+
+            //Get invoice
+            var data = await _repo.GetById(id.Value);
+            if (data == null)
+            {
+                return StatusCode(500, "Invoice item with id '" + id.Value + "' could not be found.");
+            }
+
+            //Convert to view model
+            var result = new InvoiceItemViewModel();
+            result.SetProperties(data);
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Creates a invoice item
         /// </summary>
         /// <param name="model">Invoice item object</param>
         [HttpPost("create")]
@@ -151,25 +139,28 @@ namespace ShareListAPI.Controllers
                 ItemNumber = model.ItemNumber,
                 Name = model.Name,
                 Description = model.Description,
-                Tax = model.Tax,
                 Price = model.Price,
+                Tax = model.Tax,
                 Quantity = model.Quantity
             };
 
             //Insert invoice item
-            var result = await _repo.Insert(invoiceItem);
-            if (result == null)
+            var data = await _repo.Insert(invoiceItem);
+            if (data == null)
             {
                 return StatusCode(500, "A problem occured while saving the record. Please try again!");
             }
+
+            var result = new InvoiceItemViewModel();
+            result.SetProperties(data);
 
             return Ok(result);
         }
 
         /// <summary>
-        /// Updates a invoice item.
+        /// Updates a user.
         /// </summary>
-        /// <param name="model">Invoice item object</param>
+        /// <param name="model">User object</param>
         [HttpPut("update")]
         [ProducesResponseType(typeof(InvoiceItemViewModel), 200)]
         [ProducesResponseType(typeof(void), 400)]
@@ -187,8 +178,8 @@ namespace ShareListAPI.Controllers
                 ItemNumber = model.ItemNumber,
                 Name = model.Name,
                 Description = model.Description,
-                Tax = model.Tax,
                 Price = model.Price,
+                Tax = model.Tax,
                 Quantity = model.Quantity
             };
 
@@ -206,22 +197,22 @@ namespace ShareListAPI.Controllers
         }
 
         /// <summary>
-        /// Deletes a invoice item by number
+        /// Deletes a invoice by number
         /// </summary>
-        /// <param name="number">Number of invoice item</param>
+        /// <param name="number">Id of invoice</param>
         [HttpDelete("delete")]
         [ProducesResponseType(typeof(void), 200)]
         [ProducesResponseType(typeof(void), 400)]
         [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> Delete(int? number)
+        public async Task<IActionResult> Delete(int? id)
         {
-            if (!number.HasValue)
+            if (!id.HasValue)
             {
                 return StatusCode(400, "Invalid parameter(s).");
             }
 
             //Remove invoice item
-            var succeeded = await _repo.Delete(number.Value);
+            var succeeded = await _repo.Delete(id.Value);
             if (!succeeded)
             {
                 return StatusCode(500, "A problem occured while removing the record. Please try again!");

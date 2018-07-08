@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using InvoiceAPI.Components.DataContext;
-using InvoiceAPI.Components.Entities;
-using InvoiceAPI.Components.Helpers;
-using InvoiceAPI.Components.Services.Interfaces;
+using InvoiceWebApp.Components.DataContext;
+using InvoiceWebApp.Components.Entities;
+using InvoiceWebApp.Components.Helpers;
+using InvoiceWebApp.Components.Services.Interfaces;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace InvoiceAPI.Components.Services
+namespace InvoiceWebApp.Components.Services
 {
     public class AddressRepository : IAddressRepository
     {
@@ -44,7 +44,7 @@ namespace InvoiceAPI.Components.Services
 
         public async Task<Address> Insert(Address address)
         {
-            var response = await _context.Addresses.AddAsync(address);
+            var response = _context.Addresses.Add(address);
             await _context.SaveChangesAsync();
 
             return response.Entity;

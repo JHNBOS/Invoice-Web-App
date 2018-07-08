@@ -1,8 +1,8 @@
-﻿using InvoiceAPI.Components.Entities;
+﻿using InvoiceWebApp.Components.Entities;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace InvoiceAPI.Components.DataContext
+namespace InvoiceWebApp.Components.DataContext
 {
     public partial class InvoiceContext : DbContext
     {
@@ -128,8 +128,7 @@ namespace InvoiceAPI.Components.DataContext
                 entity.HasOne(e => e.Address)
                     .WithMany(e => e.Debtors)
                     .HasConstraintName("dha_address_fk")
-                    .HasForeignKey(e => e.Number)
-                    .HasForeignKey(e => e.PostalCode)
+                    .HasForeignKey(e => new { e.Number, e.PostalCode })
                     .OnDelete(DeleteBehavior.Cascade);
 
                 entity.Property(e => e.PostalCode)

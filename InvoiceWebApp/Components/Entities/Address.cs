@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace InvoiceAPI.Components.Entities
+namespace InvoiceWebApp.Components.Entities
 {
     public partial class Address
     {

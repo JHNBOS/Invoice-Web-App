@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using InvoiceAPI.Components.Entities;
-using InvoiceAPI.Components.Services;
-using InvoiceAPI.Components.Services.Interfaces;
-using InvoiceAPI.Controllers.Viewmodels;
+using InvoiceWebApp.Components.Entities;
+using InvoiceWebApp.Components.Services;
+using InvoiceWebApp.Components.Services.Interfaces;
+using InvoiceWebApp.Controllers.Viewmodels;
 
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ShareListAPI.Controllers
+namespace InvoiceWebApp.Controllers
 {
     [EnableCors("AllowAll")]
     [Produces("application/json")]

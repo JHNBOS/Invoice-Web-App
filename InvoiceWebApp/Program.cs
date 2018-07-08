@@ -3,7 +3,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace InvoiceAPI
+namespace InvoiceWebApp
 {
     public class Program
     {

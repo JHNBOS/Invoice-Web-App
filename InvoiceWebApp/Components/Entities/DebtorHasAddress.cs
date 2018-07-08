@@ -1,4 +1,4 @@
-﻿namespace InvoiceAPI.Components.Entities
+﻿namespace InvoiceWebApp.Components.Entities
 {
     public partial class DebtorHasAddress
     {

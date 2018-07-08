@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using InvoiceAPI.Components.DataContext;
-using InvoiceAPI.Components.Entities;
-using InvoiceAPI.Components.Helpers;
-using InvoiceAPI.Components.Services.Interfaces;
+using InvoiceWebApp.Components.DataContext;
+using InvoiceWebApp.Components.Entities;
+using InvoiceWebApp.Components.Helpers;
+using InvoiceWebApp.Components.Services.Interfaces;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace InvoiceAPI.Components.Services
+namespace InvoiceWebApp.Components.Services
 {
     public class UserRepository : IUserRepository
     {
@@ -41,10 +41,10 @@ namespace InvoiceAPI.Components.Services
         public async Task<User> Insert(User user)
         {
             user.Password = _encryptor.Encrypt(user.Password);
-            var response = await _context.Users.AddAsync(user);
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return response.Entity;
+            return user;
         }
 
         public async Task<User> Update(User user)

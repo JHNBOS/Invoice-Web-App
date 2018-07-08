@@ -1,8 +1,8 @@
-﻿using InvoiceAPI.Components.Entities;
+﻿using InvoiceWebApp.Components.Entities;
 
 using Newtonsoft.Json;
 
-namespace InvoiceAPI.Controllers.ViewModels
+namespace InvoiceWebApp.Controllers.ViewModels
 {
     public class AddressViewModel
     {

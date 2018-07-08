@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using InvoiceAPI.Components.DataContext;
-using InvoiceAPI.Components.Entities;
-using InvoiceAPI.Components.Services.Interfaces;
+using InvoiceWebApp.Components.DataContext;
+using InvoiceWebApp.Components.Entities;
+using InvoiceWebApp.Components.Services.Interfaces;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace InvoiceAPI.Components.Services
+namespace InvoiceWebApp.Components.Services
 {
     public class DebtorRepository : IDebtorRepository
     {
@@ -33,7 +33,7 @@ namespace InvoiceAPI.Components.Services
 
         public async Task<Debtor> Insert(Debtor debtor)
         {
-            var response = await _context.Debtors.AddAsync(debtor);
+            var response = _context.Debtors.Add(debtor);
             await _context.SaveChangesAsync();
 
             return response.Entity;

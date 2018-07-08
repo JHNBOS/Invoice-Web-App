@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-using InvoiceAPI.Components.Entities;
-using InvoiceAPI.Components.Services;
-using InvoiceAPI.Components.Services.Interfaces;
-using InvoiceAPI.Controllers.ViewModels;
+using InvoiceWebApp.Components.Entities;
+using InvoiceWebApp.Components.Services;
+using InvoiceWebApp.Components.Services.Interfaces;
+using InvoiceWebApp.Controllers.ViewModels;
 
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +33,7 @@ namespace ShareListAPI.Controllers
         /// <summary>
         /// Gets a list with all debtors.
         /// </summary>
-        [HttpGet("getDebtors")]
+        [HttpGet("getAll")]
         [ProducesResponseType(typeof(IEnumerable<DebtorViewModel>), 200)]
         [ProducesResponseType(typeof(void), 500)]
         public async Task<IActionResult> GetUsers()
@@ -106,7 +106,7 @@ namespace ShareListAPI.Controllers
         /// <summary>
         /// Gets a debtor by id.
         /// </summary>
-        /// <param name="email">Id of debtor</param>
+        /// <param name="id">Id of debtor</param>
         [HttpGet("getById")]
         [ProducesResponseType(typeof(UserViewModel), 200)]
         [ProducesResponseType(typeof(void), 400)]
@@ -213,7 +213,7 @@ namespace ShareListAPI.Controllers
         /// <summary>
         /// Deletes a debtor.
         /// </summary>
-        /// <param name="email">Id of debtor</param>
+        /// <param name="id">Id of debtor</param>
         [HttpDelete("delete")]
         [ProducesResponseType(typeof(void), 200)]
         [ProducesResponseType(typeof(void), 400)]

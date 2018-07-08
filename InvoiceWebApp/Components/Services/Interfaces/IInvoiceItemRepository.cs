@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using InvoiceAPI.Components.Entities;
+using InvoiceWebApp.Components.Entities;
 
-namespace InvoiceAPI.Components.Services.Interfaces
+namespace InvoiceWebApp.Components.Services.Interfaces
 {
     public interface IInvoiceItemRepository
     {

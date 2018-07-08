@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-using InvoiceAPI.Components.Entities;
-using InvoiceAPI.Components.Services;
-using InvoiceAPI.Components.Services.Interfaces;
-using InvoiceAPI.Controllers.ViewModels;
+using InvoiceWebApp.Components.Entities;
+using InvoiceWebApp.Components.Services;
+using InvoiceWebApp.Components.Services.Interfaces;
+using InvoiceWebApp.Controllers.ViewModels;
 
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;

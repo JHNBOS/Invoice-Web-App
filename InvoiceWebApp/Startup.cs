@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace InvoiceAPI
+namespace InvoiceWebApp
 {
     public class Startup
     {

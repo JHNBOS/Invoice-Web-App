@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using InvoiceAPI.Components.DataContext;
-using InvoiceAPI.Components.Entities;
-using InvoiceAPI.Components.Services.Interfaces;
+using InvoiceWebApp.Components.DataContext;
+using InvoiceWebApp.Components.Entities;
+using InvoiceWebApp.Components.Services.Interfaces;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace InvoiceAPI.Components.Services
+namespace InvoiceWebApp.Components.Services
 {
     public class InvoiceRepository : IInvoiceRepository
     {
@@ -47,7 +47,7 @@ namespace InvoiceAPI.Components.Services
 
         public async Task<Invoice> Insert(Invoice invoice)
         {
-            var response = await _context.Invoices.AddAsync(invoice);
+            var response = _context.Invoices.Add(invoice);
             await _context.SaveChangesAsync();
 
             return response.Entity;

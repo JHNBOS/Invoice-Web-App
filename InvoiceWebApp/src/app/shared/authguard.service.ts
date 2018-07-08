@@ -8,7 +8,7 @@ export class AuthGuard implements CanActivate {
     constructor(private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (sessionStorage.getItem('loggedInUser')) {
+        if (localStorage.getItem('loggedInUser')) {
             let user = JSON.parse(localStorage.getItem('loggedInUser')) as User;
             let roles = route.data["roles"] as Array<number>;
 
