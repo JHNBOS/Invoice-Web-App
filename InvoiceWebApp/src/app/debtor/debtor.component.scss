@@ -57,3 +57,12 @@
     color: red;
     cursor: pointer;
 }
+
+.divider, .divider:hover {
+    background-color: transparent !important;
+    outline: none;
+    border: none;
+    border-right: 3px solid #fff;
+    height: 50%;
+    margin: 0 8px 0px -8px;
+}

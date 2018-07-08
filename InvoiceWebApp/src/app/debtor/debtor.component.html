@@ -21,16 +21,22 @@
                 </li>
             </ul>
 
+            <hr />
+
+            <a href="#" [routerLink]="['add', 'no']" class="btn btn-primary btn-sm mt-3" title="Add private debtor">
+                <i class="fa fa-male"></i>
+            </a>
+            <a href="#" [routerLink]="['add', 'yes']" class="btn btn-primary btn-sm mt-3" title="Add business debtor">
+                <i class="fa fa-building-o"></i>
+            </a>
+
+            <span class="btn btn-primary btn-sm mt-3 divider"></span>
+
             <a href="#" [routerLink]="['import']" class="btn btn-primary btn-sm mt-3" title="Add debtors by CSV">
                 <i class="fa fa-file-excel-o"></i>
             </a>
-            <a href="#" [routerLink]="['add']" class="btn btn-primary btn-sm mt-3" title="Add debtor">
-                <i class="fa fa-plus"></i>
-            </a>
         </div>
 
-        </div>
     </div>
-
     <!-- End of container -->
 </div>

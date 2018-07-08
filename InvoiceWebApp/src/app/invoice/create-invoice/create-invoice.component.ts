@@ -15,7 +15,6 @@ import { InvoiceItemService } from '../../shared/services/invoice_item.service';
 })
 export class CreateInvoiceComponent implements OnInit {
     invoice: Invoice = new Invoice;
-    items: InvoiceItem[] = [];
     debtor: Debtor;
 
     constructor(private titleService: Title, private route: ActivatedRoute, private invoiceService: InvoiceService, private invoiceItemService: InvoiceItemService,
@@ -28,7 +27,7 @@ export class CreateInvoiceComponent implements OnInit {
         const row = new InvoiceItem();
         row.invoice_number = this.invoice.invoice_number;
 
-        this.items.push(row);
+        this.invoice.items.push(row);
     }
 
     submitForm() {
@@ -46,8 +45,8 @@ export class CreateInvoiceComponent implements OnInit {
     }
 
     saveInvoiceItems() {
-        for (var i = 0; i < this.items.length; i++) {
-            let item = this.items[i];
+        for (var i = 0; i < this.invoice.items.length; i++) {
+            let item = this.invoice.items[i];
 
             this.invoiceItemService.create(item).subscribe(
                 res => this.router.navigate(['/invoices']),
@@ -60,11 +59,11 @@ export class CreateInvoiceComponent implements OnInit {
         const row = new InvoiceItem();
         row.invoice_number = this.invoice.invoice_number;
 
-        this.items.push(row);
+        this.invoice.items.push(row);
     }
 
     deleteRow(row: InvoiceItem) {
-        this.items.splice(this.items.indexOf(row), 1);
+        this.invoice.items.splice(this.invoice.items.indexOf(row), 1);
     }
 
     getDebtorChoice(event: any) {

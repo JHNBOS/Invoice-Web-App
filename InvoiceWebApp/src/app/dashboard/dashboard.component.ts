@@ -20,6 +20,6 @@ export class DashboardComponent implements OnInit {
     }
 
     getLoggedInUser() {
-        this.user = JSON.parse(localStorage.getItem('loggedInUser'));
+        this.user = JSON.parse(sessionStorage.getItem('loggedInUser'));
     }
 }

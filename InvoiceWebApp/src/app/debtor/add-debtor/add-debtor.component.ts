@@ -23,11 +23,11 @@ export class AddDebtorComponent implements OnInit {
 
     ngOnInit() {
         this.titleService.setTitle('Create Debtor - inVoice');
-        //this.route.params.subscribe(
-        //    (params) => {
-        //        this.forCompany = params['company'] == 'yes' ? true : false;
-        //    }
-        //);
+        this.route.params.subscribe(
+            (params) => {
+                this.forCompany = params['company'] == 'yes' ? true : false;
+            }
+        );
     }
 
     submitForm() {

@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     }
 
     checkIfLoggedIn() {
-        this.user = JSON.parse(localStorage.getItem('loggedInUser'));
+        this.user = JSON.parse(sessionStorage.getItem('loggedInUser'));
         if (this.user != null) {
             this.isLoggedIn = true;
         } else {

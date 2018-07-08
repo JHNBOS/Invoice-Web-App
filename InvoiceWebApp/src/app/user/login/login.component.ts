@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(this.email, this.password)
             .subscribe(
                 (response) => {
-                    localStorage.setItem('loggedInUser', JSON.stringify(response as User));
+                    sessionStorage.setItem('loggedInUser', JSON.stringify(response));
                     this.router.navigate(['/']);
                 },
                 (error) => { throw (error); }
