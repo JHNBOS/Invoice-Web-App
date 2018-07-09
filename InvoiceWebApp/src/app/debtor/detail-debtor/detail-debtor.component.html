@@ -6,11 +6,12 @@
 
     <div class="row">
         <div class="col-sm-12 col-md-10 offset-md-1">
-            <div class="form-horizontal" *ngIf="debtor && address">
+            <div class="form-horizontal" *ngIf="debtor">
                 <div class="form-row my-4">
                     <div class="col-sm-12 col-md-6">
-                        <label for="ssn">SSN</label>
-                        <input type="number" class="form-control" id="ssn" [(ngModel)]="debtor.ssn" readonly>
+                        <label for="id" *ngIf="debtor.company_name != null">Business Number</label>
+                        <label for="id" *ngIf="debtor.company_name == null">Social Security Number</label>
+                        <input type="text" class="form-control" id="id" [(ngModel)]="debtor.id" readonly>
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <label for="email">E-mail</label>
@@ -20,16 +21,28 @@
 
                 <hr />
 
-                <div class="form-row my-4">
-                    <div class="col-sm-12 col-md-6">
-                        <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" id="firstName" [(ngModel)]="debtor.first_name" readonly>
+                <ng-container *ngIf="debtor.company_name == null">
+                    <div class="form-row my-4">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" id="firstName" [(ngModel)]="debtor.first_name" readonly>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" [(ngModel)]="debtor.last_name" readonly>
+                        </div>
                     </div>
-                    <div class="col-sm-12 col-md-6">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" [(ngModel)]="debtor.last_name" readonly>
+                </ng-container>
+
+                <ng-container *ngIf="debtor.company_name != null">
+                    <div class="form-row my-4">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="companyName">Company Name</label>
+                            <input type="text" class="form-control" id="companyName" [(ngModel)]="debtor.company_name" readonly>
+                        </div>
+                        <div class="col-sm-12 col-md-6"></div>
                     </div>
-                </div>
+                </ng-container>
 
                 <div class="form-row my-4">
                     <div class="col-sm-12 col-md-6">
@@ -47,34 +60,34 @@
                 <div class="form-row my-4">
                     <div class="col-sm-12 col-md-6">
                         <label for="street">Street</label>
-                        <input type="text" class="form-control" id="street" [(ngModel)]="address.street" readonly>
+                        <input type="text" class="form-control" id="street" [(ngModel)]="debtor.address.street" readonly>
                     </div>
                     <div class="col-sm-12 col-md-3">
                         <label for="number">Number</label>
-                        <input type="number" class="form-control" id="number" [(ngModel)]="address.number" readonly>
+                        <input type="number" class="form-control" id="number" [(ngModel)]="debtor.address.number" readonly>
                     </div>
                     <div class="col-sm-12 col-md-3">
                         <label for="suffix">Suffix</label>
-                        <input type="text" class="form-control" id="suffix" [(ngModel)]="address.suffix" readonly>
+                        <input type="text" class="form-control" id="suffix" [(ngModel)]="debtor.address.suffix" readonly>
                     </div>
                 </div>
 
                 <div class="form-row my-4">
                     <div class="col-sm-12 col-md-3">
                         <label for="postal">Postal Code</label>
-                        <input type="text" class="form-control" id="postal" [(ngModel)]="address.postal_code" readonly>
+                        <input type="text" class="form-control" id="postal" [(ngModel)]="debtor.address.postal_code" readonly>
                     </div>
                     <div class="col-sm-12 col-md-5">
                         <label for="city">City</label>
-                        <input type="text" class="form-control" id="city" [(ngModel)]="address.city" readonly>
+                        <input type="text" class="form-control" id="city" [(ngModel)]="debtor.address.city" readonly>
                     </div>
                     <div class="col-sm-12 col-md-4">
                         <label for="country">Country</label>
-                        <input type="text" class="form-control" id="country" [(ngModel)]="address.country" readonly>
+                        <input type="text" class="form-control" id="country" [(ngModel)]="debtor.address.country" readonly>
                     </div>
                 </div>
 
-                <a id="btnChange" class="btn btn-primary float-right my-4" [routerLink]="['../../edit', debtor.ssn]">Edit</a>
+                <a id="btnChange" class="btn btn-primary float-right my-4" [routerLink]="['../../edit', debtor.id]">Edit</a>
             </div>
         </div>
     </div>

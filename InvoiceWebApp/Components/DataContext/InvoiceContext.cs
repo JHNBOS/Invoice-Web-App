@@ -64,7 +64,6 @@ namespace InvoiceWebApp.Components.DataContext
                     .HasMaxLength(150);
 
                 entity.Property(e => e.Suffix)
-                    .IsRequired()
                     .HasColumnName("suffix")
                     .HasMaxLength(10);
             });

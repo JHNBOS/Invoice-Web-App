@@ -36,7 +36,7 @@ namespace ShareListAPI.Controllers
         [HttpGet("getAll")]
         [ProducesResponseType(typeof(IEnumerable<DebtorViewModel>), 200)]
         [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> GetAll()
         {
             //Get data
             var data = await _repo.GetDebtors();
@@ -46,24 +46,27 @@ namespace ShareListAPI.Controllers
             }
 
             //Convert to viewmodel
-            var result = data.Select(async s =>
+            var result = new List<DebtorViewModel>();
+            foreach (var debtor in data)
             {
+                var hasAddress = debtor.Addresses.ToList()[0];
+                var address = await _addressRepository.GetAddressByPostalAndNumber(hasAddress.Number, hasAddress.PostalCode);
+
                 var addressViewModel = new AddressViewModel();
-                var address = await this.GetAddress(s.Id);
                 addressViewModel.SetProperties(address);
 
-                new DebtorViewModel
+                result.Add(new DebtorViewModel
                 {
-                    Id = s.Id,
-                    FirstName = s.FirstName,
-                    LastName = s.LastName,
-                    Email = s.Email,
-                    CompanyName = s.CompanyName,
-                    BankAccount = s.BankAccount,
-                    Phone = s.Phone,
+                    Id = debtor.Id,
+                    FirstName = debtor.FirstName,
+                    LastName = debtor.LastName,
+                    Email = debtor.Email,
+                    CompanyName = debtor.CompanyName,
+                    BankAccount = debtor.BankAccount,
+                    Phone = debtor.Phone,
                     Address = addressViewModel
-                };
-            });
+                });
+            }
 
             return Ok(result);
         }
@@ -96,9 +99,16 @@ namespace ShareListAPI.Controllers
                 return StatusCode(500, "Debtor could not be found.");
             }
 
+            //Set address
+            var hasAddress = data.Addresses.ToList()[0];
+            var address = await _addressRepository.GetAddressByPostalAndNumber(hasAddress.Number, hasAddress.PostalCode);
+            var addressViewModel = new AddressViewModel();
+            addressViewModel.SetProperties(address);
+
             //Convert to view model
             var result = new DebtorViewModel();
             result.SetProperties(data);
+            result.Address = addressViewModel;
 
             return Ok(result);
         }
@@ -125,9 +135,16 @@ namespace ShareListAPI.Controllers
                 return StatusCode(500, "Debtor could not be found.");
             }
 
+            //Set address
+            var hasAddress = data.Addresses.ToList()[0];
+            var address = await _addressRepository.GetAddressByPostalAndNumber(hasAddress.Number, hasAddress.PostalCode);
+            var addressViewModel = new AddressViewModel();
+            addressViewModel.SetProperties(address);
+
             //Convert to view model
             var result = new DebtorViewModel();
             result.SetProperties(data);
+            result.Address = addressViewModel;
 
             return Ok(result);
         }

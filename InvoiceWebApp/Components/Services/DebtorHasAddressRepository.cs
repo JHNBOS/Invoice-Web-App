@@ -20,25 +20,25 @@ namespace InvoiceWebApp.Components.Services
 
         public async Task<ICollection<DebtorHasAddress>> GetAll()
         {
-            var response = await _context.DebtorHasAddresses.ToListAsync();
+            var response = await _context.DebtorHasAddresses.Include(i => i.Address).ToListAsync();
             return response;
         }
 
         public async Task<DebtorHasAddress> GetAddressByDebtorId(string id)
         {
-            var response = await _context.DebtorHasAddresses.FirstOrDefaultAsync(q => q.DebtorId == id);
+            var response = await _context.DebtorHasAddresses.Include(i => i.Address).FirstOrDefaultAsync(q => q.DebtorId == id);
             return response;
         }
 
         public async Task<ICollection<DebtorHasAddress>> GetAddressesByPostal(string postal)
         {
-            var response = await _context.DebtorHasAddresses.Where(q => q.PostalCode.ToLower() == postal.ToLower()).ToListAsync();
+            var response = await _context.DebtorHasAddresses.Include(i => i.Address).Where(q => q.PostalCode.ToLower() == postal.ToLower()).ToListAsync();
             return response;
         }
 
         public async Task<DebtorHasAddress> GetAddressByPostalAndNumber(int number, string postal)
         {
-            var response = await _context.DebtorHasAddresses.FirstOrDefaultAsync(q => q.PostalCode.ToLower() == postal.ToLower() && q.Number == number);
+            var response = await _context.DebtorHasAddresses.Include(i => i.Address).FirstOrDefaultAsync(q => q.PostalCode.ToLower() == postal.ToLower() && q.Number == number);
             return response;
         }
 

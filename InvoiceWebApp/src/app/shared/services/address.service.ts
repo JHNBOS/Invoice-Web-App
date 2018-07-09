@@ -30,7 +30,7 @@ export class AddressService {
     }
 
     getAddress(postal: string, number: number): Observable<Address> {
-        return this.http.get<any>(this.apiUrl + 'getByNumberAndPostalCode?number=' + number + '&postal=' + postal)
+        return this.http.get(this.apiUrl + 'getByNumberAndPostalCode?number=' + number + '&postal=' + postal)
             .catch(this.handleError);
     }
 

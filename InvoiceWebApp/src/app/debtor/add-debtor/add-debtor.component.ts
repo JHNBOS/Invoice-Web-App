@@ -19,7 +19,7 @@ export class AddDebtorComponent implements OnInit {
     address: Address = new Address;
 
     constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService,
-        private debtorAddressLinkService: DebtorHasAddressService, private addressService: AddressService, private router: Router) { }
+        private debtorHasAddressService: DebtorHasAddressService, private addressService: AddressService, private router: Router) { }
 
     ngOnInit() {
         this.titleService.setTitle('Create Debtor - Invoice Panel');
@@ -33,26 +33,63 @@ export class AddDebtorComponent implements OnInit {
     submitForm() {
         this.debtorService.create(this.debtor).subscribe(
             (response) => {
-                this.createAddress();
+                if ((this.debtor.address.postal_code != this.address.postal_code) && (this.debtor.address.number != this.address.number)) {
+                    this.createAddress();
+                } else {
+                    this.router.navigate(['/debtors']);
+                }
             },
             (error) => { throw error; }
         );
     }
 
     private createAddress() {
-        this.addressService.create(this.address).subscribe(
-            (response) => this.linkAddress(),
-            (error) => { throw error; }
+        var exists = this.addressService.getAddress(this.address.postal_code, this.address.number).subscribe(
+            (response) => {
+                if (response != null) {
+                    true;
+                } else {
+                    false;
+                }
+            },
+            (error) => { }
         );
+
+        if (exists) {
+            this.linkAddress();
+        } else {
+            this.addressService.create(this.address).subscribe(
+                (response) => this.linkAddress(),
+                (error) => { throw error; }
+            );
+        }
     }
 
     private linkAddress() {
+        var exists = this.debtorHasAddressService.getByDebtorId(this.debtor.id).subscribe(
+            (response) => {
+                if (response != null) {
+                    true;
+                } else {
+                    false;
+                }
+            },
+            (error) => { }
+        );
+
+        if (exists) {
+            this.debtorHasAddressService.deleteDebtorHasAddress(this.debtor.id, this.address.postal_code, this.address.number).subscribe(
+                (response) => { },
+                (error) => { }
+            );
+        }
+
         const debtorAddressLink = new DebtorHasAddress();
         debtorAddressLink.debtor_id = this.debtor.id;
         debtorAddressLink.address_postal = this.address.postal_code;
         debtorAddressLink.address_number = this.address.number;
 
-        this.debtorAddressLinkService.create(debtorAddressLink).subscribe(
+        this.debtorHasAddressService.create(debtorAddressLink).subscribe(
             (response) => this.router.navigate(['/debtors']),
             (error) => { throw error; }
         );

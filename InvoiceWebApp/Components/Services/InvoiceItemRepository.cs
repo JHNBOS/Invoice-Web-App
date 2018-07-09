@@ -16,19 +16,19 @@ namespace InvoiceWebApp.Components.Services
 
         public async Task<ICollection<InvoiceItem>> GetByInvoiceNumber(int number)
         {
-            var response = await _context.InvoiceItems.Where(q => q.InvoiceNumber == number).ToListAsync();
+            var response = await _context.InvoiceItems.Include(i => i.Invoice).Where(q => q.InvoiceNumber == number).ToListAsync();
             return response;
         }
 
         public async Task<InvoiceItem> GetById(int id)
         {
-            var response = await _context.InvoiceItems.FirstOrDefaultAsync(q => q.ItemNumber == id);
+            var response = await _context.InvoiceItems.Include(i => i.Invoice).FirstOrDefaultAsync(q => q.ItemNumber == id);
             return response;
         }
 
         public async Task<InvoiceItem> GetByName(string name)
         {
-            var response = await _context.InvoiceItems.FirstOrDefaultAsync(q => q.Name.ToLower() == name.ToLower());
+            var response = await _context.InvoiceItems.Include(i => i.Invoice).FirstOrDefaultAsync(q => q.Name.ToLower() == name.ToLower());
             return response;
         }
 

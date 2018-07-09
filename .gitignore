@@ -446,3 +446,9 @@ ASALocalRun/
 /InvoiceWebApp/wwwroot/styles.bundle.js.map
 /InvoiceWebApp/wwwroot/vendor.bundle.js
 /InvoiceWebApp/wwwroot/vendor.bundle.js.map
+/InvoiceWebApp/dist/out-tsc/app/shared/models/*.js
+/InvoiceWebApp/dist/out-tsc/app/shared/models/*.map
+/InvoiceWebApp/dist/out-tsc/app/shared/services/*.js
+/InvoiceWebApp/dist/out-tsc/app/shared/services/*.map
+/InvoiceWebApp/dist/out-tsc/app/user/reset-password/reset-password.component.js
+/InvoiceWebApp/dist/out-tsc/app/user/reset-password/reset-password.component.js.map

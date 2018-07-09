@@ -4,14 +4,14 @@
         <div class="col-sm-12 col-md-10 offset-md-1">
             <ul class="list-group">
                 <li class="list-group-item" *ngFor="let debtor of debtors">
-                    <a [routerLink]="['details', debtor.ssn]">
+                    <a [routerLink]="['details', debtor.id]">
                         {{debtor.first_name}} {{debtor.last_name}} - {{debtor.email}}
                     </a>
                     <span class="list-icons">
-                        <button class="btn-edit" [routerLink]="['edit', debtor.ssn]" title="Edit">
+                        <button class="btn-edit" [routerLink]="['edit', debtor.id]" title="Edit">
                             <i class="fa fa-edit"></i>
                         </button>
-                        <button class="btn-delete" type="button" (click)="deleteDebtor(debtor.ssn)" title="Remove">
+                        <button class="btn-delete" type="button" (click)="deleteDebtor(debtor.id)" title="Remove">
                             <i class="fa fa-trash"></i>
                         </button>
                     </span>

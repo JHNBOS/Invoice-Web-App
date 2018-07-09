@@ -20,25 +20,25 @@ namespace InvoiceWebApp.Components.Services
 
         public async Task<ICollection<Address>> GetAddresses()
         {
-            var response = await _context.Addresses.ToListAsync();
+            var response = await _context.Addresses.Include(i => i.Debtors).ToListAsync();
             return response;
         }
 
         public async Task<ICollection<Address>> GetAddressesByCity(string city)
         {
-            var response = await _context.Addresses.Where(q => q.City.ToLower() == city.ToLower()).ToListAsync();
+            var response = await _context.Addresses.Include(i => i.Debtors).Where(q => q.City.ToLower() == city.ToLower()).ToListAsync();
             return response;
         }
 
         public async Task<ICollection<Address>> GetAddressesByPostal(string postal)
         {
-            var response = await _context.Addresses.Where(q => q.PostalCode.ToLower() == postal.ToLower()).ToListAsync();
+            var response = await _context.Addresses.Include(i => i.Debtors).Where(q => q.PostalCode.ToLower() == postal.ToLower()).ToListAsync();
             return response;
         }
 
         public async Task<Address> GetAddressByPostalAndNumber(int number, string postal)
         {
-            var response = await _context.Addresses.FirstOrDefaultAsync(q => q.PostalCode.ToLower() == postal.ToLower() && q.Number == number);
+            var response = await _context.Addresses.Include(i => i.Debtors).FirstOrDefaultAsync(q => q.PostalCode.ToLower() == postal.ToLower() && q.Number == number);
             return response;
         }
 
