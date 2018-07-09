@@ -1,51 +1,45 @@
-<!-- Top navigation -->
 <nav class="navbar navbar-dark fixed-top flex-row-reverse">
     <h1 class="navbar-brand">{{ title }}</h1>
+    <ul class="nav justify-content-end" *ngIf="isLoggedIn && user != null">
+        <li class="nav-item">
+            <a [routerLink]="['/users/edit', user.email]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#" title="{{user.first_name}} {{user.last_name}}">
+                <img class="profile" [src]="_sanitizer.bypassSecurityTrustUrl(user.picture)" />
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link sign-out" style="cursor: pointer;" (click)="signOut()" title="Sign Out">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
 </nav>
 
-<!-- Begin of side navigation bar -->
 <nav class="bg-faded sidebar">
     <div class="nav-top">
         <a class="navbar-brand" href="#">Invoice Panel</a>
     </div>
-    <ul class="nav nav-pills flex-column" [hidden]="!isLoggedIn">
+    <ul class="nav nav-pills flex-column" *ngIf="isLoggedIn && user != null">
         <li class="nav-item">
             <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Home</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [hidden]="user.role_id == 2">
             <a [routerLink]="['/debtors']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Debtors</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [hidden]="user.role_id == 2">
             <a [routerLink]="['/invoices']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Invoices</a>
         </li>
-    </ul>
-    <ul class="nav nav-pills flex-column nav-bottom" [hidden]="!isLoggedIn">
         <li class="nav-item">
             <a [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Users</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" style="cursor: pointer;" (click)="signOut()">Sign out</a>
-        </li>
     </ul>
+    <ul class="nav nav-pills flex-column nav-bottom" *ngIf="isLoggedIn && user != null"></ul>
 </nav>
-<!-- End of side navigation bar -->
 
 <div class="container-fluid">
     <div class="row">
-
-        <!-- Main content -->
         <main>
             <router-outlet (activate)="checkIfLoggedIn()"></router-outlet>
             <ng2-toasty [position]="'bottom-right'"></ng2-toasty>
         </main>
-
-        <!-- Footer -->
-        <footer class="footer bg-primary">
-            <div class="container text-center">
-                <span class="text-white">Johan Bos &copy; 2018</span>
-            </div>
-        </footer>
     </div>
-    <!-- End of row -->
 </div>
-<!-- End of container -->

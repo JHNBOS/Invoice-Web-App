@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
@@ -17,7 +18,7 @@ export class AppComponent implements OnInit {
     title: string;
 
     constructor(private authService: AuthenticationService, private route: ActivatedRoute,
-        private router: Router) { }
+        private router: Router, private _sanitizer: DomSanitizer) { }
 
     ngOnInit() {
         this.checkIfLoggedIn();

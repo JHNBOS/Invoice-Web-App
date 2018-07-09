@@ -6,16 +6,13 @@
         <div class="col-sm-12 col-md-10 offset-md-1">
             <div class="form-horizontal" *ngIf="currentUser">
 
-                <!-- User ID and email -->
+                <!-- Email -->
                 <div class="form-row my-4">
-                    <div class="col-sm-12 col-md-6">
+                    <div class="col-sm-12 col-md-7">
                         <label for="email">E-mail</label>
-                        <input type="email" class="form-control" id="email" [(ngModel)]="currentUser.email">
+                        <input type="text" class="form-control" id="email" [(ngModel)]="currentUser.email">
                     </div>
-                    <div class="col-sm-12 col-md-6">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" [(ngModel)]="currentUser.password">
-                    </div>
+                    <div class="col-sm-12 col-md-5"></div>
                 </div>
 
                 <hr />

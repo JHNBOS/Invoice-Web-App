@@ -1,5 +1,5 @@
 $navbarHeight: 80px;
-$sidebarWidth: 13vw;
+$sidebarWidth: 11vw;
 $mainWidth: calc(100vw - #{$sidebarWidth});
 
 /* Navbar */
@@ -18,6 +18,50 @@ $mainWidth: calc(100vw - #{$sidebarWidth});
     line-height: $navbarHeight;
 }
 
+.navbar .nav {
+    position: absolute;
+    top: 0;
+    height: 100%;
+}
+
+.navbar .nav .nav-item .nav-link {
+    display: block;
+    padding: 0rem .5rem 0rem .5rem;
+    height: 100%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.navbar .nav .nav-item .sign-out {
+    color: red !important;
+    font-size: 22px;
+    top: calc(80px - .5rem);
+    transform: translateY(-55px);
+    padding: 0.5rem .7rem 0rem .8rem;
+}
+
+.navbar .nav .nav-item:hover .sign-out {
+    color: darkred !important;
+}
+
+.navbar .nav .nav-item .profile {
+    max-height: 55px;
+    height: auto;
+    max-width: 55px;
+    border-radius: 30%;
+    border: 2px solid rgba(0, 123, 255, 0.30);
+    margin-left: 15px;
+    position: relative;
+    top: 50%;
+    left: 0%;
+    transform: translate(-25%, -50%);
+}
+
+.navbar .nav .nav-item:hover .profile {
+    border: 2px solid rgba(0, 123, 255, 0.60);
+}
+
 /* Main */
 main {
     position: fixed;
@@ -29,7 +73,6 @@ main {
     height: 100%;
     padding: 30px 15px 5px 15px;
 }
-
 /* Sidebar */
 .sidebar {
     position: fixed;
@@ -43,13 +86,12 @@ main {
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background: #424c56;
 }
-  
 /* Sidebar navigation */
 .sidebar {
     padding-left: 0;
     padding-right: 0;
 }
-  
+
 .sidebar .nav-top {
     position: absolute;
     top: 0;
@@ -86,7 +128,9 @@ main {
 }
 
 .sidebar .nav-item a {
-    color: #ddd;
+    padding: 10px 25px;
+    color: #ddd !important;
+    text-align: left;
 }
 
 .sidebar .nav-item:hover a {
