@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastOptions, ToastyService } from 'ng2-toasty';
-import { Observable } from 'rxjs/Observable';
 import User from '../../shared/models/user.model';
 import { UserService } from '../../shared/services/user.service';
 
@@ -13,20 +11,8 @@ import { UserService } from '../../shared/services/user.service';
 })
 export class ImportUserComponent implements OnInit {
     users: User[] = [];
-    toastOptions: ToastOptions;
 
-    constructor(private titleService: Title, private userService: UserService, private toastyService: ToastyService,
-        private route: ActivatedRoute, private router: Router) {
-
-        this.titleService.setTitle('Import Users - inVoice');
-        this.toastOptions = {
-            title: 'Success',
-            msg: 'User(s) have been successfully added!',
-            theme: ' bootstrap',
-            showClose: true,
-            timeout: 4000
-        };
-    }
+    constructor(private titleService: Title, private userService: UserService, private route: ActivatedRoute, private router: Router) { }
 
     ngOnInit() { }
 
@@ -36,12 +22,12 @@ export class ImportUserComponent implements OnInit {
 
     private mapToUser(data: any[]) {
         const user = new User();
-        user.user_id = Number.parseInt(data[0]);
-        user.first_name = data[1];
-        user.last_name = data[2];
-        user.email = data[3];
-        user.password = data[4];
-        user.profile_pic = data[5];
+        user.first_name = data[0];
+        user.last_name = data[1];
+        user.email = data[2];
+        user.password = data[3];
+        user.profile_pic = data[4];
+        user.role_id = data[5]
 
         this.users.push(user);
     }
@@ -81,12 +67,7 @@ export class ImportUserComponent implements OnInit {
             const user = this.users[i];
 
             this.userService.create(user).subscribe(
-                (response) => {
-                    count++;
-                    if (count === this.users.length) {
-                        this.toastyService.success(this.toastOptions);
-                    }
-                },
+                (response) => { },
                 (error) => { throw (error); }
             );
         }
