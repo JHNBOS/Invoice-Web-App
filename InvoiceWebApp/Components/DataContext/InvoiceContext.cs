@@ -225,7 +225,6 @@ namespace InvoiceWebApp.Components.DataContext
                     .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Type)
-                    .IsRequired()
                     .HasColumnName("type")
                     .HasMaxLength(200);
             });

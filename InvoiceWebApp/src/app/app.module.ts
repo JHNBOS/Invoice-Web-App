@@ -10,6 +10,7 @@ import { InvoiceModule } from './invoice/invoice.module';
 import { AuthenticationService } from './shared/authentication.service';
 import { AuthGuard } from './shared/authguard.service';
 import { CustomErrorHandler } from './shared/error-handler';
+import { RoleService } from './shared/services/role.service';
 import { SharedService } from './shared/services/shared.service';
 import { UserModule } from './user/user.module';
 
@@ -32,6 +33,7 @@ import { UserModule } from './user/user.module';
     ],
     providers: [
         SharedService,
+        RoleService,
         { provide: AuthGuard, useClass: AuthGuard },
         { provide: AuthenticationService, useClass: AuthenticationService },
         { provide: ErrorHandler, useClass: CustomErrorHandler }

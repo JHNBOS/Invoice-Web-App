@@ -6,14 +6,14 @@
 
             <ul class="list-group">
                 <li class="list-group-item" *ngFor="let user of users">
-                    <a [routerLink]="['details', user.user_id]">
+                    <a [routerLink]="['details', user.email]">
                         {{user.first_name}} {{user.last_name}} - {{user.email}}
                     </a>
                     <span class="list-icons">
-                        <button class="btn-edit" [routerLink]="['edit', user.user_id]" title="Edit">
+                        <button class="btn-edit" [routerLink]="['edit', user.email]" title="Edit">
                             <i class="fa fa-edit"></i>
                         </button>
-                        <button class="btn-delete" type="button" (click)="deleteUser(user.user_id)" title="Remove">
+                        <button class="btn-delete" type="button" (click)="deleteUser(user.email)" title="Remove">
                             <i class="fa fa-trash"></i>
                         </button>
                     </span>

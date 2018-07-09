@@ -26,7 +26,7 @@ export class ImportUserComponent implements OnInit {
         user.last_name = data[1];
         user.email = data[2];
         user.password = data[3];
-        user.profile_pic = data[4];
+        user.picture = data[4];
         user.role_id = data[5]
 
         this.users.push(user);
