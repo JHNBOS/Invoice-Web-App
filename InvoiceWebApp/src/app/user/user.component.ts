@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
         private userService: UserService, private router: Router) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Users - inVoice');
+        this.titleService.setTitle('Users - Invoice Panel');
         this.getAllUsers();
     }
 

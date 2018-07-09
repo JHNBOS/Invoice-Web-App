@@ -11,7 +11,6 @@ import { DebtorHasAddressService } from '../../shared/services/debtor_has_addres
 })
 export class DebtorDropdownComponent implements OnInit {
     debtors: Debtor[] = [];
-    locations: string[] = [];
     selectedDebtor: Debtor;
     isReady = false;
 
@@ -30,7 +29,7 @@ export class DebtorDropdownComponent implements OnInit {
 
     getAllDebtors() {
         this.debtorService.getAll().subscribe(
-            (response) => this.debtors = response,
+            (response) => { this.debtors = response; this.isReady = true; },
             (error) => { throw (error); }
         );
     }

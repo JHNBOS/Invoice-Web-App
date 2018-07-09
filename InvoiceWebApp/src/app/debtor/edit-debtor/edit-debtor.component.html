@@ -1,12 +1,12 @@
 <div class="container">
 
-    <!-- Row -->
-    <div class="row">
+    <a class="return my-3" [routerLink]="['/debtors']" title="Return">
+        <i class="fa fa-arrow-left"></i>
+    </a>
 
+    <div class="row">
         <div class="col-sm-12 col-md-10 offset-md-1">
             <div class="form-horizontal" *ngIf="debtor">
-
-                <!-- User id and email -->
                 <div class="form-row my-4">
                     <div class="col-sm-12 col-md-6">
                         <label for="ssn">SSN</label>
@@ -20,7 +20,6 @@
 
                 <hr />
 
-                <!-- Names -->
                 <div class="form-row my-4">
                     <div class="col-sm-12 col-md-6">
                         <label for="firstName">First Name</label>
@@ -32,7 +31,6 @@
                     </div>
                 </div>
 
-                <!-- Phone and a bank account -->
                 <div class="form-row my-4">
                     <div class="col-sm-12 col-md-6">
                         <label for="phone">Phone</label>
@@ -44,10 +42,8 @@
                     </div>
                 </div>
 
-
                 <hr />
 
-                <!-- Address -->
                 <div class="form-row my-4">
                     <div class="col-sm-12 col-md-6">
                         <label for="street">Street</label>
@@ -78,12 +74,8 @@
                     </div>
                 </div>
 
-
                 <button [disabled]="!debtor.isValid() && !address.isValid()" id="btnSave" type="button" class="btn btn-primary float-right my-4" (click)="submitForm()">Save</button>
-
             </div>
-
-            <!-- End of container -->
         </div>
     </div>
 </div>

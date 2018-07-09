@@ -12,6 +12,7 @@ import { ImportUserComponent } from './import-user/import-user.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user.component';
 import { UserRoutingModule } from './user.routing';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { UserRoutingModule } from './user.routing';
         AddUserComponent,
         DetailUserComponent,
         ImportUserComponent,
-        LoginComponent
+        LoginComponent,
+        ResetPasswordComponent
     ],
     imports: [
         CommonModule,

@@ -23,7 +23,7 @@ export class ImportDebtorComponent implements OnInit {
     constructor(private titleService: Title, private debtorService: DebtorService, private addressService: AddressService,
         private debtorHasAddressService: DebtorHasAddressService, private toastyService: ToastyService, private route: ActivatedRoute, private router: Router) {
 
-        this.titleService.setTitle('Import Debtors - inVoice');
+        this.titleService.setTitle('Import Debtors - Invoice Panel');
         this.toastOptions = {
             title: 'Success',
             msg: 'Debtor(s) have been successfully added!',

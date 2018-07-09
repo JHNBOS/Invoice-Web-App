@@ -16,7 +16,7 @@ export class DebtorComponent implements OnInit {
     constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService, private router: Router) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Debtors - inVoice');
+        this.titleService.setTitle('Debtors - Invoice Panel');
         this.getAllDebtors();
     }
 

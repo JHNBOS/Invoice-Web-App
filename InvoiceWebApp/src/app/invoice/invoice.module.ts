@@ -7,7 +7,8 @@ import { DebtorDropdownModule } from '../debtor/debtor-dropdown/debtor-dropdown.
 import { CustomErrorHandler } from '../shared/error-handler';
 import { AddressService } from '../shared/services/address.service';
 import { DebtorService } from '../shared/services/debtor.service';
-import { InvoiceService } from '../shared/services/invoice.service';;
+import { InvoiceService } from '../shared/services/invoice.service';
+import { InvoiceItemService } from '../shared/services/invoice_item.service';
 import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
 import { InvoiceComponent } from './invoice.component';
 import { InvoiceRoutingModule } from './invoice.routing';
@@ -27,6 +28,7 @@ import { InvoiceRoutingModule } from './invoice.routing';
     ],
     providers: [
         InvoiceService,
+        InvoiceItemService,
         DebtorService,
         AddressService,
         { provide: ErrorHandler, useClass: CustomErrorHandler }

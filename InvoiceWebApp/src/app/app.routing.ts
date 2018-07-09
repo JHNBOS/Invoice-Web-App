@@ -5,6 +5,7 @@ import { DebtorComponent } from './debtor/debtor.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { AuthGuard } from './shared/authguard.service';
 import { LoginComponent } from './user/login/login.component';
+import { ResetPasswordComponent } from './user/reset-password/reset-password.component';
 import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
@@ -36,6 +37,11 @@ const routes: Routes = [
         path: 'login',
         component: LoginComponent,
         data: { title: 'Sign In' }
+    },
+    {
+        path: 'forgot',
+        component: ResetPasswordComponent,
+        data: { title: 'Reset Password' }
     }
 ];
 

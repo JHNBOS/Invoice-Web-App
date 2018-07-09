@@ -1,12 +1,15 @@
 <div class="container">
-    <!-- Row -->
+
+    <a class="return my-3" [routerLink]="['/invoices']" title="Return">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+
     <div class="row mt-4">
         <div class="col-sm-12 col-md-12">
             <div class="form-horizontal" *ngIf="invoice">
-                <!-- Debtor -->
                 <div class="form-row my-4">
                     <div class="col-sm-12 col-md-6">
-                        <label for="ssn">Debtor</label>
+                        <label>Debtor</label>
                         <app-debtor-dropdown (chosenDebtor)="getDebtorChoice($event)"></app-debtor-dropdown>
                     </div>
                     <div class="col-sm-12 col-md-6">
@@ -17,7 +20,6 @@
                     </div>
                 </div>
                 <hr class="py-2" />
-                <!-- Invoice rows -->
                 <div class="form-row my-4">
                     <div class="col-sm-12 col-md-12">
                         <table class="table table-sm table-striped">
@@ -33,7 +35,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="table-row" *ngFor="let row of items;let i = index">
+                                <tr class="table-row" *ngFor="let row of invoice.items;let i = index">
                                     <td>
                                         <input type="text" class="form-control" [(ngModel)]="row.product" required />
                                     </td>
@@ -66,7 +68,6 @@
                     </div>
                 </div>
                 <hr class="py-2" />
-                <!-- Comment -->
                 <div class="form-row my-4">
                     <div class="col-sm-12 col-md-6">
                         <label for="comment">Comment</label>
@@ -80,5 +81,4 @@
             </div>
         </div>
     </div>
-    <!-- End of container -->
 </div>

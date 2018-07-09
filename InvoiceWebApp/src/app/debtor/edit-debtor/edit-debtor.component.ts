@@ -23,7 +23,7 @@ export class EditDebtorComponent implements OnInit {
         private debtorService: DebtorService, private debtorHasAddressService: DebtorHasAddressService, private addressService: AddressService, private router: Router) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Edit Debtor - inVoice');
+        this.titleService.setTitle('Edit Debtor - Invoice Panel');
         this.route.params.subscribe(
             (params) => {
                 this.debtorId = params['id'];

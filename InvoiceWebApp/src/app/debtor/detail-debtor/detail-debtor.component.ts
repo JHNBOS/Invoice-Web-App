@@ -16,7 +16,7 @@ export class DetailDebtorComponent implements OnInit {
     constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService, private router: Router) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Debtor Details - inVoice');
+        this.titleService.setTitle('Debtor Details - Invoice Panel');
         this.route.params.subscribe(
             (params) => {
                 this.debtorId = params['id'];

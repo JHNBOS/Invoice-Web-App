@@ -16,7 +16,7 @@ export class InvoiceComponent implements OnInit {
     constructor(private titleService: Title, private route: ActivatedRoute, private invoiceService: InvoiceService, private router: Router) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Invoices - inVoice');
+        this.titleService.setTitle('Invoices - Invoice Panel');
         this.getAllInvoices();
     }
 

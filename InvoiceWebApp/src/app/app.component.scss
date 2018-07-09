@@ -13,9 +13,11 @@ $mainWidth: calc(100vw - #{$sidebarWidth});
     width: 100%;
     margin-left: 50px;
     color: #333;
-    font-size: 33px;
+    font-size: 24px;
     font-weight: 400;
-    line-height: $navbarHeight;
+    position: relative;
+    top: 45%;
+    transform: translateY(-50%);
 }
 
 .navbar .nav {
@@ -73,6 +75,7 @@ main {
     height: 100%;
     padding: 30px 15px 5px 15px;
 }
+
 /* Sidebar */
 .sidebar {
     position: fixed;
@@ -104,7 +107,7 @@ main {
 }
 
 .sidebar .nav-top a {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 400;
     color: #fff;
     text-decoration: none;

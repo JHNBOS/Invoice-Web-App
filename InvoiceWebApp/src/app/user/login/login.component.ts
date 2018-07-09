@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
         private router: Router, private authenticationService: AuthenticationService) {}
 
     ngOnInit() {
-        this.titleService.setTitle('Sign In - inVoice');
+        this.titleService.setTitle('Sign In - Invoice Panel');
 
         // reset login status
         this.authenticationService.logout();

@@ -13,5 +13,6 @@ namespace InvoiceWebApp.Components.Services.Interfaces
         Task<User> Update(User user);
         Task<bool> Delete(string email);
         Task<User> Authenticate(string email, string password);
+        Task<string> ResetPassword(string email);
     }
 }

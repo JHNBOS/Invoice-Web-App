@@ -1,10 +1,7 @@
 <div class="container">
-
-    <!-- Row -->
     <h3 class="text-center" *ngIf="debtors.length == 0">No debtors.</h3>
     <div class="row">
         <div class="col-sm-12 col-md-10 offset-md-1">
-
             <ul class="list-group">
                 <li class="list-group-item" *ngFor="let debtor of debtors">
                     <a [routerLink]="['details', debtor.ssn]">
@@ -36,7 +33,5 @@
                 <i class="fa fa-file-excel-o"></i>
             </a>
         </div>
-
     </div>
-    <!-- End of container -->
 </div>

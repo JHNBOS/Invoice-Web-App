@@ -22,7 +22,7 @@ export class AddDebtorComponent implements OnInit {
         private debtorAddressLinkService: DebtorHasAddressService, private addressService: AddressService, private router: Router) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Create Debtor - inVoice');
+        this.titleService.setTitle('Create Debtor - Invoice Panel');
         this.route.params.subscribe(
             (params) => {
                 this.forCompany = params['company'] == 'yes' ? true : false;

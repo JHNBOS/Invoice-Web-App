@@ -44,6 +44,20 @@ export class UserService {
             .catch(this.handleError);
     }
 
+    upload(file: any, user: User): Observable<User> {
+        let formData = new FormData();
+        formData.append("file", file);
+        formData.append("model", JSON.stringify(user));
+
+        return this.http.post(this.apiUrl + 'upload', formData)
+            .catch(this.handleError);
+    }
+
+    resetPassword(email: string): Observable<any> {
+        return this.http.get(this.apiUrl + 'resetPassword?email=' + email)
+            .catch(this.handleError);
+    }
+
     private handleError(error: any) {
         return Observable.throw(error);
     }

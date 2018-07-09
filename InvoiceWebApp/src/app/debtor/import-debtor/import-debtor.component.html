@@ -1,13 +1,16 @@
 <div class="container">
 
+    <a class="return my-3" [routerLink]="['/debtors']" title="Return">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+
     <div class="row">
         <div class="col-sm-12 col-md-10 offset-md-1">
-            <!-- File upload form -->
             <div class="form-horizontal">
                 <div class="form-row my-4">
                     <div class="col-sm-12 col-md-6">
                         <label for="fileUpload">Please choose a csv file to upload</label>
-                        <input type="file" class="form-control" id="fileUpload" (change)="upload($event)">
+                        <input type="file" class="form-control-file" id="fileUpload" (change)="upload($event)">
                     </div>
                     <div class="col-sm-12 col-md-6">
                     </div>

@@ -21,7 +21,7 @@ export class CreateInvoiceComponent implements OnInit {
         private router: Router) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Create Invoive - inVoice');
+        this.titleService.setTitle('Create Invoive - Invoice Panel');
 
         // Add one row, at least one row is required
         const row = new InvoiceItem();

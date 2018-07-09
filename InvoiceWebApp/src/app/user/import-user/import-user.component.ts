@@ -14,7 +14,9 @@ export class ImportUserComponent implements OnInit {
 
     constructor(private titleService: Title, private userService: UserService, private route: ActivatedRoute, private router: Router) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.titleService.setTitle('Import Users - Invoice Panel');
+    }
 
     upload(event: any) {
         this.extractData(event.target);
