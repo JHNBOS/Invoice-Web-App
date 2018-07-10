@@ -4,34 +4,69 @@
 
 .table thead {
     background: dodgerblue;
+    border: 2px solid dodgerblue;
     color: #fff;
 }
 
 .table thead th {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border: none;
+}
+
+.table thead th:nth-child(1) {
+    width: 23%;
+}
+
+.table thead th:nth-child(2) {
+    width: 29%;
+}
+
+.table thead th:nth-child(3) {
+    width: 16%;
+}
+
+.table thead th:nth-child(4), .table thead th:nth-child(5),
+.table thead th:nth-child(6) {
+    width: 10%;
+}
+
+.table thead th:nth-child(7) {
+    width: 2%;
+    vertical-align: middle;
+    text-align: right;
 }
 
 .table tbody tr td {
-    padding: 0.3rem;
+    padding: 0.2rem;
 }
 
 .table tbody tr.table-row {
-    background: #f2f2f2;
+    background-color: #e6e6e6;
+    border: 1px solid #f7f7f7;
 }
 
-a.btn > i{
+.table tbody tr td:nth-child(1) {
+    padding: 0.2rem 0.2rem 0.2rem 0rem;
+}
+
+.table tbody tr td:nth-child(7) {
+    text-align: right;
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem
+}
+
+a.btn > i {
     color: #fff;
 }
 
-.btn-delete > i{
+.btn-delete > i {
     background: transparent;
     border: none;
     font-size: 22px;
-    color: darkred;
+    color: red;
 }
 
-.btn-delete:hover > i{
-    color: red;
+.btn-delete:hover > i {
+    color: orangered;
     cursor: pointer;
 }

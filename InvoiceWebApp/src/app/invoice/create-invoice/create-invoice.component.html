@@ -25,13 +25,13 @@
                         <table class="table table-sm table-striped">
                             <thead>
                                 <tr>
-                                    <th width="25%">Name</th>
-                                    <th width="30%">Description</th>
-                                    <th width="15%" class="text-right">Price</th>
-                                    <th width="8%" class="text-right">Qty</th>
-                                    <th width="8%" class="text-right">Tax</th>
-                                    <th width="8%" class="text-right">Discount</th>
-                                    <th width="8%"></th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th>Tax</th>
+                                    <th>Discount</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,7 +54,7 @@
                                     <td>
                                         <input type="number" class="form-control" [(ngModel)]="row.discount" required />
                                     </td>
-                                    <td class="text-center">
+                                    <td>
                                         <a class="btn-delete" (click)="deleteRow(row)" title="Remove">
                                             <i class="fa fa-trash"></i>
                                         </a>
@@ -62,7 +62,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <a class="btn btn-primary btn-sm" (click)="addRow()">
+                        <a class="btn btn-primary btn-sm" (click)="addRow()" title="Add">
                             <i class="fa fa-plus"></i>
                         </a>
                     </div>

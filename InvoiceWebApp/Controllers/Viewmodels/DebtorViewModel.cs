@@ -22,6 +22,8 @@ namespace InvoiceWebApp.Controllers.ViewModels
         public string Phone { get; set; }
         [JsonProperty("address")]
         public AddressViewModel Address { get; set; }
+        [JsonProperty("label")]
+        public string Label { get; set; }
 
         public DebtorViewModel()
         {
@@ -37,6 +39,13 @@ namespace InvoiceWebApp.Controllers.ViewModels
             this.CompanyName = model.CompanyName;
             this.BankAccount = model.BankAccount;
             this.Phone = model.Phone;
+
+            if (this.CompanyName != null || !string.IsNullOrEmpty(this.CompanyName))
+            {
+                this.Label = string.Format("{0} - {1} in {2}, {3}", this.Id, this.CompanyName, this.Address.City, this.Address.Country);
+            }
+
+            this.Label = string.Format("{0} - {1} {2} from {3}, {4}", this.Id, this.FirstName, this.LastName, this.Address.City, this.Address.Country);
         }
     }
 }
