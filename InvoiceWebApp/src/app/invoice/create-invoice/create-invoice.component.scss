@@ -15,11 +15,11 @@
 }
 
 .table thead th:nth-child(1) {
-    width: 23%;
+    width: 25%;
 }
 
 .table thead th:nth-child(2) {
-    width: 29%;
+    width: 30%;
 }
 
 .table thead th:nth-child(3) {
@@ -28,7 +28,7 @@
 
 .table thead th:nth-child(4), .table thead th:nth-child(5),
 .table thead th:nth-child(6) {
-    width: 10%;
+    width: 9%;
 }
 
 .table thead th:nth-child(7) {
@@ -43,16 +43,19 @@
 
 .table tbody tr.table-row {
     background-color: #e6e6e6;
-    border: 1px solid #f7f7f7;
 }
 
 .table tbody tr td:nth-child(1) {
     padding: 0.2rem 0.2rem 0.2rem 0rem;
 }
 
+.table tbody tr td:nth-child(6) {
+    line-height: 2rem;
+}
+
 .table tbody tr td:nth-child(7) {
-    text-align: right;
-    padding: 0.2rem 0.5rem 0.2rem 0.5rem
+    text-align: center;
+    padding: 0.2rem 1rem 0.2rem 0.2rem;
 }
 
 a.btn > i {

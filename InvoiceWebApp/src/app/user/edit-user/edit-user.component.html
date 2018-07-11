@@ -1,62 +1,57 @@
-<div class="container">
+<a class="return my-3" [routerLink]="['/users']" title="Return">
+    <i class="fa fa-arrow-left"></i>
+</a>
 
-    <a class="return my-3" [routerLink]="['/users']" title="Return">
-        <i class="fa fa-arrow-left"></i>
-    </a>
-
-    <div class="row">
-        <div class="col-sm-12 col-md-10 offset-md-1">
-            <div class="form-horizontal" *ngIf="user && roles">
-                <div class="form-row my-4">
-                    <div class="col-sm-12 col-md-6">
-                        <label for="email">E-mail</label>
-                        <input type="text" class="form-control" id="email" [(ngModel)]="user.email" readonly>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <label for="role">User Role</label>
-                        <select class="form-control" id="role" [(ngModel)]="user.role_id" [disabled]="user.role_id == 2">
-                            <option>Select an user role</option>
-                            <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
-                        </select>
-                    </div>
-                </div>
-
-                <hr />
-
-                <div class="form-row my-4">
-                    <div class="col-sm-12 col-md-6">
-                        <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" id="firstName" [(ngModel)]="user.first_name">
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" [(ngModel)]="user.last_name">
-                    </div>
-                </div>
-
-                <hr />
-
-                <div class="form-row my-4">
-                    <div class="col-sm-12 col-md-6">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" [(ngModel)]="user.password">
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                    </div>
-                </div>
-
-                <hr />
-
-                <div class="form-row my-4">
-                    <div class="col-sm-12 col-md-6">
-                        <label>Profile Picture</label>
-                        <input id="fileInput" class="form-control-file" #fileInput type="file" accept="image/*" title="Choose an image to upload as profile picture" />
-                    </div>
-                    <div class="col-sm-12 col-md-6"></div>
-                </div>
-
-                <button id="btnSave" type="button" class="btn btn-primary float-right my-4" (click)="submitForm()">Save</button>
+<div class="col-sm-12 col-md-10 offset-md-1">
+    <div class="form-horizontal" *ngIf="user && roles">
+        <div class="form-row my-4">
+            <div class="col-sm-12 col-md-6">
+                <label for="email">E-mail</label>
+                <input type="text" class="form-control" id="email" [(ngModel)]="user.email" readonly>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <label for="role">User Role</label>
+                <select class="form-control" id="role" [(ngModel)]="user.role_id" [disabled]="user.role_id == 2">
+                    <option>Select an user role</option>
+                    <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
+                </select>
             </div>
         </div>
+
+        <hr />
+
+        <div class="form-row my-4">
+            <div class="col-sm-12 col-md-6">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" id="firstName" [(ngModel)]="user.first_name">
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="lastName" [(ngModel)]="user.last_name">
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="form-row my-4">
+            <div class="col-sm-12 col-md-6">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" [(ngModel)]="user.password">
+            </div>
+            <div class="col-sm-12 col-md-6">
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="form-row my-4">
+            <div class="col-sm-12 col-md-6">
+                <label>Profile Picture</label>
+                <input id="fileInput" class="form-control-file" #fileInput type="file" accept="image/*" title="Choose an image to upload as profile picture" />
+            </div>
+            <div class="col-sm-12 col-md-6"></div>
+        </div>
+
+        <button id="btnSave" type="button" class="btn btn-primary float-right my-4" (click)="submitForm()">Save</button>
     </div>
 </div>

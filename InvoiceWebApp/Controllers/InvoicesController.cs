@@ -63,18 +63,18 @@ namespace ShareListAPI.Controllers
         [ProducesResponseType(typeof(InvoiceViewModel), 200)]
         [ProducesResponseType(typeof(void), 400)]
         [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> GetByNumber(int? invoice)
+        public async Task<IActionResult> GetByNumber(string invoice)
         {
-            if (!invoice.HasValue)
+            if (String.IsNullOrEmpty(invoice))
             {
                 return StatusCode(400, "Invalid parameter(s).");
             }
 
             //Get invoice
-            var data = await _repo.GetByNumber(invoice.Value);
+            var data = await _repo.GetByNumber(invoice);
             if (data == null)
             {
-                return StatusCode(500, "Invoice with number " + invoice.Value + " could not be found.");
+                return StatusCode(500, "Invoice with number " + invoice + " could not be found.");
             }
 
             //Convert to view model
@@ -272,15 +272,15 @@ namespace ShareListAPI.Controllers
         [ProducesResponseType(typeof(void), 200)]
         [ProducesResponseType(typeof(void), 400)]
         [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> Delete(int? invoice)
+        public async Task<IActionResult> Delete(string invoice)
         {
-            if (!invoice.HasValue)
+            if (String.IsNullOrEmpty(invoice))
             {
                 return StatusCode(400, "Invalid parameter(s).");
             }
 
             //Remove invoice
-            var succeeded = await _repo.Delete(invoice.Value);
+            var succeeded = await _repo.Delete(invoice);
             if (!succeeded)
             {
                 return StatusCode(500, "A problem occured while removing the record. Please try again!");

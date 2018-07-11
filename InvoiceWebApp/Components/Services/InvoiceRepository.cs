@@ -39,7 +39,7 @@ namespace InvoiceWebApp.Components.Services
             return response;
         }
 
-        public async Task<Invoice> GetByNumber(int number)
+        public async Task<Invoice> GetByNumber(string number)
         {
             var response = await _context.Invoices.Include(i => i.Items).FirstOrDefaultAsync(q => q.InvoiceNumber == number);
             return response;
@@ -67,7 +67,7 @@ namespace InvoiceWebApp.Components.Services
             return result == 1 ? invoice : null;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> Delete(string id)
         {
             Invoice invoice = await _context.Invoices.FirstOrDefaultAsync(q => q.InvoiceNumber == id);
             _context.Invoices.Remove(invoice);

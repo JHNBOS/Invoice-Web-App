@@ -7,7 +7,7 @@ namespace InvoiceWebApp.Components.Services.Interfaces
 {
     public interface IInvoiceItemRepository
     {
-        Task<ICollection<InvoiceItem>> GetByInvoiceNumber(int number);
+        Task<ICollection<InvoiceItem>> GetByInvoiceNumber(string number);
         Task<InvoiceItem> GetById(int id);
         Task<InvoiceItem> GetByName(string name);
         Task<InvoiceItem> Insert(InvoiceItem item);

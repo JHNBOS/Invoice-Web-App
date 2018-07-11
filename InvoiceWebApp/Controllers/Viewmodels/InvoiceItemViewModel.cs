@@ -9,7 +9,7 @@ namespace InvoiceWebApp.Controllers.ViewModels
         [JsonProperty("item_number")]
         public int ItemNumber { get; set; }
         [JsonProperty("invoice_number")]
-        public int InvoiceNumber { get; set; }
+        public string InvoiceNumber { get; set; }
         [JsonProperty("name")]
         public string Name { get; set; }
         [JsonProperty("description")]

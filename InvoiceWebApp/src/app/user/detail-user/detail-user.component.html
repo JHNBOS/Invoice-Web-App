@@ -1,49 +1,44 @@
-<div class="container">
+<a class="return my-3" [routerLink]="['/users']" title="Return">
+    <i class="fa fa-arrow-left"></i>
+</a>
 
-    <a class="return my-3" [routerLink]="['/users']" title="Return">
-        <i class="fa fa-arrow-left"></i>
-    </a>
-
-    <div class="row">
-        <div class="col-sm-12 col-md-10 offset-md-1">
-            <div class="form-horizontal" *ngIf="currentUser && roles">
-                <div class="form-row my-4">
-                    <div class="col-sm-12 col-md-6">
-                        <label for="email">E-mail</label>
-                        <input type="text" class="form-control" id="email" [(ngModel)]="currentUser.email" readonly>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <label for="role">User Role</label>
-                        <select class="form-control" id="role" [(ngModel)]="currentUser.role_id" disabled>
-                            <option>Select an user role</option>
-                            <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
-                        </select>
-                    </div>
-                </div>
-
-                <hr />
-
-                <div class="form-row my-4">
-                    <div class="col-sm-12 col-md-6">
-                        <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" id="firstName" [(ngModel)]="currentUser.first_name" readonly>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" [(ngModel)]="currentUser.last_name" readonly>
-                    </div>
-                </div>
-
-                <hr />
-
-                <div class="form-row my-4">
-                    <div class="col-sm-12 col-md-4 offset-md-4 text-center">
-                        <img class="img-fluid profile-picture" [src]="_sanitizer.bypassSecurityTrustUrl(currentUser.picture)" />
-                    </div>
-                </div>
-
-                <a id="btnChange" class="btn btn-primary float-right my-4" [routerLink]="['../../edit', currentUser.email]">Edit</a>
+<div class="col-sm-12 col-md-10 offset-md-1">
+    <div class="form-horizontal" *ngIf="currentUser && roles">
+        <div class="form-row my-4">
+            <div class="col-sm-12 col-md-6">
+                <label for="email">E-mail</label>
+                <input type="text" class="form-control" id="email" [(ngModel)]="currentUser.email" readonly>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <label for="role">User Role</label>
+                <select class="form-control" id="role" [(ngModel)]="currentUser.role_id" disabled>
+                    <option>Select an user role</option>
+                    <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
+                </select>
             </div>
         </div>
+
+        <hr />
+
+        <div class="form-row my-4">
+            <div class="col-sm-12 col-md-6">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" id="firstName" [(ngModel)]="currentUser.first_name" readonly>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="lastName" [(ngModel)]="currentUser.last_name" readonly>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="form-row my-4">
+            <div class="col-sm-12 col-md-4 offset-md-4 text-center">
+                <img class="img-fluid profile-picture" [src]="_sanitizer.bypassSecurityTrustUrl(currentUser.picture)" />
+            </div>
+        </div>
+
+        <a id="btnChange" class="btn btn-primary float-right my-4" [routerLink]="['../../edit', currentUser.email]">Edit</a>
     </div>
 </div>

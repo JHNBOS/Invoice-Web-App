@@ -19,7 +19,7 @@ export class InvoiceItemService {
             .catch(this.handleError);
     }
 
-    getByInvoice(id: number): Observable<InvoiceItem[]> {
+    getByInvoice(id: string): Observable<InvoiceItem[]> {
         return this.http.get(this.apiUrl + 'getByInvoice?invoice=' + id)
             .catch(this.handleError);
     }

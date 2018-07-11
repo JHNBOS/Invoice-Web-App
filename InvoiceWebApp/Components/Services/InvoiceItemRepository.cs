@@ -14,7 +14,7 @@ namespace InvoiceWebApp.Components.Services
     {
         private InvoiceContext _context = new InvoiceContext();
 
-        public async Task<ICollection<InvoiceItem>> GetByInvoiceNumber(int number)
+        public async Task<ICollection<InvoiceItem>> GetByInvoiceNumber(string number)
         {
             var response = await _context.InvoiceItems.Include(i => i.Invoice).Where(q => q.InvoiceNumber == number).ToListAsync();
             return response;

@@ -27,7 +27,7 @@ export class InvoiceComponent implements OnInit {
         );
     }
 
-    deleteInvoice(id: number) {
+    deleteInvoice(id: string) {
         if (confirm('Are you sure you want to delete this invoice?')) {
             this.invoiceService.delete(id).subscribe(
                 (response) => this.ngOnInit(),

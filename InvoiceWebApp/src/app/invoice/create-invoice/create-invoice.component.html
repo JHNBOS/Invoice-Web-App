@@ -1,84 +1,94 @@
-<div class="container">
+<a class="return my-3" [routerLink]="['/invoices']" title="Return">
+    <i class="fa fa-arrow-left"></i>
+</a>
 
-    <a class="return my-3" [routerLink]="['/invoices']" title="Return">
-        <i class="fa fa-arrow-left"></i>
-    </a>
+<div class="col-sm-12 col-md-10 offset-md-1">
+    <div class="form-horizontal" *ngIf="invoice">
 
-    <div class="row mt-4">
-        <div class="col-sm-12 col-md-12">
-            <div class="form-horizontal" *ngIf="invoice">
-                <div class="form-row my-4">
-                    <div class="col-sm-12 col-md-6">
-                        <label>Debtor</label>
-                        <app-debtor-dropdown (chosenDebtor)="getDebtorChoice($event)"></app-debtor-dropdown>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <label for="expired">Expiration Date</label>
-                        <input type="date" class="form-control" id="expired" [(ngModel)]="invoice.expiration">
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                    </div>
-                </div>
-                <hr class="py-2" />
-                <div class="form-row my-4">
-                    <div class="col-sm-12 col-md-12">
-                        <table class="table table-sm table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Price</th>
-                                    <th>Qty</th>
-                                    <th>Tax</th>
-                                    <th>Discount</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="table-row" *ngFor="let row of invoice.items;let i = index">
-                                    <td>
-                                        <input type="text" class="form-control" [(ngModel)]="row.product" required />
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" [(ngModel)]="row.description" />
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" [(ngModel)]="row.price" required />
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" [(ngModel)]="row.quantity" required />
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" [(ngModel)]="row.tax" required />
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" [(ngModel)]="row.discount" required />
-                                    </td>
-                                    <td>
-                                        <a class="btn-delete" (click)="deleteRow(row)" title="Remove">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <a class="btn btn-primary btn-sm" (click)="addRow()" title="Add">
-                            <i class="fa fa-plus"></i>
-                        </a>
-                    </div>
-                </div>
-                <hr class="py-2" />
-                <div class="form-row my-4">
-                    <div class="col-sm-12 col-md-6">
-                        <label for="comment">Comment</label>
-                        <textarea rows="3" class="form-control" id="comment" [(ngModel)]="invoice.comment"></textarea>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                    </div>
-                </div>
+        <div class="form-row my-4">
+            <div class="col-sm-12 col-md-6">
+                <label>Debtor</label>
+                <app-debtor-dropdown (chosenDebtor)="getDebtorChoice($event)"></app-debtor-dropdown>
+            </div>
+            <div class="col-sm-12 col-md-6"></div>
+        </div>
 
-                <button id="btnSave" type="button" class="btn btn-primary float-right my-4" (click)="submitForm()">Create</button>
+        <div class="form-row my-4">
+            <div class="col-sm-12 col-md-6">
+                <label for="created">Invoice Date</label>
+                <input type="date" class="form-control" id="created" [min]="minDate" [(ngModel)]="begin" (change)="setExpired()" required>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <label for="expired">Expiration Date</label>
+                <input type="date" class="form-control" id="expired" [min]="minDate" [(ngModel)]="expiration" required>
             </div>
         </div>
+
+        <hr class="py-2" />
+
+        <div class="form-row my-4">
+            <div class="col-sm-12 col-md-12 table-responsive">
+                <table class="table table-sm table-striped table-responsive w-100">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Tax</th>
+                            <th>Total</th>
+                            <th class="text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-row" *ngFor="let row of invoice.items;let i = index">
+                            <td>
+                                <input type="text" class="form-control" [(ngModel)]="row.name" required />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" [(ngModel)]="row.description" />
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" [(ngModel)]="row.price" step="0.01" min="0" (change)="calculatePrice(row)" lang="de" required />
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" [(ngModel)]="row.quantity" min="1" (change)="calculatePrice(row)" required />
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" [(ngModel)]="row.tax" min="0" required />
+                            </td>
+                            <td>
+                                <span style="font-weight: 500;">
+                                    &euro; {{ row.total | number:'1.2-3' }}
+                                </span>
+                            </td>
+                            <td>
+                                <a *ngIf="i >= 1" class="btn-delete" (click)="deleteRow(row)" title="Remove">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a class="btn btn-primary btn-sm" (click)="addRow()" title="Add">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+        </div>
+
+        <hr class="py-2" />
+
+        <div class="form-row my-4">
+            <div class="col-sm-12 col-md-6">
+                <label for="comment">Comment</label>
+                <textarea rows="3" class="form-control" id="comment" [(ngModel)]="invoice.comment"></textarea>
+            </div>
+            <div class="col-sm-12 col-md-4 offset-md-1">
+                <label for="discount">Discount</label>
+                <input type="number" id="discount" class="form-control" [(ngModel)]="invoice.discount" value="0" min="0" required />
+            </div>
+        </div>
+
+        <button id="btnSave" type="button" class="btn btn-primary float-right my-4" (click)="submitForm()">Create</button>
     </div>
 </div>

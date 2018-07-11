@@ -31,18 +31,18 @@ namespace ShareListAPI.Controllers
         [HttpGet("getByInvoice")]
         [ProducesResponseType(typeof(IEnumerable<InvoiceItemViewModel>), 200)]
         [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> GetByInvoice(int? invoice)
+        public async Task<IActionResult> GetByInvoice(string invoice)
         {
-            if (!invoice.HasValue)
+            if (String.IsNullOrEmpty(invoice))
             {
                 return StatusCode(400, "Invalid parameter(s).");
             }
 
             //Get data
-            var data = await _repo.GetByInvoiceNumber(invoice.Value);
+            var data = await _repo.GetByInvoiceNumber(invoice);
             if (data == null)
             {
-                return StatusCode(500, "Invoice items belonging to invoice '" + invoice.Value + "' could not be found.");
+                return StatusCode(500, "Invoice items belonging to invoice '" + invoice + "' could not be found.");
             }
 
             //Convert to viewmodel

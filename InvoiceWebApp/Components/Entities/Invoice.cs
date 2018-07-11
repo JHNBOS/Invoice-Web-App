@@ -10,7 +10,7 @@ namespace InvoiceWebApp.Components.Entities
             this.Items = new HashSet<InvoiceItem>();
         }
 
-        public int InvoiceNumber { get; set; }
+        public string InvoiceNumber { get; set; }
         public string CustomerId { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime ExpiredOn { get; set; }

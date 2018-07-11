@@ -14,12 +14,12 @@ export class InvoiceService {
 
     constructor(public http: HttpClient) { }
 
-    getByNumber(id: number): Observable<Invoice> {
+    getByNumber(id: string): Observable<Invoice> {
         return this.http.get(this.apiUrl + 'getByNumber?invoice=' + id)
             .catch(this.handleError);
     }
 
-    getByDebtorId(id: string): Observable<Invoice> {
+    getByDebtorId(id: string): Observable<Invoice[]> {
         return this.http.get(this.apiUrl + 'getByDebtorId?debtor=' + id)
             .catch(this.handleError);
     }
@@ -49,8 +49,8 @@ export class InvoiceService {
             .catch(this.handleError);
     }
 
-    delete(number: number): Observable<boolean> {
-        return this.http.delete(this.apiUrl + 'delete?invoice=' + number)
+    delete(id: string): Observable<boolean> {
+        return this.http.delete(this.apiUrl + 'delete?invoice=' + id)
             .catch(this.handleError);
     }
 

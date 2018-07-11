@@ -147,7 +147,7 @@ namespace InvoiceWebApp.Components.DataContext
 
                 entity.Property(e => e.InvoiceNumber)
                     .HasColumnName("invoice_number")
-                    .HasColumnType("int(11)");
+                    .HasMaxLength(200);
 
                 entity.Property(e => e.Comment)
                     .HasColumnName("comment")
@@ -190,7 +190,7 @@ namespace InvoiceWebApp.Components.DataContext
 
                 entity.Property(e => e.InvoiceNumber)
                     .HasColumnName("invoice_number")
-                    .HasColumnType("int(11)");
+                    .HasMaxLength(200);
 
                 entity.Property(e => e.Description)
                     .HasColumnName("description")
