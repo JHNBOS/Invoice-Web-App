@@ -17,7 +17,7 @@ namespace InvoiceWebApp.Controllers.ViewModels
         [JsonProperty("tax")]
         public int Tax { get; set; }
         [JsonProperty("price")]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         [JsonProperty("quantity")]
         public int Quantity { get; set; }
 

@@ -30,7 +30,7 @@ namespace InvoiceWebApp.Controllers.ViewModels
 
         }
 
-        public void SetProperties(Debtor model)
+        public void SetProperties(Debtor model, bool skipLabel)
         {
             this.Email = model.Email;
             this.Id = model.Id;
@@ -40,12 +40,15 @@ namespace InvoiceWebApp.Controllers.ViewModels
             this.BankAccount = model.BankAccount;
             this.Phone = model.Phone;
 
-            if (this.CompanyName != null || !string.IsNullOrEmpty(this.CompanyName))
+            if (!skipLabel)
             {
-                this.Label = string.Format("{0} - {1} in {2}, {3}", this.Id, this.CompanyName, this.Address.City, this.Address.Country);
-            }
+                if (this.CompanyName != null || !string.IsNullOrEmpty(this.CompanyName))
+                {
+                    this.Label = string.Format("{0} - {1} in {2}, {3}", this.Id, this.CompanyName, this.Address.City, this.Address.Country);
+                }
 
-            this.Label = string.Format("{0} - {1} {2} from {3}, {4}", this.Id, this.FirstName, this.LastName, this.Address.City, this.Address.Country);
+                this.Label = string.Format("{0} - {1} {2} from {3}, {4}", this.Id, this.FirstName, this.LastName, this.Address.City, this.Address.Country);
+            }
         }
     }
 }

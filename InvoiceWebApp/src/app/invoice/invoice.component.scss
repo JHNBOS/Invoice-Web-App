@@ -57,3 +57,19 @@
     color: red;
     cursor: pointer;
 }
+
+.table thead {
+    background: dodgerblue;
+    border: 2px solid dodgerblue;
+    color: #fff;
+}
+
+.table thead th {
+    padding-left: 8px;
+    padding-right: 8px;
+    border: none;
+}
+
+.table tbody tr {
+    background: #fff;
+}

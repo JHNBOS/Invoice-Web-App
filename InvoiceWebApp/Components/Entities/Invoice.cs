@@ -14,10 +14,11 @@ namespace InvoiceWebApp.Components.Entities
         public string CustomerId { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime ExpiredOn { get; set; }
-        public double Total { get; set; }
-        public double Discount { get; set; }
+        public decimal Total { get; set; }
+        public int Discount { get; set; }
         public string Comment { get; set; }
 
         public virtual ICollection<InvoiceItem> Items { get; set; }
+        public virtual Debtor Debtor { get; set; }
     }
 }

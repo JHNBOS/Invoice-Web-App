@@ -41,16 +41,27 @@ namespace ShareListAPI.Controllers
             }
 
             //Convert to viewmodel
-            var result = data.Select(s => new InvoiceViewModel
+            var result = new List<InvoiceViewModel>();
+            foreach (var invoice in data)
             {
-                InvoiceNumber = s.InvoiceNumber,
-                CustomerId = s.CustomerId,
-                Total = s.Total,
-                Discount = s.Discount,
-                Comment = s.Comment,
-                CreatedOn = s.CreatedOn,
-                ExpiredOn = s.ExpiredOn
-            });
+                var debtor = invoice.Debtor;
+                var debtorModel = new DebtorViewModel();
+                debtorModel.SetProperties(debtor, true);
+
+                var invoiceModel = new InvoiceViewModel
+                {
+                    InvoiceNumber = invoice.InvoiceNumber,
+                    CustomerId = invoice.CustomerId,
+                    Total = invoice.Total,
+                    Discount = invoice.Discount,
+                    Comment = invoice.Comment,
+                    CreatedOn = invoice.CreatedOn,
+                    ExpiredOn = invoice.ExpiredOn,
+                    Debtor = debtorModel
+                };
+
+                result.Add(invoiceModel);
+            }
 
             return Ok(result);
         }
@@ -215,6 +226,10 @@ namespace ShareListAPI.Controllers
                 CustomerId = model.CustomerId
             };
 
+            //Swap comma with dots
+            var totalString = invoice.Total.ToString().Replace(".", ",");
+            invoice.Total = Convert.ToDecimal(totalString);
+
             //Insert invoice
             var result = await _repo.Insert(invoice);
             if (result == null)
@@ -250,6 +265,10 @@ namespace ShareListAPI.Controllers
                 Comment = model.Comment,
                 CustomerId = model.CustomerId
             };
+
+            //Swap comma with dots
+            var totalString = invoice.Total.ToString().Replace(".", ",");
+            invoice.Total = Convert.ToDecimal(totalString);
 
             //Update invoice
             var data = await _repo.Update(invoice);

@@ -6,6 +6,7 @@ export default class InvoiceItem {
     tax: number = 0;
     price: number = 0;
     quantity: number = 1;
+
     total: number = 0;
 
     public isValid(): boolean {

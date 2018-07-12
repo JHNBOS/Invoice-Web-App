@@ -15,11 +15,13 @@ namespace InvoiceWebApp.Controllers.ViewModels
         [JsonProperty("expired_on")]
         public DateTime ExpiredOn { get; set; }
         [JsonProperty("total")]
-        public double Total { get; set; }
+        public decimal Total { get; set; }
         [JsonProperty("comment")]
         public string Comment { get; set; }
         [JsonProperty("discount")]
-        public double Discount { get; set; }
+        public int Discount { get; set; }
+        [JsonProperty("debtor")]
+        public DebtorViewModel Debtor { get; set; }
 
         public InvoiceViewModel()
         {

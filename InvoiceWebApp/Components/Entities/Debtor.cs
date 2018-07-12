@@ -7,6 +7,7 @@ namespace InvoiceWebApp.Components.Entities
         public Debtor()
         {
             this.Addresses = new HashSet<DebtorHasAddress>();
+            this.Invoices = new HashSet<Invoice>();
         }
 
         public string Id { get; set; }
@@ -18,5 +19,6 @@ namespace InvoiceWebApp.Components.Entities
         public string Phone { get; set; }
 
         public virtual ICollection<DebtorHasAddress> Addresses { get; set; }
+        public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }

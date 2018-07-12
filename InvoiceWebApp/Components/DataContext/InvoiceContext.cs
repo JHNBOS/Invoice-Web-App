@@ -162,6 +162,11 @@ namespace InvoiceWebApp.Components.DataContext
                     .HasColumnName("customer_id")
                     .HasMaxLength(200);
 
+                entity.HasOne(e => e.Debtor)
+                    .WithMany(e => e.Invoices)
+                    .HasForeignKey(e => e.CustomerId)
+                    .HasConstraintName("invoices_debtors_fk");
+
                 entity.Property(e => e.ExpiredOn)
                     .HasColumnName("expired_on")
                     .HasColumnType("datetime");

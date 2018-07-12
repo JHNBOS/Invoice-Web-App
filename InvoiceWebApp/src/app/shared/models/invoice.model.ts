@@ -1,4 +1,5 @@
 import InvoiceItem from './invoice_item.model';
+import Debtor from './debtor.model';
 
 export default class Invoice {
     invoice_number: string = null;
@@ -8,7 +9,8 @@ export default class Invoice {
     total: number = null;
     comment: string = null;
     items: InvoiceItem[] = [];
-    discount: number = null;
+    discount: number = 0;
+    debtor: Debtor = null;
 
     public isValid(): boolean {
         if (this.customer_id != null && this.expired_on != null && this.created_on != null && this.total != null) {

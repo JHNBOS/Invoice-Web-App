@@ -28,7 +28,7 @@
 
         <div class="form-row my-4">
             <div class="col-sm-12 col-md-12 table-responsive">
-                <table class="table table-sm table-striped table-responsive w-100">
+                <table class="table table-sm table-striped w-100">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -49,7 +49,7 @@
                                 <input type="text" class="form-control" [(ngModel)]="row.description" />
                             </td>
                             <td>
-                                <input type="number" class="form-control" [(ngModel)]="row.price" step="0.01" min="0" (change)="calculatePrice(row)" lang="de" required />
+                                <input type="text" class="form-control" [(ngModel)]="row.price" (change)="calculatePrice(row)" lang="de" required />
                             </td>
                             <td>
                                 <input type="number" class="form-control" [(ngModel)]="row.quantity" min="1" (change)="calculatePrice(row)" required />

@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastOptions, ToastyConfig, ToastyService } from 'ng2-toasty';
 import Invoice from '../shared/models/invoice.model';
 import { InvoiceService } from '../shared/services/invoice.service';
+import { DebtorService } from '../shared/services/debtor.service';
+import Debtor from '../shared/models/debtor.model';
 
 @Component({
     selector: 'app-invoice',
@@ -13,7 +15,7 @@ import { InvoiceService } from '../shared/services/invoice.service';
 export class InvoiceComponent implements OnInit {
     invoices: Invoice[] = [];
 
-    constructor(private titleService: Title, private route: ActivatedRoute, private invoiceService: InvoiceService, private router: Router) { }
+    constructor(private titleService: Title, private route: ActivatedRoute, private invoiceService: InvoiceService, private debtorService: DebtorService, private router: Router) { }
 
     ngOnInit() {
         this.titleService.setTitle('Invoices - Invoice Panel');

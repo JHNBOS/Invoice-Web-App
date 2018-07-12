@@ -156,6 +156,10 @@ namespace ShareListAPI.Controllers
                 Quantity = model.Quantity
             };
 
+            //Swap comma with dots
+            var priceString = invoiceItem.Price.ToString().Replace(".", ",");
+            invoiceItem.Price = Convert.ToDecimal(priceString);
+
             //Insert invoice item
             var result = await _repo.Insert(invoiceItem);
             if (result == null)
@@ -191,6 +195,10 @@ namespace ShareListAPI.Controllers
                 Price = model.Price,
                 Quantity = model.Quantity
             };
+
+            //Swap comma with dots
+            var priceString = invoiceItem.Price.ToString().Replace(".", ",");
+            invoiceItem.Price = Convert.ToDecimal(priceString);
 
             //Update invoice item
             var data = await _repo.Update(invoiceItem);

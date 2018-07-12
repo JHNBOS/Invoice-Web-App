@@ -60,7 +60,7 @@ namespace ShareListAPI.Controllers
                 //Debtor model
                 var debtorModel = new DebtorViewModel();
                 debtorModel.Address = addressViewModel;
-                debtorModel.SetProperties(debtor);
+                debtorModel.SetProperties(debtor, false);
 
                 result.Add(debtorModel);
             }
@@ -107,7 +107,7 @@ namespace ShareListAPI.Controllers
             //Debtor model
             var result = new DebtorViewModel();
             result.Address = addressViewModel;
-            result.SetProperties(data);
+            result.SetProperties(data, false);
 
             return Ok(result);
         }
@@ -145,7 +145,7 @@ namespace ShareListAPI.Controllers
             //Debtor model
             var result = new DebtorViewModel();
             result.Address = addressViewModel;
-            result.SetProperties(data);
+            result.SetProperties(data, false);
 
             return Ok(result);
         }
@@ -184,7 +184,7 @@ namespace ShareListAPI.Controllers
             }
 
             var result = new DebtorViewModel();
-            result.SetProperties(data);
+            result.SetProperties(data, false);
 
             return Ok(result);
         }
@@ -223,7 +223,7 @@ namespace ShareListAPI.Controllers
             }
 
             var result = new DebtorViewModel();
-            result.SetProperties(data);
+            result.SetProperties(data, false);
 
             return Ok(result);
         }

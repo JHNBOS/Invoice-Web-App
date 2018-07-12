@@ -16,19 +16,19 @@ namespace InvoiceWebApp.Components.Services
 
         public async Task<ICollection<Debtor>> GetDebtors()
         {
-            var response = await _context.Debtors.Include(i => i.Addresses).ToListAsync();
+            var response = await _context.Debtors.Include(i => i.Addresses).Include(i => i.Invoices).ToListAsync();
             return response;
         }
 
         public async Task<Debtor> GetDebtorByEmail(string email)
         {
-            var response = await _context.Debtors.Include(i => i.Addresses).FirstOrDefaultAsync(q => q.Email.ToLower() == email.ToLower());
+            var response = await _context.Debtors.Include(i => i.Addresses).Include(i => i.Invoices).FirstOrDefaultAsync(q => q.Email.ToLower() == email.ToLower());
             return response;
         }
 
         public async Task<Debtor> GetDebtorByID(string id)
         {
-            var response = await _context.Debtors.Include(i => i.Addresses).FirstOrDefaultAsync(q => q.Id == id);
+            var response = await _context.Debtors.Include(i => i.Addresses).Include(i => i.Invoices).FirstOrDefaultAsync(q => q.Id == id);
             return response;
         }
 
