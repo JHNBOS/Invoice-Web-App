@@ -59,7 +59,7 @@ namespace InvoiceWebApp.Components.Services
             if (userBeforeUpdate.Password != user.Password)
             {
                 //Encrypt password before updating
-                userBeforeUpdate.Password = _encryptor.Encrypt(user.Password);
+                user.Password = _encryptor.Encrypt(user.Password);
             }
 
             _context.Entry(userBeforeUpdate).CurrentValues.SetValues(user);

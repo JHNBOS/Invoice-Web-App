@@ -88,8 +88,14 @@ namespace ShareListAPI.Controllers
                 return StatusCode(500, "Invoice with number " + invoice + " could not be found.");
             }
 
+            //Get debtor
+            var debtor = data.Debtor;
+            var debtorModel = new DebtorViewModel();
+            debtorModel.SetProperties(debtor, true);
+
             //Convert to view model
             var result = new InvoiceViewModel();
+            result.Debtor = debtorModel;
             result.SetProperties(data);
 
             return Ok(result);
@@ -117,17 +123,28 @@ namespace ShareListAPI.Controllers
                 return StatusCode(500, "Invoice with debtor id " + debtor + " could not be found.");
             }
 
-            //Convert to view model
-            var result = data.Select(s => new InvoiceViewModel
+            //Convert to viewmodel
+            var result = new List<InvoiceViewModel>();
+            foreach (var invoice in data)
             {
-                InvoiceNumber = s.InvoiceNumber,
-                CustomerId = s.CustomerId,
-                Total = s.Total,
-                Discount = s.Discount,
-                Comment = s.Comment,
-                CreatedOn = s.CreatedOn,
-                ExpiredOn = s.ExpiredOn
-            });
+                var debtors = invoice.Debtor;
+                var debtorModel = new DebtorViewModel();
+                debtorModel.SetProperties(debtors, true);
+
+                var invoiceModel = new InvoiceViewModel
+                {
+                    InvoiceNumber = invoice.InvoiceNumber,
+                    CustomerId = invoice.CustomerId,
+                    Total = invoice.Total,
+                    Discount = invoice.Discount,
+                    Comment = invoice.Comment,
+                    CreatedOn = invoice.CreatedOn,
+                    ExpiredOn = invoice.ExpiredOn,
+                    Debtor = debtorModel
+                };
+
+                result.Add(invoiceModel);
+            }
 
             return Ok(result);
         }
@@ -154,17 +171,28 @@ namespace ShareListAPI.Controllers
                 return StatusCode(500, "Invoice with date" + date.Value.ToString("dd-MM-yyyy") + " could not be found.");
             }
 
-            //Convert to view model
-            var result = data.Select(s => new InvoiceViewModel
+            //Convert to viewmodel
+            var result = new List<InvoiceViewModel>();
+            foreach (var invoice in data)
             {
-                InvoiceNumber = s.InvoiceNumber,
-                CustomerId = s.CustomerId,
-                Total = s.Total,
-                Discount = s.Discount,
-                Comment = s.Comment,
-                CreatedOn = s.CreatedOn,
-                ExpiredOn = s.ExpiredOn
-            });
+                var debtor = invoice.Debtor;
+                var debtorModel = new DebtorViewModel();
+                debtorModel.SetProperties(debtor, true);
+
+                var invoiceModel = new InvoiceViewModel
+                {
+                    InvoiceNumber = invoice.InvoiceNumber,
+                    CustomerId = invoice.CustomerId,
+                    Total = invoice.Total,
+                    Discount = invoice.Discount,
+                    Comment = invoice.Comment,
+                    CreatedOn = invoice.CreatedOn,
+                    ExpiredOn = invoice.ExpiredOn,
+                    Debtor = debtorModel
+                };
+
+                result.Add(invoiceModel);
+            }
 
             return Ok(result);
         }
@@ -185,17 +213,28 @@ namespace ShareListAPI.Controllers
                 return StatusCode(500, "Nearly expired invoices could not be found.");
             }
 
-            //Convert to view model
-            var result = data.Select(s => new InvoiceViewModel
+            //Convert to viewmodel
+            var result = new List<InvoiceViewModel>();
+            foreach (var invoice in data)
             {
-                InvoiceNumber = s.InvoiceNumber,
-                CustomerId = s.CustomerId,
-                Total = s.Total,
-                Discount = s.Discount,
-                Comment = s.Comment,
-                CreatedOn = s.CreatedOn,
-                ExpiredOn = s.ExpiredOn
-            });
+                var debtor = invoice.Debtor;
+                var debtorModel = new DebtorViewModel();
+                debtorModel.SetProperties(debtor, true);
+
+                var invoiceModel = new InvoiceViewModel
+                {
+                    InvoiceNumber = invoice.InvoiceNumber,
+                    CustomerId = invoice.CustomerId,
+                    Total = invoice.Total,
+                    Discount = invoice.Discount,
+                    Comment = invoice.Comment,
+                    CreatedOn = invoice.CreatedOn,
+                    ExpiredOn = invoice.ExpiredOn,
+                    Debtor = debtorModel
+                };
+
+                result.Add(invoiceModel);
+            }
 
             return Ok(result);
         }
