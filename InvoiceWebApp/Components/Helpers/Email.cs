@@ -16,7 +16,7 @@ namespace InvoiceWebApp.Components.Helpers
         public Email()
         {
             this.EmailAddress = "bosbosjohan@gmail.com";
-            this.Password = "";
+            this.Password = "Rotterdam28";
             this.Host = "smtp.gmail.com";
             this.Port = 587;
             this.EnableSSL = true;
@@ -36,7 +36,7 @@ namespace InvoiceWebApp.Components.Helpers
             using (var message = new MailMessage(this.EmailAddress, toEmail)
             {
                 IsBodyHtml = true,
-                Subject = "inVoice - Password Reset",
+                Subject = "Invoice Panel - Password Reset",
                 Body = "Dear user,<br /><br />Beneath you will find your temporary password. When signed in, please change your password. <br /><br /><b>Password:<b/> " + password
             })
             {

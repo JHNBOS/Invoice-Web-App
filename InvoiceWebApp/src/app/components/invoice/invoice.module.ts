@@ -13,6 +13,19 @@ import { CreateInvoiceComponent } from './create-invoice/create-invoice.componen
 import { InvoiceComponent } from './invoice.component';
 import { InvoiceRoutingModule } from './invoice.routing';
 import { DetailInvoiceComponent } from './detail-invoice/detail-invoice.component';
+import { CurrencyMaskModule } from 'ngx-currency-mask';
+import { CURRENCY_MASK_CONFIG, CurrencyMaskConfig } from 'ngx-currency-mask/src/currency-mask.config';
+
+export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+    align: "left",
+    allowNegative: false,
+    allowZero: true,
+    decimal: ",",
+    precision: 2,
+    prefix: "",
+    suffix: "",
+    thousands: "."
+};
 
 @NgModule({
     declarations: [
@@ -25,6 +38,7 @@ import { DetailInvoiceComponent } from './detail-invoice/detail-invoice.componen
         HttpClientModule,
         FormsModule,
         DebtorDropdownModule,
+        CurrencyMaskModule,
         ToastyModule.forRoot(),
         InvoiceRoutingModule
     ],
@@ -33,7 +47,8 @@ import { DetailInvoiceComponent } from './detail-invoice/detail-invoice.componen
         InvoiceItemService,
         DebtorService,
         AddressService,
-        { provide: ErrorHandler, useClass: CustomErrorHandler }
+        { provide: ErrorHandler, useClass: CustomErrorHandler },
+        { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
     ],
     exports: [
         InvoiceComponent

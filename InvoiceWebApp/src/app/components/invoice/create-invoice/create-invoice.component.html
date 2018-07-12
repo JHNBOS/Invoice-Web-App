@@ -49,10 +49,10 @@
                                 <input type="text" class="form-control" [(ngModel)]="row.description" />
                             </td>
                             <td>
-                                <input type="text" class="form-control" [(ngModel)]="row.price" (change)="calculatePrice(row)" lang="de" required />
+                                <input class="form-control" [(ngModel)]="row.price" (change)="calculatePrice(row)" (blur)="calculatePrice(row)" currencyMask />
                             </td>
                             <td>
-                                <input type="number" class="form-control" [(ngModel)]="row.quantity" min="1" (change)="calculatePrice(row)" required />
+                                <input type="number" class="form-control" [(ngModel)]="row.quantity" min="1" (change)="calculatePrice(row)" (blur)="calculatePrice(row)" required />
                             </td>
                             <td>
                                 <input type="number" class="form-control" [(ngModel)]="row.tax" min="0" required />
