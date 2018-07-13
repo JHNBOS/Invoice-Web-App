@@ -22,6 +22,8 @@ namespace InvoiceWebApp.Controllers.ViewModels
         public int Discount { get; set; }
         [JsonProperty("is_paid")]
         public bool IsPaid { get; set; }
+        [JsonProperty("concept")]
+        public bool Concept { get; set; }
         [JsonProperty("debtor")]
         public DebtorViewModel Debtor { get; set; }
 
@@ -39,6 +41,7 @@ namespace InvoiceWebApp.Controllers.ViewModels
             this.Comment = model.Comment;
             this.Discount = model.Discount;
             this.IsPaid = model.IsPaid;
+            this.Concept = model.Concept;
         }
     }
 }

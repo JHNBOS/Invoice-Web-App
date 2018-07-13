@@ -50,7 +50,7 @@ export class CreateInvoiceComponent implements OnInit {
         this.debtor = event;
     }
 
-    submitForm() {
+    submitForm(concept: boolean) {
         // Get invoice count
         this.getInvoiceCount();
 
@@ -59,6 +59,7 @@ export class CreateInvoiceComponent implements OnInit {
         this.invoice.expired_on = moment(this.expiration).toDate();
         this.invoice.customer_id = this.debtor.id;
         this.invoice.invoice_number = new Date().getFullYear().toString() + new Date().getMonth().toString() + '-' + (this.invoiceLength + 1);
+        this.invoice.concept = concept;
 
         for (var i = 0; i < this.invoice.items.length; i++) {
             let item = this.invoice.items[i];

@@ -11,6 +11,7 @@ export default class Invoice {
     items: InvoiceItem[] = [];
     discount: number = 0;
     is_paid: boolean = false;
+    concept: boolean = false;
     debtor: Debtor = null;
 
     public isValid(): boolean {

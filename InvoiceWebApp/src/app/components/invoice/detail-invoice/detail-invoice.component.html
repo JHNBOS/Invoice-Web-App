@@ -90,7 +90,15 @@
                 <label for="comment">Comment</label>
                 <textarea rows="3" class="form-control" id="comment" [(ngModel)]="invoice.comment" readonly></textarea>
             </div>
-            <div class="col-sm-12 col-md-6"></div>
+            <div class="col-sm-12 col-md-2 offset-md-2 mt-2">
+                <div class="checkbox">
+                    <label style="font-size: 1.1em">
+                        <input type="checkbox" id="concept" name="concept" [(ngModel)]="invoice.concept" disabled />
+                        <span class="cr" style="font-size: 1.2rem;"><i [ngClass]="(invoice.concept == true) ? 'cr-icon fa fa-check' : 'cr-icon fa fa-times'"></i></span>
+                        Saved as concept
+                    </label>
+                </div>
+            </div>
         </div>
 
         <a *ngIf="currentUser.role_id == 1" id="btnChange" class="btn btn-primary float-right my-4" [routerLink]="['../../edit', invoice.invoice_number]">Edit</a>

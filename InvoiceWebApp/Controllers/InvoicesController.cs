@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 using InvoiceWebApp.Components.Entities;
+using InvoiceWebApp.Components.Helpers;
 using InvoiceWebApp.Components.Services;
 using InvoiceWebApp.Components.Services.Interfaces;
 using InvoiceWebApp.Controllers.ViewModels;
@@ -19,10 +19,12 @@ namespace ShareListAPI.Controllers
     public class InvoicesController : Controller
     {
         private IInvoiceRepository _repo;
+        private Email _email;
 
         public InvoicesController()
         {
             this._repo = new InvoiceRepository();
+            this._email = new Email();
         }
 
         /// <summary>
@@ -58,7 +60,8 @@ namespace ShareListAPI.Controllers
                     CreatedOn = invoice.CreatedOn,
                     ExpiredOn = invoice.ExpiredOn,
                     Debtor = debtorModel,
-                    IsPaid = invoice.IsPaid
+                    IsPaid = invoice.IsPaid,
+                    Concept = invoice.Concept
                 };
 
                 result.Add(invoiceModel);
@@ -142,7 +145,8 @@ namespace ShareListAPI.Controllers
                     CreatedOn = invoice.CreatedOn,
                     ExpiredOn = invoice.ExpiredOn,
                     Debtor = debtorModel,
-                    IsPaid = invoice.IsPaid
+                    IsPaid = invoice.IsPaid,
+                    Concept = invoice.Concept
                 };
 
                 result.Add(invoiceModel);
@@ -191,7 +195,8 @@ namespace ShareListAPI.Controllers
                     CreatedOn = invoice.CreatedOn,
                     ExpiredOn = invoice.ExpiredOn,
                     Debtor = debtorModel,
-                    IsPaid = invoice.IsPaid
+                    IsPaid = invoice.IsPaid,
+                    Concept = invoice.Concept
                 };
 
                 result.Add(invoiceModel);
@@ -234,7 +239,8 @@ namespace ShareListAPI.Controllers
                     CreatedOn = invoice.CreatedOn,
                     ExpiredOn = invoice.ExpiredOn,
                     Debtor = debtorModel,
-                    IsPaid = invoice.IsPaid
+                    IsPaid = invoice.IsPaid,
+                    Concept = invoice.Concept
                 };
 
                 result.Add(invoiceModel);
@@ -267,7 +273,8 @@ namespace ShareListAPI.Controllers
                 Discount = model.Discount,
                 Comment = model.Comment,
                 CustomerId = model.CustomerId,
-                IsPaid = model.IsPaid
+                IsPaid = model.IsPaid,
+                Concept = model.Concept
             };
 
             //Swap comma with dots
@@ -279,6 +286,12 @@ namespace ShareListAPI.Controllers
             if (result == null)
             {
                 return StatusCode(500, "A problem occured while saving the record. Please try again!");
+            }
+
+            //Send email
+            if (invoice.Concept == false)
+            {
+                await _email.SendNotification(invoice.Debtor);
             }
 
             return Ok(result);
@@ -299,6 +312,8 @@ namespace ShareListAPI.Controllers
                 return StatusCode(400, "Invalid parameter(s).");
             }
 
+            var originalInvoice = await _repo.GetByNumber(model.InvoiceNumber);
+
             Invoice invoice = new Invoice
             {
                 InvoiceNumber = model.InvoiceNumber,
@@ -308,7 +323,8 @@ namespace ShareListAPI.Controllers
                 Discount = model.Discount,
                 Comment = model.Comment,
                 CustomerId = model.CustomerId,
-                IsPaid = model.IsPaid
+                IsPaid = model.IsPaid,
+                Concept = model.Concept
             };
 
             //Swap comma with dots
@@ -324,6 +340,12 @@ namespace ShareListAPI.Controllers
 
             var result = new InvoiceViewModel();
             result.SetProperties(data);
+
+            //Send email
+            if (originalInvoice.Concept == false && invoice.Concept == true)
+            {
+                await _email.SendNotification(invoice.Debtor);
+            }
 
             return Ok(result);
         }

@@ -175,6 +175,10 @@ namespace InvoiceWebApp.Components.DataContext
                     .HasColumnName("is_paid")
                     .HasColumnType("boolean");
 
+                entity.Property(e => e.Concept)
+                    .HasColumnName("concept")
+                    .HasColumnType("boolean");
+
                 entity.Property(e => e.Discount).HasColumnName("discount");
 
                 entity.Property(e => e.Total).HasColumnName("total");
