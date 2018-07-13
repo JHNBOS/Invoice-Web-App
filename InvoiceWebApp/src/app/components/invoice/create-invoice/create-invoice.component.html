@@ -19,8 +19,19 @@
                 <input type="date" class="form-control" id="created" [min]="minDate" [(ngModel)]="begin" (change)="setExpired()" required>
             </div>
             <div class="col-sm-12 col-md-6">
-                <label for="expired">Expiration Date</label>
+                <label for="expired">Due Date</label>
                 <input type="date" class="form-control" id="expired" [min]="minDate" [(ngModel)]="expiration" required>
+            </div>
+        </div>
+
+        <div class="form-row my-4">
+            <div class="col-sm-12 col-md-6">
+                <label for="total">To be paid</label>
+                <input type="text" class="form-control" id="total" [ngModel]="invoice.total | number: '1.2-2'" (ngModelChange)="invoice.total=$event" readonly>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <label for="discount">Discount</label>
+                <input class="form-control" id="discount" [(ngModel)]="invoice.discount" (change)="calculateTotal()" (blur)="calculateTotal(row)" required currencyMask>
             </div>
         </div>
 
@@ -83,10 +94,7 @@
                 <label for="comment">Comment</label>
                 <textarea rows="3" class="form-control" id="comment" [(ngModel)]="invoice.comment"></textarea>
             </div>
-            <div class="col-sm-12 col-md-4 offset-md-1">
-                <label for="discount">Discount</label>
-                <input type="number" id="discount" class="form-control" [(ngModel)]="invoice.discount" value="0" min="0" required />
-            </div>
+            <div class="col-sm-12 col-md-6"></div>
         </div>
 
         <button id="btnSave" type="button" class="btn btn-primary float-right my-4" (click)="submitForm()">Create</button>

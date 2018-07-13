@@ -109,6 +109,10 @@ export class CreateInvoiceComponent implements OnInit {
         item.total = (item.price * item.quantity);
     }
 
+    calculateTotal() {
+        this.invoice.total = this.invoice.total - this.invoice.discount;
+    }
+
     getInvoiceCount() {
         this.invoiceService.getAll().subscribe(
             (response) => this.invoiceLength = response.length,
