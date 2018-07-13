@@ -15,6 +15,7 @@ import { InvoiceRoutingModule } from './invoice.routing';
 import { DetailInvoiceComponent } from './detail-invoice/detail-invoice.component';
 import { CurrencyMaskModule } from 'ngx-currency-mask';
 import { CURRENCY_MASK_CONFIG, CurrencyMaskConfig } from 'ngx-currency-mask/src/currency-mask.config';
+import { EditInvoiceComponent } from './edit-invoice/edit-invoice.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     align: "left",
@@ -31,7 +32,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     declarations: [
         InvoiceComponent,
         CreateInvoiceComponent,
-        DetailInvoiceComponent
+        DetailInvoiceComponent,
+        EditInvoiceComponent
     ],
     imports: [
         CommonModule,

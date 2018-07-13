@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Title, DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import Role from '../../../shared/models/role.model';
 import User from '../../../shared/models/user.model';
@@ -13,7 +13,7 @@ import { UserService } from '../../../shared/services/user.service';
 })
 export class DetailUserComponent implements OnInit {
     email: string;
-    currentUser: User;
+    user: User;
     roles: Role[] = null;
 
     constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService, private roleService: RoleService, private _sanitizer: DomSanitizer, private router: Router) { }
@@ -38,7 +38,7 @@ export class DetailUserComponent implements OnInit {
 
     getUser(email: string) {
         this.userService.getByEmail(email).subscribe(
-            (response) => this.currentUser = response,
+            (response) => this.user = response,
             (error) => { throw error; }
         );
     }

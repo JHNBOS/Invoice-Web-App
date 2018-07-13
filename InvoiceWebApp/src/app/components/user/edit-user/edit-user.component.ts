@@ -14,7 +14,7 @@ import { UserService } from '../../../shared/services/user.service';
 export class EditUserComponent implements OnInit {
     email: string;
     user: User;
-    currentUser: User;
+    currentUser: User = JSON.parse(sessionStorage.getItem('signedInUser'));
     roles: Role[] = null;
 
     @ViewChild('fileInput') fileInput: ElementRef;
@@ -23,7 +23,6 @@ export class EditUserComponent implements OnInit {
 
     ngOnInit() {
         this.titleService.setTitle('Edit User - Invoice Panel');
-        this.getCurrentUser();
         this.route.params.subscribe(
             (params) => {
                 this.email = params['email'];
@@ -56,10 +55,6 @@ export class EditUserComponent implements OnInit {
             (response) => this.user = response,
             (error) => { throw error; }
         );
-    }
-
-    getCurrentUser() {
-        this.currentUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
     }
 
     fileUpload(): void {

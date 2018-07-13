@@ -3,15 +3,15 @@
 </a>
 
 <div class="col-sm-12 col-md-10 offset-md-1">
-    <div class="form-horizontal" *ngIf="currentUser && roles">
+    <div class="form-horizontal" *ngIf="user && roles">
         <div class="form-row my-4">
             <div class="col-sm-12 col-md-6">
                 <label for="email">E-mail</label>
-                <input type="text" class="form-control" id="email" [(ngModel)]="currentUser.email">
+                <input type="text" class="form-control" id="email" [(ngModel)]="user.email">
             </div>
             <div class="col-sm-12 col-md-6">
                 <label for="role">User Role</label>
-                <select class="form-control" id="role" [(ngModel)]="currentUser.role_id">
+                <select class="form-control" id="role" [(ngModel)]="user.role_id">
                     <option>Select an user role</option>
                     <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
                 </select>
@@ -23,11 +23,11 @@
         <div class="form-row my-4">
             <div class="col-sm-12 col-md-6">
                 <label for="firstName">First Name</label>
-                <input type="text" class="form-control" id="firstName" [(ngModel)]="currentUser.first_name">
+                <input type="text" class="form-control" id="firstName" [(ngModel)]="user.first_name">
             </div>
             <div class="col-sm-12 col-md-6">
                 <label for="lastName">Last Name</label>
-                <input type="text" class="form-control" id="lastName" [(ngModel)]="currentUser.last_name">
+                <input type="text" class="form-control" id="lastName" [(ngModel)]="user.last_name">
             </div>
         </div>
 

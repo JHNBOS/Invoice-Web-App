@@ -1,21 +1,45 @@
-<h3 class="text-center" *ngIf="debtors.length == 0">No debtors.</h3>
+<h3 class="text-center" *ngIf="debtors?.length == 0">No debtors.</h3>
 
-<div class="col-sm-12 col-md-10 offset-md-1">
-    <ul class="list-group">
-        <li class="list-group-item" *ngFor="let debtor of debtors">
-            <a [routerLink]="['details', debtor.id]">
-                {{debtor.first_name}} {{debtor.last_name}} - {{debtor.email}}
-            </a>
-            <span class="list-icons">
-                <button class="btn-edit" [routerLink]="['edit', debtor.id]" title="Edit">
-                    <i class="fa fa-edit"></i>
-                </button>
-                <button class="btn-delete" type="button" (click)="deleteDebtor(debtor.id)" title="Remove">
-                    <i class="fa fa-trash"></i>
-                </button>
-            </span>
-        </li>
-    </ul>
+<div class="col-sm-12 col-md-10 offset-md-1 table-responsive">
+    <table class="table table-hover table-sm table-striped w-100" *ngIf="debtors?.length > 0">
+        <thead>
+            <tr>
+                <th class="pl-3">ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>City</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let debtor of debtors">
+                <td class="text-muted py-2 pl-3">
+                    <a [routerLink]="['details', debtor.id]" title="View debtor details">
+                        {{ debtor.id }}
+                    </a>
+                </td>
+                <td class="p-2">
+                    <a [routerLink]="['details', debtor.id]" title="View debtor details">
+                        <span *ngIf="debtor.company_name == null">{{ debtor.first_name }} {{ debtor.last_name }}</span><span *ngIf="debtor.company_name != null">{{ debtor.company_name }}</span>
+                    </a>
+                </td>
+                <td class="p-2">
+                    {{ debtor.email }}
+                </td>
+                <td class="p-2">
+                    {{ debtor.address.city }}, {{ debtor.address.country }}
+                </td>
+                <td class="text-right py-2 pr-3">
+                    <button class="btn-edit" [routerLink]="['edit', debtor.id]" title="Edit">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                    <button class="btn-delete" type="button" (click)="deleteDebtor(debtor.id)" title="Remove">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
     <hr />
 

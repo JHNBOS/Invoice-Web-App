@@ -13,7 +13,6 @@ import { UserService } from '../../../shared/services/user.service';
 export class LoginComponent implements OnInit {
     email = '';
     password = '';
-    user: User;
 
     constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService,
         private router: Router, private authenticationService: AuthenticationService) {}
@@ -29,7 +28,7 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(this.email, this.password)
             .subscribe(
                 (response) => {
-                    sessionStorage.setItem('loggedInUser', JSON.stringify(response));
+                    sessionStorage.setItem('signedInUser', JSON.stringify(response));
                     this.router.navigate(['/']);
                 },
                 (error) => { throw (error); }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as moment from 'moment';
 import Invoice from '../../../shared/models/invoice.model';
+import User from '../../../shared/models/user.model';
 import { InvoiceService } from '../../../shared/services/invoice.service';
 import { InvoiceItemService } from '../../../shared/services/invoice_item.service';
 
@@ -12,6 +12,7 @@ import { InvoiceItemService } from '../../../shared/services/invoice_item.servic
     styleUrls: ['./detail-invoice.component.scss']
 })
 export class DetailInvoiceComponent implements OnInit {
+    currentUser: User = JSON.parse(sessionStorage.getItem('signedInUser'));
     invoiceNumber: string;
     invoice: Invoice;
 

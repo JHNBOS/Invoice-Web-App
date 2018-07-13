@@ -21,7 +21,7 @@ export class AuthenticationService {
 
     logout() {
         // remove user from local storage to log user out
-        sessionStorage.removeItem('loggedInUser');
+        sessionStorage.removeItem('signedInUser');
     }
 
     private handleError(error) {

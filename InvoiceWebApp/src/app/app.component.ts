@@ -13,8 +13,8 @@ import User from './shared/models/user.model';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    user: User = null;
-    isLoggedIn = false;
+    currentUser: User = null;
+    isSignedIn = false;
     title: string;
 
     constructor(private authService: AuthenticationService, private route: ActivatedRoute,
@@ -26,11 +26,11 @@ export class AppComponent implements OnInit {
     }
 
     checkIfLoggedIn() {
-        this.user = JSON.parse(sessionStorage.getItem('loggedInUser'));
-        if (this.user != null) {
-            this.isLoggedIn = true;
+        this.currentUser = JSON.parse(sessionStorage.getItem('signedInUser'));
+        if (this.currentUser != null) {
+            this.isSignedIn = true;
         } else {
-            this.isLoggedIn = false;
+            this.isSignedIn = false;
         }
     }
 
@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
         this.authService.logout();
         this.checkIfLoggedIn();
 
-        if (!this.isLoggedIn) {
+        if (!this.isSignedIn) {
             this.router.navigate(['/login']);
         }
     }

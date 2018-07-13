@@ -12,7 +12,7 @@ import { UserService } from '../../../shared/services/user.service';
     styleUrls: ['./add-user.component.scss']
 })
 export class AddUserComponent implements OnInit {
-    currentUser: User = new User;
+    user: User = new User;
     roles: Role[] = null;
 
     @ViewChild('fileInput') fileInput: ElementRef;
@@ -32,7 +32,7 @@ export class AddUserComponent implements OnInit {
     }
 
     submitForm() {
-        this.userService.create(this.currentUser).subscribe(
+        this.userService.create(this.user).subscribe(
             (response) => {
                 if (response != null) {
                     this.fileUpload();
@@ -48,7 +48,7 @@ export class AddUserComponent implements OnInit {
             let fileToUpload = fi.files[0];
 
             if (fileToUpload) {
-                this.userService.upload(fileToUpload, this.currentUser).subscribe(
+                this.userService.upload(fileToUpload, this.user).subscribe(
                     (response) => this.router.navigate(['/users']),
                     (error) => { throw (error); }
                 );
@@ -57,5 +57,4 @@ export class AddUserComponent implements OnInit {
             this.router.navigate(['/users']);
         }
     }
-
 }

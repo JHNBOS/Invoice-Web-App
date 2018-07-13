@@ -1,10 +1,10 @@
-<h3 class="text-center" *ngIf="invoices.length == 0">No invoices.</h3>
+<h3 class="text-center" *ngIf="invoices?.length == 0">No invoices.</h3>
 
 <div class="col-sm-12 col-md-10 offset-md-1 table-responsive">
-    <table class="table table-hover table-sm table-striped w-100" *ngIf="invoices.length > 0">
+    <table class="table table-hover table-sm table-striped w-100" *ngIf="invoices?.length > 0">
         <thead>
             <tr>
-                <th>Expired On</th>
+                <th class="pl-3">Expired On</th>
                 <th>Invoice Nr.</th>
                 <th>Total</th>
                 <th>Debtor</th>
@@ -16,7 +16,7 @@
             <tr *ngFor="let invoice of invoices">
                 <td class="text-muted py-2 pl-3">{{ invoice.expired_on | date: 'MMMM dd, yyyy' }}</td>
                 <td class="p-2">
-                    <a [routerLink]="['details', invoice.invoice_number]">
+                    <a [routerLink]="['details', invoice.invoice_number]" title="View invoice details">
                         {{ invoice.invoice_number }}
                     </a>
                 </td>
@@ -24,7 +24,7 @@
                     {{ invoice.total }}
                 </td>
                 <td class="p-2">
-                    {{ invoice.debtor.id }} &emsp; <span *ngIf="invoice.debtor.company_name == null">{{ invoice.debtor.first_name }} {{ invoice.debtor.last_name }}</span> <span *ngIf="invoice.debtor.company_name != null">{{ invoice.debtor.company_name }}</span>
+                    {{ invoice.debtor.id }} - <span *ngIf="invoice.debtor.company_name == null">{{ invoice.debtor.first_name }} {{ invoice.debtor.last_name }}</span> <span *ngIf="invoice.debtor.company_name != null">{{ invoice.debtor.company_name }}</span>
                 </td>
                 <td class="p-2">
                     {{ invoice.is_paid == true ? 'Yes' : 'No' }}

@@ -1,21 +1,37 @@
-<h3 class="text-center" *ngIf="users.length == 0">No users.</h3>
+<h3 class="text-center" *ngIf="users?.length == 0">No users.</h3>
 
-<div class="col-sm-12 col-md-10 offset-md-1">
-    <ul class="list-group">
-        <li class="list-group-item" *ngFor="let user of users">
-            <a [routerLink]="['details', user.email]">
-                {{user.first_name}} {{user.last_name}} - {{user.email}}
-            </a>
-            <span class="list-icons">
-                <button class="btn-edit" [routerLink]="['edit', user.email]" title="Edit">
-                    <i class="fa fa-edit"></i>
-                </button>
-                <button class="btn-delete" type="button" (click)="deleteUser(user.email)" title="Remove">
-                    <i class="fa fa-trash"></i>
-                </button>
-            </span>
-        </li>
-    </ul>
+<div class="col-sm-12 col-md-10 offset-md-1 table-responsive">
+    <table class="table table-hover table-sm table-striped w-100" *ngIf="users?.length > 0">
+        <thead>
+            <tr>
+                <th class="pl-3">User</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td class="text-muted py-2 pl-3">
+                    <a [routerLink]="['details', user.email]" title="View user details">
+                        {{ user.first_name }} {{ user.last_name }}
+                    </a>
+                </td>
+                <td class="p-2">
+                    <a [routerLink]="['details', user.email]" title="View user details">
+                        {{ user.email }}
+                    </a>
+                </td>
+                <td class="text-right py-2 pr-3">
+                    <button class="btn-edit" [routerLink]="['edit', user.email]" title="Edit">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                    <button class="btn-delete" type="button" (click)="deleteUser(user.email)" title="Remove">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
     <a href="#" [routerLink]="['import']" class="btn btn-primary btn-sm mt-3" title="Add users by CSV">
         <i class="fa fa-file-excel-o"></i>

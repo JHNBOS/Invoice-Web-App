@@ -93,6 +93,6 @@
             <div class="col-sm-12 col-md-6"></div>
         </div>
 
-        <a id="btnChange" class="btn btn-primary float-right my-4" [routerLink]="['../../edit', invoice.invoice_number]">Edit</a>
+        <a *ngIf="currentUser.role_id == 1" id="btnChange" class="btn btn-primary float-right my-4" [routerLink]="['../../edit', invoice.invoice_number]">Edit</a>
     </div>
 </div>

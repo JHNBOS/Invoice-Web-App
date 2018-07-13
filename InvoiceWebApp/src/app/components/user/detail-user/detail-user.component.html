@@ -3,15 +3,15 @@
 </a>
 
 <div class="col-sm-12 col-md-10 offset-md-1">
-    <div class="form-horizontal" *ngIf="currentUser && roles">
+    <div class="form-horizontal" *ngIf="user && roles">
         <div class="form-row my-4">
             <div class="col-sm-12 col-md-6">
                 <label for="email">E-mail</label>
-                <input type="text" class="form-control" id="email" [(ngModel)]="currentUser.email" readonly>
+                <input type="text" class="form-control" id="email" [(ngModel)]="user.email" readonly>
             </div>
             <div class="col-sm-12 col-md-6">
                 <label for="role">User Role</label>
-                <select class="form-control" id="role" [(ngModel)]="currentUser.role_id" disabled>
+                <select class="form-control" id="role" [(ngModel)]="user.role_id" disabled>
                     <option>Select an user role</option>
                     <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
                 </select>
@@ -23,11 +23,11 @@
         <div class="form-row my-4">
             <div class="col-sm-12 col-md-6">
                 <label for="firstName">First Name</label>
-                <input type="text" class="form-control" id="firstName" [(ngModel)]="currentUser.first_name" readonly>
+                <input type="text" class="form-control" id="firstName" [(ngModel)]="user.first_name" readonly>
             </div>
             <div class="col-sm-12 col-md-6">
                 <label for="lastName">Last Name</label>
-                <input type="text" class="form-control" id="lastName" [(ngModel)]="currentUser.last_name" readonly>
+                <input type="text" class="form-control" id="lastName" [(ngModel)]="user.last_name" readonly>
             </div>
         </div>
 
@@ -35,10 +35,10 @@
 
         <div class="form-row my-4">
             <div class="col-sm-12 col-md-4 offset-md-4 text-center">
-                <img class="img-fluid profile-picture" [src]="_sanitizer.bypassSecurityTrustUrl(currentUser.picture)" />
+                <img class="img-fluid profile-picture" [src]="_sanitizer.bypassSecurityTrustUrl(user.picture)" />
             </div>
         </div>
 
-        <a id="btnChange" class="btn btn-primary float-right my-4" [routerLink]="['../../edit', currentUser.email]">Edit</a>
+        <a id="btnChange" class="btn btn-primary float-right my-4" [routerLink]="['../../edit', user.email]">Edit</a>
     </div>
 </div>
