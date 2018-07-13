@@ -17,13 +17,14 @@ namespace InvoiceWebApp.Components.Services
 
         public async Task<ICollection<Invoice>> GetInvoices()
         {
-            var response = await _context.Invoices.Include(i => i.Items).Include(i => i.Debtor).ToListAsync();
+            var response = await _context.Invoices.Include(i => i.Items).Include(i => i.Debtor).OrderBy(o => o.ExpiredOn).ToListAsync();
             return response;
         }
 
         public async Task<ICollection<Invoice>> GetNearlyExpired()
         {
-            var response = await _context.Invoices.Include(i => i.Items).Include(i => i.Debtor).Where(q => (q.ExpiredOn - DateTime.Now).TotalDays <= 30).ToListAsync();
+            var response = await _context.Invoices.Include(i => i.Items).Include(i => i.Debtor).Where(q => (q.ExpiredOn - DateTime.Now).TotalDays <= 30)
+                .OrderBy(o => o.ExpiredOn).ToListAsync();
             return response;
         }
 
@@ -35,7 +36,7 @@ namespace InvoiceWebApp.Components.Services
 
         public async Task<ICollection<Invoice>> GetByDebtorId(string id)
         {
-            var response = await _context.Invoices.Include(i => i.Items).Include(i => i.Debtor).Where(q => q.CustomerId == id).ToListAsync();
+            var response = await _context.Invoices.Include(i => i.Items).Include(i => i.Debtor).Where(q => q.CustomerId == id).OrderBy(o => o.ExpiredOn).ToListAsync();
             return response;
         }
 

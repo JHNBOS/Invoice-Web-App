@@ -171,6 +171,10 @@ namespace InvoiceWebApp.Components.DataContext
                     .HasColumnName("expired_on")
                     .HasColumnType("datetime");
 
+                entity.Property(e => e.IsPaid)
+                    .HasColumnName("is_paid")
+                    .HasColumnType("boolean");
+
                 entity.Property(e => e.Discount).HasColumnName("discount");
 
                 entity.Property(e => e.Total).HasColumnName("total");

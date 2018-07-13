@@ -57,7 +57,8 @@ namespace ShareListAPI.Controllers
                     Comment = invoice.Comment,
                     CreatedOn = invoice.CreatedOn,
                     ExpiredOn = invoice.ExpiredOn,
-                    Debtor = debtorModel
+                    Debtor = debtorModel,
+                    IsPaid = invoice.IsPaid
                 };
 
                 result.Add(invoiceModel);
@@ -140,7 +141,8 @@ namespace ShareListAPI.Controllers
                     Comment = invoice.Comment,
                     CreatedOn = invoice.CreatedOn,
                     ExpiredOn = invoice.ExpiredOn,
-                    Debtor = debtorModel
+                    Debtor = debtorModel,
+                    IsPaid = invoice.IsPaid
                 };
 
                 result.Add(invoiceModel);
@@ -188,7 +190,8 @@ namespace ShareListAPI.Controllers
                     Comment = invoice.Comment,
                     CreatedOn = invoice.CreatedOn,
                     ExpiredOn = invoice.ExpiredOn,
-                    Debtor = debtorModel
+                    Debtor = debtorModel,
+                    IsPaid = invoice.IsPaid
                 };
 
                 result.Add(invoiceModel);
@@ -230,7 +233,8 @@ namespace ShareListAPI.Controllers
                     Comment = invoice.Comment,
                     CreatedOn = invoice.CreatedOn,
                     ExpiredOn = invoice.ExpiredOn,
-                    Debtor = debtorModel
+                    Debtor = debtorModel,
+                    IsPaid = invoice.IsPaid
                 };
 
                 result.Add(invoiceModel);
@@ -262,7 +266,8 @@ namespace ShareListAPI.Controllers
                 Total = model.Total,
                 Discount = model.Discount,
                 Comment = model.Comment,
-                CustomerId = model.CustomerId
+                CustomerId = model.CustomerId,
+                IsPaid = model.IsPaid
             };
 
             //Swap comma with dots
@@ -302,7 +307,8 @@ namespace ShareListAPI.Controllers
                 Total = model.Total,
                 Discount = model.Discount,
                 Comment = model.Comment,
-                CustomerId = model.CustomerId
+                CustomerId = model.CustomerId,
+                IsPaid = model.IsPaid
             };
 
             //Swap comma with dots

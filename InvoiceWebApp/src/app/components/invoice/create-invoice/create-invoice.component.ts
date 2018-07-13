@@ -16,6 +16,7 @@ import { InvoiceItemService } from '../../../shared/services/invoice_item.servic
 export class CreateInvoiceComponent implements OnInit {
     invoice: Invoice = new Invoice;
     debtor: Debtor;
+    invoiceLength: number = 0;
 
     minDate: string = new Date().toJSON().split('T')[0];
     begin: string = this.minDate;
@@ -50,10 +51,14 @@ export class CreateInvoiceComponent implements OnInit {
     }
 
     submitForm() {
+        // Get invoice count
+        this.getInvoiceCount();
+
+        //Set invoice properties
         this.invoice.created_on = moment(this.begin).toDate();
         this.invoice.expired_on = moment(this.expiration).toDate();
         this.invoice.customer_id = this.debtor.id;
-        this.invoice.invoice_number = new Date().getFullYear().toString() + (this.getInvoiceCount() + 1) + '';
+        this.invoice.invoice_number = new Date().getFullYear().toString() + new Date().getMonth().toString() + '-' + (this.invoiceLength + 1);
 
         for (var i = 0; i < this.invoice.items.length; i++) {
             let item = this.invoice.items[i];
@@ -65,7 +70,11 @@ export class CreateInvoiceComponent implements OnInit {
 
     saveInvoice() {
         this.invoiceService.create(this.invoice).subscribe(
-            (response) => this.saveInvoiceItems(),
+            (response) => {
+                setTimeout(() => {
+                    this.saveInvoiceItems();
+                },1000);
+            },
             (error) => { throw (error); }
         );
     }
@@ -100,12 +109,10 @@ export class CreateInvoiceComponent implements OnInit {
         item.total = (item.price * item.quantity);
     }
 
-    getInvoiceCount(): number {
-        this.invoiceService.getByDebtorId(this.debtor.id).subscribe(
-            (response) => { return response.length },
+    getInvoiceCount() {
+        this.invoiceService.getAll().subscribe(
+            (response) => this.invoiceLength = response.length,
             (error) => { throw error; }
         );
-
-        return 0;
     }
 }

@@ -21,6 +21,18 @@ var create_invoice_component_1 = require("./create-invoice/create-invoice.compon
 var invoice_component_1 = require("./invoice.component");
 var invoice_routing_1 = require("./invoice.routing");
 var detail_invoice_component_1 = require("./detail-invoice/detail-invoice.component");
+var ngx_currency_mask_1 = require("ngx-currency-mask");
+var currency_mask_config_1 = require("ngx-currency-mask/src/currency-mask.config");
+exports.CustomCurrencyMaskConfig = {
+    align: "left",
+    allowNegative: false,
+    allowZero: true,
+    decimal: ",",
+    precision: 2,
+    prefix: "",
+    suffix: "",
+    thousands: "."
+};
 var InvoiceModule = /** @class */ (function () {
     function InvoiceModule() {
     }
@@ -36,6 +48,7 @@ var InvoiceModule = /** @class */ (function () {
                 http_1.HttpClientModule,
                 forms_1.FormsModule,
                 debtor_dropdown_module_1.DebtorDropdownModule,
+                ngx_currency_mask_1.CurrencyMaskModule,
                 ng2_toasty_1.ToastyModule.forRoot(),
                 invoice_routing_1.InvoiceRoutingModule
             ],
@@ -44,7 +57,8 @@ var InvoiceModule = /** @class */ (function () {
                 invoice_item_service_1.InvoiceItemService,
                 debtor_service_1.DebtorService,
                 address_service_1.AddressService,
-                { provide: core_1.ErrorHandler, useClass: error_handler_1.CustomErrorHandler }
+                { provide: core_1.ErrorHandler, useClass: error_handler_1.CustomErrorHandler },
+                { provide: currency_mask_config_1.CURRENCY_MASK_CONFIG, useValue: exports.CustomCurrencyMaskConfig }
             ],
             exports: [
                 invoice_component_1.InvoiceComponent

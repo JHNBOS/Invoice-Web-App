@@ -1,29 +1,35 @@
 <h3 class="text-center" *ngIf="invoices.length == 0">No invoices.</h3>
 
 <div class="col-sm-12 col-md-10 offset-md-1 table-responsive">
-    <table class="table table-hover table-striped w-100">
+    <table class="table table-hover table-sm table-striped w-100" *ngIf="invoices.length > 0">
         <thead>
             <tr>
                 <th>Expired On</th>
                 <th>Invoice Nr.</th>
                 <th>Total</th>
                 <th>Debtor</th>
+                <th>Paid</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let invoice of invoices">
-                <td class="text-muted">{{ invoice.expired_on | date: 'MMMM dd, yyyy' }}</td>
-                <td>
+                <td class="text-muted py-2 pl-3">{{ invoice.expired_on | date: 'MMMM dd, yyyy' }}</td>
+                <td class="p-2">
                     <a [routerLink]="['details', invoice.invoice_number]">
                         {{ invoice.invoice_number }}
                     </a>
                 </td>
-                <td>{{ invoice.total }}</td>
-                <td>
+                <td class="p-2">
+                    {{ invoice.total }}
+                </td>
+                <td class="p-2">
                     {{ invoice.debtor.id }} &emsp; <span *ngIf="invoice.debtor.company_name == null">{{ invoice.debtor.first_name }} {{ invoice.debtor.last_name }}</span> <span *ngIf="invoice.debtor.company_name != null">{{ invoice.debtor.company_name }}</span>
                 </td>
-                <td class="text-right">
+                <td class="p-2">
+                    {{ invoice.is_paid == true ? 'Yes' : 'No' }}
+                </td>
+                <td class="text-right py-2 pr-3">
                     <button class="btn-edit" [routerLink]="['edit', invoice.invoice_number]" title="Edit">
                         <i class="fa fa-edit"></i>
                     </button>

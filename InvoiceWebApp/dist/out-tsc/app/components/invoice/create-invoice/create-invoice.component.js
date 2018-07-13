@@ -25,6 +25,7 @@ var CreateInvoiceComponent = /** @class */ (function () {
         this.invoiceItemService = invoiceItemService;
         this.router = router;
         this.invoice = new invoice_model_1.default;
+        this.invoiceLength = 0;
         this.minDate = new Date().toJSON().split('T')[0];
         this.begin = this.minDate;
     }
@@ -47,10 +48,13 @@ var CreateInvoiceComponent = /** @class */ (function () {
         this.debtor = event;
     };
     CreateInvoiceComponent.prototype.submitForm = function () {
+        // Get invoice count
+        this.getInvoiceCount();
+        //Set invoice properties
         this.invoice.created_on = moment(this.begin).toDate();
         this.invoice.expired_on = moment(this.expiration).toDate();
         this.invoice.customer_id = this.debtor.id;
-        this.invoice.invoice_number = new Date().getFullYear().toString() + (this.getInvoiceCount() + 1) + '';
+        this.invoice.invoice_number = new Date().getFullYear().toString() + new Date().getMonth().toString() + '-' + (this.invoiceLength + 1);
         for (var i = 0; i < this.invoice.items.length; i++) {
             var item = this.invoice.items[i];
             this.invoice.total += item.total;
@@ -59,7 +63,11 @@ var CreateInvoiceComponent = /** @class */ (function () {
     };
     CreateInvoiceComponent.prototype.saveInvoice = function () {
         var _this = this;
-        this.invoiceService.create(this.invoice).subscribe(function (response) { return _this.saveInvoiceItems(); }, function (error) { throw (error); });
+        this.invoiceService.create(this.invoice).subscribe(function (response) {
+            setTimeout(function () {
+                _this.saveInvoiceItems();
+            }, 1000);
+        }, function (error) { throw (error); });
     };
     CreateInvoiceComponent.prototype.saveInvoiceItems = function () {
         for (var i = 0; i < this.invoice.items.length; i++) {
@@ -82,8 +90,8 @@ var CreateInvoiceComponent = /** @class */ (function () {
         item.total = (item.price * item.quantity);
     };
     CreateInvoiceComponent.prototype.getInvoiceCount = function () {
-        this.invoiceService.getByDebtorId(this.debtor.id).subscribe(function (response) { return response.length; }, function (error) { throw error; });
-        return 0;
+        var _this = this;
+        this.invoiceService.getAll().subscribe(function (response) { return _this.invoiceLength = response.length; }, function (error) { throw error; });
     };
     CreateInvoiceComponent = __decorate([
         core_1.Component({

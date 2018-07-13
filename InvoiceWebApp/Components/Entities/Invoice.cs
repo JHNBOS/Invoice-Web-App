@@ -17,6 +17,7 @@ namespace InvoiceWebApp.Components.Entities
         public decimal Total { get; set; }
         public int Discount { get; set; }
         public string Comment { get; set; }
+        public bool IsPaid { get; set; }
 
         public virtual ICollection<InvoiceItem> Items { get; set; }
         public virtual Debtor Debtor { get; set; }

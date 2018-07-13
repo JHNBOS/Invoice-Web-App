@@ -10,6 +10,7 @@ export default class Invoice {
     comment: string = null;
     items: InvoiceItem[] = [];
     discount: number = 0;
+    is_paid: boolean = false;
     debtor: Debtor = null;
 
     public isValid(): boolean {
