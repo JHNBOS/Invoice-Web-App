@@ -7,7 +7,7 @@ import User from './models/user.model';
 
 @Injectable()
 export class AuthenticationService {
-    private apiUrl = 'http://localhost/api/users/';
+    private apiUrl = 'http://invoice.jhnbos.nl:90/api/users/';
 
     constructor(private http: HttpClient, private router: Router) { }
 

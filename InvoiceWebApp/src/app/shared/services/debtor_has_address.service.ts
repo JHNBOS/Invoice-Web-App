@@ -7,7 +7,7 @@ import DebtorHasAddress from '../models/debtor_has_address.model';
 @Injectable()
 export class DebtorHasAddressService {
 
-    private apiUrl = 'http://localhost/api/has_address/';
+    private apiUrl = 'http://invoice.jhnbos.nl:90/api/has_address/';
 
     constructor(public http: HttpClient) { }
 

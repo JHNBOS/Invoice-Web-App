@@ -7,7 +7,7 @@ import InvoiceItem from '../models/invoice_item.model';
 @Injectable()
 export class InvoiceItemService {
 
-    private apiUrl = 'http://localhost/api/items/';
+    private apiUrl = 'http://invoice.jhnbos.nl:90/api/items/';
 
     constructor(public http: HttpClient) { }
 

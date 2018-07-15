@@ -7,7 +7,7 @@ import Debtor from '../models/debtor.model';
 @Injectable()
 export class DebtorService {
 
-    private apiUrl = 'http://localhost/api/debtors/';
+    private apiUrl = 'http://invoice.jhnbos.nl:90/api/debtors/';
 
     constructor(public http: HttpClient) { }
 
