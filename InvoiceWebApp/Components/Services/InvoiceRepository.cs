@@ -48,6 +48,8 @@ namespace InvoiceWebApp.Components.Services
 
         public async Task<Invoice> Insert(Invoice invoice)
         {
+            invoice.Debtor = null;
+
             var response = _context.Invoices.Add(invoice);
             await _context.SaveChangesAsync();
 
@@ -56,6 +58,8 @@ namespace InvoiceWebApp.Components.Services
 
         public async Task<Invoice> Update(Invoice invoice)
         {
+            invoice.Debtor = null;
+
             var invoiceBeforeUpdate = await _context.Invoices.FindAsync(invoice.InvoiceNumber);
             if (invoiceBeforeUpdate == null)
             {

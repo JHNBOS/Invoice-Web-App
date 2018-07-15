@@ -30,6 +30,7 @@ export class CreateInvoiceComponent implements OnInit {
 
         this.setExpired();
         this.setInitialRow();
+        this.getInvoiceCount();
     }
 
     setInitialRow() {
@@ -51,20 +52,13 @@ export class CreateInvoiceComponent implements OnInit {
     }
 
     submitForm(concept: boolean) {
-        // Get invoice count
-        this.getInvoiceCount();
-
         //Set invoice properties
         this.invoice.created_on = moment(this.begin).toDate();
         this.invoice.expired_on = moment(this.expiration).toDate();
         this.invoice.customer_id = this.debtor.id;
         this.invoice.invoice_number = new Date().getFullYear().toString() + new Date().getMonth().toString() + '-' + (this.invoiceLength + 1);
         this.invoice.concept = concept;
-
-        for (var i = 0; i < this.invoice.items.length; i++) {
-            let item = this.invoice.items[i];
-            this.invoice.total += item.total;
-        }
+        this.invoice.debtor = this.debtor;
 
         this.saveInvoice();
     }
@@ -74,7 +68,7 @@ export class CreateInvoiceComponent implements OnInit {
             (response) => {
                 setTimeout(() => {
                     this.saveInvoiceItems();
-                },1000);
+                },500);
             },
             (error) => { throw (error); }
         );
@@ -87,18 +81,18 @@ export class CreateInvoiceComponent implements OnInit {
             item.invoice_number = this.invoice.invoice_number;
 
             this.invoiceItemService.create(item).subscribe(
-                (response) => { },
+                (response) => {
+                    if (i == (this.invoice.items.length - 1)) {
+                        this.router.navigate(['/invoices']);
+                    }
+                },
                 (error) => { throw (error); }
             );
         }
-
-        this.router.navigate(['/invoices']);
     }
 
     addRow() {
         const row = new InvoiceItem();
-        row.invoice_number = this.invoice.invoice_number;
-
         this.invoice.items.push(row);
     }
 
@@ -108,9 +102,17 @@ export class CreateInvoiceComponent implements OnInit {
 
     calculatePrice(item: InvoiceItem) {
         item.total = (item.price * item.quantity);
+        this.calculateTotal();
     }
 
     calculateTotal() {
+        this.invoice.total = 0;
+
+        for (var i = 0; i < this.invoice.items.length; i++) {
+            let item = this.invoice.items[i];
+            this.invoice.total += item.total;
+        }
+
         this.invoice.total = this.invoice.total - this.invoice.discount;
     }
 

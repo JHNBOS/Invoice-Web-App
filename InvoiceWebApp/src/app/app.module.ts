@@ -1,5 +1,7 @@
+import { registerLocaleData } from '@angular/common';
+import localeNL from '@angular/common/locales/nl';
 import { HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CurrencyMaskModule } from "ngx-currency-mask";
 import { ToastyModule } from 'ng2-toasty';
@@ -14,6 +16,8 @@ import { AuthGuard } from './shared/authguard.service';
 import { CustomErrorHandler } from './shared/error-handler';
 import { RoleService } from './shared/services/role.service';
 import { SharedService } from './shared/services/shared.service';
+
+//registerLocaleData(localeNL, 'nl');
 
 @NgModule({
     declarations: [
@@ -38,6 +42,7 @@ import { SharedService } from './shared/services/shared.service';
         { provide: AuthGuard, useClass: AuthGuard },
         { provide: AuthenticationService, useClass: AuthenticationService },
         { provide: ErrorHandler, useClass: CustomErrorHandler },
+        //{ provide: LOCALE_ID, useValue: 'nl' }
     ],
     bootstrap: [
         AppComponent

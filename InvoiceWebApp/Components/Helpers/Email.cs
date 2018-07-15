@@ -17,7 +17,7 @@ namespace InvoiceWebApp.Components.Helpers
         public Email()
         {
             this.EmailAddress = "bosbosjohan@gmail.com";
-            this.Password = "";
+            this.Password = "Rotterdam28";
             this.Host = "smtp.gmail.com";
             this.Port = 587;
             this.EnableSSL = true;

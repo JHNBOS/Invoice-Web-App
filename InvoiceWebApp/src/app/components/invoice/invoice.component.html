@@ -22,7 +22,7 @@
                     </a>
                 </td>
                 <td class="p-2">
-                    {{ invoice.total }}
+                    {{ getLocaleString(invoice.total) }}
                 </td>
                 <td class="p-2">
                     {{ invoice.debtor.id }} - <span *ngIf="invoice.debtor.company_name == null">{{ invoice.debtor.first_name }} {{ invoice.debtor.last_name }}</span> <span *ngIf="invoice.debtor.company_name != null">{{ invoice.debtor.company_name }}</span>

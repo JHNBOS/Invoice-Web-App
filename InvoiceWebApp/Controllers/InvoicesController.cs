@@ -274,7 +274,17 @@ namespace ShareListAPI.Controllers
                 Comment = model.Comment,
                 CustomerId = model.CustomerId,
                 IsPaid = model.IsPaid,
-                Concept = model.Concept
+                Concept = model.Concept,
+                Debtor = new Debtor
+                {
+                    Id = model.Debtor.Id,
+                    FirstName = model.Debtor.FirstName,
+                    LastName = model.Debtor.LastName,
+                    Email = model.Debtor.Email,
+                    BankAccount = model.Debtor.BankAccount,
+                    Phone = model.Debtor.Phone,
+                    CompanyName = model.Debtor.CompanyName
+                }
             };
 
             //Swap comma with dots
@@ -291,7 +301,16 @@ namespace ShareListAPI.Controllers
             //Send email
             if (invoice.Concept == false)
             {
-                await _email.SendNotification(invoice.Debtor);
+                await _email.SendNotification(new Debtor
+                {
+                    Id = model.Debtor.Id,
+                    FirstName = model.Debtor.FirstName,
+                    LastName = model.Debtor.LastName,
+                    Email = model.Debtor.Email,
+                    BankAccount = model.Debtor.BankAccount,
+                    Phone = model.Debtor.Phone,
+                    CompanyName = model.Debtor.CompanyName
+                });
             }
 
             return Ok(result);
