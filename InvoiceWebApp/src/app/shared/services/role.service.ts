@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import Role from '../models/role.model';
 
@@ -13,10 +13,6 @@ export class RoleService {
 
     getAll(): Observable<Role[]> {
         return this.http.get<Role[]>(this.apiUrl + 'getAll')
-            .pipe(catchError(this.handleError));
-    }
-
-    private handleError(error: any) {
-        return Observable.throw(error);
+            .pipe(catchError(error => throwError(error)));
     }
 }

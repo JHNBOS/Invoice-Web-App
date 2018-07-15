@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import Invoice from '../models/invoice.model';
 
@@ -13,50 +13,46 @@ export class InvoiceService {
 
     getByNumber(id: string): Observable<Invoice> {
         return this.http.get<Invoice>(this.apiUrl + 'getByNumber?invoice=' + id)
-            .pipe(catchError(this.handleError));
+            .pipe(catchError(error => throwError(error)));
     }
 
     getByDebtorId(id: string): Observable<Invoice[]> {
         return this.http.get<Invoice[]>(this.apiUrl + 'getByDebtorId?debtor=' + id)
-            .pipe(catchError(this.handleError));
+            .pipe(catchError(error => throwError(error)));
     }
 
     getByCreationDate(date: Date): Observable<Invoice> {
         return this.http.get<Invoice>(this.apiUrl + 'getByCreationDate?date=' + date)
-            .pipe(catchError(this.handleError));
+            .pipe(catchError(error => throwError(error)));
     }
 
     getNearlyExpired(): Observable<Invoice> {
         return this.http.get<Invoice>(this.apiUrl + 'getNearlyExpired')
-            .pipe(catchError(this.handleError));
+            .pipe(catchError(error => throwError(error)));
     }
 
     getAll(): Observable<Invoice[]> {
         return this.http.get<Invoice[]>(this.apiUrl + 'getAll')
-            .pipe(catchError(this.handleError));
+            .pipe(catchError(error => throwError(error)));
     }
 
     create(invoice: Invoice): Observable<Invoice> {
         return this.http.post<Invoice>(this.apiUrl + 'create', invoice)
-            .pipe(catchError(this.handleError));
+            .pipe(catchError(error => throwError(error)));
     }
 
     update(invoice: Invoice): Observable<Invoice> {
         return this.http.put<Invoice>(this.apiUrl + 'update', invoice)
-            .pipe(catchError(this.handleError));
+            .pipe(catchError(error => throwError(error)));
     }
 
     delete(id: string): Observable<boolean> {
         return this.http.delete<boolean>(this.apiUrl + 'delete?invoice=' + id)
-            .pipe(catchError(this.handleError));
+            .pipe(catchError(error => throwError(error)));
     }
 
     deleteByDebtor(id: number): Observable<boolean> {
         return this.http.delete<boolean>(this.apiUrl + 'deleteByDebtorId?debtor=' + id)
-            .pipe(catchError(this.handleError));
-    }
-
-    private handleError(error) {
-        return Observable.throw(error);
+            .pipe(catchError(error => throwError(error)));
     }
 }
