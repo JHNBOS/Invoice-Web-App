@@ -10,7 +10,7 @@ import { UserService } from '../../shared/services/user.service';
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-    currentUser: User = JSON.parse(sessionStorage.getItem('signedInUser'));;
+    currentUser: User = JSON.parse(sessionStorage.getItem('signedInUser'));
     invoice_count: number = 0;
 
     constructor(private titleService: Title, private userService: UserService, private invoiceService: InvoiceService) { }
