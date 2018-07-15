@@ -1,6 +1,33 @@
 <nav class="navbar navbar-dark fixed-top flex-row-reverse">
     <h1 class="navbar-brand">{{ title }}</h1>
-    <ul class="nav justify-content-end" *ngIf="isSignedIn && currentUser != null">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileMenu" aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation" *ngIf="isSignedIn && currentUser != null">
+        <i class="fa fa-navicon"></i>
+    </button>
+
+    <div class="navbar-collapse collapse d-block d-md-block d-lg-none" id="mobileMenu">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item" [hidden]="currentUser.role_id == 2">
+                <a [routerLink]="['/debtors']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Debtors</a>
+            </li>
+            <li class="nav-item" [hidden]="currentUser.role_id == 2">
+                <a [routerLink]="['/invoices']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Invoices</a>
+            </li>
+            <li class="nav-item">
+                <a [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link sign-out" style="cursor: pointer;" (click)="signOut()" title="Sign Out">
+                    Sign Out
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <ul class="nav justify-content-end user-menu d-none d-md-none d-lg-block d-xl-block" *ngIf="isSignedIn && currentUser != null">
         <li class="nav-item">
             <a [routerLink]="['/users/edit', currentUser.email]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#" title="{{currentUser.first_name}} {{currentUser.last_name}}">
                 <img class="profile" [src]="_sanitizer.bypassSecurityTrustUrl(currentUser.picture)" />
@@ -14,7 +41,7 @@
     </ul>
 </nav>
 
-<nav class="bg-faded sidebar">
+<nav class="bg-faded sidebar d-none d-lg-block">
     <div class="nav-top">
         <a class="navbar-brand" href="#">Invoice Panel</a>
     </div>
@@ -35,7 +62,7 @@
     <ul class="nav nav-pills flex-column nav-bottom" *ngIf="isSignedIn && currentUser != null"></ul>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <main>
             <router-outlet (activate)="checkIfLoggedIn()"></router-outlet>

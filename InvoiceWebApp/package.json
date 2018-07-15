@@ -5,11 +5,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.config.json",
-    "build": "ng build --prod",
+    "build": "ng build --configuration=prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev": "ng build --dev"
+    "dev": "ng build"
   },
   "private": true,
   "dependencies": {

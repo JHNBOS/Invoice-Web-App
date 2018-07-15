@@ -24,6 +24,7 @@ $mainWidth: calc(100vw - #{$sidebarWidth});
     position: absolute;
     top: 0;
     height: 100%;
+    width: 150px;
 }
 
 .navbar .nav .nav-item .nav-link {
@@ -36,6 +37,7 @@ $mainWidth: calc(100vw - #{$sidebarWidth});
 }
 
 .navbar .nav .nav-item .sign-out {
+    position: absolute;
     color: red !important;
     font-size: 22px;
     top: calc(80px - .5rem);
@@ -48,6 +50,7 @@ $mainWidth: calc(100vw - #{$sidebarWidth});
 }
 
 .navbar .nav .nav-item .profile {
+    position: absolute;
     max-height: 55px;
     height: auto;
     max-width: 55px;
@@ -58,10 +61,53 @@ $mainWidth: calc(100vw - #{$sidebarWidth});
     top: 50%;
     left: 0%;
     transform: translate(-25%, -50%);
+    z-index: 99999;
 }
 
 .navbar .nav .nav-item:hover .profile {
     border: 2px solid rgba(0, 123, 255, 0.60);
+}
+
+.navbar-toggler {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    color: dodgerblue;
+    border-color: dodgerblue;
+    display: none;
+}
+
+.navbar-toggler i {
+    color: dodgerblue;
+    border-color: dodgerblue;
+}
+
+#mobileMenu {
+    box-shadow: 0px 3px 14px 0px #9c9c9c;
+    z-index: 999;
+    position: absolute;
+    top: 75px;
+    width: 90vw;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#mobileMenu ul {
+    margin: 0 auto;
+}
+
+#mobileMenu ul .nav-item .active {
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+#mobileMenu ul .nav-item a {
+    background-color: #fff;
+    color: dodgerblue;
+    padding: 10px 20px;
+    text-align: center;
+    border-bottom: 1px solid #c8c8c8;
 }
 
 /* Main */
@@ -152,4 +198,19 @@ main {
 
 .sidebar .nav-link {
     border-radius: 0;
+}
+
+@media(max-width: 992px) {
+    .navbar {
+        left: 0 !important;
+    }
+
+    .navbar-toggler {
+        display: block;
+    }
+
+    main {
+        left: 0 !important;
+        width: 100vw;
+    }
 }
