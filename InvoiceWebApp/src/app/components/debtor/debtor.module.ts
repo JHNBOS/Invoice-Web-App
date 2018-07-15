@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ToastyModule } from 'ng2-toasty';
+import { ToastyModule } from 'ngx-toasty';
 import { CustomErrorHandler } from '../../shared/error-handler';
 import { AddressService } from '../../shared/services/address.service';
 import { DebtorService } from '../../shared/services/debtor.service';

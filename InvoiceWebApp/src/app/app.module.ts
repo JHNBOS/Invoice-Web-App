@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CurrencyMaskModule } from "ngx-currency-mask";
-import { ToastyModule } from 'ng2-toasty';
+import { ToastyModule } from 'ngx-toasty';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { DashboardModule } from './components/dashboard/dashboard.module';

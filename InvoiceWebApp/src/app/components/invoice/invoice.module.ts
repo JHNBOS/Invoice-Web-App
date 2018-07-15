@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ToastyModule } from 'ng2-toasty';
+import { ToastyModule } from 'ngx-toasty';
 import { CurrencyMaskModule } from 'ngx-currency-mask';
 import { CURRENCY_MASK_CONFIG, CurrencyMaskConfig } from 'ngx-currency-mask/src/currency-mask.config';
 import { CustomErrorHandler } from '../../shared/error-handler';

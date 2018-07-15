@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
+import { filter, map, mergeMap } from 'rxjs/operators';
 import { AuthenticationService } from './shared/authentication.service';
 import User from './shared/models/user.model';
 
@@ -36,14 +34,14 @@ export class AppComponent implements OnInit {
 
     getCurrentRouteTitle() {
         this.router.events
-            .filter(event => event instanceof NavigationEnd)
-            .map(() => this.route)
-            .map(route => {
+            .pipe(filter(event => event instanceof NavigationEnd))
+            .pipe(map(() => this.route))
+            .pipe(map(route => {
                 while (route.firstChild) { route = route.firstChild; }
                 return route;
-            })
-            .filter(route => route.outlet === 'primary')
-            .mergeMap(route => route.data)
+            }))
+            .pipe(filter(route => route.outlet === 'primary'))
+            .pipe(mergeMap(route => route.data))
             .subscribe((event) => this.title = event['title']);
     }
 

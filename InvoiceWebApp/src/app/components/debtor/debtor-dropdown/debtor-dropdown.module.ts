@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { ToastyModule } from 'ng2-toasty';
+import { ToastyModule } from 'ngx-toasty';
 import { DebtorService } from '../../../shared/services/debtor.service';
 import { DebtorDropdownComponent } from './debtor-dropdown.component';
 

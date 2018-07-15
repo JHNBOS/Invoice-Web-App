@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastOptions, ToastyConfig, ToastyService } from 'ng2-toasty';
+import { ToastOptions, ToastyConfig, ToastyService } from 'ngx-toasty';
 import Invoice from '../../shared/models/invoice.model';
 import { InvoiceService } from '../../shared/services/invoice.service';
 import { DebtorService } from '../../shared/services/debtor.service';

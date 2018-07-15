@@ -1,11 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/share';
+import { catchError } from 'rxjs/operators';
 import User from '../models/user.model';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class UserService {
@@ -15,33 +12,33 @@ export class UserService {
     constructor(public http: HttpClient) { }
 
     getByEmail(email: string): Observable<User> {
-        return this.http.get(this.apiUrl + 'getByEmail?email=' + email)
-            .catch(this.handleError);
+        return this.http.get<User>(this.apiUrl + 'getByEmail?email=' + email)
+            .pipe(catchError(this.handleError));
     }
 
     getAll(): Observable<User[]> {
-        return this.http.get<any>(this.apiUrl + 'getAll')
-            .catch(this.handleError);
+        return this.http.get<User[]>(this.apiUrl + 'getAll')
+            .pipe(catchError(this.handleError));
     }
 
     checkCredentials(email: string, password: string): Observable<User> {
-        return this.http.get(this.apiUrl + 'authenticate?email=' + email + '&password=' + password)
-            .catch(this.handleError);
+        return this.http.get<User>(this.apiUrl + 'authenticate?email=' + email + '&password=' + password)
+            .pipe(catchError(this.handleError));
     }
 
     create(user: User): Observable<User> {
-        return this.http.post(this.apiUrl + 'create', user)
-            .catch(this.handleError);
+        return this.http.post<User>(this.apiUrl + 'create', user)
+            .pipe(catchError(this.handleError));
     }
 
     update(user: User): Observable<User> {
-        return this.http.put(this.apiUrl + 'update', user)
-            .catch(this.handleError);
+        return this.http.put<User>(this.apiUrl + 'update', user)
+            .pipe(catchError(this.handleError));
     }
 
     delete(email: string): Observable<boolean> {
-        return this.http.delete(this.apiUrl + 'delete?email=' + email)
-            .catch(this.handleError);
+        return this.http.delete<boolean>(this.apiUrl + 'delete?email=' + email)
+            .pipe(catchError(this.handleError));
     }
 
     upload(file: any, user: User): Observable<User> {
@@ -49,13 +46,13 @@ export class UserService {
         formData.append("file", file);
         formData.append("model", JSON.stringify(user));
 
-        return this.http.post(this.apiUrl + 'upload', formData)
-            .catch(this.handleError);
+        return this.http.post<User>(this.apiUrl + 'upload', formData)
+            .pipe(catchError(this.handleError));
     }
 
     resetPassword(email: string): Observable<any> {
         return this.http.get(this.apiUrl + 'resetPassword?email=' + email)
-            .catch(this.handleError);
+            .pipe(catchError(this.handleError));
     }
 
     private handleError(error: any) {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { ToastOptions, ToastyService } from 'ng2-toasty';
+import { ToastOptions, ToastyService } from 'ngx-toasty';
 import { UserService } from '../../../shared/services/user.service';
 
 @Component({

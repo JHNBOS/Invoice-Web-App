@@ -1,11 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/share';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import User from './models/user.model';
 
 @Injectable()
@@ -15,8 +12,8 @@ export class AuthenticationService {
     constructor(private http: HttpClient, private router: Router) { }
 
     login(email: string, password: string): Observable<User> {
-        return this.http.get(this.apiUrl + 'authenticate?email=' + email + '&password=' + password)
-            .catch(this.handleError);
+        return this.http.get<User>(this.apiUrl + 'authenticate?email=' + email + '&password=' + password)
+            .pipe(catchError(this.handleError));
     }
 
     logout() {
