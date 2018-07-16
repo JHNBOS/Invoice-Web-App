@@ -4,12 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json",
-    "build": "ng build --configuration=prod",
+    "start": "ng serve",
+    "build": "ng build",
+    "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "dev": "ng build"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -61,7 +61,7 @@
   },
   "-vs-binding": {
     "BeforeBuild": [
-      "dev"
+      "build"
     ]
   }
 }
