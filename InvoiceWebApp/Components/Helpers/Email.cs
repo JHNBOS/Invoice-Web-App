@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+
 using InvoiceWebApp.Components.Entities;
 
 namespace InvoiceWebApp.Components.Helpers
@@ -60,6 +61,30 @@ namespace InvoiceWebApp.Components.Helpers
                 IsBodyHtml = true,
                 Subject = "Invoice Panel - New Invoice",
                 Body = string.Format("Dear {0}. {1},<br /><br />A new invoice is awaiting your attention.<br /><br />Kind regards,<br /><br />Invoice Panel", debtor.FirstName[0], debtor.LastName)
+            })
+            {
+                await smtpClient.SendMailAsync(message);
+            }
+        }
+
+        public async Task SendCredentials(User user)
+        {
+            var smtpClient = new SmtpClient
+            {
+                Host = this.Host,
+                Port = this.Port,
+                EnableSsl = this.EnableSSL,
+                Credentials = this.Credentials
+            };
+
+            using (var message = new MailMessage(this.EmailAddress, user.Email)
+            {
+                IsBodyHtml = true,
+                Subject = "Invoice Panel - Credentials",
+                Body = string.Format("Dear {0}. {1},<br /><br />Below you will find your credentials. Please change after signing in."
+                + "<br /><br /><b>Username:<b/>" + user.Email
+                + "<br /><b>Password:<b/>" + user.Password
+                + "<br /><br />Kind regards,<br /><br />Invoice Panel", user.FirstName[0], user.LastName)
             })
             {
                 await smtpClient.SendMailAsync(message);
