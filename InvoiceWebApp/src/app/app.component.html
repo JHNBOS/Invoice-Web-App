@@ -62,11 +62,7 @@
     <ul class="nav nav-pills flex-column nav-bottom" *ngIf="isSignedIn && currentUser != null"></ul>
 </nav>
 
-<div class="container">
-    <div class="row">
-        <main>
-            <router-outlet (activate)="checkIfLoggedIn()"></router-outlet>
-            <ng2-toasty [position]="'bottom-right'"></ng2-toasty>
-        </main>
-    </div>
-</div>
+<main>
+    <router-outlet class="container-fluid" (activate)="checkIfLoggedIn()"></router-outlet>
+    <ng2-toasty [position]="'bottom-right'"></ng2-toasty>
+</main>

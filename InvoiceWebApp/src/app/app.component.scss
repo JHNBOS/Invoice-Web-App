@@ -102,9 +102,14 @@ main {
     top: $navbarHeight;
     bottom: 0;
     overflow-y: auto;
+    overflow-x: auto;
     width: $mainWidth;
-    height: 100%;
-    padding: 30px 15px 5px 15px;
+    height: calc(100vh - 80px);
+    padding: 20px 15px;
+}
+
+main .container-fluid {
+    height: 100% !important;
 }
 
 /* Sidebar */

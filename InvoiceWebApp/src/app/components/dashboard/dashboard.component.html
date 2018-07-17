@@ -1,12 +1,12 @@
-<h3 class="text-center">Welcome, {{ currentUser?.first_name }}</h3>
+<div class="row">
+    <div class="col-sm-12 col-md-10 col-lg-10 mx-auto">
+        <h3 class="text-center">Welcome, {{ currentUser?.first_name }}</h3>
+        <p class="lead text-center">
+            Currently, there {{ invoice_count == 1 ? 'is' : 'are' }}
+            <strong>
+                <i>{{ invoice_count }} unpaid {{ invoice_count == 1 ? 'invoice' : 'invoices' }}.</i>
+            </strong>
+        </p>
+    </div>
 
-<div class="col-sm-12 col-md-12 col-lg-10 offset-lg-1">
-    <p class="lead text-center">
-        Currently, there {{ invoice_count == 1 ? 'is' : 'are' }}
-        <strong>
-            <i>{{ invoice_count }} unpaid {{ invoice_count == 1 ? 'invoice' : 'invoices' }}.</i>
-        </strong>
-    </p>
-
-    <hr />
 </div>

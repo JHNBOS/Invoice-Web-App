@@ -1,26 +1,19 @@
-<div class="col-sm-12 col-md-12 col-lg-10 offset-lg-1">
-    <div class="form-horizontal">
-
-        <!-- User ID and email -->
-        <div class="form-row mb-2">
-            <div class="col-sm-12 col-md-8 offset-md-2 my-3">
+<div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 mx-auto">
+        <form>
+            <div class="form-group">
                 <label for="email">E-mail</label>
-                <input type="email" class="form-control" id="email" [(ngModel)]="email">
+                <input type="email" name="email" class="form-control" id="email" [(ngModel)]="email" autofocus>
             </div>
-            <div class="col-sm-12 col-md-8 offset-md-2 my-3">
+            <div class="form-group mt-4">
+                <a [routerLink]="['/forgot']" class="text-primary pull-right" title="Forgot your password?">Forgot password?</a>
+
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" [(ngModel)]="password">
+                <input type="password" name="password" class="form-control" id="password" [(ngModel)]="password">
             </div>
-            <div class="col-sm-12 col-md-8 offset-md-2 mt-4 text-center">
-                <input id="btnLogin" type="button" class="btn btn-primary mb-4 mx-auto" value="Sign In" (click)="checkCredentials()" />
 
-                <br />
-
-                <a href="#" [routerLink]="['/forgot']" class="text-primary mt-4" title="Forgot your password?">
-                    Forgot Password?
-                </a>
-            </div>
-        </div>
-
+            <button id="btnLogin" type="button" class="btn btn-primary mt-3 float-right" (click)="checkCredentials()">Sign In</button>
+        </form>
     </div>
+
 </div>
