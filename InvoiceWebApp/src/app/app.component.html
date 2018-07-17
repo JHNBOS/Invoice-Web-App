@@ -8,16 +8,16 @@
     <div class="collapse navbar-collapse" id="navBar" *ngIf="isSignedIn && currentUser != null">
         <ul class="navbar-nav mr-auto d-md-flex d-lg-none" id="mobileMenu">
             <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Home</a>
+                <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">Home</a>
             </li>
             <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" [hidden]="currentUser.role_id == 2">
-                <a [routerLink]="['/debtors']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Debtors</a>
+                <a [routerLink]="['/debtors']" routerLinkActive="active"class="nav-link">Debtors</a>
             </li>
             <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" [hidden]="currentUser.role_id == 2">
-                <a [routerLink]="['/invoices']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Invoices</a>
+                <a [routerLink]="['/invoices']" routerLinkActive="active" class="nav-link">Invoices</a>
             </li>
             <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                <a [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Users</a>
+                <a [routerLink]="['/users']" routerLinkActive="active" class="nav-link">Users</a>
             </li>
             <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                 <a class="nav-link sign-out" style="cursor: pointer;" (click)="signOut()" title="Sign Out">

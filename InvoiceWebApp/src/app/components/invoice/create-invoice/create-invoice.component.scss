@@ -1,4 +1,4 @@
-#btnSave {
+button.btn {
     width: 150px;
 }
 
@@ -19,16 +19,19 @@
 }
 
 .table thead th:nth-child(2) {
-    width: 30%;
+    width: 28%;
 }
 
 .table thead th:nth-child(3) {
-    width: 16%;
+    width: 15%;
 }
 
-.table thead th:nth-child(4), .table thead th:nth-child(5),
-.table thead th:nth-child(6) {
+.table thead th:nth-child(4), .table thead th:nth-child(5) {
     width: 9%;
+}
+
+.table thead th:nth-child(6) {
+    width: 12%;
 }
 
 .table thead th:nth-child(7) {

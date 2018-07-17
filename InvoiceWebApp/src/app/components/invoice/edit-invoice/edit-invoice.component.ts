@@ -53,8 +53,10 @@ export class EditInvoiceComponent implements OnInit {
         this.total = this.invoice.total - this.invoice.discount;
     }
 
-    submitForm() {
+    submitForm(concept: boolean) {
         this.invoice.total = this.total;
+        this.invoice.concept = concept;
+
         this.updateInvoice();
     }
 

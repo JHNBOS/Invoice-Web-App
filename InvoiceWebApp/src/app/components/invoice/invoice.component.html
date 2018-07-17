@@ -1,53 +1,53 @@
-<h3 class="text-center" *ngIf="invoices?.length == 0">No invoices.</h3>
+<div class="row">
+    <div class="col-sm-12 col-md-10 col-lg-10 mx-auto table-responsive">
+        <h3 class="text-center" *ngIf="invoices?.length == 0">No invoices.</h3>
 
-<div class="col-sm-12 col-md-12 col-lg-10 offset-lg-1 table-responsive">
-    <table class="table table-hover table-sm table-striped w-100" *ngIf="invoices?.length > 0">
-        <thead>
-            <tr>
-                <th class="pl-3">Expired On</th>
-                <th>Invoice Nr.</th>
-                <th>Total</th>
-                <th>Debtor</th>
-                <th>Paid</th>
-                <th>Concept</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let invoice of invoices">
-                <td class="text-muted py-2 pl-3">{{ invoice.expired_on | date: 'MMMM dd, yyyy' }}</td>
-                <td class="p-2">
-                    <a [routerLink]="['details', invoice.invoice_number]" title="View invoice details">
-                        {{ invoice.invoice_number }}
-                    </a>
-                </td>
-                <td class="p-2">
-                    {{ getLocaleString(invoice.total) }}
-                </td>
-                <td class="p-2">
-                    {{ invoice.debtor.id }} - <span *ngIf="invoice.debtor.company_name == null">{{ invoice.debtor.first_name }} {{ invoice.debtor.last_name }}</span> <span *ngIf="invoice.debtor.company_name != null">{{ invoice.debtor.company_name }}</span>
-                </td>
-                <td class="p-2">
-                    {{ invoice.is_paid == true ? 'Yes' : 'No' }}
-                </td>
-                <td class="p-2">
-                    {{ invoice.concept == true ? 'Yes' : 'No' }}
-                </td>
-                <td class="text-right py-2 pr-3">
-                    <button class="btn-edit" [routerLink]="['edit', invoice.invoice_number]" title="Edit">
-                        <i class="fa fa-edit"></i>
-                    </button>
-                    <button class="btn-delete" type="button" (click)="deleteInvoice(invoice.invoice_number)" title="Remove">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table table-hover table-sm table-striped w-100" *ngIf="invoices?.length > 0">
+            <thead>
+                <tr>
+                    <th class="pl-3">Expired On</th>
+                    <th>Invoice Nr.</th>
+                    <th>Total</th>
+                    <th>Debtor</th>
+                    <th>Paid</th>
+                    <th>Concept</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let invoice of invoices">
+                    <td class="text-muted py-2 pl-3">{{ invoice.expired_on | date: 'MMMM dd, yyyy' }}</td>
+                    <td class="p-2">
+                        <a [routerLink]="['details', invoice.invoice_number]" title="View invoice details">
+                            {{ invoice.invoice_number }}
+                        </a>
+                    </td>
+                    <td class="p-2">
+                        {{ getLocaleString(invoice.total) }}
+                    </td>
+                    <td class="p-2">
+                        {{ invoice.debtor.id }} - <span *ngIf="invoice.debtor.company_name == null">{{ invoice.debtor.first_name }} {{ invoice.debtor.last_name }}</span> <span *ngIf="invoice.debtor.company_name != null">{{ invoice.debtor.company_name }}</span>
+                    </td>
+                    <td class="p-2">
+                        {{ invoice.is_paid == true ? 'Yes' : 'No' }}
+                    </td>
+                    <td class="p-2">
+                        {{ invoice.concept == true ? 'Yes' : 'No' }}
+                    </td>
+                    <td class="text-right py-2 pr-3">
+                        <button class="btn-edit" [routerLink]="['edit', invoice.invoice_number]" title="Edit">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn-delete" type="button" (click)="deleteInvoice(invoice.invoice_number)" title="Remove">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <hr />
-
-    <a href="#" [routerLink]="['create']" class="btn btn-primary btn-sm mt-3" title="Create invoice">
-        <i class="fa fa-plus"></i>
-    </a>
+        <a [routerLink]="['create']" class="btn btn-primary btn-sm mt-3 mr-1" title="Create invoice">
+            <i class="fa fa-plus"></i>
+        </a>
+    </div>
 </div>

@@ -15,12 +15,12 @@
             <tbody>
                 <tr *ngFor="let debtor of debtors">
                     <td class="text-muted py-2 pl-3">
-                        <a [routerLink]="['details', debtor.id]" title="View debtor details">
+                        <a routerLinkActive="active" [routerLink]="['details', debtor.id]" title="View debtor details">
                             {{ debtor.id }}
                         </a>
                     </td>
                     <td class="p-2">
-                        <a [routerLink]="['details', debtor.id]" title="View debtor details">
+                        <a routerLinkActive="active" [routerLink]="['details', debtor.id]" title="View debtor details">
                             <span *ngIf="debtor.company_name == null">{{ debtor.first_name }} {{ debtor.last_name }}</span><span *ngIf="debtor.company_name != null">{{ debtor.company_name }}</span>
                         </a>
                     </td>
@@ -31,7 +31,7 @@
                         {{ debtor.address.city }}, {{ debtor.address.country }}
                     </td>
                     <td class="text-right py-2 pr-3">
-                        <button class="btn-edit" [routerLink]="['edit', debtor.id]" title="Edit">
+                        <button class="btn-edit" routerLinkActive="active" [routerLink]="['edit', debtor.id]" title="Edit">
                             <i class="fa fa-edit"></i>
                         </button>
                         <button class="btn-delete" type="button" (click)="deleteDebtor(debtor.id)" title="Remove">
@@ -42,18 +42,16 @@
             </tbody>
         </table>
 
-        <hr />
-
-        <a href="#" [routerLink]="['add', 'no']" class="btn btn-primary btn-sm mt-3 mr-1" title="Add private debtor">
+        <a routerLinkActive="active" [routerLink]="['add', 'no']" class="btn btn-primary btn-sm mt-3 mr-1" title="Add private debtor">
             <i class="fa fa-male"></i>
         </a>
-        <a href="#" [routerLink]="['add', 'yes']" class="btn btn-primary btn-sm mt-3" title="Add business debtor">
+        <a routerLinkActive="active" [routerLink]="['add', 'yes']" class="btn btn-primary btn-sm mt-3" title="Add business debtor">
             <i class="fa fa-building-o"></i>
         </a>
 
         <span class="btn btn-primary btn-sm mt-3 divider"></span>
 
-        <a href="#" [routerLink]="['import']" class="btn btn-primary btn-sm mt-3" title="Add debtors by CSV">
+        <a routerLinkActive="active" [routerLink]="['import']" class="btn btn-primary btn-sm mt-3" title="Add debtors by CSV">
             <i class="fa fa-file-excel-o"></i>
         </a>
     </div>
