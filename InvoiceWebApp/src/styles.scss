@@ -39,3 +39,20 @@ body {
 .return i {
     font-size: 24px;
 }
+
+h4.text-muted {
+    font-size: 1.3rem;
+    padding: 20px 0px;
+    position: relative;
+}
+
+h4.text-muted::after {
+    content: '';
+    background-color: #aaaaaa;
+    position: absolute;
+    left: 100px;
+    top: 57%;
+    opacity: .4;
+    width: calc(100% - 100px);
+    height: 2px;
+}

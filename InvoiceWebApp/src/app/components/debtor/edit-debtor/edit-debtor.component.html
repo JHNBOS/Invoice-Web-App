@@ -2,88 +2,106 @@
     <i class="fa fa-arrow-left"></i>
 </a>
 
-<div class="col-sm-12 col-md-12 col-lg-10 offset-lg-1">
-    <div class="form-horizontal" *ngIf="debtor && address">
-        <div class="form-row my-4">
-            <div class="col-sm-12 col-md-6">
-                <label for="id" *ngIf="debtor.company_name != null">Business Number</label>
-                <label for="id" *ngIf="debtor.company_name == null">Social Security Number</label>
-                <input type="text" class="form-control" id="id" [(ngModel)]="debtor.id" readonly>
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <label for="email">E-mail</label>
-                <input type="email" class="form-control" id="email" [(ngModel)]="debtor.email">
-            </div>
-        </div>
+<div class="row justify-content-around">
+    <div class="col-sm-12 col-md-10 col-lg-9 mx-auto table-responsive">
+        <form *ngIf="debtor && address">
 
-        <hr />
+            <h4 class="text-muted">{{ debtor.company_name != null ? 'Business Information' : 'Personal Information' }}</h4>
 
-        <ng-container *ngIf="debtor.company_name == null">
-            <div class="form-row my-4">
-                <div class="col-sm-12 col-md-6">
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName" [(ngModel)]="debtor.first_name">
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="id" *ngIf="debtor.company_name != null">Business Number</label>
+                    <label for="id" *ngIf="debtor.company_name == null">Social Security Number</label>
+                    <input type="text" name="id" class="form-control" id="id" [(ngModel)]="debtor.id" autofocus required />
                 </div>
-                <div class="col-sm-12 col-md-6">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" [(ngModel)]="debtor.last_name">
+                <div class="col-sm-6"></div>
+            </div>
+
+            <br />
+
+            <ng-container *ngIf="debtor.company_name == null">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="firstName">First Name</label>
+                        <input type="text" name="f_name" class="form-control" id="firstName" [(ngModel)]="debtor.first_name" />
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" name="l_name" class="form-control" id="lastName" [(ngModel)]="debtor.last_name" />
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="debtor.company_name != null">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="companyName">Company Name</label>
+                        <input type="text" name="company" class="form-control" id="companyName" [(ngModel)]="debtor.company_name" />
+                    </div>
+                    <div class="col-sm-6"></div>
+                </div>
+            </ng-container>
+
+            <br />
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" class="form-control" id="email" [(ngModel)]="debtor.email" />
+                </div>
+                <div class="col-sm-6">
+                    <label for="phone">Phone</label>
+                    <input type="tel" name="phone" class="form-control" id="phone" [(ngModel)]="debtor.phone" />
                 </div>
             </div>
-        </ng-container>
 
-        <ng-container *ngIf="debtor.company_name != null">
-            <div class="form-row my-4">
-                <div class="col-sm-12 col-md-6">
-                    <label for="companyName">Company Name</label>
-                    <input type="text" class="form-control" id="companyName" [(ngModel)]="debtor.company_name">
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="bank">Bank Account</label>
+                    <input type="text" name="bank" class="form-control" id="bank" [(ngModel)]="debtor.bank_account" required />
                 </div>
-                <div class="col-sm-12 col-md-6"></div>
+                <div class="col-sm-6"></div>
             </div>
-        </ng-container>
 
-        <div class="form-row my-4">
-            <div class="col-sm-12 col-md-6">
-                <label for="phone">Phone</label>
-                <input type="text" class="form-control" id="phone" [(ngModel)]="debtor.phone">
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <label for="bank">Bank Account</label>
-                <input type="text" class="form-control" id="bank" [(ngModel)]="debtor.bank_account">
-            </div>
-        </div>
+            <h4 class="text-muted">Address</h4>
 
-        <hr />
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="street">Street</label>
+                    <input type="text" name="street" class="form-control" id="street" [(ngModel)]="address.street" required />
+                </div>
+                <div class="col-sm-2">
+                    <label for="number">Number</label>
+                    <input type="number" name="num" class="form-control" min="1" id="number" [(ngModel)]="address.number" required />
+                </div>
+                <div class="col-sm-1">
+                    <label for="suffix">Suffix</label>
+                    <input type="text" name="suffix" class="form-control" id="suffix" [(ngModel)]="address.suffix">
+                </div>
+            </div>
 
-        <div class="form-row my-4">
-            <div class="col-sm-12 col-md-6">
-                <label for="street">Street</label>
-                <input type="text" class="form-control" id="street" [(ngModel)]="address.street">
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="postal">Postal Code</label>
+                    <input type="text" name="postal" class="form-control" id="postal" [(ngModel)]="address.postal_code" required />
+                </div>
+                <div class="col-sm-6">
+                    <label for="city">City</label>
+                    <input type="text" name="city" class="form-control" id="city" [(ngModel)]="address.city" required />
+                </div>
             </div>
-            <div class="col-sm-12 col-md-3">
-                <label for="number">Number</label>
-                <input type="number" class="form-control" id="number" [(ngModel)]="address.number">
-            </div>
-            <div class="col-sm-12 col-md-3">
-                <label for="suffix">Suffix</label>
-                <input type="text" class="form-control" id="suffix" [(ngModel)]="address.suffix">
-            </div>
-        </div>
 
-        <div class="form-row my-4">
-            <div class="col-sm-12 col-md-3">
-                <label for="postal">Postal Code</label>
-                <input type="text" class="form-control" id="postal" [(ngModel)]="address.postal_code">
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="country">Country</label>
+                    <input type="text" name="country" class="form-control" id="country" [(ngModel)]="address.country" required />
+                </div>
+                <div class="col-sm-6"></div>
             </div>
-            <div class="col-sm-12 col-md-5">
-                <label for="city">City</label>
-                <input type="text" class="form-control" id="city" [(ngModel)]="address.city">
-            </div>
-            <div class="col-sm-12 col-md-4">
-                <label for="country">Country</label>
-                <input type="text" class="form-control" id="country" [(ngModel)]="address.country">
-            </div>
-        </div>
 
-        <button id="btnSave" type="button" class="btn btn-primary float-right my-4" (click)="submitForm()">Save</button>
+            <br />
+
+            <button type="button" class="btn btn-primary float-right my-4" (click)="submitForm()">Save</button>
+        </form>
     </div>
 </div>
