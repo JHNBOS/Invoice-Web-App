@@ -41,18 +41,29 @@ body {
 }
 
 h4.text-muted {
-    font-size: 1.3rem;
-    padding: 20px 0px;
     position: relative;
+    text-align: left;
+    padding: 20px 0px;
 }
 
-h4.text-muted::after {
-    content: '';
-    background-color: #aaaaaa;
+h4.text-muted span {
+    background: rgb(230, 230, 230);
+    padding: 0 15px 0 0;
+    position: relative;
+    z-index: 1;
+}
+
+h4.text-muted::before {
+    background: #aaa;
+    opacity: .6;
+    content: "";
+    display: block;
+    height: 1px;
     position: absolute;
-    left: 100px;
-    top: 57%;
-    opacity: .4;
-    width: calc(100% - 100px);
-    height: 2px;
+    top: 50%;
+    width: 100%;
+}
+
+h4.text-muted::before {
+    left: 0;
 }

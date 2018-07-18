@@ -79,7 +79,7 @@ $mainWidth: calc(100vw - #{$sidebarWidth});
     left: 0;
 }
 
-#mobileMenu .nav-item .active {
+#mobileMenu .nav-item a.active {
     text-decoration: underline;
     font-weight: 600;
 }

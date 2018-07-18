@@ -8,16 +8,16 @@
     <div class="collapse navbar-collapse" id="navBar" *ngIf="isSignedIn && currentUser != null">
         <ul class="navbar-nav mr-auto d-md-flex d-lg-none" id="mobileMenu">
             <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">Home</a>
+                <a [routerLink]="['/']" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
             </li>
             <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" [hidden]="currentUser.role_id == 2">
-                <a [routerLink]="['/debtors']" routerLinkActive="active"class="nav-link">Debtors</a>
+                <a [routerLink]="['/debtors']" class="nav-link" routerLinkActive="active" >Debtors</a>
             </li>
             <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" [hidden]="currentUser.role_id == 2">
-                <a [routerLink]="['/invoices']" routerLinkActive="active" class="nav-link">Invoices</a>
+                <a [routerLink]="['/invoices']" class="nav-link" routerLinkActive="active" >Invoices</a>
             </li>
-            <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                <a [routerLink]="['/users']" routerLinkActive="active" class="nav-link">Users</a>
+            <li class="nav-item"data-toggle="collapse" data-target=".navbar-collapse.show">
+                <a [routerLink]="['/users']" class="nav-link" routerLinkActive="active" >Users</a>
             </li>
             <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                 <a class="nav-link sign-out" style="cursor: pointer;" (click)="signOut()" title="Sign Out">
@@ -27,8 +27,8 @@
         </ul>
 
         <ul class="navbar-nav d-none d-lg-flex" *ngIf="isSignedIn && currentUser != null">
-            <li class="nav-item">
-                <a [routerLink]="['/users/edit', currentUser.email]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#" title="{{currentUser.first_name}} {{currentUser.last_name}}">
+            <li class="nav-item" routerLinkActive="active">
+                <a [routerLink]="['/users/edit', currentUser.email]" class="nav-link" href="#" title="{{currentUser.first_name}} {{currentUser.last_name}}">
                     <img class="profile" [src]="_sanitizer.bypassSecurityTrustUrl(currentUser.picture)" />
                 </a>
             </li>
@@ -47,16 +47,16 @@
     </div>
     <ul class="nav nav-pills flex-column" *ngIf="isSignedIn && currentUser != null">
         <li class="nav-item">
-            <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Home</a>
+            <a [routerLink]="['/']" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
         </li>
         <li class="nav-item" [hidden]="currentUser.role_id == 2">
-            <a [routerLink]="['/debtors']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Debtors</a>
+            <a [routerLink]="['/debtors']" class="nav-link" routerLinkActive="active">Debtors</a>
         </li>
         <li class="nav-item" [hidden]="currentUser.role_id == 2">
-            <a [routerLink]="['/invoices']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Invoices</a>
+            <a [routerLink]="['/invoices']" class="nav-link" routerLinkActive="active">Invoices</a>
         </li>
-        <li class="nav-item">
-            <a [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" href="#">Users</a>
+        <li class="nav-item" [hidden]="currentUser.role_id == 2">
+            <a [routerLink]="['/users']" class="nav-link" routerLinkActive="active">Users</a>
         </li>
     </ul>
     <ul class="nav nav-pills flex-column nav-bottom" *ngIf="isSignedIn && currentUser != null"></ul>

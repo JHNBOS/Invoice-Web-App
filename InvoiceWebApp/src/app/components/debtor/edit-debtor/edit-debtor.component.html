@@ -6,7 +6,7 @@
     <div class="col-sm-12 col-md-10 col-lg-9 mx-auto table-responsive">
         <form *ngIf="debtor && address">
 
-            <h4 class="text-muted">{{ debtor.company_name != null ? 'Business Information' : 'Personal Information' }}</h4>
+            <h4 class="text-muted"><span>{{ debtor.company_name != null ? 'Business Information' : 'Personal Information' }}</span></h4>
 
             <div class="form-group row">
                 <div class="col-sm-6">
@@ -74,7 +74,7 @@
                     <label for="number">Number</label>
                     <input type="number" name="num" class="form-control" min="1" id="number" [(ngModel)]="address.number" required />
                 </div>
-                <div class="col-sm-1">
+                <div class="col-sm-2 col-md-1">
                     <label for="suffix">Suffix</label>
                     <input type="text" name="suffix" class="form-control" id="suffix" [(ngModel)]="address.suffix">
                 </div>
