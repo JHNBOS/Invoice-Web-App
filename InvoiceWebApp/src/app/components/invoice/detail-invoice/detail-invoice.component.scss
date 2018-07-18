@@ -48,3 +48,18 @@ a.btn {
 .checkbox label input[type="checkbox"]:disabled + .cr {
     opacity: .8;
 }
+
+@media (max-width: 992px) {
+    .row.form-group:last-child {
+        text-align: center !important;
+    }
+
+    a.btn {
+        width: 60%;
+        height: 50px;
+        float: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        line-height: 2;
+    }
+}

@@ -1,8 +1,8 @@
-<a class="return my-3" [routerLink]="['/users']" title="Return">
+<a class="return" [routerLink]="['/users']" title="Return">
     <i class="fa fa-arrow-left"></i>
 </a>
 
-<div class="row justify-content-around">
+<div class="row justify-content-around mt-3">
     <div class="col-sm-12 col-md-10 col-lg-9 mx-auto table-responsive">
         <form *ngIf="user && roles">
 
@@ -43,7 +43,13 @@
                 </div>
             </div>
 
-            <a class="btn btn-primary float-right my-4" [routerLink]="['../../edit', user.email]">Edit</a>
+            <br />
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <a class="btn btn-primary float-right my-4" [routerLink]="['../../edit', user.email]">Edit</a>
+                </div>
+            </div>
         </form>
     </div>
 </div>

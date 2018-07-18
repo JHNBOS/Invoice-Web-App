@@ -1,8 +1,8 @@
-<a class="return my-3" [routerLink]="['/invoices']" title="Return">
+<a class="return" [routerLink]="['/invoices']" title="Return">
     <i class="fa fa-arrow-left"></i>
 </a>
 
-<div class="row justify-content-around">
+<div class="row justify-content-around mt-3">
     <div class="col-sm-12 col-md-10 col-lg-10 mx-auto table-responsive">
         <form *ngIf="invoice">
 
@@ -114,8 +114,12 @@
 
             <br />
 
-            <button type="button" class="btn btn-primary float-right my-4" (click)="submitForm(false)">Save</button>
-            <button type="button" class="btn btn-primary float-right my-4 mr-1" (click)="submitForm(true)">Save as concept</button>
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-primary float-right my-4" (click)="submitForm(false)">Save</button>
+                    <button type="button" class="btn btn-primary float-right my-4 mr-1" (click)="submitForm(true)">Save as concept</button>
+                </div>
+            </div>
         </form>
     </div>
 </div>

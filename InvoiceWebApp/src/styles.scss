@@ -32,7 +32,7 @@ body {
 .return {
     cursor: pointer;
     position: absolute;
-    top: 0;
+    top: 3%;
     left: 5%;
 }
 
@@ -66,4 +66,11 @@ h4.text-muted::before {
 
 h4.text-muted::before {
     left: 0;
+}
+
+@media (max-width: 992px) {
+    .return {
+        top: 2%;
+        left: 3%;
+    }
 }
