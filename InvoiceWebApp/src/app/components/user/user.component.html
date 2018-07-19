@@ -2,7 +2,7 @@
     <div class="col-sm-12 col-md-10 col-lg-10 mx-auto table-responsive">
         <h3 class="text-center" *ngIf="users?.length == 0">No users.</h3>
 
-        <table class="table table-hover table-sm table-striped w-100" *ngIf="users?.length > 0">
+        <table class="table table-hover table-sm table-condensed table-striped w-100" *ngIf="users?.length > 0">
             <thead>
                 <tr>
                     <th class="pl-3">User</th>
@@ -12,17 +12,17 @@
             </thead>
             <tbody>
                 <tr *ngFor="let user of users">
-                    <td class="text-muted py-2 pl-3">
+                    <td class="text-muted py-2 pl-3" data-title="User">
                         <a [routerLink]="['details', user.email]" title="View user details">
                             {{ user.first_name }} {{ user.last_name }}
                         </a>
                     </td>
-                    <td class="p-2">
+                    <td class="p-2" data-title="Email">
                         <a [routerLink]="['details', user.email]" title="View user details">
                             {{ user.email }}
                         </a>
                     </td>
-                    <td class="text-right py-2 pr-3">
+                    <td class="text-right py-2 pr-3" data-title="">
                         <button class="btn-edit" [routerLink]="['edit', user.email]" title="Edit">
                             <i class="fa fa-edit"></i>
                         </button>
@@ -34,12 +34,16 @@
             </tbody>
         </table>
 
-        <a [routerLink]="['add']" class="btn btn-primary btn-sm mt-3 mr-1" title="Add user">
-            <i class="fa fa-plus"></i>
-        </a>
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <a [routerLink]="['add']" class="btn btn-primary mt-3 mr-1" title="Add user">
+                    <i class="fa fa-plus"></i><span>Add user</span>
+                </a>
 
-        <a [routerLink]="['import']" class="btn btn-primary btn-sm mt-3" title="Add users by CSV">
-            <i class="fa fa-file-excel-o"></i>
-        </a>
+                <a [routerLink]="['import']" class="btn btn-primary mt-3" title="Add users by CSV">
+                    <i class="fa fa-file-excel-o"></i><span>Import CSV</span>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
