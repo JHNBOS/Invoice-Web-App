@@ -32,6 +32,11 @@ a.btn > i {
 }
 
 @media (max-width: 992px) {
+    .table thead, .table tbody,
+    .table th, .table td, .table tr {
+        display: block;
+    }
+
     .form-group:last-child {
         text-align: center !important;
     }
@@ -45,7 +50,7 @@ a.btn > i {
         line-height: 2.5;
     }
 
-    a.btn.btn-primary:last-child {
+    a.btn.btn-primary {
         margin-bottom: 2.5rem;
     }
 
