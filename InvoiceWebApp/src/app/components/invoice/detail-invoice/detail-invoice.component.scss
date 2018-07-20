@@ -63,21 +63,6 @@ a.btn {
 }
 
 @media (max-width: 992px) {
-    .row.form-group:last-child {
-        text-align: center !important;
-    }
-
-    a.btn {
-        width: 60%;
-        height: 50px;
-        float: none !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        line-height: 2;
-    }
-}
-
-@media (max-width: 992px) {
     .table thead, .table tbody,
     .table th, .table td, .table tr {
         display: block;
@@ -90,6 +75,10 @@ a.btn {
         margin-left: auto !important;
         margin-right: auto !important;
         line-height: 2.5;
+    }
+
+    a.btn.btn-primary:last-child {
+        margin-bottom: 2.5rem;
     }
 
     .form-group:last-child {

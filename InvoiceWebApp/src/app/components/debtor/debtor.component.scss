@@ -75,6 +75,10 @@
         line-height: 2.5;
     }
 
+    a.btn.btn-primary:last-child {
+        margin-bottom: 2.5rem;
+    }
+
     span.btn {
         display: none;
     }
