@@ -13,6 +13,10 @@ button.btn {
         float: none !important;
         margin-left: auto !important;
         margin-right: auto !important;
-        line-height: 2;
+        line-height: 2.5;
+    }
+
+    button.btn.btn-primary:last-child {
+        margin-bottom: 2.5rem;
     }
 }
