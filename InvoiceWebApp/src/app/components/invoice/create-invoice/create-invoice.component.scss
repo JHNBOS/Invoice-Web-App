@@ -2,65 +2,6 @@ button.btn {
     width: 150px;
 }
 
-.table thead {
-    background: dodgerblue;
-    border: 2px solid dodgerblue;
-    color: #fff;
-}
-
-.table thead th {
-    padding-left: 8px;
-    padding-right: 8px;
-    border: none;
-}
-
-.table thead th:nth-child(1) {
-    width: 25%;
-}
-
-.table thead th:nth-child(2) {
-    width: 28%;
-}
-
-.table thead th:nth-child(3) {
-    width: 15%;
-}
-
-.table thead th:nth-child(4), .table thead th:nth-child(5) {
-    width: 9%;
-}
-
-.table thead th:nth-child(6) {
-    width: 12%;
-}
-
-.table thead th:nth-child(7) {
-    width: 2%;
-    vertical-align: middle;
-    text-align: right;
-}
-
-.table tbody tr td {
-    padding: 0.2rem;
-}
-
-.table tbody tr.table-row {
-    background-color: #e6e6e6;
-}
-
-.table tbody tr td:nth-child(1) {
-    padding: 0.2rem 0.2rem 0.2rem 0rem;
-}
-
-.table tbody tr td:nth-child(6) {
-    line-height: 2rem;
-}
-
-.table tbody tr td:nth-child(7) {
-    text-align: center;
-    padding: 0.2rem 1rem 0.2rem 0.2rem;
-}
-
 a.btn > i {
     color: #fff;
 }
@@ -91,7 +32,7 @@ a.btn > i {
 }
 
 @media (max-width: 992px) {
-    .row.form-group:last-child {
+    .form-group:last-child {
         text-align: center !important;
     }
 
