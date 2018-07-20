@@ -43,7 +43,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">&euro;</span>
                         </div>
-                        <input name="total" class="form-control" id="total" [(ngModel)]="total" (blur)="calculateTotal()" currencyMask />
+                        <input name="total" class="form-control" id="total" [(ngModel)]="total" readonly currencyMask />
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -83,7 +83,7 @@
                                     <input type="text" name="price" class="form-control form-control-sm" [ngModel]="row.price | number: '1.2-2'" (ngModelChange)="row.price=$event" readonly />
                                 </td>
                                 <td data-title="Quantity">
-                                    <input type="number" name="qnt" class="form-control form-control-sm" [(ngModel)]="row.quantity" min="1" (change)="calculatePrice(row)" (blur)="calculatePrice(row)" readonly />
+                                    <input type="number" name="qnt" class="form-control form-control-sm" [(ngModel)]="row.quantity" min="1" readonly />
                                 </td>
                                 <td data-title="Tax">
                                     <input type="number" name="tax" class="form-control form-control-sm" [(ngModel)]="row.tax" min="0" readonly />

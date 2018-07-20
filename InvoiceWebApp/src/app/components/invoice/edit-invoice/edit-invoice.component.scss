@@ -81,7 +81,8 @@ button.btn {
         line-height: 2.5;
     }
 
-    a.btn.btn-primary {
+    button.btn.btn-primary:last-child {
+        margin-top: 1.5rem;
         margin-bottom: 2.5rem;
     }
 
