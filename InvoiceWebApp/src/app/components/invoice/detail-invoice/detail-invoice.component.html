@@ -76,19 +76,19 @@
                                 <td data-title="Name">
                                     <input type="text" name="p_name" class="form-control form-control-sm" [(ngModel)]="row.name" readonly />
                                 </td>
-                                <td data-title="Desc.">
+                                <td data-title="Desc">
                                     <input type="text" name="desc" class="form-control form-control-sm" [(ngModel)]="row.description" readonly />
                                 </td>
                                 <td data-title="Price">
                                     <input type="text" name="price" class="form-control form-control-sm" [ngModel]="row.price | number: '1.2-2'" (ngModelChange)="row.price=$event" readonly />
                                 </td>
                                 <td data-title="Quantity">
-                                    <input type="number" name="qnt" class="form-control form-control-sm" [(ngModel)]="row.quantity" min="1" (change)="calculatePrice(row)" (blur)="calculatePrice(row)" readonly />
+                                    <input type="number" name="qnt" class="form-control form-control-sm" [(ngModel)]="row.quantity" min="1" readonly />
                                 </td>
                                 <td data-title="Tax">
                                     <input type="number" name="tax" class="form-control form-control-sm" [(ngModel)]="row.tax" min="0" readonly />
                                 </td>
-                                <td style="line-height:2;" data-title="">
+                                <td style="line-height:2;" data-title="Total">
                                     <span style="font-weight: 500;">
                                         &euro; {{ row.price * row.quantity | number: '1.2-2' }}
                                     </span>

@@ -54,7 +54,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-12">
-                    <table class="table table-sm table-striped w-100">
+                    <table class="table table-sm table-striped">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -68,27 +68,27 @@
                         </thead>
                         <tbody>
                             <tr class="table-row" *ngFor="let row of invoice.items;let i = index">
-                                <td>
+                                <td data-title="Name">
                                     <input type="text" name="p_name" class="form-control form-control-sm" [(ngModel)]="row.name" required />
                                 </td>
-                                <td>
+                                <td data-title="Desc">
                                     <input type="text" name="desc" class="form-control form-control-sm" [(ngModel)]="row.description" />
                                 </td>
-                                <td>
+                                <td data-title="Price">
                                     <input name="price" class="form-control form-control-sm" [(ngModel)]="row.price" (change)="calculatePrice(row)" (blur)="calculatePrice(row)" currencyMask />
                                 </td>
-                                <td>
+                                <td data-title="Quantity">
                                     <input type="number" name="qnt" class="form-control form-control-sm" [(ngModel)]="row.quantity" min="1" (change)="calculatePrice(row)" (blur)="calculatePrice(row)" required />
                                 </td>
-                                <td>
+                                <td data-title="Tax">
                                     <input type="number" name="tax" class="form-control form-control-sm" [(ngModel)]="row.tax" min="0" required />
                                 </td>
-                                <td>
+                                <td data-title="Total">
                                     <span style="font-weight: 500;">
                                         &euro; {{ row.total | number:'1.2-2' }}
                                     </span>
                                 </td>
-                                <td>
+                                <td data-title="">
                                     <a *ngIf="i >= 1" class="btn-delete" (click)="deleteRow(row)" title="Remove">
                                         <i class="fa fa-trash"></i>
                                     </a>
@@ -116,8 +116,8 @@
 
             <div class="form-group row">
                 <div class="col-sm-12">
-                    <button type="button" class="btn btn-primary float-right my-4" (click)="submitForm(false)">Save</button>
-                    <button type="button" class="btn btn-primary float-right my-4 mr-1" (click)="submitForm(true)">Save as concept</button>
+                    <button type="button" class="btn btn-primary float-right" (click)="submitForm(false)">Save</button>
+                    <button type="button" class="btn btn-primary float-right mr-1" (click)="submitForm(true)">Save as concept</button>
                 </div>
             </div>
         </form>

@@ -73,4 +73,13 @@ h4.text-muted::before {
         top: 2%;
         left: 3%;
     }
+
+    a.btn.btn-primary {
+        width: 60%;
+        height: 50px !important;
+        float: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        line-height: 2.5;
+    }
 }
