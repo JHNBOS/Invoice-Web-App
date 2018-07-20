@@ -58,8 +58,8 @@
             </div>
 
             <div class="form-group row">
-                <div class="col-sm-12">
-                    <table class="table table-sm table-striped w-100">
+                <div class="col-sm-12 table-responsive">
+                    <table class="table table-sm table-condensed table-striped">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -73,22 +73,22 @@
                         </thead>
                         <tbody>
                             <tr class="table-row" *ngFor="let row of invoice.items;let i = index">
-                                <td>
+                                <td data-title="Name">
                                     <input type="text" name="p_name" class="form-control form-control-sm" [(ngModel)]="row.name" readonly />
                                 </td>
-                                <td>
+                                <td data-title="Desc.">
                                     <input type="text" name="desc" class="form-control form-control-sm" [(ngModel)]="row.description" readonly />
                                 </td>
-                                <td>
+                                <td data-title="Price">
                                     <input type="text" name="price" class="form-control form-control-sm" [ngModel]="row.price | number: '1.2-2'" (ngModelChange)="row.price=$event" readonly />
                                 </td>
-                                <td>
+                                <td data-title="Quantity">
                                     <input type="number" name="qnt" class="form-control form-control-sm" [(ngModel)]="row.quantity" min="1" (change)="calculatePrice(row)" (blur)="calculatePrice(row)" readonly />
                                 </td>
-                                <td>
+                                <td data-title="Tax">
                                     <input type="number" name="tax" class="form-control form-control-sm" [(ngModel)]="row.tax" min="0" readonly />
                                 </td>
-                                <td style="line-height:2;">
+                                <td style="line-height:2;" data-title="">
                                     <span style="font-weight: 500;">
                                         &euro; {{ row.price * row.quantity | number: '1.2-2' }}
                                     </span>
