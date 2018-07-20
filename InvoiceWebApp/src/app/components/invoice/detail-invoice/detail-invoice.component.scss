@@ -102,6 +102,10 @@ a.btn {
         }
     }
 
+    .table {
+        margin-top: 1rem;
+    }
+
     .table thead tr {
         position: absolute;
         top: -9999px;
@@ -118,6 +122,10 @@ a.btn {
         border-bottom: 1px solid #eee;
         position: relative;
         white-space: normal;
+        text-align: right;
+    }
+
+    .table tbody td > input {
         text-align: right;
     }
 
