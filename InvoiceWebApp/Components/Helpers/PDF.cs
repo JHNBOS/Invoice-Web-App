@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using InvoiceWebApp.Components.DataContext;
 using InvoiceWebApp.Components.Entities;
@@ -422,12 +423,16 @@ namespace InvoiceWebApp.Components.Helpers
 
         private bool CheckOS()
         {
-            string windir = Environment.GetEnvironmentVariable("windir");
-            if (!string.IsNullOrEmpty(windir) && windir.Contains(@"\") && Directory.Exists(windir))
+            var result = false;
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                return true;
+                result = true;
+            } else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                result = false;
             }
-            return false;
+
+            return result;
         }
     }
 }
