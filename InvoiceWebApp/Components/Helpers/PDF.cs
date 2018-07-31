@@ -71,7 +71,7 @@ namespace InvoiceWebApp.Components.Helpers
 
         private Document InitDocument()
         {
-            Document doc = new Document(PageSize.A4, 40, 40, 40, 40);
+            Document doc = new Document(PageSize.A4);
             doc.AddTitle("Hello World example");
             doc.AddSubject(String.Format("This invoice belongs to {0}. {1}", debtor.FirstName[0], debtor.LastName));
             doc.AddKeywords("Invoice, Payment");
