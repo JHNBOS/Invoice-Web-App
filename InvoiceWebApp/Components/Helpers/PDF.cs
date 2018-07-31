@@ -62,7 +62,7 @@ namespace InvoiceWebApp.Components.Helpers
             cb.BeginText();
             cb.SetFontAndSize(bf, 18);
 
-            cb.SetTextMatrix(100, 400);
+            cb.SetTextMatrix(700, 10);
             cb.ShowText("Invoice Panel");
 
             cb.EndText();
