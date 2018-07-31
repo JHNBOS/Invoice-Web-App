@@ -61,7 +61,7 @@ namespace InvoiceWebApp.Components.Helpers
             BaseFont title = BaseFont.CreateFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
 
             cb.BeginText();
-            cb.SetFontAndSize(title, 22);
+            cb.SetFontAndSize(title, 26);
 
             cb.SetTextMatrix(380, 800);
             cb.ShowText("Invoice Panel");
