@@ -43,6 +43,6 @@ export class InvoiceComponent implements OnInit {
     }
 
     openPDF(invoice: string) {
-        this.invoiceService.pdf(invoice).subscribe((response) => window.open(response, 'blank'));
+        window.open(this.invoiceService.pdf(invoice), '_blank');
     }
 }

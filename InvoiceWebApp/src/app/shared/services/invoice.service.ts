@@ -36,9 +36,8 @@ export class InvoiceService {
             .pipe(catchError(error => throwError(error)));
     }
 
-    pdf(invoice: string): Observable<any> {
-        return this.http.get<any>(this.apiUrl + 'pdf?invoice=' + invoice)
-            .pipe(map(res => res.blob()) ,catchError(error => throwError(error)));
+    pdf(invoice: string): string {
+        return this.apiUrl + 'pdf?invoice=' + invoice;
     }
 
     create(invoice: Invoice): Observable<Invoice> {
