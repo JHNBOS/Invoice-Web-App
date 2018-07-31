@@ -13,15 +13,19 @@ import { UserService } from '../../../shared/services/user.service';
 export class LoginComponent implements OnInit {
     email = '';
     password = '';
+    returnUrl: string;
 
     constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService,
-        private router: Router, private authenticationService: AuthenticationService) {}
+        private router: Router, private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
         this.titleService.setTitle('Sign In - Invoice Panel');
 
         // reset login status
         this.authenticationService.logout();
+
+        // get possible return url
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
     checkCredentials() {
@@ -29,7 +33,7 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 (response) => {
                     sessionStorage.setItem('signedInUser', JSON.stringify(response));
-                    this.router.navigate(['/']);
+                    this.router.navigateByUrl(this.returnUrl);
                 },
                 (error) => { throw (error); }
             );
