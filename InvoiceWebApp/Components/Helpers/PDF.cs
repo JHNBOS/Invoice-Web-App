@@ -59,7 +59,7 @@ namespace InvoiceWebApp.Components.Helpers
 
             ColumnText ct = new ColumnText(cb);
             Phrase companyName = new Phrase("Invoice Panel");
-            ct.SetSimpleColumn(companyName, 630, 100, 730, 200, 15, Element.ALIGN_LEFT);
+            ct.SetSimpleColumn(companyName, 0, 0, 100, 100, 15, Element.ALIGN_LEFT);
             ct.Go();
 
             //--------------------- CONTENT -----------------------------//
