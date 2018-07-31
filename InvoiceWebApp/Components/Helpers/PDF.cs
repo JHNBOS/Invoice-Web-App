@@ -51,9 +51,9 @@ namespace InvoiceWebApp.Components.Helpers
             var doc = this.InitDocument();
             MemoryStream ms = new MemoryStream();
             PdfWriter writer = PdfWriter.GetInstance(doc, ms);
-            PdfContentByte cb = writer.DirectContent;
 
             doc.Open();
+            PdfContentByte cb = writer.DirectContent;
 
             //--------------------- CONTENT -----------------------------// // 2480 X 3508
 
