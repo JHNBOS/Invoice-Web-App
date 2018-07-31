@@ -55,14 +55,14 @@ namespace InvoiceWebApp.Components.Helpers
             doc.Open();
             PdfContentByte cb = writer.DirectContent;
 
-            //--------------------- CONTENT -----------------------------//
+            //--------------------- CONTENT -----------------------------// 595 x 842
 
             BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
 
             cb.BeginText();
             cb.SetFontAndSize(bf, 18);
 
-            cb.SetTextMatrix(700, 10);
+            cb.SetTextMatrix(500, 10);
             cb.ShowText("Invoice Panel");
 
             cb.EndText();
