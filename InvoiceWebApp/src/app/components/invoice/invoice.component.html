@@ -35,7 +35,7 @@
                         {{ invoice.concept == true ? 'Yes' : 'No' }}
                     </td>
                     <td class="text-right py-2 pr-3" date-title="">
-                        <a href="{{openPDF(invoice.invoice_number)}}" target="_blank" class="btn-download" title="Open PDF">
+                        <a href="http://invoice.jhnbos.nl:90/api/invoices/pdf?invoice={{invoice.invoice_number}}" target="_blank" class="btn-download" title="Open PDF">
                             <i class="fa fa-download"></i>
                         </a>
                         <button class="btn-edit" [routerLink]="['edit', invoice.invoice_number]" title="Edit">

@@ -279,7 +279,7 @@ namespace ShareListAPI.Controllers
                 FileDownloadName = String.Format("Invoice_{0}.pdf", invoice)
             };
 
-            return Ok(result);
+            return result;
         }
 
         /// <summary>
