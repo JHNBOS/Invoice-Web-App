@@ -55,11 +55,11 @@ namespace InvoiceWebApp.Components.Helpers
             doc.Open();
             PdfContentByte cb = writer.DirectContent;
 
-            //--------------------- CONTENT -----------------------------// // 2480 X 3508
+            //--------------------- CONTENT -----------------------------// // 794 x 1122
 
             ColumnText ct = new ColumnText(cb);
             Phrase companyName = new Phrase("Invoice Panel");
-            ct.SetSimpleColumn(companyName, 2340, 100, 2440, 200, 15, Element.ALIGN_LEFT);
+            ct.SetSimpleColumn(companyName, 630, 100, 730, 200, 15, Element.ALIGN_LEFT);
             ct.Go();
 
             //--------------------- CONTENT -----------------------------//
@@ -71,7 +71,7 @@ namespace InvoiceWebApp.Components.Helpers
 
         private Document InitDocument()
         {
-            Document doc = new Document(PageSize.A4);
+            Document doc = new Document(PageSize.A4, 40, 40, 40, 40);
             doc.AddTitle("Hello World example");
             doc.AddSubject(String.Format("This invoice belongs to {0}. {1}", debtor.FirstName[0], debtor.LastName));
             doc.AddKeywords("Invoice, Payment");

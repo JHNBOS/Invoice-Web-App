@@ -36,10 +36,6 @@ export class InvoiceService {
             .pipe(catchError(error => throwError(error)));
     }
 
-    pdf(invoice: string): string {
-        return this.apiUrl + 'pdf?invoice=' + invoice;
-    }
-
     create(invoice: Invoice): Observable<Invoice> {
         return this.http.post<Invoice>(this.apiUrl + 'create', invoice)
             .pipe(catchError(error => throwError(error)));
