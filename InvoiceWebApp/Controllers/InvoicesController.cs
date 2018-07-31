@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 
 using InvoiceWebApp.Components.Entities;
@@ -268,13 +267,19 @@ namespace ShareListAPI.Controllers
             }
 
             //Get pdf
-            var result = await _pdf.CreatePDF(invoice);
-            if (result == null)
+            var data = await _pdf.CreatePDF(invoice);
+            if (data == null)
             {
                 return StatusCode(500, "Could not generate PDF of requested invoice.");
             }
 
-            return result;
+            HttpContext.Response.ContentType = "application/pdf";
+            FileContentResult result = new FileContentResult(data, "application/pdf")
+            {
+                FileDownloadName = String.Format("Invoice_{0}", invoice)
+            };
+
+            return Ok(result);
         }
 
         /// <summary>
