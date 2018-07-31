@@ -257,7 +257,7 @@ namespace ShareListAPI.Controllers
         /// </summary>
         /// <param name="invoice">Number of invoice</param>
         [HttpGet("pdf")]
-        [ProducesResponseType(typeof(File), 200)]
+        [ProducesResponseType(typeof(FileResult), 200)]
         [ProducesResponseType(typeof(void), 400)]
         [ProducesResponseType(typeof(void), 500)]
         public async Task<IActionResult> PDF(string invoice)
@@ -274,7 +274,7 @@ namespace ShareListAPI.Controllers
                 return StatusCode(500, "Could not generate PDF of requested invoice.");
             }
 
-            return Ok(result);
+            return result;
         }
 
         /// <summary>

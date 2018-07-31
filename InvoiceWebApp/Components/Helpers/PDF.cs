@@ -23,7 +23,7 @@ namespace InvoiceWebApp.Components.Helpers
             _context = new InvoiceContext();
         }
 
-        public async Task<IActionResult> CreatePDF(string id)
+        public async Task<FileResult> CreatePDF(string id)
         {
 
             //Variables
