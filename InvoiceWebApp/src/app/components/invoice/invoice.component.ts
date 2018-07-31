@@ -41,8 +41,4 @@ export class InvoiceComponent implements OnInit {
     getLocaleString(total: number): string {
         return total.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR' });
     }
-
-    openPDF(invoice: string): string {
-        return this.invoiceService.pdf(invoice);
-    }
 }
