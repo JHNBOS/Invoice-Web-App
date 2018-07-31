@@ -404,17 +404,30 @@ namespace InvoiceWebApp.Components.Helpers
                 + "</table>"
                 + "</div>";
 
+            //Check OS
+            var isWindows = this.CheckOS();
+
             //Full HTML string
             string htmlContent = cssString + companyString + debtorString + spacerString
                 + invoiceString + productString + tableString + totalString + disclaimerString;
 
-            var wkhtmltopdf = new FileInfo(@"wkhtmltox\bin\wkhtmltopdf.exe");
+            var wkhtmltopdf = isWindows == true ? new FileInfo(@"wkhtmltox_win\bin\wkhtmltopdf.exe") : new FileInfo(@"wkhtmltox_linux\bin\wkhtmltopdf");
             var converter = new HtmlToPdfConverter(wkhtmltopdf);
             var pdfBytes = converter.ConvertToPdf(htmlContent);
 
             FileResult fileResult = new FileContentResult(pdfBytes, "application/pdf");
             fileResult.FileDownloadName = "invoice_" + id + ".pdf";
             return fileResult;
+        }
+
+        private bool CheckOS()
+        {
+            string windir = Environment.GetEnvironmentVariable("windir");
+            if (!string.IsNullOrEmpty(windir) && windir.Contains(@"\") && Directory.Exists(windir))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
