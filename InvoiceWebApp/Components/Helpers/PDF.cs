@@ -26,7 +26,7 @@ namespace InvoiceWebApp.Components.Helpers
             _context = new InvoiceContext();
         }
 
-        private async Task GetData()
+        private async Task GetData(string id)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace InvoiceWebApp.Components.Helpers
 
         public async Task<byte[]> CreatePDF(string id)
         {
-            await this.GetData();
+            await this.GetData(id);
 
             var invoiceNumber = invoice.InvoiceNumber.ToString();
 
