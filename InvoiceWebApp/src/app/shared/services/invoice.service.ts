@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import Invoice from '../models/invoice.model';
 
 @Injectable()
@@ -34,6 +34,11 @@ export class InvoiceService {
     getAll(): Observable<Invoice[]> {
         return this.http.get<Invoice[]>(this.apiUrl + 'getAll')
             .pipe(catchError(error => throwError(error)));
+    }
+
+    pdf(invoice: string): Observable<any> {
+        return this.http.get<any>(this.apiUrl + 'pdf?invoice=' + invoice)
+            .pipe(map(res => res.blob()) ,catchError(error => throwError(error)));
     }
 
     create(invoice: Invoice): Observable<Invoice> {

@@ -22,6 +22,18 @@
     cursor: pointer;
 }
 
+.btn-download {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    color: #8dff8d;
+}
+
+.btn-download:hover {
+    color: #75f975;
+    cursor: pointer;
+}
+
 .table thead {
     background: dodgerblue;
     border: 2px solid dodgerblue;

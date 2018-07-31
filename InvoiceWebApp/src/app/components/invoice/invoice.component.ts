@@ -29,9 +29,9 @@ export class InvoiceComponent implements OnInit {
         );
     }
 
-    deleteInvoice(id: string) {
+    deleteInvoice(invoice: string) {
         if (confirm('Are you sure you want to delete this invoice?')) {
-            this.invoiceService.delete(id).subscribe(
+            this.invoiceService.delete(invoice).subscribe(
                 (response) => this.ngOnInit(),
                 (error) => { throw error; }
             );
@@ -40,5 +40,9 @@ export class InvoiceComponent implements OnInit {
 
     getLocaleString(total: number): string {
         return total.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR' });
+    }
+
+    openPDF(invoice: string) {
+        this.invoiceService.pdf(invoice).subscribe((response) => window.open(response, 'blank'));
     }
 }

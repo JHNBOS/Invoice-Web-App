@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 using InvoiceWebApp.Components.Entities;
@@ -20,11 +21,13 @@ namespace ShareListAPI.Controllers
     {
         private IInvoiceRepository _repo;
         private Email _email;
+        private PDF _pdf;
 
         public InvoicesController()
         {
             this._repo = new InvoiceRepository();
             this._email = new Email();
+            this._pdf = new PDF();
         }
 
         /// <summary>
@@ -244,6 +247,31 @@ namespace ShareListAPI.Controllers
                 };
 
                 result.Add(invoiceModel);
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Returns a pdf of invoice.
+        /// </summary>
+        /// <param name="invoice">Number of invoice</param>
+        [HttpGet("pdf")]
+        [ProducesResponseType(typeof(File), 200)]
+        [ProducesResponseType(typeof(void), 400)]
+        [ProducesResponseType(typeof(void), 500)]
+        public async Task<IActionResult> PDF(string invoice)
+        {
+            if (String.IsNullOrEmpty(invoice))
+            {
+                return StatusCode(400, "Invalid parameter(s).");
+            }
+
+            //Get pdf
+            var result = await _pdf.CreatePDF(invoice);
+            if (result == null)
+            {
+                return StatusCode(500, "Could not generate PDF of requested invoice.");
             }
 
             return Ok(result);
