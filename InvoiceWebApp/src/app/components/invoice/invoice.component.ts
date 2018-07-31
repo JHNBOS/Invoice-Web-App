@@ -42,7 +42,7 @@ export class InvoiceComponent implements OnInit {
         return total.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR' });
     }
 
-    openPDF(invoice: string) {
-        window.open(this.invoiceService.pdf(invoice), '_blank');
+    openPDF(invoice: string): string {
+        return this.invoiceService.pdf(invoice);
     }
 }
