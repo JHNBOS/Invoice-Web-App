@@ -276,7 +276,7 @@ namespace ShareListAPI.Controllers
             HttpContext.Response.ContentType = "application/pdf";
             FileContentResult result = new FileContentResult(data, "application/pdf")
             {
-                FileDownloadName = String.Format("Invoice_{0}", invoice)
+                FileDownloadName = String.Format("Invoice_{0}.pdf", invoice)
             };
 
             return Ok(result);
