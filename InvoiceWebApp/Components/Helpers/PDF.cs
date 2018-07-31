@@ -57,10 +57,9 @@ namespace InvoiceWebApp.Components.Helpers
 
             //--------------------- CONTENT -----------------------------// // 794 x 1122
 
-            ColumnText ct = new ColumnText(cb);
-            Phrase companyName = new Phrase("Invoice Panel");
-            ct.SetSimpleColumn(companyName, 0, 0, 100, 100, 15, Element.ALIGN_LEFT);
-            ct.Go();
+            cb.BeginText();
+            cb.SetTextMatrix(100, 400);
+            cb.ShowText("Invoice Panel");
 
             //--------------------- CONTENT -----------------------------//
 
