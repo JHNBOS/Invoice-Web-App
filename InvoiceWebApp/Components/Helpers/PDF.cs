@@ -411,7 +411,7 @@ namespace InvoiceWebApp.Components.Helpers
             string htmlContent = cssString + companyString + debtorString + spacerString
                 + invoiceString + productString + tableString + totalString + disclaimerString;
 
-            var wkhtmltopdf = isWindows == true ? new FileInfo(@"wkhtmltox_win\bin\wkhtmltopdf.exe") : new FileInfo(@"wkhtmltox_linux\bin\wkhtmltopdf");
+            var wkhtmltopdf = isWindows == true ? new FileInfo(@"wkhtml\wkhtmltox_win\bin\wkhtmltopdf.exe") : new FileInfo(@"wkhtml\wkhtmltox_linux\bin\wkhtmltopdf");
             var converter = new HtmlToPdfConverter(wkhtmltopdf);
             var pdfBytes = converter.ConvertToPdf(htmlContent);
 
