@@ -278,6 +278,8 @@ namespace InvoiceWebApp.Components.DataContext
 
             modelBuilder.Entity<Settings>(entity =>
             {
+                entity.HasKey(e => e.Id);
+
                 entity.ToTable("settings");
 
                 entity.Property(e => e.ShowLogo)

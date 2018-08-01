@@ -6,6 +6,9 @@ namespace InvoiceWebApp.Controllers.ViewModels
 {
     public class SettingsViewModel
     {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
         [JsonProperty("company_name")]
         public string CompanyName { get; set; }
         [JsonProperty("website")]

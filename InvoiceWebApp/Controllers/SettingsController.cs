@@ -62,6 +62,7 @@ namespace InvoiceWebApp.Controllers
 
             Settings settings = new Settings
             {
+                Id = model.Id,
                 CompanyName = model.CompanyName,
                 Website = model.Website,
                 Phone = model.Phone,

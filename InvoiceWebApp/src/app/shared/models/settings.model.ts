@@ -1,4 +1,6 @@
 export default class Settings {
+    id: number = null;
+
     company_name: string = null;
     website: string = null;
     phone: string = null;
