@@ -1,7 +1,10 @@
+using System;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
+using InvoiceWebApp.Components.DataContext;
 using InvoiceWebApp.Components.Entities;
 
 namespace InvoiceWebApp.Components.Helpers
@@ -15,14 +18,25 @@ namespace InvoiceWebApp.Components.Helpers
         private string Password;
         private NetworkCredential Credentials;
 
+        private InvoiceContext _context;
+        private Settings Settings;
+
         public Email()
         {
-            this.EmailAddress = "bosbosjohan@gmail.com";
-            this.Password = "Rotterdam28";
-            this.Host = "smtp.gmail.com";
-            this.Port = 587;
+            _context = new InvoiceContext();
+            this.GetSettings();
+
+            this.EmailAddress = this.Settings.Email;
+            this.Password = this.Settings.Password;
+            this.Host = this.Settings.SMTP;
+            this.Port = this.Settings.Port;
             this.EnableSSL = true;
             this.Credentials = new NetworkCredential(this.EmailAddress, this.Password);
+        }
+
+        private void GetSettings()
+        {
+            this.Settings = this._context.Settings.FirstOrDefault();
         }
 
         public async Task SendPasswordResetEmail(string toEmail, string password)
@@ -38,7 +52,7 @@ namespace InvoiceWebApp.Components.Helpers
             using (var message = new MailMessage(this.EmailAddress, toEmail)
             {
                 IsBodyHtml = true,
-                Subject = "Invoice Panel - Password Reset",
+                Subject = String.Format("{0} - Password Reset", this.Settings.CompanyName),
                 Body = "Dear user,<br /><br />Beneath you will find your temporary password. When signed in, please change your password. <br /><br /><b>Password:<b/> " + password
             })
             {
@@ -59,7 +73,7 @@ namespace InvoiceWebApp.Components.Helpers
             using (var message = new MailMessage(this.EmailAddress, debtor.Email)
             {
                 IsBodyHtml = true,
-                Subject = "Invoice Panel - New Invoice",
+                Subject = String.Format("{0} - New Invoice", this.Settings.CompanyName),
                 Body = string.Format("Dear {0}. {1},<br /><br />A new invoice is awaiting your attention.<br /><br />Kind regards,<br /><br />Invoice Panel", debtor.FirstName[0], debtor.LastName)
             })
             {
@@ -80,7 +94,7 @@ namespace InvoiceWebApp.Components.Helpers
             using (var message = new MailMessage(this.EmailAddress, user.Email)
             {
                 IsBodyHtml = true,
-                Subject = "Invoice Panel - Credentials",
+                Subject = String.Format("{0} - Credentials", this.Settings.CompanyName),
                 Body = string.Format("Dear {0}. {1},<br /><br />Below you will find your credentials. Please change after signing in."
                 + "<br /><br /><b>Username:<b/>" + user.Email
                 + "<br /><b>Password:<b/>" + user.Password

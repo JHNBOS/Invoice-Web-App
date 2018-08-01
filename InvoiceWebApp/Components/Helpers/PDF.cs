@@ -7,23 +7,32 @@ using System.Threading.Tasks;
 
 using InvoiceWebApp.Components.DataContext;
 using InvoiceWebApp.Components.Entities;
+
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace InvoiceWebApp.Components.Helpers
 {
     public class PDF
     {
-        private InvoiceContext _context;
         private Invoice invoice = null;
         private Debtor debtor = null;
         private List<InvoiceItem> invoiceItems = null;
 
+        private InvoiceContext _context;
+        private Settings settings;
+
         public PDF()
         {
             _context = new InvoiceContext();
+            this.GetSettings();
+        }
+
+        private void GetSettings()
+        {
+            this.settings = this._context.Settings.FirstOrDefault();
         }
 
         private async Task GetData(string id)
@@ -64,7 +73,7 @@ namespace InvoiceWebApp.Components.Helpers
             cb.SetFontAndSize(title, 26);
 
             cb.SetTextMatrix(380, 800);
-            cb.ShowText("Invoice Panel");
+            cb.ShowText(this.settings.CompanyName);
 
             cb.EndText();
 
@@ -78,10 +87,9 @@ namespace InvoiceWebApp.Components.Helpers
         private Document InitDocument()
         {
             Document doc = new Document(PageSize.A4);
-            doc.AddTitle("Hello World example");
             doc.AddSubject(String.Format("This invoice belongs to {0}. {1}", debtor.FirstName[0], debtor.LastName));
             doc.AddKeywords("Invoice, Payment");
-            doc.AddCreator("Invoice Panel");
+            doc.AddCreator(this.settings.CompanyName);
 
             return doc;
         }
