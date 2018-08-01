@@ -17,7 +17,7 @@ using Microsoft.Extensions.Primitives;
 
 using Newtonsoft.Json;
 
-namespace ShareListAPI.Controllers
+namespace InvoiceWebApp.Controllers
 {
     [EnableCors("AllowAll")]
     [Produces("application/json")]

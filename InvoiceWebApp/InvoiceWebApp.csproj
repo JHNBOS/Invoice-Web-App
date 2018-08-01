@@ -12,8 +12,10 @@
 
   <ItemGroup>
     <None Remove="src\app\shared\models\role.model.ts" />
+    <None Remove="src\app\shared\models\settings.model.ts" />
     <None Remove="src\app\shared\services\invoice_item.service.ts" />
     <None Remove="src\app\shared\services\role.service.ts" />
+    <None Remove="src\app\shared\services\settings.service.ts" />
   </ItemGroup>
   
   <ItemGroup>
@@ -41,11 +43,13 @@
     <TypeScriptCompile Include="src\app\shared\models\address.model.ts" />
     <TypeScriptCompile Include="src\app\shared\models\debtor.model.ts" />
     <TypeScriptCompile Include="src\app\shared\models\invoice.model.ts" />
+    <TypeScriptCompile Include="src\app\shared\models\settings.model.ts" />
     <TypeScriptCompile Include="src\app\shared\models\role.model.ts" />
     <TypeScriptCompile Include="src\app\shared\models\user.model.ts" />
     <TypeScriptCompile Include="src\app\shared\authentication.service.ts" />
     <TypeScriptCompile Include="src\app\shared\services\invoice_item.service.ts" />
     <TypeScriptCompile Include="src\app\shared\services\role.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\services\settings.service.ts" />
     <TypeScriptCompile Include="src\app\shared\services\user.service.ts" />
     <TypeScriptCompile Include="src\app\shared\services\debtor.service.ts" />
     <TypeScriptCompile Include="src\app\shared\services\invoice.service.ts" />

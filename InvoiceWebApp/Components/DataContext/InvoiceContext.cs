@@ -22,6 +22,7 @@ namespace InvoiceWebApp.Components.DataContext
         public virtual DbSet<InvoiceItem> InvoiceItems { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Settings> Settings { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -273,6 +274,19 @@ namespace InvoiceWebApp.Components.DataContext
                 entity.Property(e => e.Role)
                     .HasColumnName("role")
                     .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<Settings>(entity =>
+            {
+                entity.ToTable("settings");
+
+                entity.Property(e => e.ShowLogo)
+                    .HasColumnName("show_logo")
+                    .HasColumnType("boolean");
+
+                entity.Property(e => e.ShowLogoInPDF)
+                    .HasColumnName("show_logo_in_pdf")
+                    .HasColumnType("boolean");
             });
         }
     }

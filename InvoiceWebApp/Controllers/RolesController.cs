@@ -9,7 +9,7 @@ using InvoiceWebApp.Controllers.ViewModels;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ShareListAPI.Controllers
+namespace InvoiceWebApp.Controllers
 {
     [EnableCors("AllowAll")]
     [Produces("application/json")]
