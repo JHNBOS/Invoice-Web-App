@@ -282,11 +282,98 @@ namespace InvoiceWebApp.Components.DataContext
 
                 entity.ToTable("settings");
 
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.CompanyName)
+                    .IsRequired()
+                    .HasColumnName("company_name")
+                    .HasMaxLength(300);
+
+                entity.Property(e => e.Website)
+                    .HasColumnName("website")
+                    .HasMaxLength(300);
+
+                entity.Property(e => e.Phone)
+                    .HasColumnName("phone")
+                    .HasMaxLength(40);
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasColumnName("email")
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasColumnName("password")
+                    .HasMaxLength(80);
+
+                entity.Property(e => e.SMTP)
+                    .IsRequired()
+                    .HasColumnName("smtp")
+                    .HasMaxLength(80);
+
+                entity.Property(e => e.Port)
+                .IsRequired()
+                    .HasColumnName("port")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.BankAccount)
+                    .IsRequired()
+                    .HasColumnName("bank_account")
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.Bank)
+                    .IsRequired()
+                    .HasColumnName("bank")
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.Address)
+                    .IsRequired()
+                    .HasColumnName("address")
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.PostalCode)
+                    .IsRequired()
+                    .HasColumnName("postal_code")
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.City)
+                    .IsRequired()
+                    .HasColumnName("city")
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.Country)
+                    .IsRequired()
+                    .HasColumnName("country")
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.BusinessNumber)
+                    .IsRequired()
+                    .HasColumnName("business_number")
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.VAT)
+                    .IsRequired()
+                    .HasColumnName("vat_number")
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.InvoicePrefix)
+                    .HasColumnName("invoice_prefix")
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.Logo)
+                    .HasColumnName("logo")
+                    .HasMaxLength(300);
+
                 entity.Property(e => e.ShowLogo)
+                    .IsRequired()
                     .HasColumnName("show_logo")
                     .HasColumnType("boolean");
 
                 entity.Property(e => e.ShowLogoInPDF)
+                    .IsRequired()
                     .HasColumnName("show_logo_in_pdf")
                     .HasColumnType("boolean");
             });
