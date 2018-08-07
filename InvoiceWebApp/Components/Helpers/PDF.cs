@@ -66,25 +66,36 @@ namespace InvoiceWebApp.Components.Helpers
 
             // Fonts
             BaseFont helvetica = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-            BaseFont title = BaseFont.CreateFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+            BaseFont helveticaBold = BaseFont.CreateFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
 
             // Company name/logo
-            cb.BeginText();
-            cb.SetFontAndSize(title, 26);
-            cb.SetTextMatrix(30, 785);
-            cb.ShowText(this.settings.CompanyName);
-            cb.EndText();
+            //cb.BeginText();
+            //cb.SetFontAndSize(helveticaBold, 26);
+            //cb.ShowTextAligned(Element.ALIGN_LEFT, settings.CompanyName, 30, 785, 0);
+            //cb.EndText();
 
             // Company info
             cb.BeginText();
+            cb.SetFontAndSize(helveticaBold, 12f);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, settings.CompanyName, 430, 795, 0);                               //795
             cb.SetFontAndSize(helvetica, 10f);
-            cb.ShowTextAligned(Element.ALIGN_LEFT, settings.Address, 430, 795, 0);
-            cb.ShowTextAligned(Element.ALIGN_LEFT, settings.PostalCode + ", " + settings.City, 430, 780, 0);
-            cb.ShowTextAligned(Element.ALIGN_LEFT, settings.Email, 430, 760, 0);
-            cb.ShowTextAligned(Element.ALIGN_LEFT, settings.Phone, 430, 745, 0);
-            cb.ShowTextAligned(Element.ALIGN_LEFT, "COC: " + settings.BusinessNumber, 430, 725, 0);
-            cb.ShowTextAligned(Element.ALIGN_LEFT, "VAT: " + settings.VAT, 430, 710, 0);
-            cb.ShowTextAligned(Element.ALIGN_LEFT, "IBAN: " + settings.BankAccount, 430, 695, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, settings.Address, 430, 780, 0);                                  //780
+            cb.ShowTextAligned(Element.ALIGN_LEFT, settings.PostalCode + ", " + settings.City, 430, 765, 0);        //765
+            cb.ShowTextAligned(Element.ALIGN_LEFT, settings.Email, 430, 745, 0);                                    //745
+            cb.ShowTextAligned(Element.ALIGN_LEFT, settings.Phone, 430, 730, 0);                                    //730
+            cb.ShowTextAligned(Element.ALIGN_LEFT, "COC: " + settings.BusinessNumber, 430, 710, 0);                 //710
+            cb.ShowTextAligned(Element.ALIGN_LEFT, "VAT: " + settings.VAT, 430, 695, 0);                            //695
+            cb.ShowTextAligned(Element.ALIGN_LEFT, "IBAN: " + settings.BankAccount, 430, 680, 0);                   //680
+            cb.EndText();
+
+            // Debtor name and address
+            var debtorAddress = debtor.Addresses.First().Address;
+
+            cb.BeginText();
+            cb.SetFontAndSize(helvetica, 10f);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, debtor.FirstName + " " + debtor.LastName, 55, 635, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, debtorAddress.Street + " " + debtorAddress.Number + debtorAddress.Suffix, 55, 620, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, debtorAddress.PostalCode + " " + debtorAddress.City, 55, 605, 0);
             cb.EndText();
 
             // Close and return pdf
