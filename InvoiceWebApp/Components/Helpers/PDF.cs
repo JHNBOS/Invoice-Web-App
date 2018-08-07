@@ -73,48 +73,56 @@ namespace InvoiceWebApp.Components.Helpers
             cb.BeginText();
             cb.SetFontAndSize(title, 26);
 
-            cb.SetTextMatrix(30, 800);
+            cb.SetTextMatrix(30, 785);
             cb.ShowText(this.settings.CompanyName);
 
             cb.EndText();
 
             // Company Info Line 1
-            cb.SetLineWidth(0.4f);
-            cb.SetRgbColorStroke(0, 100, 240);
-            cb.Rectangle(348, 810, 70, 0.4f);
-            cb.Rectangle(435, 810, 120, 0.4f);
-            cb.Stroke();
+            //cb.SetLineWidth(0.4f);
+            //cb.SetRgbColorStroke(0, 100, 240);
 
-            // -------------- Company Info ---------------------
-            // Address
+            //cb.Rectangle(385, 810, 40, 0.4f);
+            //cb.Rectangle(437, 810, 118, 0.4f);
+
+            //cb.Rectangle(385, 680, 40, 0.4f);
+            //cb.Rectangle(437, 680, 118, 0.4f);
+
+            //cb.Stroke();
+
             cb.BeginText();
             cb.SetFontAndSize(helvetica, 10f);
 
-            cb.ShowTextAligned(Element.ALIGN_RIGHT, "Address:", 415, 795, 0);
+            // -------------- Company Info ---------------------
 
-            cb.SetTextMatrix(375, 780);
-            cb.ShowText("");
-            
-            cb.SetTextMatrix(440, 795);
-            cb.ShowText(settings.Address);
-            cb.SetTextMatrix(440, 780);
-            cb.ShowText(settings.PostalCode + ", " + settings.City);
+            // Address
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "", 420, 795, 0);
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "", 420, 780, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, settings.Address, 430, 795, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, settings.PostalCode + ", " + settings.City, 430, 780, 0);
 
-            // VAT nr
-            //cb.SetTextMatrix(375, 760);
-            cb.ShowTextAligned(Element.ALIGN_RIGHT, "VAT nr:", 415, 760, 0);
+            // E-mail
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "", 430, 760, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, settings.Email, 430, 760, 0);
 
-            cb.SetTextMatrix(440, 760);
-            cb.ShowText(settings.VAT);
+            // Phone
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "", 430, 745, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, settings.Phone, 430, 745, 0);
 
             // Business nr
-            //cb.SetTextMatrix(358, 750);
-            cb.ShowTextAligned(Element.ALIGN_RIGHT, "Business nr:", 415, 745, 0);
+            //cb.ShowTextAligned(Element.ALIGN_RIGHT, "COC:", 420, 725, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, "COC: " + settings.BusinessNumber, 430, 725, 0);
 
-            cb.SetTextMatrix(440, 745);
-            cb.ShowText(settings.BusinessNumber);
+            // VAT nr
+            //cb.ShowTextAligned(Element.ALIGN_RIGHT, "VAT:", 420, 710, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, "VAT: " + settings.VAT, 430, 710, 0);
+
+            // Bank account
+            //cb.ShowTextAligned(Element.ALIGN_RIGHT, "IBAN:", 420, 695, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, "IBAN: " + settings.BankAccount, 430, 695, 0);
 
             cb.EndText();
+
             //--------------------- CONTENT -----------------------------//
 
             doc.Close();
