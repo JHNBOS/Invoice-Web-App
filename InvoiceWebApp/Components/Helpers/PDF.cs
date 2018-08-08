@@ -68,12 +68,15 @@ namespace InvoiceWebApp.Components.Helpers
             BaseFont helvetica = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
             BaseFont helveticaBold = BaseFont.CreateFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
 
-            // Company name/logo
-            //cb.BeginText();
-            //cb.SetFontAndSize(helveticaBold, 26);
-            //cb.ShowTextAligned(Element.ALIGN_LEFT, settings.CompanyName, 30, 785, 0);
-            //cb.EndText();
+            // Company logo
+            if (settings.ShowLogoInPDF)
+            {
+                string imagepath = @"~/Images/" + settings.Logo;
+                Image logo = Image.GetInstance(imagepath + "/mikesdotnetting.gif");
 
+                cb.AddImage(logo, logo.Width, 0, 0, logo.Height, 30, 800);
+            }
+            
             // Company info
             cb.BeginText();
             cb.SetFontAndSize(helveticaBold, 12f);
