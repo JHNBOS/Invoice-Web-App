@@ -8,6 +8,7 @@ namespace InvoiceWebApp.Components.Services.Interfaces
 {
     public interface IInvoiceRepository
     {
+        Task<int> GetCount();
         Task<ICollection<Invoice>> GetInvoices();
         Task<ICollection<Invoice>> GetByCreationDate(DateTime date);
         Task<ICollection<Invoice>> GetNearlyExpired();

@@ -81,7 +81,7 @@ namespace InvoiceWebApp.Components.Helpers
             cb.BeginText();
             cb.SetFontAndSize(helveticaBold, 12f);
             cb.ShowTextAligned(Element.ALIGN_LEFT, settings.CompanyName, 430, 795, 0);                               //795
-            cb.SetFontAndSize(helvetica, 10f);
+            cb.SetFontAndSize(helvetica, 9.5f);
             cb.ShowTextAligned(Element.ALIGN_LEFT, settings.Address, 430, 780, 0);                                  //780
             cb.ShowTextAligned(Element.ALIGN_LEFT, settings.PostalCode + ", " + settings.City, 430, 765, 0);        //765
             cb.ShowTextAligned(Element.ALIGN_LEFT, settings.Email, 430, 745, 0);                                    //745
@@ -96,9 +96,22 @@ namespace InvoiceWebApp.Components.Helpers
 
             cb.BeginText();
             cb.SetFontAndSize(helvetica, 10f);
-            cb.ShowTextAligned(Element.ALIGN_LEFT, debtor.FirstName + " " + debtor.LastName, 55, 635, 0);
-            cb.ShowTextAligned(Element.ALIGN_LEFT, debtorAddress.Street + " " + debtorAddress.Number + debtorAddress.Suffix, 55, 620, 0);
-            cb.ShowTextAligned(Element.ALIGN_LEFT, debtorAddress.PostalCode + " " + debtorAddress.City, 55, 605, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, debtor.FirstName + " " + debtor.LastName, 70, 635, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, debtorAddress.Street + " " + debtorAddress.Number + debtorAddress.Suffix, 70, 620, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, debtorAddress.PostalCode + " " + debtorAddress.City, 70, 605, 0);
+            cb.EndText();
+
+            // Invoice number
+            cb.BeginText();
+            cb.SetFontAndSize(helveticaBold, 15f);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, "Invoice " + invoice.InvoiceNumber, 55, 500, 0);
+            cb.EndText();
+
+            // Invoice dates
+            cb.BeginText();
+            cb.SetFontAndSize(helvetica, 10f);
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "Invoice date:       " + invoice.CreatedOn.ToString("dd-MM-yyyy"), 550, 500, 0);
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "Expiration date:       " + invoice.ExpiredOn.ToString("dd-MM-yyyy"), 550, 485, 0);
             cb.EndText();
 
             // Close and return pdf

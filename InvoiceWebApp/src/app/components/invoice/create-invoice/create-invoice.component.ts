@@ -56,7 +56,7 @@ export class CreateInvoiceComponent implements OnInit {
         this.invoice.created_on = moment(this.begin).toDate();
         this.invoice.expired_on = moment(this.expiration).toDate();
         this.invoice.customer_id = this.debtor.id;
-        this.invoice.invoice_number = new Date().getFullYear().toString() + new Date().getMonth().toString() + '-' + (this.invoiceLength + 1);
+        this.invoice.invoice_number = '-1';
         this.invoice.concept = concept;
         this.invoice.debtor = this.debtor;
 

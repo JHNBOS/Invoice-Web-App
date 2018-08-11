@@ -43,7 +43,7 @@
 
 <nav class="bg-faded sidebar d-none d-lg-block">
     <div class="nav-top">
-        <a class="navbar-brand" href="#" [hidden]="settings == null">{{ settings.company_name }}</a>
+        <a class="navbar-brand" href="#" *ngIf="settings != null">{{ settings.company_name }}</a>
     </div>
     <ul class="nav nav-pills flex-column" *ngIf="isSignedIn && currentUser != null">
         <li class="nav-item">

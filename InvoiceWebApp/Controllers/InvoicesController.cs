@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 using InvoiceWebApp.Components.Entities;
@@ -19,14 +20,20 @@ namespace InvoiceWebApp.Controllers
     public class InvoicesController : Controller
     {
         private IInvoiceRepository _repo;
+        private ISettingRepository _settingRepository;
+        private Settings _settings;
         private Email _email;
         private PDF _pdf;
 
         public InvoicesController()
         {
             this._repo = new InvoiceRepository();
+            this._settingRepository = new SettingRepository();
+
             this._email = new Email();
             this._pdf = new PDF();
+
+            Task.Run(async () => this._settings = await this._settingRepository.GetSettings());
         }
 
         /// <summary>
@@ -256,7 +263,7 @@ namespace InvoiceWebApp.Controllers
         /// </summary>
         /// <param name="invoice">Number of invoice</param>
         [HttpGet("pdf")]
-        [ProducesResponseType(typeof(FileResult), 200)]
+        [ProducesResponseType(typeof(FileContentResult), 200)]
         [ProducesResponseType(typeof(void), 400)]
         [ProducesResponseType(typeof(void), 500)]
         public async Task<IActionResult> PDF(string invoice)
@@ -273,13 +280,17 @@ namespace InvoiceWebApp.Controllers
                 return StatusCode(500, "Could not generate PDF of requested invoice.");
             }
 
-            HttpContext.Response.ContentType = "application/pdf";
-            FileContentResult result = new FileContentResult(data, "application/pdf")
+            // Open PDF
+            var contentDispositionHeader = new System.Net.Mime.ContentDisposition
             {
-                FileDownloadName = String.Format("Invoice_{0}.pdf", invoice)
+                Inline = true,
+                FileName = String.Format("{0}_{1}.pdf", _settings.CompanyName, invoice)
             };
 
-            return result;
+            Response.Headers.Add("Content-Type", "application/pdf");
+            Response.Headers.Add("Content-Disposition", contentDispositionHeader.ToString());
+
+            return File(data, System.Net.Mime.MediaTypeNames.Application.Pdf);
         }
 
         /// <summary>
@@ -319,6 +330,33 @@ namespace InvoiceWebApp.Controllers
                     CompanyName = model.Debtor.CompanyName
                 }
             };
+
+            //Set invoice number
+            if (invoice.InvoiceNumber == "-1")
+            {
+                var today = DateTime.Now;
+                var prefix = _settings.InvoicePrefix;
+
+                var invoiceCount = await this._repo.GetCount();
+                var leadingZeros = "";
+                switch (today.Month.ToString().Length)
+                {
+                    case 1:
+                        leadingZeros = "000";
+                        break;
+                    case 2:
+                        leadingZeros = "00";
+                        break;
+                    case 3:
+                        leadingZeros = "0";
+                        break;
+                    case 4:
+                        leadingZeros = "";
+                        break;
+                }
+
+                invoice.InvoiceNumber = today.Year + '-' + (leadingZeros + invoiceCount);
+            }
 
             //Swap comma with dots
             var totalString = invoice.Total.ToString().Replace(".", ",");

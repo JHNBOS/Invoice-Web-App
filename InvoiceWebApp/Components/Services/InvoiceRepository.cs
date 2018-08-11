@@ -15,6 +15,12 @@ namespace InvoiceWebApp.Components.Services
     {
         private InvoiceContext _context = new InvoiceContext();
 
+        public async Task<int> GetCount()
+        {
+            var response = await _context.Invoices.CountAsync();
+            return response;
+        }
+
         public async Task<ICollection<Invoice>> GetInvoices()
         {
             var response = await _context.Invoices.Include(i => i.Items).Include(i => i.Debtor).OrderBy(o => o.ExpiredOn).ToListAsync();
