@@ -114,15 +114,59 @@ namespace InvoiceWebApp.Components.Helpers
             cb.ShowTextAligned(Element.ALIGN_RIGHT, "Expiration date:       " + invoice.ExpiredOn.ToString("dd-MM-yyyy"), 550, 485, 0);
             cb.EndText();
 
-            // Invoice items
+            // Invoice items subjects
             cb.BeginText();
             cb.SetFontAndSize(helvetica, 9f);
-            cb.ShowTextAligned(Element.ALIGN_RIGHT, "Description", 195, 452, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, "Item", 48, 452, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, "Description", 185, 452, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, "Price", 350, 452, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, "Qty.", 424, 452, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, "Total", 470, 452, 0);
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "VAT", 560, 452, 0);
             cb.EndText();
 
-            cb.Rectangle(50, 445, 500, 1);
+            cb.Rectangle(45, 445, 520, 1);
             cb.SetRgbColorStroke(75, 75, 75);
             cb.Stroke();
+
+            // Place invoice item info
+            var y = 435;
+            foreach (var item in invoiceItems)
+            {
+                cb.SetFontAndSize(helvetica, 9f);
+                cb.BeginText();
+
+                // Item
+                cb.ShowTextAligned(Element.ALIGN_LEFT, item.Name, 48, y, 0);
+
+                // Desc
+                cb.ShowTextAligned(Element.ALIGN_LEFT, item.Description, 185, y, 0);
+
+                //  Price
+                cb.ShowTextAligned(Element.ALIGN_LEFT, "€" + item.Price.ToString("N2"), 350, y, 0);
+                
+                //  Quantity
+                cb.ShowTextAligned(Element.ALIGN_LEFT, item.Quantity.ToString(), 425, y, 0);
+
+                // Total
+                var total = item.Price * item.Quantity;
+                cb.ShowTextAligned(Element.ALIGN_LEFT, "€" + total.ToString("N2"), 470, y, 0);
+
+                // VAT
+                cb.ShowTextAligned(Element.ALIGN_RIGHT, item.Tax + "%", 560, y, 0);
+
+                cb.EndText();
+
+                // Divider
+                if (item != invoiceItems.Last())
+                {
+                    cb.Rectangle(45, y - 2, 520, 1);
+                    cb.SetRgbColorStroke(90, 90, 90);
+                    cb.Stroke();
+                }
+
+                y = y - 2;
+            }
 
             // Close and return pdf
             doc.Close();
