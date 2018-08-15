@@ -114,6 +114,16 @@ namespace InvoiceWebApp.Components.Helpers
             cb.ShowTextAligned(Element.ALIGN_RIGHT, "Expiration date:       " + invoice.ExpiredOn.ToString("dd-MM-yyyy"), 550, 485, 0);
             cb.EndText();
 
+            // Invoice items
+            cb.BeginText();
+            cb.SetFontAndSize(helvetica, 9f);
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "Description", 195, 452, 0);
+            cb.EndText();
+
+            cb.Rectangle(50, 445, 500, 1);
+            cb.SetRgbColorStroke(75, 75, 75);
+            cb.Stroke();
+
             // Close and return pdf
             doc.Close();
             return ms.ToArray();
