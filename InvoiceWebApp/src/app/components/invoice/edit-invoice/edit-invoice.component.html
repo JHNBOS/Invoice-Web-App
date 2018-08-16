@@ -74,19 +74,19 @@
                         <tbody>
                             <tr class="table-row" *ngFor="let row of invoice.items;let i = index">
                                 <td data-title="Name">
-                                    <input type="text" name="p_name" class="form-control form-control-sm" [(ngModel)]="row.name" readonly />
+                                    <input type="text" name="p_name" class="form-control form-control-sm" [value]="row.name" readonly />
                                 </td>
                                 <td data-title="Desc">
-                                    <input type="text" name="desc" class="form-control form-control-sm" [(ngModel)]="row.description" readonly />
+                                    <input type="text" name="desc" class="form-control form-control-sm" [value]="row.description" readonly />
                                 </td>
                                 <td data-title="Price">
-                                    <input type="text" name="price" class="form-control form-control-sm" [ngModel]="row.price | number: '1.2-2'" (ngModelChange)="row.price=$event" readonly />
+                                    <input type="text" name="price" class="form-control form-control-sm" [value]="row.price | number: '1.2-2'" (ngModelChange)="row.price=$event" readonly />
                                 </td>
                                 <td data-title="Quantity">
-                                    <input type="number" name="qnt" class="form-control form-control-sm" [(ngModel)]="row.quantity" min="1" readonly />
+                                    <input type="number" name="qnt" class="form-control form-control-sm" [value]="row.quantity" min="1" readonly />
                                 </td>
                                 <td data-title="Tax">
-                                    <input type="number" name="tax" class="form-control form-control-sm" [(ngModel)]="row.tax" min="0" readonly />
+                                    <input type="number" name="tax" class="form-control form-control-sm" [value]="row.tax" min="0" readonly />
                                 </td>
                                 <td style="line-height:2;" data-title="Total">
                                     <span style="font-weight: 500;">

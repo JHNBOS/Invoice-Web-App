@@ -194,10 +194,15 @@ namespace InvoiceWebApp.Components.Helpers
             cb.Rectangle(310, y - 21, 200, 0.20f);
             cb.Stroke();
 
+            // Discount
+            cb.SetFontAndSize(helveticaBold, 10f);
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "Discount", 390, y - 34, 0);
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "€ " + invoice.Discount.ToString("N2"), 509, y - 34, 0);
+
             // Total
             cb.SetFontAndSize(helveticaBold, 10f);
-            cb.ShowTextAligned(Element.ALIGN_RIGHT, "Total", 390, y - 34, 0);
-            cb.ShowTextAligned(Element.ALIGN_RIGHT, "€ " + totalPrice.ToString("N2"), 509, y - 34, 0);
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "Total", 390, y - 49, 0);
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "€ " + totalPrice.ToString("N2"), 509, y - 49, 0);
 
             // Close and return pdf
             doc.Close();
