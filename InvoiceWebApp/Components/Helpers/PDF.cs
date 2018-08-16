@@ -76,7 +76,7 @@ namespace InvoiceWebApp.Components.Helpers
 
                 cb.AddImage(logo, logo.Width, 0, 0, logo.Height, 30, 800);
             }
-            
+
             // Company info
             cb.BeginText();
             cb.SetFontAndSize(helveticaBold, 12f);
@@ -130,6 +130,10 @@ namespace InvoiceWebApp.Components.Helpers
             cb.Stroke();
 
             // Place invoice item info
+            decimal totalPrice = 0;
+            decimal subtotal = 0;
+            decimal taxTotal = 0;
+
             var y = 435;
             foreach (var item in invoiceItems)
             {
@@ -144,7 +148,7 @@ namespace InvoiceWebApp.Components.Helpers
 
                 //  Price
                 cb.ShowTextAligned(Element.ALIGN_LEFT, "€" + item.Price.ToString("N2"), 350, y, 0);
-                
+
                 //  Quantity
                 cb.ShowTextAligned(Element.ALIGN_LEFT, item.Quantity.ToString(), 425, y, 0);
 
@@ -160,13 +164,40 @@ namespace InvoiceWebApp.Components.Helpers
                 // Divider
                 if (item != invoiceItems.Last())
                 {
-                    cb.Rectangle(45, y - 2, 520, 1);
-                    cb.SetRgbColorStroke(90, 90, 90);
+                    cb.SetRgbColorStroke(170, 170, 170);
+                    cb.Rectangle(48, y - 5, 517, 0.20f);
                     cb.Stroke();
                 }
 
-                y = y - 2;
+                y = y - 15;
+
+                var vatAmount = (total / 100) * item.Tax;
+
+                totalPrice += total;
+                taxTotal += vatAmount;
+                subtotal += (total - vatAmount);
             }
+
+            y = y - 50;
+
+            // Subtotal
+            cb.SetFontAndSize(helvetica, 10f);
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "Subtotal", 390, y, 0);
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "€ " + subtotal.ToString("N2"), 509, y, 0);
+
+            // Total VAT
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "Amount VAT", 390, y - 15, 0);
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "€ " + taxTotal.ToString("N2"), 509, y - 15, 0);
+
+            // Divider
+            cb.SetRgbColorStroke(170, 170, 170);
+            cb.Rectangle(310, y - 21, 200, 0.20f);
+            cb.Stroke();
+
+            // Total
+            cb.SetFontAndSize(helveticaBold, 10f);
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "Total", 390, y - 34, 0);
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "€ " + totalPrice.ToString("N2"), 509, y - 34, 0);
 
             // Close and return pdf
             doc.Close();
