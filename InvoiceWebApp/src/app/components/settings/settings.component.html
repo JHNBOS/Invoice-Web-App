@@ -1,0 +1,98 @@
+<div class="row justify-content-around mt-3">
+    <div class="col-sm-12 col-md-10 col-lg-9 mx-auto table-responsive">
+        <form *ngIf="settings">
+
+            <h4 class="text-muted"><span>Business Information</span></h4>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="businessName">Name of business</label>
+                    <input type="text" name="bname" class="form-control" id="businessName" [(ngModel)]="settings.company_name" autofocus required />
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="businessNumber">Business Number</label>
+                    <input type="text" name="bid" class="form-control" id="businessNumber" [(ngModel)]="settings.business_number" required />
+                </div>
+                <div class="col-sm-6">
+                    <label for="vat">VAT Number</label>
+                    <input type="text" name="vat" class="form-control" id="vat" [(ngModel)]="settings.vat" required />
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="web">Website</label>
+                    <input type="text" name="web" class="form-control" id="web" [(ngModel)]="settings.website" />
+                </div>
+                <div class="col-sm-6">
+                    <label for="phone">Phone</label>
+                    <input type="text" name="phone" class="form-control" id="phone" [(ngModel)]="settings.phone" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="bank">Name of bank</label>
+                    <input type="text" name="bank" class="form-control" id="bank" [(ngModel)]="settings.bank" required />
+                </div>
+                <div class="col-sm-6">
+                    <label for="bankAccount">Bank Account</label>
+                    <input type="text" name="bankaccount" class="form-control" id="bankAccount" [(ngModel)]="settings.bank_account" required />
+                </div>
+            </div>
+
+            <h4 class="text-muted"><span>Address</span></h4>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="street">Street</label>
+                    <input type="text" name="street" class="form-control" id="street" [(ngModel)]="address.street" required />
+                </div>
+                <div class="col-sm-2">
+                    <label for="number">Number</label>
+                    <input type="number" name="num" class="form-control" min="1" id="number" [(ngModel)]="address.number" required />
+                </div>
+                <div class="col-sm-2 col-md-1">
+                    <label for="suffix">Suffix</label>
+                    <input type="text" name="suffix" class="form-control" id="suffix" [(ngModel)]="address.suffix" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="postal">Postal Code</label>
+                    <input type="text" name="postal" class="form-control" id="postal" [(ngModel)]="address.postal_code" required />
+                </div>
+                <div class="col-sm-6">
+                    <label for="city">City</label>
+                    <input type="text" name="city" class="form-control" id="city" [(ngModel)]="address.city" required />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="country">Country</label>
+                    <input type="text" name="country" class="form-control" id="country" [(ngModel)]="address.country" required />
+                </div>
+                <div class="col-sm-6"></div>
+            </div>
+
+            <br />
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-primary float-right" (click)="submitForm()">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
