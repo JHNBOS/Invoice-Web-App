@@ -130,7 +130,6 @@ namespace InvoiceWebApp.Components.Helpers
             cb.Stroke();
 
             // Place invoice item info
-            decimal totalPrice = 0;
             decimal subtotal = 0;
             decimal taxTotal = 0;
 
@@ -173,7 +172,6 @@ namespace InvoiceWebApp.Components.Helpers
 
                 var vatAmount = (total / 100) * item.Tax;
 
-                totalPrice += total;
                 taxTotal += vatAmount;
                 subtotal += (total - vatAmount);
             }
@@ -202,7 +200,7 @@ namespace InvoiceWebApp.Components.Helpers
             // Total
             cb.SetFontAndSize(helveticaBold, 10f);
             cb.ShowTextAligned(Element.ALIGN_RIGHT, "Total", 390, y - 49, 0);
-            cb.ShowTextAligned(Element.ALIGN_RIGHT, "€ " + totalPrice.ToString("N2"), 509, y - 49, 0);
+            cb.ShowTextAligned(Element.ALIGN_RIGHT, "€ " + invoice.Total.ToString("N2"), 509, y - 49, 0);
 
             // Close and return pdf
             doc.Close();
