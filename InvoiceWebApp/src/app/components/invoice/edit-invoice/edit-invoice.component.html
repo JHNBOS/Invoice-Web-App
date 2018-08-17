@@ -69,34 +69,45 @@
                                 <th>Tax</th>
                                 <th>Total</th>
                                 <th class="text-center"></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="table-row" *ngFor="let row of invoice.items;let i = index">
                                 <td data-title="Name">
-                                    <input type="text" name="p_name" class="form-control form-control-sm" [value]="row.name" readonly />
+                                    <input type="text" name="p_name" class="form-control form-control-sm" [value]="row.name" [readonly]="row.invoice_number != '-1'" />
                                 </td>
                                 <td data-title="Desc">
-                                    <input type="text" name="desc" class="form-control form-control-sm" [value]="row.description" readonly />
+                                    <input type="text" name="desc" class="form-control form-control-sm" [value]="row.description" [readonly]="row.invoice_number != '-1'" />
                                 </td>
                                 <td data-title="Price">
-                                    <input type="text" name="price" class="form-control form-control-sm" [value]="row.price | number: '1.2-2'" (ngModelChange)="row.price=$event" readonly />
+                                    <input type="text" name="price" class="form-control form-control-sm" [value]="row.price | number: '1.2-2'" (ngModelChange)="row.price=$event" *ngIf="row.invoice_number != '-1'" readonly />
+                                    <input name="price" class="form-control form-control-sm" [(ngModel)]="row.price" (change)="calculatePrice(row)" (blur)="calculatePrice(row)" *ngIf="row.invoice_number == '-1'" currencyMask />
                                 </td>
                                 <td data-title="Quantity">
-                                    <input type="number" name="qnt" class="form-control form-control-sm" [value]="row.quantity" min="1" readonly />
+                                    <input type="number" name="qnt" class="form-control form-control-sm" [value]="row.quantity" min="1" *ngIf="row.invoice_number != '-1'" readonly />
+                                    <input type="number" name="qnt" class="form-control form-control-sm" [(ngModel)]="row.quantity" min="1" (change)="calculatePrice(row)" (blur)="calculatePrice(row)" *ngIf="row.invoice_number == '-1'" required />
                                 </td>
                                 <td data-title="Tax">
-                                    <input type="number" name="tax" class="form-control form-control-sm" [value]="row.tax" min="0" readonly />
+                                    <input type="number" name="tax" class="form-control form-control-sm" [value]="row.tax" min="0" [readonly]="row.invoice_number != '-1'" />
                                 </td>
                                 <td style="line-height:2;" data-title="Total">
                                     <span style="font-weight: 500;">
                                         &euro; {{ row.price * row.quantity | number: '1.2-2' }}
                                     </span>
                                 </td>
+                                <td data-title="" [hidden]="row.invoice_number != '-1'">
+                                    <a *ngIf="i >= 1" class="btn-delete" (click)="deleteRow(row)" title="Remove">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <!--<a class="btn btn-primary add" (click)="addRow()" title="Add">
+                    <i class="fa fa-plus"></i>
+                </a>-->
             </div>
 
             <br />
@@ -114,7 +125,7 @@
             <div class="form-group row">
                 <div class="col-sm-12">
                     <button type="button" class="btn btn-primary float-right" (click)="submitForm(false)">Save</button>
-                    <button type="button" class="btn btn-primary float-rightmr-1" (click)="submitForm(true)">Save as concept</button>
+                    <button type="button" class="btn btn-primary float-right mr-1" (click)="submitForm(true)">Save as concept</button>
                 </div>
             </div>
         </form>

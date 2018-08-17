@@ -5,6 +5,7 @@ import Invoice from '../../../shared/models/invoice.model';
 import { InvoiceService } from '../../../shared/services/invoice.service';
 import { InvoiceItemService } from '../../../shared/services/invoice_item.service';
 import User from '../../../shared/models/user.model';
+import InvoiceItem from '../../../shared/models/invoice_item.model';
 
 @Component({
     selector: 'app-edit-invoice',
@@ -42,6 +43,16 @@ export class EditInvoiceComponent implements OnInit {
         );
     }
 
+    addRow() {
+        const row = new InvoiceItem();
+        row.invoice_number = '-1';
+        this.invoice.items.push(row);
+    }
+
+    deleteRow(row: InvoiceItem) {
+        this.invoice.items.splice(this.invoice.items.indexOf(row), 1);
+    }
+
     getItems(invoice: string) {
         this.itemService.getByInvoice(invoice).subscribe(
             (response) => this.invoice.items = response,
@@ -49,8 +60,19 @@ export class EditInvoiceComponent implements OnInit {
         );
     }
 
+    calculatePrice(item: InvoiceItem) {
+        item.total = (item.price * item.quantity);
+        this.calculateTotal();
+    }
+
     calculateTotal() {
-        this.total = this.invoice.total - this.invoice.discount;
+        //for (var i = 0; i < this.invoice.items.filter(f => f.invoice_number == '-1').length; i++) {
+        //    let item = this.invoice.items[i];
+        //    this.total += item.total;
+        //}
+
+        this.total = this.invoice.total;
+        this.total = this.total - this.invoice.discount;
     }
 
     submitForm(concept: boolean) {

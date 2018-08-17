@@ -2,6 +2,14 @@ button.btn {
     width: 150px;
 }
 
+a.btn > i {
+    color: #fff;
+}
+
+.add {
+    margin-left: 1rem !important;
+}
+
 .checkbox label:after {
     content: '';
     display: table;
