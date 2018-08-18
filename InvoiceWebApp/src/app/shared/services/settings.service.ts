@@ -20,4 +20,13 @@ export class SettingsService {
         return this.http.put<Settings>(this.apiUrl + 'update', settings)
             .pipe(catchError(error => throwError(error)));
     }
+
+    upload(file: any, settings: Settings): Observable<Settings> {
+        let formData = new FormData();
+        formData.append("file", file);
+        formData.append("model", JSON.stringify(settings));
+
+        return this.http.post<Settings>(this.apiUrl + 'upload', formData)
+            .pipe(catchError(error => throwError(error)));
+    }
 }

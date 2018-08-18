@@ -10,6 +10,8 @@
                     <input type="text" name="bname" class="form-control" id="businessName" [(ngModel)]="settings.company_name" autofocus required />
                 </div>
                 <div class="col-sm-6">
+                    <label for="prefix">Prefix for invoice number</label>
+                    <input type="text" name="prefix" class="form-control" id="prefix" [(ngModel)]="settings.invoice_prefix" />
                 </div>
             </div>
 
@@ -39,6 +41,8 @@
                 </div>
             </div>
 
+            <h4 class="text-muted"><span>Bank</span></h4>
+
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label for="bank">Name of bank</label>
@@ -50,43 +54,82 @@
                 </div>
             </div>
 
-            <h4 class="text-muted"><span>Address</span></h4>
+            <h4 class="text-muted"><span>E-mail</span></h4>
 
             <div class="form-group row">
                 <div class="col-sm-6">
-                    <label for="street">Street</label>
-                    <input type="text" name="street" class="form-control" id="street" [(ngModel)]="address.street" required />
+                    <label for="email">E-mail address</label>
+                    <input type="email" name="email" class="form-control" id="email" [(ngModel)]="settings.email" required />
                 </div>
-                <div class="col-sm-2">
-                    <label for="number">Number</label>
-                    <input type="number" name="num" class="form-control" min="1" id="number" [(ngModel)]="address.number" required />
+                <div class="col-sm-6">
+                    <label for="pass">Password</label>
+                    <input type="password" name="pass" class="form-control" id="pass" [(ngModel)]="settings.password" required />
                 </div>
-                <div class="col-sm-2 col-md-1">
-                    <label for="suffix">Suffix</label>
-                    <input type="text" name="suffix" class="form-control" id="suffix" [(ngModel)]="address.suffix" />
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="smtp">SMTP server</label>
+                    <input type="text" name="smtp" class="form-control" id="smtp" [(ngModel)]="settings.smtp" required />
+                </div>
+                <div class="col-sm-6">
+                    <label for="port">SMTP Port</label>
+                    <input type="number" name="port" class="form-control" id="port" [(ngModel)]="settings.smtp_port" required />
+                </div>
+            </div>
+
+            <h4 class="text-muted"><span>Address</span></h4>
+
+            <div class="form-group row">
+                <div class="col-sm-8">
+                    <label for="address">Address</label>
+                    <input type="text" name="address" class="form-control" id="address" [(ngModel)]="settings.address" required />
                 </div>
             </div>
 
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label for="postal">Postal Code</label>
-                    <input type="text" name="postal" class="form-control" id="postal" [(ngModel)]="address.postal_code" required />
+                    <input type="text" name="postal" class="form-control" id="postal" [(ngModel)]="settings.postal_code" required />
                 </div>
                 <div class="col-sm-6">
                     <label for="city">City</label>
-                    <input type="text" name="city" class="form-control" id="city" [(ngModel)]="address.city" required />
+                    <input type="text" name="city" class="form-control" id="city" [(ngModel)]="settings.city" required />
                 </div>
             </div>
 
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label for="country">Country</label>
-                    <input type="text" name="country" class="form-control" id="country" [(ngModel)]="address.country" required />
+                    <input type="text" name="country" class="form-control" id="country" [(ngModel)]="settings.country" required />
                 </div>
                 <div class="col-sm-6"></div>
             </div>
 
             <br />
+
+            <h4 class="text-muted"><span>Logo</span></h4>
+
+            <div class="form-group row">
+                <div class="col-sm-8">
+                    <label for="logoweb">Use logo for website</label>
+                    <input type="checkbox" name="logoweb" class="form-control" id="logoweb" [(ngModel)]="settings.show_logo" required />
+                </div>
+                <div class="col-sm-8">
+                    <label for="logopdf">Use logo for PDF</label>
+                    <input type="checkbox" name="logopdf" class="form-control" id="logopdf" [(ngModel)]="settings.show_logo_in_pdf" required />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <div class="custom-file">
+                        <input id="fileInput" name="logo" class="custom-file-input" #fileInput type="file" accept="image/*" title="Choose an image to upload as logo" />
+                        <label class="custom-file-label" for="fileInput">Choose picture</label>
+                    </div>
+                </div>
+                <div class="col-sm-6"></div>
+            </div>
 
             <div class="form-group row">
                 <div class="col-sm-12">
