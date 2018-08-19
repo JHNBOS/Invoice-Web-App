@@ -47,7 +47,6 @@ $mainWidth: calc(100vw - #{$sidebarWidth});
     text-align: center;
 }
 
-
 .navbar-nav:nth-child(2) .nav-item .profile {
     max-height: 55px;
     height: auto;
@@ -152,7 +151,7 @@ main .container-fluid {
     height: $navbarHeight;
     background: dodgerblue;
     line-height: 75px;
-    padding: 0px;
+    padding: 3px 3px;
 }
 
 .sidebar .nav-top a {
@@ -171,7 +170,8 @@ main .container-fluid {
 
 .sidebar .nav-top a>img.logo {
     text-align: center;
-    max-height: 70px;
+    max-height: 78px;
+    max-width: 200px;
 }
 
 .sidebar .nav {
