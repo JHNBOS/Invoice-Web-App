@@ -43,7 +43,10 @@
 
 <nav class="bg-faded sidebar d-none d-lg-block">
     <div class="nav-top">
-        <a class="navbar-brand" href="#" *ngIf="settings != null">{{ settings.company_name }}</a>
+        <a [routerLink]="['/']" class="navbar-brand" *ngIf="settings != null">
+            <span *ngIf="!settings.show_logo">{{ settings.company_name }}</span>
+            <img *ngIf="settings.show_logo" class="logo" [src]="_sanitizer.bypassSecurityTrustUrl(settings.logo)" />
+        </a>
     </div>
     <ul class="nav nav-pills flex-column" *ngIf="isSignedIn && currentUser != null">
         <li class="nav-item">
@@ -59,7 +62,13 @@
             <a [routerLink]="['/users']" class="nav-link" routerLinkActive="active">Users</a>
         </li>
     </ul>
-    <ul class="nav nav-pills flex-column nav-bottom" *ngIf="isSignedIn && currentUser != null"></ul>
+    <ul class="nav nav-pills flex-column nav-bottom" *ngIf="isSignedIn && currentUser != null">
+        <li class="nav-item" [hidden]="currentUser.role_id == 2">
+            <a [routerLink]="['/settings']" class="nav-link" routerLinkActive="active">
+                <i class="fa fa-cog mr-2" aria-hidden="true"></i>Settings
+            </a>
+        </li>
+    </ul>
 </nav>
 
 <main>

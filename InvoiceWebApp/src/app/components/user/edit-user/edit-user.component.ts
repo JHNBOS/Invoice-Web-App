@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import Role from '../../../shared/models/role.model';
+import Settings from '../../../shared/models/settings.model';
 import User from '../../../shared/models/user.model';
 import { RoleService } from '../../../shared/services/role.service';
 import { UserService } from '../../../shared/services/user.service';
@@ -12,17 +13,20 @@ import { UserService } from '../../../shared/services/user.service';
     styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
+    settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
+    currentUser: User = JSON.parse(sessionStorage.getItem('signedInUser'));
+
     email: string;
     user: User;
-    currentUser: User = JSON.parse(sessionStorage.getItem('signedInUser'));
     roles: Role[] = null;
+    fileLabel: string = 'Choose an image to use as profile picture';
 
     @ViewChild('fileInput') fileInput: ElementRef;
 
     constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService, private roleService: RoleService, private router: Router) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Edit User - Invoice Panel');
+        this.titleService.setTitle('Edit User - ' + this.settings.company_name);
         this.route.params.subscribe(
             (params) => {
                 this.email = params['email'];
@@ -70,6 +74,19 @@ export class EditUserComponent implements OnInit {
             }
         } else {
             this.router.navigate(['/users']);
+        }
+    }
+
+    setFileName() {
+        let fi = this.fileInput.nativeElement;
+        if (fi.files && fi.files[0]) {
+            let fileToUpload = fi.files[0];
+
+            if (fileToUpload) {
+                this.fileLabel = fileToUpload.name;
+            }
+        } else {
+            this.fileLabel = 'Choose an image to use as profile picture';
         }
     }
 }

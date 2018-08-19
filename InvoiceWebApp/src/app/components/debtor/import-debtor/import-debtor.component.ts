@@ -5,6 +5,7 @@ import { ToastOptions, ToastyService } from 'ngx-toasty';
 import Address from '../../../shared/models/address.model';
 import Debtor from '../../../shared/models/debtor.model';
 import DebtorHasAddress from '../../../shared/models/debtor_has_address.model';
+import Settings from '../../../shared/models/settings.model';
 import { AddressService } from '../../../shared/services/address.service';
 import { DebtorService } from '../../../shared/services/debtor.service';
 import { DebtorHasAddressService } from '../../../shared/services/debtor_has_address.service';
@@ -15,6 +16,8 @@ import { DebtorHasAddressService } from '../../../shared/services/debtor_has_add
     styleUrls: ['./import-debtor.component.scss']
 })
 export class ImportDebtorComponent implements OnInit {
+    settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
+
     debtors: Debtor[] = [];
     addresses: Address[] = [];
     livesAts: DebtorHasAddress[] = [];
@@ -23,7 +26,7 @@ export class ImportDebtorComponent implements OnInit {
     constructor(private titleService: Title, private debtorService: DebtorService, private addressService: AddressService,
         private debtorHasAddressService: DebtorHasAddressService, private toastyService: ToastyService, private route: ActivatedRoute, private router: Router) {
 
-        this.titleService.setTitle('Import Debtors - Invoice Panel');
+        this.titleService.setTitle('Import Debtors - ' + this.settings.company_name);
         this.toastOptions = {
             title: 'Success',
             msg: 'Debtor(s) have been successfully added!',

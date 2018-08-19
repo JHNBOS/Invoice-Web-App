@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastOptions, ToastyConfig, ToastyService } from 'ngx-toasty';
 import Invoice from '../../shared/models/invoice.model';
-import { InvoiceService } from '../../shared/services/invoice.service';
+import Settings from '../../shared/models/settings.model';
 import { DebtorService } from '../../shared/services/debtor.service';
-import Debtor from '../../shared/models/debtor.model';
+import { InvoiceService } from '../../shared/services/invoice.service';
 
 @Component({
     selector: 'app-invoice',
@@ -13,12 +12,14 @@ import Debtor from '../../shared/models/debtor.model';
     styleUrls: ['./invoice.component.scss']
 })
 export class InvoiceComponent implements OnInit {
+    settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
+
     invoices: Invoice[] = [];
 
     constructor(private titleService: Title, private route: ActivatedRoute, private invoiceService: InvoiceService, private debtorService: DebtorService, private router: Router) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Invoices - Invoice Panel');
+        this.titleService.setTitle('Invoices - ' + this.settings.company_name);
         this.getAllInvoices();
     }
 

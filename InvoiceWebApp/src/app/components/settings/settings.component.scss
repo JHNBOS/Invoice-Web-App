@@ -2,6 +2,11 @@ button.btn {
     width: 150px;
 }
 
+.custom-checkbox .custom-control-label::before {
+    border-radius: .25rem;
+    border: 1px solid #b8b8b8;
+}
+
 @media (max-width: 992px) {
     .row.form-group:last-child {
         text-align: center !important;

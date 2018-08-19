@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Address from '../../../shared/models/address.model';
 import Debtor from '../../../shared/models/debtor.model';
 import DebtorHasAddress from '../../../shared/models/debtor_has_address.model';
+import Settings from '../../../shared/models/settings.model';
 import { AddressService } from '../../../shared/services/address.service';
 import { DebtorService } from '../../../shared/services/debtor.service';
 import { DebtorHasAddressService } from '../../../shared/services/debtor_has_address.service';
@@ -14,16 +15,18 @@ import { DebtorHasAddressService } from '../../../shared/services/debtor_has_add
     styleUrls: ['./edit-debtor.component.scss']
 })
 export class EditDebtorComponent implements OnInit {
+    settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
+
     debtorId: string;
     debtor: Debtor;
     lives_at: DebtorHasAddress;
     address: Address;
 
-    constructor(private titleService: Title, private route: ActivatedRoute,
-        private debtorService: DebtorService, private debtorHasAddressService: DebtorHasAddressService, private addressService: AddressService, private router: Router) { }
+    constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService, private debtorHasAddressService: DebtorHasAddressService,
+        private addressService: AddressService, private router: Router) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Edit Debtor - Invoice Panel');
+        this.titleService.setTitle('Edit Debtor - ' + this.settings.company_name);
         this.route.params.subscribe(
             (params) => {
                 this.debtorId = params['id'];

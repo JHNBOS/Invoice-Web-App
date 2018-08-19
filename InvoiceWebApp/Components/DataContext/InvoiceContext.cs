@@ -268,8 +268,7 @@ namespace InvoiceWebApp.Components.DataContext
                     .HasMaxLength(255);
 
                 entity.Property(e => e.Picture)
-                    .HasColumnName("picture")
-                    .HasMaxLength(255);
+                    .HasColumnName("picture");
 
                 entity.Property(e => e.Role)
                     .HasColumnName("role")
@@ -364,8 +363,7 @@ namespace InvoiceWebApp.Components.DataContext
                     .HasMaxLength(20);
 
                 entity.Property(e => e.Logo)
-                    .HasColumnName("logo")
-                    .HasMaxLength(300);
+                    .HasColumnName("logo");
 
                 entity.Property(e => e.ShowLogo)
                     .IsRequired()

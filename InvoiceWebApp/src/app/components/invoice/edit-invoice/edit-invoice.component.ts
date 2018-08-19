@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import Invoice from '../../../shared/models/invoice.model';
+import InvoiceItem from '../../../shared/models/invoice_item.model';
+import Settings from '../../../shared/models/settings.model';
+import User from '../../../shared/models/user.model';
 import { InvoiceService } from '../../../shared/services/invoice.service';
 import { InvoiceItemService } from '../../../shared/services/invoice_item.service';
-import User from '../../../shared/models/user.model';
-import InvoiceItem from '../../../shared/models/invoice_item.model';
 
 @Component({
     selector: 'app-edit-invoice',
@@ -14,6 +15,8 @@ import InvoiceItem from '../../../shared/models/invoice_item.model';
 })
 export class EditInvoiceComponent implements OnInit {
     currentUser: User = JSON.parse(sessionStorage.getItem('signedInUser'));
+    settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
+
     invoiceNumber: string;
     invoice: Invoice;
 
@@ -23,7 +26,7 @@ export class EditInvoiceComponent implements OnInit {
         private titleService: Title) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Edit Invoice - Invoice Panel');
+        this.titleService.setTitle('Edit Invoice - ' + this.settings.company_name);
         this.route.params.subscribe(
             (params) => {
                 this.invoiceNumber = params['id'];

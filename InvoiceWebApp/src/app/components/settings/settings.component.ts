@@ -11,6 +11,7 @@ import { SettingsService } from '../../shared/services/settings.service';
 })
 export class SettingsComponent implements OnInit {
     settings: Settings = null;
+    fileLabel: string = 'Choose an image to use as logo';
 
     @ViewChild('fileInput') fileInput: ElementRef;
 
@@ -28,22 +29,18 @@ export class SettingsComponent implements OnInit {
 
     submitForm() {
         this.settingsService.update(this.settings).subscribe(
-            (response) => {
-                if (response != null) {
-                    this.fileUpload();
-                }
-            },
+            (response) => this.fileUpload(response),
             (error) => { throw error; }
         );
     }
 
-    fileUpload(): void {
+    fileUpload(settings: Settings): void {
         let fi = this.fileInput.nativeElement;
         if (fi.files && fi.files[0]) {
             let fileToUpload = fi.files[0];
 
             if (fileToUpload) {
-                this.settingsService.upload(fileToUpload, this.settings).subscribe(
+                this.settingsService.upload(fileToUpload, settings).subscribe(
                     (response) => {
                         sessionStorage.setItem('settings', JSON.stringify(response));
                         this.router.navigate(['/']);
@@ -53,6 +50,19 @@ export class SettingsComponent implements OnInit {
             }
         } else {
             this.router.navigate(['/']);
+        }
+    }
+
+    setFileName() {
+        let fi = this.fileInput.nativeElement;
+        if (fi.files && fi.files[0]) {
+            let fileToUpload = fi.files[0];
+
+            if (fileToUpload) {
+                this.fileLabel = fileToUpload.name;
+            }
+        } else {
+            this.fileLabel = 'Choose an image to use as logo';
         }
     }
 }

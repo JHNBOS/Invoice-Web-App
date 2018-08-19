@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Address from '../../../shared/models/address.model';
 import Debtor from '../../../shared/models/debtor.model';
 import DebtorHasAddress from '../../../shared/models/debtor_has_address.model';
+import Settings from '../../../shared/models/settings.model';
 import { AddressService } from '../../../shared/services/address.service';
 import { DebtorService } from '../../../shared/services/debtor.service';
 import { DebtorHasAddressService } from '../../../shared/services/debtor_has_address.service';
@@ -14,6 +15,8 @@ import { DebtorHasAddressService } from '../../../shared/services/debtor_has_add
     styleUrls: ['./add-debtor.component.scss']
 })
 export class AddDebtorComponent implements OnInit {
+    settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
+
     forCompany: boolean = false;
     debtor: Debtor = new Debtor;
     address: Address = new Address;
@@ -22,7 +25,7 @@ export class AddDebtorComponent implements OnInit {
         private debtorHasAddressService: DebtorHasAddressService, private addressService: AddressService, private router: Router) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Create Debtor - Invoice Panel');
+        this.titleService.setTitle('Create Debtor - ' + this.settings.company_name);
         this.route.params.subscribe(
             (params) => {
                 this.forCompany = params['company'] == 'yes' ? true : false;

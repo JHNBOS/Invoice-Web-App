@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ToastOptions, ToastyService } from 'ngx-toasty';
+import Settings from '../../../shared/models/settings.model';
 import { UserService } from '../../../shared/services/user.service';
 
 @Component({
@@ -10,6 +11,8 @@ import { UserService } from '../../../shared/services/user.service';
     styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent implements OnInit {
+    settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
+
     email: string;
     toastOptions: ToastOptions;
 
@@ -27,7 +30,7 @@ export class ResetPasswordComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.titleService.setTitle('Reset Password - Invoice Panel');
+        this.titleService.setTitle('Reset Password - ' + this.settings.company_name);
     }
 
     showSuccess() {

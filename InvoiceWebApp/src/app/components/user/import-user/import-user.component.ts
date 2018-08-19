@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import Settings from '../../../shared/models/settings.model';
 import User from '../../../shared/models/user.model';
 import { UserService } from '../../../shared/services/user.service';
 
@@ -10,12 +11,14 @@ import { UserService } from '../../../shared/services/user.service';
     styleUrls: ['./import-user.component.scss']
 })
 export class ImportUserComponent implements OnInit {
+    settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
+
     users: User[] = [];
 
     constructor(private titleService: Title, private userService: UserService, private route: ActivatedRoute, private router: Router) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Import Users - Invoice Panel');
+        this.titleService.setTitle('Import Users - ' + this.settings.company_name);
     }
 
     upload(event: any) {

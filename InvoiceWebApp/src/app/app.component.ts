@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { AuthenticationService } from './shared/authentication.service';
@@ -18,11 +18,14 @@ export class AppComponent implements OnInit {
     isSignedIn = false;
     title: string;
 
-    constructor(private authService: AuthenticationService, private route: ActivatedRoute,
-        private router: Router, private _sanitizer: DomSanitizer, private _settingsService: SettingsService) { }
+    constructor(private authService: AuthenticationService, private route: ActivatedRoute, private router: Router, private _sanitizer: DomSanitizer,
+        private settingsService: SettingsService, private titleService: Title) {
+        this.getSettings();
+    }
 
     ngOnInit() {
-        this.getSettings();
+        this.titleService.setTitle(this.settings.company_name); \
+
         this.checkIfLoggedIn();
         this.getCurrentRouteTitle();
     }
@@ -50,7 +53,7 @@ export class AppComponent implements OnInit {
     }
 
     getSettings() {
-        this._settingsService.get().subscribe(
+        this.settingsService.get().subscribe(
             (response) => {
                 this.settings = response;
                 sessionStorage.setItem('settings', JSON.stringify(response));

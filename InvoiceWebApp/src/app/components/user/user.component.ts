@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import Settings from '../../shared/models/settings.model';
 import User from '../../shared/models/user.model';
 import { UserService } from '../../shared/services/user.service';
 
@@ -11,13 +12,15 @@ import { UserService } from '../../shared/services/user.service';
 })
 
 export class UserComponent implements OnInit {
+    settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
+
     users: User[] = [];
 
     constructor(private titleService: Title, private route: ActivatedRoute,
         private userService: UserService, private router: Router) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Users - Invoice Panel');
+        this.titleService.setTitle('Users - ' + this.settings.company_name);
         this.getAllUsers();
     }
 

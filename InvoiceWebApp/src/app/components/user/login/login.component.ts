@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../../shared/authentication.service';
-import User from '../../../shared/models/user.model';
+import Settings from '../../../shared/models/settings.model';
 import { UserService } from '../../../shared/services/user.service';
 
 @Component({
@@ -11,6 +11,8 @@ import { UserService } from '../../../shared/services/user.service';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+    settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
+
     email = '';
     password = '';
     returnUrl: string;
@@ -19,7 +21,7 @@ export class LoginComponent implements OnInit {
         private router: Router, private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Sign In - Invoice Panel');
+        this.titleService.setTitle('Sign In - ' + this.settings.company_name);
 
         // reset login status
         this.authenticationService.logout();

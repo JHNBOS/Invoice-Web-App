@@ -112,20 +112,24 @@
 
             <div class="form-group row">
                 <div class="col-sm-8">
-                    <label for="logoweb">Use logo for website</label>
-                    <input type="checkbox" name="logoweb" class="form-control" id="logoweb" [(ngModel)]="settings.show_logo" required />
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" name="logoweb" id="logoweb" [(ngModel)]="settings.show_logo" required />
+                        <label class="custom-control-label" for="logoweb">Use logo on website</label>
+                    </div>
                 </div>
                 <div class="col-sm-8">
-                    <label for="logopdf">Use logo for PDF</label>
-                    <input type="checkbox" name="logopdf" class="form-control" id="logopdf" [(ngModel)]="settings.show_logo_in_pdf" required />
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" name="logopdf" id="logopdf" [(ngModel)]="settings.show_logo_in_pdf" required />
+                        <label class="custom-control-label" for="logopdf">Use logo in PDF</label>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row">
                 <div class="col-sm-6">
                     <div class="custom-file">
-                        <input id="fileInput" name="logo" class="custom-file-input" #fileInput type="file" accept="image/*" title="Choose an image to upload as logo" />
-                        <label class="custom-file-label" for="fileInput">Choose picture</label>
+                        <input id="fileInput" name="logo" class="custom-file-input" #fileInput type="file" accept="image/*" title="Choose an image to upload as logo" (change)="setFileName()"/>
+                        <label class="custom-file-label" for="fileInput">{{ fileLabel }}</label>
                     </div>
                 </div>
                 <div class="col-sm-6"></div>

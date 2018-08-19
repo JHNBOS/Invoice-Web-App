@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import Debtor from '../../../shared/models/debtor.model';
 import Invoice from '../../../shared/models/invoice.model';
 import InvoiceItem from '../../../shared/models/invoice_item.model';
+import Settings from '../../../shared/models/settings.model';
 import { InvoiceService } from '../../../shared/services/invoice.service';
 import { InvoiceItemService } from '../../../shared/services/invoice_item.service';
 
@@ -14,6 +15,8 @@ import { InvoiceItemService } from '../../../shared/services/invoice_item.servic
     styleUrls: ['./create-invoice.component.scss']
 })
 export class CreateInvoiceComponent implements OnInit {
+    settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
+
     invoice: Invoice = new Invoice;
     debtor: Debtor;
     invoiceLength: number = 0;
@@ -26,7 +29,7 @@ export class CreateInvoiceComponent implements OnInit {
         private router: Router) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Create Invoice - Invoice Panel');
+        this.titleService.setTitle('Create Invoice - ' + this.settings.company_name);
 
         this.setExpired();
         this.setInitialRow();
@@ -68,7 +71,7 @@ export class CreateInvoiceComponent implements OnInit {
             (response) => {
                 setTimeout(() => {
                     this.saveInvoiceItems();
-                },500);
+                }, 500);
             },
             (error) => { throw (error); }
         );

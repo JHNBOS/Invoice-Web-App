@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import Invoice from '../../../shared/models/invoice.model';
+import Settings from '../../../shared/models/settings.model';
 import User from '../../../shared/models/user.model';
 import { InvoiceService } from '../../../shared/services/invoice.service';
 import { InvoiceItemService } from '../../../shared/services/invoice_item.service';
@@ -13,6 +14,8 @@ import { InvoiceItemService } from '../../../shared/services/invoice_item.servic
 })
 export class DetailInvoiceComponent implements OnInit {
     currentUser: User = JSON.parse(sessionStorage.getItem('signedInUser'));
+    settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
+
     invoiceNumber: string;
     invoice: Invoice;
 
@@ -20,7 +23,7 @@ export class DetailInvoiceComponent implements OnInit {
         private titleService: Title) { }
 
     ngOnInit() {
-        this.titleService.setTitle('Invoice Details - Invoice Panel');
+        this.titleService.setTitle('Invoice Details - ' + this.settings.company_name);
         this.route.params.subscribe(
             (params) => {
                 this.invoiceNumber = params['id'];

@@ -27,9 +27,9 @@ namespace InvoiceWebApp.Components.Services
             }
 
             _context.Entry(settingsBeforeUpdate).CurrentValues.SetValues(settings);
-            var result = await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
-            return result == 1 ? settings : null;
+            return settings;
         }
     }
 }

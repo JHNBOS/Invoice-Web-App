@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import Role from '../../../shared/models/role.model';
+import Settings from '../../../shared/models/settings.model';
 import User from '../../../shared/models/user.model';
 import { RoleService } from '../../../shared/services/role.service';
 import { UserService } from '../../../shared/services/user.service';
@@ -12,6 +13,8 @@ import { UserService } from '../../../shared/services/user.service';
     styleUrls: ['./detail-user.component.scss']
 })
 export class DetailUserComponent implements OnInit {
+    settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
+
     email: string;
     user: User;
     roles: Role[] = null;
@@ -19,7 +22,7 @@ export class DetailUserComponent implements OnInit {
     constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService, private roleService: RoleService, private _sanitizer: DomSanitizer, private router: Router) { }
 
     ngOnInit() {
-        this.titleService.setTitle('User Details - Invoice Panel');
+        this.titleService.setTitle('User Details - ' + this.settings.company_name);
         this.route.params.subscribe(
             (params) => {
                 this.email = params['email'];
