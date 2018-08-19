@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.titleService.setTitle(this.settings.company_name); \
+        this.titleService.setTitle(this.settings.company_name);
 
         this.checkIfLoggedIn();
         this.getCurrentRouteTitle();
