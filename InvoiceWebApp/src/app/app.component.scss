@@ -1,8 +1,8 @@
 $navbarHeight: 80px;
 $sidebarWidth: 11vw;
 $mainWidth: calc(100vw - #{$sidebarWidth});
-
 /* Navbar */
+
 .navbar {
     height: $navbarHeight;
     left: $sidebarWidth;
@@ -40,6 +40,13 @@ $mainWidth: calc(100vw - #{$sidebarWidth});
 .navbar-nav:nth-child(2) .nav-item:hover .sign-out {
     color: darkred !important;
 }
+
+.navbar-nav:nth-child(2) .nav-item .settings {
+    font-size: 22px;
+    padding: 0.5rem .7rem 0rem .8rem;
+    text-align: center;
+}
+
 
 .navbar-nav:nth-child(2) .nav-item .profile {
     max-height: 55px;
@@ -91,11 +98,13 @@ $mainWidth: calc(100vw - #{$sidebarWidth});
     text-align: center;
 }
 
-.navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse {
+.navbar-fixed-bottom .navbar-collapse,
+.navbar-fixed-top .navbar-collapse {
     max-height: none;
 }
 
 /* Main */
+
 main {
     position: fixed;
     left: $sidebarWidth;
@@ -113,6 +122,7 @@ main .container-fluid {
 }
 
 /* Sidebar */
+
 .sidebar {
     position: fixed;
     width: $sidebarWidth;
@@ -122,11 +132,13 @@ main .container-fluid {
     z-index: 1000;
     padding: 20px;
     overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    overflow-y: auto;
+    /* Scrollable contents if viewport is shorter than content. */
     background: #424c56;
 }
 
 /* Sidebar navigation */
+
 .sidebar {
     padding-left: 0;
     padding-right: 0;
@@ -157,7 +169,7 @@ main .container-fluid {
     padding: 0;
 }
 
-.sidebar .nav-top a > img.logo {
+.sidebar .nav-top a>img.logo {
     text-align: center;
     max-height: 70px;
 }
@@ -194,7 +206,7 @@ main .container-fluid {
     color: #fff;
 }
 
-.sidebar .nav-item + .nav-item {
+.sidebar .nav-item+.nav-item {
     margin-left: 0;
 }
 
@@ -203,11 +215,11 @@ main .container-fluid {
 }
 
 /* Media Queries */
+
 @media (max-width: 992px) {
     .navbar {
         left: 0 !important;
     }
-
     .navbar-collapse {
         z-index: 999;
         position: absolute;
@@ -215,11 +227,9 @@ main .container-fluid {
         width: 100vw;
         left: 0px;
     }
-
     .navbar-toggler {
         display: block;
     }
-
     main {
         left: 0 !important;
         width: 100vw;
@@ -231,7 +241,6 @@ main .container-fluid {
     .sidebar .nav-top {
         padding: 0px 5px 0px 5px;
     }
-
     .sidebar .nav-top a {
         font-size: 14px;
     }
