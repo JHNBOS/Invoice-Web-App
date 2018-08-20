@@ -15,7 +15,7 @@ import { InvoiceService } from '../../shared/services/invoice.service';
 })
 export class InvoiceComponent implements OnInit {
     settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
-    user: User = JSON.parse(sessionStorage.getItem('signedInUser'));
+    currentUser: User = JSON.parse(sessionStorage.getItem('signedInUser'));
 
     debtor: Debtor = null;
     invoices: Invoice[] = [];
@@ -25,7 +25,7 @@ export class InvoiceComponent implements OnInit {
     ngOnInit() {
         this.titleService.setTitle('Invoices - ' + this.settings.company_name);
 
-        if (this.user.role_id == 2) {
+        if (this.currentUser.role_id == 2) {
             this.getInvoicesByDebtor();
         } else {
             this.getAllInvoices();
@@ -33,17 +33,10 @@ export class InvoiceComponent implements OnInit {
     }
 
     getAllInvoices() {
-        if (this.user.role_id == 2) {
-            this.invoiceService.getByDebtorId(this.debtor.id).subscribe(
-                (response) => this.invoices = response,
-                (error) => { throw error; }
-            );
-        } else {
-            this.invoiceService.getAll().subscribe(
-                (response) => this.invoices = response,
-                (error) => { throw error; }
-            );
-        }
+        this.invoiceService.getAll().subscribe(
+            (response) => this.invoices = response,
+            (error) => { throw error; }
+        );
     }
 
     getInvoicesByDebtor() {
@@ -56,7 +49,7 @@ export class InvoiceComponent implements OnInit {
     }
 
     getDebtor() {
-        this.debtorService.getByEmail(this.user.email).subscribe(
+        this.debtorService.getByEmail(this.currentUser.email).subscribe(
             (response) => this.debtor = response,
             (error) => { throw error; }
         );

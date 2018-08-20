@@ -14,7 +14,6 @@ export class DashboardComponent implements OnInit {
     settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
     currentUser: User = JSON.parse(sessionStorage.getItem('signedInUser'));
     invoice_count: number = 0;
-    show: boolean = false;
 
     constructor(private titleService: Title, private userService: UserService, private invoiceService: InvoiceService) { }
 
