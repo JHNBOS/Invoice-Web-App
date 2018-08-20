@@ -40,7 +40,7 @@
             <div class="form-group row">
                 <div class="col-sm-6">
                     <div class="custom-file">
-                        <input id="fileInput" name="profile_pic" class="custom-file-input" #fileInput type="file" accept="image/*" title="Choose an image to upload as profile picture" />
+                        <input id="fileInput" name="profile_pic" class="custom-file-input" #fileInput type="file" accept="image/*" title="Choose an image to upload as profile picture" (change)="setFileName()" />
                         <label class="custom-file-label" for="fileInput">{{ fileLabel }}</label>
                     </div>
                 </div>

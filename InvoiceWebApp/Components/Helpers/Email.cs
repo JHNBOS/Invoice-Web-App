@@ -53,7 +53,7 @@ namespace InvoiceWebApp.Components.Helpers
             {
                 IsBodyHtml = true,
                 Subject = String.Format("{0} - Password Reset", this.Settings.CompanyName),
-                Body = "Dear user,<br /><br />Beneath you will find your temporary password. When signed in, please change your password. <br /><br /><b>Password:<b/> " + password
+                Body = "Dear user,<br /><br />Beneath you will find your temporary password. When signed in, please change your password. <br /><br /><b>Password:  <b/> " + password
             })
             {
                 await smtpClient.SendMailAsync(message);
@@ -96,8 +96,8 @@ namespace InvoiceWebApp.Components.Helpers
                 IsBodyHtml = true,
                 Subject = String.Format("{0} - Credentials", this.Settings.CompanyName),
                 Body = string.Format("Dear {0}. {1},<br /><br />Below you will find your credentials. Please change after signing in."
-                + "<br /><br /><b>Username:<b/>" + user.Email
-                + "<br /><b>Password:<b/>" + user.Password
+                + "<br /><br /><b>Username:  <b/>" + user.Email
+                + "<br /><b>Password:  <b/>" + user.Password
                 + "<br /><br />Kind regards,<br /><br />Invoice Panel", user.FirstName[0], user.LastName)
             })
             {
