@@ -26,7 +26,7 @@ export class InvoiceComponent implements OnInit {
         this.titleService.setTitle('Invoices - ' + this.settings.company_name);
 
         if (this.currentUser.role_id == 2) {
-            this.getInvoicesByDebtor();
+            this.getDebtor();
         } else {
             this.getAllInvoices();
         }
@@ -40,8 +40,6 @@ export class InvoiceComponent implements OnInit {
     }
 
     getInvoicesByDebtor() {
-        this.getDebtor();
-
         this.invoiceService.getByDebtorId(this.debtor.id).subscribe(
             (response) => this.invoices = response,
             (error) => { throw error; }
@@ -50,7 +48,10 @@ export class InvoiceComponent implements OnInit {
 
     getDebtor() {
         this.debtorService.getByEmail(this.currentUser.email).subscribe(
-            (response) => this.debtor = response,
+            (response) => {
+                this.debtor = response;
+                this.getInvoicesByDebtor();
+            },
             (error) => { throw error; }
         );
     }
