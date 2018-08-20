@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app.routing';
 import { DashboardModule } from './components/dashboard/dashboard.module';
 import { DebtorModule } from './components/debtor/debtor.module';
 import { InvoiceModule } from './components/invoice/invoice.module';
+import { ModalModule } from './components/modal/modal.module';
 import { SettingsModule } from './components/settings/settings.module';
 import { UserModule } from './components/user/user.module';
 import { AuthenticationService } from './shared/authentication.service';
@@ -30,6 +31,7 @@ import { SharedService } from './shared/services/shared.service';
         DebtorModule,
         InvoiceModule,
         SettingsModule,
+        ModalModule,
         ToastyModule.forRoot(),
         AppRoutingModule
     ],
