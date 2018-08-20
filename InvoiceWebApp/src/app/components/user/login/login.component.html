@@ -3,14 +3,14 @@
         <form>
             <div class="form-group">
                 <label for="email">E-mail</label>
-                <input type="email" name="email" class="form-control" id="email" [(ngModel)]="email" autofocus>
+                <input type="email" name="email" class="form-control" id="email" [(ngModel)]="email" autofocus required autocomplete="email" />
             </div>
 
             <div class="form-group mt-4">
                 <a [routerLink]="['/forgot']" class="text-primary pull-right" title="Forgot your password?">Forgot password?</a>
 
                 <label for="password">Password</label>
-                <input type="password" name="password" class="form-control" id="password" [(ngModel)]="password">
+                <input type="password" name="password" class="form-control" id="password" [(ngModel)]="password" required autocomplete="current-password" />
             </div>
 
             <div class="form-group row">
