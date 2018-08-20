@@ -36,6 +36,7 @@ export class AddUserComponent implements OnInit {
     }
 
     submitForm() {
+        this.user.role_id = Number(this.user.role_id);
         this.userService.create(this.user).subscribe(
             (response) => {
                 if (response != null) {
