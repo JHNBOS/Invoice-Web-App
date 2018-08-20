@@ -34,7 +34,7 @@ export class InvoiceComponent implements OnInit {
 
     getAllInvoices() {
         if (this.user.role_id == 2) {
-            this.invoiceService.getByDebtorId(this.).subscribe(
+            this.invoiceService.getByDebtorId(this.debtor.id).subscribe(
                 (response) => this.invoices = response,
                 (error) => { throw error; }
             );
