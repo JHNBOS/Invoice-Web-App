@@ -148,6 +148,7 @@ namespace InvoiceWebApp.Controllers
                 return StatusCode(400, "Invalid parameter(s).");
             }
 
+            bool sendEmail = false;
             User user = new User
             {
                 FirstName = model.FirstName,
@@ -174,6 +175,7 @@ namespace InvoiceWebApp.Controllers
             if (String.IsNullOrEmpty(user.Password))
             {
                 user.Password = String.Format("{0}{1}{2}", user.LastName, user.FirstName[0], DateTime.Now.Minute);
+                sendEmail = true;
             }
 
             //Insert user
@@ -187,7 +189,10 @@ namespace InvoiceWebApp.Controllers
             result.SetProperties(data);
 
             //Send email with credentials
-            await _email.SendCredentials(user);
+            if (sendEmail)
+            {
+                await _email.SendCredentials(user);
+            }
 
             return Ok(result);
         }

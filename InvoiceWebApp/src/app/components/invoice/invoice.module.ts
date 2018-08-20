@@ -2,15 +2,16 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ToastyModule } from 'ngx-toasty';
 import { CurrencyMaskModule } from 'ngx-currency-mask';
 import { CURRENCY_MASK_CONFIG, CurrencyMaskConfig } from 'ngx-currency-mask/src/currency-mask.config';
+import { ToastyModule } from 'ngx-toasty';
 import { CustomErrorHandler } from '../../shared/error-handler';
 import { AddressService } from '../../shared/services/address.service';
 import { DebtorService } from '../../shared/services/debtor.service';
 import { InvoiceService } from '../../shared/services/invoice.service';
 import { InvoiceItemService } from '../../shared/services/invoice_item.service';
 import { DebtorDropdownModule } from '../debtor/debtor-dropdown/debtor-dropdown.module';
+import { ModalModule } from '../modal/modal.module';
 import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
 import { DetailInvoiceComponent } from './detail-invoice/detail-invoice.component';
 import { EditInvoiceComponent } from './edit-invoice/edit-invoice.component';
@@ -41,6 +42,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
         FormsModule,
         DebtorDropdownModule,
         CurrencyMaskModule,
+        ModalModule,
         ToastyModule.forRoot(),
         InvoiceRoutingModule
     ],

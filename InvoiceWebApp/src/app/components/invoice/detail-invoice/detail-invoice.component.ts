@@ -18,6 +18,7 @@ export class DetailInvoiceComponent implements OnInit {
 
     invoiceNumber: string;
     invoice: Invoice;
+    show: boolean = false;
 
     constructor(private invoiceService: InvoiceService, private itemService: InvoiceItemService, private router: Router, private route: ActivatedRoute,
         private titleService: Title) { }
@@ -45,6 +46,16 @@ export class DetailInvoiceComponent implements OnInit {
     getItems(invoice: string) {
         this.itemService.getByInvoice(invoice).subscribe(
             (response) => this.invoice.items = response,
+            (error) => { throw error; }
+        );
+    }
+
+    payInvoice() {
+        this.invoice.is_paid = true;
+        this.invoiceService.update(this.invoice).subscribe(
+            (response) => {
+                this.show = true;
+            },
             (error) => { throw error; }
         );
     }

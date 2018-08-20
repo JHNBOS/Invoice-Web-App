@@ -47,7 +47,7 @@
 <nav class="bg-faded sidebar d-none d-lg-block">
     <div class="nav-top">
         <a [routerLink]="['/']" class="navbar-brand" *ngIf="settings != null">
-            <span *ngIf="!settings?.show_logo">{{ settings?.company_name }}</span>
+            <span *ngIf="!settings?.show_logo">{{ settings.company_name }}</span>
             <img *ngIf="settings?.show_logo" class="logo" [src]="_sanitizer.bypassSecurityTrustUrl(settings?.logo)" />
         </a>
     </div>

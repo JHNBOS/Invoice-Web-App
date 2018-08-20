@@ -24,8 +24,6 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.titleService.setTitle(this.settings.company_name);
-
         this.checkIfLoggedIn();
         this.getCurrentRouteTitle();
     }
@@ -57,6 +55,7 @@ export class AppComponent implements OnInit {
             (response) => {
                 this.settings = response;
                 sessionStorage.setItem('settings', JSON.stringify(response));
+                this.titleService.setTitle(this.settings.company_name);
             },
             (error) => { throw error; }
         );

@@ -7,6 +7,7 @@ import { CustomErrorHandler } from '../../shared/error-handler';
 import { AddressService } from '../../shared/services/address.service';
 import { DebtorService } from '../../shared/services/debtor.service';
 import { DebtorHasAddressService } from '../../shared/services/debtor_has_address.service';
+import { ModalModule } from '../modal/modal.module';
 import { AddDebtorComponent } from './add-debtor/add-debtor.component';
 import { DebtorComponent } from './debtor.component';
 import { DebtorRoutingModule } from './debtor.routing';
@@ -26,6 +27,7 @@ import { ImportDebtorComponent } from './import-debtor/import-debtor.component';
         CommonModule,
         HttpClientModule,
         FormsModule,
+        ModalModule,
         ToastyModule.forRoot(),
         DebtorRoutingModule
     ],
