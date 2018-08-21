@@ -11,13 +11,13 @@
                 <a [routerLink]="['/']" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
             </li>
             <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show" [hidden]="currentUser.role_id == 2">
-                <a [routerLink]="['/debtors']" class="nav-link" routerLinkActive="active" >Debtors</a>
+                <a [routerLink]="['/debtors']" class="nav-link" routerLinkActive="active">Debtors</a>
             </li>
             <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                 <a [routerLink]="['/invoices']" class="nav-link" routerLinkActive="active" >Invoices</a>
             </li>
             <li class="nav-item"data-toggle="collapse" data-target=".navbar-collapse.show">
-                <a [routerLink]="['/users']" class="nav-link" routerLinkActive="active" >Users</a>
+                <a [routerLink]="['/users']" class="nav-link" routerLinkActive="active">Users</a>
             </li>
             <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                 <a [routerLink]="['/settings']" class="nav-link settings" routerLinkActive="active">Settings</a>
@@ -53,16 +53,24 @@
     </div>
     <ul class="nav nav-pills flex-column" *ngIf="isSignedIn && currentUser != null">
         <li class="nav-item">
-            <a [routerLink]="['/']" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+            <a [routerLink]="['/']" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <i class="fa fa-home mr-2" aria-hidden="true"></i>Home
+            </a>
         </li>
         <li class="nav-item" [hidden]="currentUser.role_id == 2">
-            <a [routerLink]="['/debtors']" class="nav-link" routerLinkActive="active">Debtors</a>
+            <a [routerLink]="['/debtors']" class="nav-link" routerLinkActive="active">
+                <i class="fa fa-address-book mr-2" aria-hidden="true"></i>Debtors
+            </a>
         </li>
         <li class="nav-item">
-            <a [routerLink]="['/invoices']" class="nav-link" routerLinkActive="active">Invoices</a>
+            <a [routerLink]="['/invoices']" class="nav-link" routerLinkActive="active">
+                <i class="fa fa-file-text mr-2" aria-hidden="true"></i>Invoices
+            </a>
         </li>
         <li class="nav-item" [hidden]="currentUser.role_id == 2">
-            <a [routerLink]="['/users']" class="nav-link" routerLinkActive="active">Users</a>
+            <a [routerLink]="['/users']" class="nav-link" routerLinkActive="active">
+                <i class="fa fa-users mr-2" aria-hidden="true"></i>Users
+            </a>
         </li>
     </ul>
     <ul class="nav nav-pills flex-column nav-bottom" *ngIf="isSignedIn && currentUser != null">

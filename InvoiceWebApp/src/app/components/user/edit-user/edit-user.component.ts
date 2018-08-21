@@ -45,8 +45,10 @@ export class EditUserComponent implements OnInit {
     submitForm() {
         this.userService.update(this.user).subscribe(
             (response) => {
-                if (response != null) {
+                if (response != null && (this.fileInput.nativeElement.files && this.fileInput.nativeElement.files[0])) {
                     this.fileUpload();
+                } else {
+                    this.router.navigate(['/'])
                 }
             },
             (error) => { throw error; }

@@ -121,4 +121,10 @@
     </div>
 </div>
 
-<modal [title]="'Transaction Successfull'" [body]="'Thank you for paying your invoice!'" [showModal]="show"></modal>
+<modal [title]="'Transaction Succeeded'" [showModal]="show" [redirectOnClose]="true" [redirectTo]="'/'">
+    <modal-body>
+        <p>
+            Thank you for paying your invoice!
+        </p>
+    </modal-body>
+</modal>

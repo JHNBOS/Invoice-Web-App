@@ -8,11 +8,14 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div class="modal-body">
-                <p>{{ body }}</p>
+                <ng-content select="modal-body"></ng-content>
             </div>
+
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" (click)="showModal = false;">Close</button>
+                <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+                <ng-content select="modal-footer"></ng-content>
             </div>
         </div>
     </div>

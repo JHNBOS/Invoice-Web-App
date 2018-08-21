@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'modal',
@@ -7,13 +8,22 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ModalComponent implements OnInit {
 
-    @Input('title') title:string = 'Title';
-    @Input('body') body:string = 'Lorem ispum dolor et';
-    @Input('showModal') showModal:boolean = false;
+    @Input('title') title: string = 'Title';
+    @Input('redirectOnClose') redirectOnClose: boolean = false;
+    @Input('redirectTo') redirectTo: string = '/';
+    @Input('showModal') showModal: boolean = false;
 
-    constructor() { }
+    constructor(private router: Router) { }
 
-    ngOnInit() {
+    ngOnInit() { }
+
+    closeModal() {
+        this.showModal = false;
+
+        setTimeout(() => {
+            if (this.redirectOnClose) {
+                this.router.navigate([this.redirectTo]);
+            }
+        }, 500);
     }
-
 }

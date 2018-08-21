@@ -8,19 +8,45 @@
 
             <h4 class="text-muted"><span>User Information</span></h4>
 
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="email">E-mail</label>
-                    <input type="text" name="email" class="form-control" id="email" [(ngModel)]="user.email" readonly />
+            <ng-container *ngIf="user.email != currentUser.email">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="email">E-mail</label>
+                        <input type="text" name="email" class="form-control" id="email" [(ngModel)]="user.email" readonly />
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="role">User Role</label>
+                        <select name="role" class="custom-select" id="role" [(ngModel)]="user.role_id" [disabled]="user.role_id == 2">
+                            <option selected>Select an user role</option>
+                            <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-sm-6">
-                    <label for="role">User Role</label>
-                    <select name="role" class="custom-select" id="role" [(ngModel)]="user.role_id" [disabled]="user.role_id == 2">
-                        <option selected>Select an user role</option>
-                        <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
-                    </select>
+            </ng-container>
+
+            <ng-container *ngIf="user.email == currentUser.email">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="email">E-mail</label>
+                        <input type="text" name="email" class="form-control" id="email" [(ngModel)]="user.email" readonly />
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="pass">Password</label>
+                        <input type="password" name="pass" class="form-control" id="pass" [(ngModel)]="user.password" />
+                    </div>
                 </div>
-            </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="role">User Role</label>
+                        <select name="role" class="custom-select" id="role" [(ngModel)]="user.role_id" [disabled]="user.role_id == 2">
+                            <option selected>Select an user role</option>
+                            <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6"></div>
+                </div>
+            </ng-container>
 
             <br />
 

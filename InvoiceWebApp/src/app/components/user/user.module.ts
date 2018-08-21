@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToastyModule } from 'ngx-toasty';
 import { CustomErrorHandler } from '../../shared/error-handler';
@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user.component';
 import { UserRoutingModule } from './user.routing';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ModalModule } from '../modal/modal.module';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
         CommonModule,
         HttpClientModule,
         FormsModule,
+        ModalModule,
         ToastyModule.forRoot(),
         UserRoutingModule
     ],
@@ -37,6 +39,10 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     ],
     exports: [
         UserComponent
+    ],
+    schemas: [
+        NO_ERRORS_SCHEMA,
+        CUSTOM_ELEMENTS_SCHEMA
     ]
 })
 export class UserModule { }

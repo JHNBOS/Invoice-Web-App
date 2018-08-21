@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CurrencyMaskModule } from 'ngx-currency-mask';
 import { CURRENCY_MASK_CONFIG, CurrencyMaskConfig } from 'ngx-currency-mask/src/currency-mask.config';
@@ -56,6 +56,10 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ],
     exports: [
         InvoiceComponent
+    ],
+    schemas: [
+        NO_ERRORS_SCHEMA,
+        CUSTOM_ELEMENTS_SCHEMA
     ]
 })
 export class InvoiceModule { }

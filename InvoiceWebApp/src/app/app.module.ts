@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NO_ERRORS_SCHEMA, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastyModule } from 'ngx-toasty';
 import { AppComponent } from './app.component';
@@ -49,6 +49,10 @@ import { SharedService } from './shared/services/shared.service';
     ],
     bootstrap: [
         AppComponent
+    ],
+    schemas: [
+        NO_ERRORS_SCHEMA,
+        CUSTOM_ELEMENTS_SCHEMA
     ]
 })
 export class AppModule { }

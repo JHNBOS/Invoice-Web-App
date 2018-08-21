@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToastyModule } from 'ngx-toasty';
 import { CustomErrorHandler } from '../../shared/error-handler';
@@ -39,6 +39,10 @@ import { ImportDebtorComponent } from './import-debtor/import-debtor.component';
     ],
     exports: [
         DebtorComponent
+    ],
+    schemas: [
+        NO_ERRORS_SCHEMA,
+        CUSTOM_ELEMENTS_SCHEMA
     ]
 })
 export class DebtorModule { }
