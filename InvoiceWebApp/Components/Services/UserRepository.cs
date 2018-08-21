@@ -63,9 +63,9 @@ namespace InvoiceWebApp.Components.Services
             }
 
             _context.Entry(userBeforeUpdate).CurrentValues.SetValues(user);
-            var result = await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
-            return result == 1 ? user : null;
+            return user;
         }
 
         public async Task<bool> Delete(string email)

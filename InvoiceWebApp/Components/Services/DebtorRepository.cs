@@ -49,9 +49,9 @@ namespace InvoiceWebApp.Components.Services
             }
 
             _context.Entry(debtorBeforeUpdate).CurrentValues.SetValues(debtor);
-            var result = await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
-            return result == 1 ? debtor : null;
+            return debtor;
         }
 
         public async Task<bool> Delete(string id)

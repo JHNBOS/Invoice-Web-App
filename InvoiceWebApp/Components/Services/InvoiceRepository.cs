@@ -73,9 +73,9 @@ namespace InvoiceWebApp.Components.Services
             }
 
             _context.Entry(invoiceBeforeUpdate).CurrentValues.SetValues(invoice);
-            var result = await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
-            return result == 1 ? invoice : null;
+            return invoice;
         }
 
         public async Task<bool> Delete(string id)
