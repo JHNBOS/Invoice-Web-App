@@ -9,8 +9,8 @@
 
             <div class="form-row">
                 <div class="col-sm-12 col-md-6 mx-auto">
-                    <label for="fileUpload">Please choose a csv file to upload</label>
-                    <input type="file" class="form-control-file" id="fileUpload" (change)="upload($event)">
+                    <input id="fileInput" name="debtor_csv" class="custom-file-input" #fileInput type="file" accept=".csv" title="Choose a CSV file to upload" (change)="setFileName()" />
+                    <label class="custom-file-label" for="fileInput">{{ fileLabel }}</label>
                 </div>
             </div>
         </form>

@@ -15,13 +15,12 @@ import { UserService } from '../../../shared/services/user.service';
 export class EditUserComponent implements OnInit {
     settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
     currentUser: User = JSON.parse(sessionStorage.getItem('signedInUser'));
+    @ViewChild('fileInput') fileInput: ElementRef;
 
     email: string;
     user: User;
     roles: Role[] = null;
     fileLabel: string = 'Choose an image to use as profile picture';
-
-    @ViewChild('fileInput') fileInput: ElementRef;
 
     constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService, private roleService: RoleService, private router: Router) { }
 

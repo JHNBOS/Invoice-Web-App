@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import Settings from '../../../shared/models/settings.model';
@@ -12,8 +12,10 @@ import { UserService } from '../../../shared/services/user.service';
 })
 export class ImportUserComponent implements OnInit {
     settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
+    @ViewChild('fileInput') fileInput: ElementRef;
 
     users: User[] = [];
+    fileLabel: string = 'Choose a CSV file to upload';
 
     constructor(private titleService: Title, private userService: UserService, private route: ActivatedRoute, private router: Router) { }
 
@@ -23,6 +25,19 @@ export class ImportUserComponent implements OnInit {
 
     upload(event: any) {
         this.extractData(event.target);
+    }
+
+    setFileName() {
+        let fi = this.fileInput.nativeElement;
+        if (fi.files && fi.files[0]) {
+            let fileToUpload = fi.files[0];
+
+            if (fileToUpload) {
+                this.fileLabel = fileToUpload.name;
+            }
+        } else {
+            this.fileLabel = 'Choose a CSV file to upload';
+        }
     }
 
     private mapToUser(data: any[]) {
@@ -38,32 +53,36 @@ export class ImportUserComponent implements OnInit {
     }
 
     private extractData(fileInput: any) {
-        const fileReaded = fileInput.files[0];
+        let fi = this.fileInput.nativeElement;
         const lines = [];
 
-        const reader: FileReader = new FileReader();
-        reader.readAsText(fileReaded);
+        if (fi.files && fi.files[0]) {
+            let fileToUpload = fi.files[0];
 
-        reader.onload = (e) => {
-            const csv: string = reader.result;
-            const allTextLines = csv.split(/\r|\n|\r/);
-            const headers = allTextLines[0].split(',');
+            const reader: FileReader = new FileReader();
+            reader.readAsText(fileToUpload);
 
-            for (let i = 1; i < allTextLines.length; i++) {
-                // split content based on comma
-                const data = allTextLines[i].split(',');
-                if (data.length === headers.length) {
-                    const tarr = [];
-                    for (let j = 0; j < headers.length; j++) {
-                        tarr.push(data[j]);
+            reader.onload = (e) => {
+                const csv: string = reader.result;
+                const allTextLines = csv.split(/\r|\n|\r/);
+                const headers = allTextLines[0].split(',');
+
+                for (let i = 1; i < allTextLines.length; i++) {
+                    // split content based on comma
+                    const data = allTextLines[i].split(',');
+                    if (data.length === headers.length) {
+                        const tarr = [];
+                        for (let j = 0; j < headers.length; j++) {
+                            tarr.push(data[j]);
+                        }
+
+                        this.mapToUser(tarr);
                     }
-
-                    this.mapToUser(tarr);
                 }
-            }
 
-            this.saveUsers();
-        };
+                this.saveUsers();
+            };
+        }
     }
 
     private saveUsers() {
@@ -81,5 +100,4 @@ export class ImportUserComponent implements OnInit {
             this.router.navigate(['/users']);
         }, 500);
     }
-
 }
