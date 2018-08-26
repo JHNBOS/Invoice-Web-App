@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, NO_ERRORS_SCHEMA, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ErrorHandler, NO_ERRORS_SCHEMA, NgModule, CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastyModule } from 'ngx-toasty';
 import { AppComponent } from './app.component';
@@ -16,8 +16,11 @@ import { CustomErrorHandler } from './shared/error-handler';
 import { RoleService } from './shared/services/role.service';
 import { SettingsService } from './shared/services/settings.service';
 import { SharedService } from './shared/services/shared.service';
+import { ApplicationService } from './shared/services/application.service';
 
-//registerLocaleData(localeNL, 'nl');
+export function app_Init(appService: ApplicationService) {
+    return () => appService.initializeApp();
+}
 
 @NgModule({
     declarations: [
@@ -42,10 +45,11 @@ import { SharedService } from './shared/services/shared.service';
         SharedService,
         RoleService,
         SettingsService,
+        ApplicationService,
         { provide: AuthGuard, useClass: AuthGuard },
         { provide: AuthenticationService, useClass: AuthenticationService },
         { provide: ErrorHandler, useClass: CustomErrorHandler },
-        //{ provide: LOCALE_ID, useValue: 'nl' }
+        { provide: APP_INITIALIZER, useFactory: app_Init, deps: [ApplicationService], multi: true},
     ],
     bootstrap: [
         AppComponent

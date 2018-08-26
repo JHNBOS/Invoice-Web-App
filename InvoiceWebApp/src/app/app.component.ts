@@ -18,8 +18,8 @@ export class AppComponent implements OnInit {
     isSignedIn = false;
     title: string;
 
-    constructor(private authService: AuthenticationService, private route: ActivatedRoute, private router: Router, private _sanitizer: DomSanitizer,
-        private settingsService: SettingsService, private titleService: Title) {
+    constructor(private authService: AuthenticationService, private route: ActivatedRoute, private router: Router,
+        private _sanitizer: DomSanitizer, private settingsService: SettingsService, private titleService: Title) {
         this.getSettings();
     }
 
@@ -51,16 +51,9 @@ export class AppComponent implements OnInit {
     }
 
     getSettings() {
-        this.settingsService.get().subscribe(
-            (response) => {
-                this.settings = response;
-                sessionStorage.setItem('settings', JSON.stringify(response));
-                this.titleService.setTitle(this.settings.company_name);
-            },
-            (error) => { throw error; }
-        );
+        this.settings = JSON.parse(sessionStorage.getItem('settings'));
     }
-
+    
     signOut() {
         this.authService.logout();
         this.checkIfLoggedIn();
