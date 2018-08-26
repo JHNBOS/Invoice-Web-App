@@ -97,9 +97,15 @@ namespace InvoiceWebApp.Components.Helpers
                     format = ImageFormat.Gif;
                 }
 
+                // Position logo
+                var maxWidth = 250f;
+                var maxHeight = 110f;
+                var margin = 30f;
                 var logo = Image.GetInstance(img, format);
-                logo.ScalePercent(20);
-                logo.SetAbsolutePosition(30, 750);
+
+                logo.ScaleToFit(maxWidth, maxHeight);
+                logo.Alignment = Image.LEFT_ALIGN;
+                logo.SetAbsolutePosition(45, (doc.PageSize.Height - margin) - logo.ScaledHeight);
 
                 doc.Add(logo);
             }
