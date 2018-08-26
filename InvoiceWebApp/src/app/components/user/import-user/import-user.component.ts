@@ -63,8 +63,8 @@ export class ImportUserComponent implements OnInit {
             reader.readAsText(fileToUpload);
 
             reader.onload = (e) => {
-                const csv: string = reader.result;
-                const allTextLines = csv.split(/\r|\n|\r/);
+                const csv = reader.result;
+                const allTextLines = csv.toString().split(/\r|\n|\r/);
                 const headers = allTextLines[0].split(',');
 
                 for (let i = 1; i < allTextLines.length; i++) {

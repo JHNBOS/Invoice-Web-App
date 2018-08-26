@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -71,10 +72,36 @@ namespace InvoiceWebApp.Components.Helpers
             // Company logo
             if (settings.ShowLogoInPDF)
             {
-                string imagepath = @"~/Images/" + settings.Logo;
-                Image logo = Image.GetInstance(imagepath + "/mikesdotnetting.gif");
+                // Convert base64 string to byte[]
+                byte[] imageBytes = Convert.FromBase64String(settings.Logo.Split(',')[1]);
 
-                cb.AddImage(logo, logo.Width, 0, 0, logo.Height, 30, 800);
+                // Convert byte[] to Image
+                System.Drawing.Image img = null;
+                using (var ims = new MemoryStream(imageBytes, 0, imageBytes.Length))
+                {
+                    img = System.Drawing.Image.FromStream(ims, true);
+                }
+
+                // Get file format
+                var format = ImageFormat.Jpeg;
+                if (ImageFormat.Jpeg.Equals(img.RawFormat))
+                {
+                    format = ImageFormat.Jpeg;
+                }
+                else if (ImageFormat.Png.Equals(img.RawFormat))
+                {
+                    format = ImageFormat.Png;
+                }
+                else if (ImageFormat.Gif.Equals(img.RawFormat))
+                {
+                    format = ImageFormat.Gif;
+                }
+
+                var logo = Image.GetInstance(img, format);
+                logo.ScalePercent(20);
+                logo.SetAbsolutePosition(30, 750);
+
+                doc.Add(logo);
             }
 
             // Company info
