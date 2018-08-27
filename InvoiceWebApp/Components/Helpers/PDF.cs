@@ -98,8 +98,8 @@ namespace InvoiceWebApp.Components.Helpers
                 }
 
                 // Position logo
-                var maxWidth = 250f;
-                var maxHeight = 110f;
+                var maxWidth = 220f;
+                var maxHeight = 150f;
                 var margin = 30f;
                 var logo = Image.GetInstance(img, format);
 
@@ -137,7 +137,7 @@ namespace InvoiceWebApp.Components.Helpers
             // Invoice number
             cb.BeginText();
             cb.SetFontAndSize(helveticaBold, 15f);
-            cb.ShowTextAligned(Element.ALIGN_LEFT, "Invoice " + invoice.InvoiceNumber, 55, 500, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, "Invoice " + settings.InvoicePrefix + invoice.InvoiceNumber, 55, 500, 0);
             cb.EndText();
 
             // Invoice dates

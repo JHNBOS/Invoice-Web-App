@@ -19,7 +19,7 @@
                     <td class="text-muted py-2 pl-3" data-title="Due date">{{ invoice.expired_on | date: 'MMMM dd, yyyy' }}</td>
                     <td class="p-2" data-title="Invoice Nr.">
                         <a [routerLink]="['details', invoice.invoice_number]" title="View invoice details">
-                            {{ invoice.invoice_number }}
+                            {{ settings.invoice_prefix }}{{ invoice.invoice_number }}
                         </a>
                     </td>
                     <td class="p-2" data-title="Total">

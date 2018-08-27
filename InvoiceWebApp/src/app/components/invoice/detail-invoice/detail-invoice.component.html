@@ -12,7 +12,7 @@
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label for="number">Invoice Number</label>
-                    <input type="text" name="invoice_num" class="form-control" id="number" [(ngModel)]="invoice.invoice_number" readonly />
+                    <input type="text" name="invoice_num" class="form-control" id="number" value="{{ settings.invoice_prefix}}{{ invoice.invoice_number }}" readonly />
                 </div>
                 <div class="col-sm-6">
                     <label for="debtor">Debtor</label>
