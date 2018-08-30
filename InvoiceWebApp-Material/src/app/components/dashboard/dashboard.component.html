@@ -1,0 +1,17 @@
+<mat-card class="content-card mat-elevation-z15">
+    <mat-card-header>
+        <mat-card-title class="text-center">
+            <h2>Welcome <i>{{ currentUser?.first_name }}</i></h2>
+            <mat-divider></mat-divider>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            Currently, there {{ invoice_count == 1 ? 'is' : 'are' }}
+
+            <strong>
+                <i>{{ invoice_count }} unpaid {{ invoice_count == 1 ? 'invoice' : 'invoices' }}.</i>
+            </strong>
+        </p>
+    </mat-card-content>
+</mat-card>

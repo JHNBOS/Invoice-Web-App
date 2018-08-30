@@ -1,0 +1,130 @@
+<a class="return" [routerLink]="['/invoices']" title="Return">
+    <i class="fa fa-arrow-left"></i>
+</a>
+
+<div class="row justify-content-around mt-3">
+    <div class="col-sm-12 col-md-10 col-lg-10 mx-auto table-responsive">
+        <form *ngIf="invoice">
+
+            <h4 class="text-muted"><span>Invoice Information</span></h4>
+            <small class="text-muted" *ngIf="invoice.concept">Concept</small>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="number">Invoice Number</label>
+                    <input type="text" name="invoice_num" class="form-control" id="number" value="{{ settings.invoice_prefix}}{{ invoice.invoice_number }}" readonly />
+                </div>
+                <div class="col-sm-6">
+                    <label for="debtor">Debtor</label>
+                    <input type="text" name="debtor_id" id="debtor" readonly class="form-control" *ngIf="invoice.debtor.company_name == null" value="{{ invoice.debtor.id }}&emsp;{{ invoice.debtor.first_name }} {{ invoice.debtor.last_name }}" />
+                    <input type="text" name="debtor_id" id="debtor" readonly class="form-control" *ngIf="invoice.debtor.company_name != null" value="{{ invoice.debtor.id }}&emsp;{{ invoice.debtor.company_name }}" />
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="created">Invoice Date</label>
+                    <input type="date" name="creation_date" class="form-control" id="created" [ngModel]="invoice.created_on | date: 'yyyy-MM-dd'" (ngModelChange)="invoice.created_on=$event" readonly />
+                </div>
+                <div class="col-sm-6">
+                    <label for="expired">Due Date</label>
+                    <input type="date" name="expiration_date" class="form-control" id="expiration" [ngModel]="invoice.expired_on | date: 'yyyy-MM-dd'" (ngModelChange)="invoice.expired_on=$event" readonly />
+                </div>
+            </div>
+
+            <h4 class="text-muted"><span>Invoice Details</span></h4>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="total">To be paid</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">&euro;</span>
+                        </div>
+                        <input type="text" name="total" class="form-control" id="total" [ngModel]="invoice.total | number: '1.2-2'" (ngModelChange)="invoice.total=$event" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="discount">Discount</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">&euro;</span>
+                        </div>
+                        <input type="text" name="discount" class="form-control" id="discount" [ngModel]="invoice.discount | number: '1.2-2'" (ngModelChange)="invoice.discount=$event" readonly />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12 table-responsive">
+                    <table class="table table-sm table-condensed table-striped" *ngIf="invoice.items != null">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Qty</th>
+                                <th>Tax</th>
+                                <th>Total</th>
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row" *ngFor="let row of invoice.items">
+                                <td data-title="Name">
+                                    <input type="text" name="p_name" class="form-control form-control-sm" [value]="row.name" readonly />
+                                </td>
+                                <td data-title="Desc">
+                                    <input type="text" name="desc" class="form-control form-control-sm" [value]="row.description" readonly />
+                                </td>
+                                <td data-title="Price">
+                                    <input type="text" name="price" class="form-control form-control-sm" [value]="row.price | number: '1.2-2'" readonly />
+                                </td>
+                                <td data-title="Quantity">
+                                    <input type="number" name="qnt" class="form-control form-control-sm" [value]="row.quantity" min="1" readonly />
+                                </td>
+                                <td data-title="Tax">
+                                    <input type="number" name="tax" class="form-control form-control-sm" [value]="row.tax" min="0" readonly />
+                                </td>
+                                <td style="line-height:2;" data-title="Total">
+                                    <span style="font-weight: 500;">
+                                        &euro; {{ row.price * row.quantity | number: '1.2-2' }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="comment">Comment</label>
+                    <textarea rows="3" name="comment" class="form-control" id="comment" [(ngModel)]="invoice.comment" readonly></textarea>
+                </div>
+                <div class="col-sm-6"></div>
+            </div>
+
+            <br />
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <a *ngIf="currentUser.role_id == 1" class="btn btn-primary float-right" [routerLink]="['../../edit', invoice.invoice_number]" title="Edit Invoice">Edit</a>
+                    <a *ngIf="currentUser.role_id == 2 && invoice.is_paid == false" class="btn btn-primary float-right" (click)="payInvoice()" style="color:#fff !important;" title="Pay Invoice">Pay Invoice</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<modal [title]="'Transaction Succeeded'" [showModal]="show" [redirectOnClose]="true" [redirectTo]="'/'">
+    <modal-body>
+        <p>
+            Thank you for paying your invoice!
+        </p>
+    </modal-body>
+</modal>

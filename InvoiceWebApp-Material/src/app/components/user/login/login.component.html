@@ -1,0 +1,27 @@
+<mat-card class="login-card mat-elevation-z15">
+    <mat-card-header>
+        <mat-card-title>
+            <h2>Sign In</h2>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form>
+            <p>
+                <mat-form-field class="full-width-field">
+                    <mat-icon matPrefix>account_circle</mat-icon>
+                    <input type="email" matInput [(ngModel)]="email" placeholder="Enter your email" name="email" autofocus required autocomplete="on" tabindex="1" />
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width-field">
+                    <mat-icon matPrefix>lock</mat-icon>
+                    <input type="password" matInput [(ngModel)]="password" placeholder="Enter your password" name="password" required autocomplete="on" tabindex="1" />
+                </mat-form-field>
+            </p>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-flat-button color="primary" class="sign-in" (click)="checkCredentials()">SIGN IN</button>
+        <button mat-button [routerLink]="['/forgot']">RESET PASSWORD</button>
+    </mat-card-actions>
+</mat-card>

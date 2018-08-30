@@ -1,0 +1,71 @@
+<mat-card class="content-card mat-elevation-z15">
+    <mat-card-header>
+        <mat-card-title class="text-center">
+            <h2>Debtors</h2>
+
+            <div id="search-form">
+                <mat-form-field id="search" class="half-width-field">
+                    <input matInput type="text" placeholder="Search" [(ngModel)]="query" />
+                    <button mat-button *ngIf="query" matSuffix mat-icon-button aria-label="Clear" (click)="query='';">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <button id="add-debtor-button" type="button" mat-flat-button color="primary" [routerLink]="['add', 'no']" title="Create private debtor" class="mat-elevation-z3">
+                    <mat-icon>person_add</mat-icon>
+                </button>
+                <button id="add-debtor-button" type="button" mat-flat-button color="primary" [routerLink]="['add', 'yes']" title="Create business debtor" class="mat-elevation-z3">
+                    <mat-icon>group_add</mat-icon>
+                </button>
+                <button id="add-csv-button" type="button" mat-flat-button color="primary" [routerLink]="['import']" title="Import debtors by CSV" class="mat-elevation-z3">
+                    <mat-icon>note_add</mat-icon>
+                </button>
+            </div>
+
+            <mat-divider></mat-divider>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form *ngIf="debtors">
+            <table class="data-table" *ngIf="debtors?.length > 0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>City</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let debtor of search()">
+                        <td class="" data-title="ID">
+                            <a routerLinkActive="active" [routerLink]="['details', debtor.id]" title="View debtor details">
+                                {{ debtor.id }}
+                            </a>
+                        </td>
+                        <td class="" data-title="Name">
+                            <a routerLinkActive="active" [routerLink]="['details', debtor.id]" title="View debtor details">
+                                <span *ngIf="debtor.company_name == null">{{ debtor.first_name }} {{ debtor.last_name }}</span><span *ngIf="debtor.company_name != null">{{ debtor.company_name }}</span>
+                            </a>
+                        </td>
+                        <td class="" data-title="Email">
+                            {{ debtor.email }}
+                        </td>
+                        <td class="" data-title="City">
+                            {{ debtor.address.city }}, {{ debtor.address.country }}
+                        </td>
+                        <td data-title="">
+                            <button mat-icon-button color="primary" class="edit-button" [routerLink]="['edit', debtor.id]" title="Edit">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-icon-button color="primary" class="delete-button" type="button" (click)="deleteDebtor(debtor.id)" title="Remove">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </mat-card-content>
+</mat-card>

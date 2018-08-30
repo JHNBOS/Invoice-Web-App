@@ -1,0 +1,180 @@
+<mat-card class="content-card mat-elevation-z15">
+    <mat-card-header>
+        <mat-card-title class="text-center">
+            <h2>Settings</h2>
+            <mat-divider></mat-divider>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form *ngIf="settings">
+            <fieldset>
+                <legend>Business Information</legend>
+                <table cellspacing="0">
+                    <tr>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>create</mat-icon>
+                                <input type="text" matInput [(ngModel)]="settings.company_name" placeholder="Name of business" name="businessName" autofocus required tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>plus_one</mat-icon>
+                                <input type="text" matInput [(ngModel)]="settings.prefix" placeholder="Prefix for invoice number" name="prefix" tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>business</mat-icon>
+                                <input type="text" matInput [(ngModel)]="settings.business_number" placeholder="Business Number" name="businessNumber" required tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>attach_money</mat-icon>
+                                <input type="text" matInput [(ngModel)]="settings.vat" placeholder="VAT Number" name="vat" required tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>explore</mat-icon>
+                                <input type="text" matInput [(ngModel)]="settings.website" placeholder="Website" name="web" tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>phone</mat-icon>
+                                <input type="text" matInput [(ngModel)]="settings.phone" placeholder="Phone" name="phone" tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+
+            <fieldset>
+                <legend>Bank</legend>
+                <table cellspacing="0">
+                    <tr>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>account_balance</mat-icon>
+                                <input type="text" matInput [(ngModel)]="settings.bank" placeholder="Name of bank" name="bankName" required tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>credit_card</mat-icon>
+                                <input type="text" matInput [(ngModel)]="settings.bank_account" placeholder="Bank account" name="bankAccount" required tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+
+            <fieldset>
+                <legend>E-mail</legend>
+                <table cellspacing="0">
+                    <tr>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>mail</mat-icon>
+                                <input type="email" matInput [(ngModel)]="settings.email" placeholder="E-mail" name="email" required tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>lock</mat-icon>
+                                <input type="password" matInput [(ngModel)]="settings.password" placeholder="Password" name="pass" required tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>http</mat-icon>
+                                <input type="text" matInput [(ngModel)]="settings.smtp" placeholder="SMTP server" name="smtp" required tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>looks_two</mat-icon>
+                                <input type="number" matInput [(ngModel)]="settings.smtp_port" placeholder="SMTP Port" name="port" required tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+
+            <fieldset>
+                <legend>Address</legend>
+                <table cellspacing="0">
+                    <tr>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>place</mat-icon>
+                                <input type="text" matInput [(ngModel)]="settings.address" placeholder="Address" name="addr" required tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>place</mat-icon>
+                                <input type="text" matInput [(ngModel)]="settings.postal_code" placeholder="Postal code" name="postal" required tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>place</mat-icon>
+                                <input type="text" matInput [(ngModel)]="settings.city" placeholder="City" name="city" required tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>place</mat-icon>
+                                <input type="text" matInput [(ngModel)]="settings.country" placeholder="Country" name="country" required tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+
+            <fieldset>
+                <legend>Logo</legend>
+                <table cellspacing="0">
+                    <tr>
+                        <td class="half-width-field text-left">
+                            <mat-slide-toggle name="logoweb" [(ngModel)]="settings.show_logo">Use logo on website</mat-slide-toggle>
+                        </td>
+                        <td class="half-width-field"></td>
+                    </tr>
+                    <tr>
+                        <td class="half-width-field text-left">
+                            <mat-slide-toggle name="logopdf" [(ngModel)]="settings.show_logo_in_pdf">Use logo in PDF</mat-slide-toggle>
+                        </td>
+                        <td class="half-width-field"></td>
+                    </tr>
+                </table>
+
+                <table cellspacing="0">
+                    <tr>
+                        <td class="half-width-field text-left">
+                            <div class="custom-file">
+                                <input id="fileInput" name="logo" class="custom-file-input" #fileInput type="file" accept="image/*" title="Choose an image to upload as logo" (change)="setFileName()" />
+                                <label class="custom-file-label" for="fileInput">{{ fileLabel }}</label>
+                            </div>
+                        </td>
+                        <td class="half-width-field"></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-flat-button color="primary" (click)="submitForm()">SAVE</button>
+    </mat-card-actions>
+</mat-card>

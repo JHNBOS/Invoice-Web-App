@@ -1,0 +1,72 @@
+<mat-sidenav-container class="all-wrap" fullscreen>
+    <mat-sidenav #drawer mode="over" role="navigation" [(opened)]="sideNavOpened">
+        <mat-nav-list *ngIf="currentUser != null">
+            <div class="close-nav" mat-list-item>
+                <button mat-icon-button (click)="drawer.toggle();focusToolbar();" tabindex="-1">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+
+            <div mat-list-item>
+                <a href="#" style="height: 0; position: absolute;"></a>
+            </div>
+
+            <div class="account-nav" mat-list-item>
+                <a [routerLink]="['/users/edit', currentUser.email]" title="{{currentUser.first_name}} {{currentUser.last_name}}" (click)="drawer.toggle();focusToolbar();">
+                    <img class="profile" [src]="_sanitizer.bypassSecurityTrustUrl(currentUser.picture)" />
+                    <span class="user-name">{{ currentUser.first_name }} {{ currentUser.last_name }}</span>
+                </a>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <mat-list-item [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="drawer.toggle();focusToolbar();">
+                <mat-icon matListIcon>home</mat-icon>
+                <p matLine>Home</p>
+            </mat-list-item>
+            <mat-list-item [routerLink]="['/debtors']" routerLinkActive="active" [hidden]="currentUser.role_id == 2" (click)="drawer.toggle();focusToolbar();">
+                <mat-icon matListIcon>contacts</mat-icon>
+                <p matLine>Debtors</p>
+            </mat-list-item>
+            <mat-list-item [routerLink]="['/invoices']" routerLinkActive="active" (click)="drawer.toggle();focusToolbar();">
+                <mat-icon matListIcon>file_copy</mat-icon>
+                <p matLine>Invoices</p>
+            </mat-list-item>
+            <mat-list-item [routerLink]="['/users']" routerLinkActive="active" [hidden]="currentUser.role_id == 2" (click)="drawer.toggle();focusToolbar();">
+                <mat-icon matListIcon>group</mat-icon>
+                <p matLine>Users</p>
+            </mat-list-item>
+        </mat-nav-list>
+        <mat-nav-list class="bottom" *ngIf="currentUser != null">
+            <mat-list-item class="settings-button" [routerLink]="['/settings']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [hidden]="currentUser.role_id == 2" (click)="drawer.toggle();focusToolbar();">
+                <mat-icon matListIcon>settings</mat-icon>
+                <p matLine>Settings</p>
+            </mat-list-item>
+            <mat-list-item class="sign-out-button" (click)="signOut();drawer.toggle();focusToolbar();" [hidden]="currentUser.role_id == 2">
+                <mat-icon matListIcon>exit_to_app</mat-icon>
+                <p matLine>Sign Out</p>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <div #page class="page-wrap" tabindex="0">
+        <header role="banner">
+            <mat-toolbar class="navbar mat-elevation-z5" color="primary">
+                <button mat-icon-button (click)="drawer.toggle();" [hidden]="!currentUser" tabindex="-1">
+                    <mat-icon>menu</mat-icon>
+                </button>
+
+                <span class="spacer"></span>
+
+                <span class="navbar-brand" *ngIf="!settings?.show_logo">{{ settings.company_name }}</span>
+                <img *ngIf="settings?.show_logo" class="logo" [src]="_sanitizer.bypassSecurityTrustUrl(settings?.logo)" />
+            </mat-toolbar>
+        </header>
+
+        <main class="content">
+            <router-outlet (activate)="checkIfLoggedIn()"></router-outlet>
+        </main>
+
+        <footer></footer>
+    </div>
+</mat-sidenav-container>

@@ -1,0 +1,58 @@
+<mat-card class="content-card mat-elevation-z15">
+    <mat-card-header>
+        <mat-card-title class="text-center">
+            <h2>Users</h2>
+
+            <div id="search-form">
+                <mat-form-field id="search" class="half-width-field">
+                    <input matInput type="text" placeholder="Search" [(ngModel)]="query" />
+                    <button mat-button *ngIf="query" matSuffix mat-icon-button aria-label="Clear" (click)="query='';">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <button id="add-user-button" type="button" mat-flat-button color="primary" [routerLink]="['add']" title="Create user" class="mat-elevation-z3">
+                    <mat-icon>person_add</mat-icon>
+                </button>
+                <button id="add-csv-button" type="button" mat-flat-button color="primary" [routerLink]="['import']" title="Import users by CSV" class="mat-elevation-z3">
+                    <mat-icon>note_add</mat-icon>
+                </button>
+            </div>
+
+            <mat-divider></mat-divider>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form *ngIf="users">
+            <table class="data-table" *ngIf="users?.length > 0">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Email</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of search()">
+                        <td class="" data-title="User">
+                            <a [routerLink]="['details', user.email]" title="View user details">
+                                {{ user.first_name }} {{ user.last_name }}
+                            </a>
+                        </td>
+                        <td class="" data-title="Email">
+                            {{ user.email }}
+                        </td>
+                        <td data-title="">
+                            <button mat-icon-button color="primary" class="edit-button" [routerLink]="['edit', user.email]" title="Edit">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-icon-button color="primary" class="delete-button" type="button" (click)="deleteUser(user.email)" title="Remove">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </mat-card-content>
+</mat-card>

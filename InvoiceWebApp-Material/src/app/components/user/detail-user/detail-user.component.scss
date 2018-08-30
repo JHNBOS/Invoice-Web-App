@@ -1,0 +1,28 @@
+a.btn {
+    width: 150px;
+}
+
+.profile-picture {
+    max-width: 300px;
+    max-height: 300px;
+    margin: 0 auto;
+}
+
+@media (max-width: 992px) {
+    .row.form-group:last-child {
+        text-align: center !important;
+    }
+
+    a.btn {
+        width: 60%;
+        height: 50px;
+        float: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        line-height: 2.5;
+    }
+
+    a.btn.btn-primary:last-child {
+        margin-bottom: 2.5rem;
+    }
+}

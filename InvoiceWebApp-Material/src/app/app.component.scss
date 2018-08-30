@@ -1,0 +1,137 @@
+/* CONTENT AND SIDENAV */
+
+.all-wrap {
+    min-height: 100vh;
+}
+
+.page-wrap {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+mat-sidenav-container {
+    /*
+    background: #00B4DB;
+    background: -webkit-linear-gradient(to bottom, #0083B0, #00B4DB);
+    background: linear-gradient(to bottom, #0083B0, #00B4DB);
+    */
+
+    background: #24C6DC; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #514A9D, #24C6DC); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #514A9D, #24C6DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px;
+
+    > *:not(router-outlet) {
+        flex: 1;
+        display: block;
+    }
+}
+
+/* NAVBAR */
+
+.navbar {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.spacer {
+    flex: 1 auto 1;
+}
+
+.navbar .navbar-brand {
+    font-size: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: 'Montserrat', serif;
+}
+
+.navbar .logo {
+    max-height: 90%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* SIDENAV */
+
+mat-sidenav {
+    width: 10vw;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.close-nav{
+    text-align: right
+}
+
+mat-sidenav-container mat-sidenav mat-nav-list mat-list-item p {
+    color: #545454;
+}
+
+mat-sidenav-container mat-sidenav mat-nav-list mat-list-item mat-icon {
+    color: #797777;
+}
+
+mat-sidenav-container mat-sidenav mat-nav-list mat-list-item.active {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+mat-sidenav-container mat-sidenav mat-nav-list mat-list-item.active p,
+mat-sidenav-container mat-sidenav mat-nav-list mat-list-item.active mat-icon {
+    color: dodgerblue;
+}
+
+mat-sidenav-container mat-sidenav mat-nav-list.bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+mat-sidenav-container mat-sidenav mat-nav-list.bottom .settings-button {
+    color: #fff;
+    font-weight: 500;
+}
+
+mat-sidenav-container mat-sidenav mat-nav-list.bottom .sign-out-button {
+    color: #fff;
+    font-weight: 500;
+}
+
+mat-sidenav-container mat-sidenav mat-nav-list.bottom .settings-button mat-icon {
+    margin-right: 6px;
+    color: steelblue;
+}
+
+mat-sidenav-container mat-sidenav mat-nav-list.bottom .sign-out-button mat-icon  {
+    margin-right: 6px;
+    color: red;
+}
+
+mat-sidenav-container mat-sidenav .account-nav {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin: 5px 0 24px 0;
+}
+
+mat-sidenav-container mat-sidenav .account-nav a {
+    display: block;
+}
+
+mat-sidenav-container mat-sidenav .account-nav .profile {
+    max-width: 90px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+mat-sidenav-container mat-sidenav .account-nav .user-name {
+    display: block;
+    width: 100%;
+    font-weight: 600;
+    color: #646464;
+}

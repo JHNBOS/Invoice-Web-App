@@ -1,0 +1,55 @@
+<a class="return" [routerLink]="['/users']" title="Return">
+    <i class="fa fa-arrow-left"></i>
+</a>
+
+<div class="row justify-content-around mt-3">
+    <div class="col-sm-12 col-md-10 col-lg-9 mx-auto table-responsive">
+        <form *ngIf="user && roles">
+
+            <h4 class="text-muted"><span>User Information</span></h4>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="email">E-mail</label>
+                    <input type="text" name="email" class="form-control" id="email" [(ngModel)]="user.email" readonly />
+                </div>
+                <div class="col-sm-6">
+                    <label for="role">User Role</label>
+                    <select name="role" class="custom-select" id="role" [(ngModel)]="user.role_id" [disabled]="user.role_id == 2" disabled>
+                        <option selected>Select an user role</option>
+                        <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="firstName">First Name</label>
+                    <input type="text" name="f_name" class="form-control" id="firstName" [(ngModel)]="user.first_name" readonly />
+                </div>
+                <div class="col-sm-6">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" name="l_name" class="form-control" id="lastName" [(ngModel)]="user.last_name" readonly />
+                </div>
+            </div>
+
+            <h4 class="text-muted">Profile Picture</h4>
+
+            <div class="form-group row">
+                <div class="col-sm-4 mx-auto text-center">
+                    <img class="img-fluid profile-picture" [src]="_sanitizer.bypassSecurityTrustUrl(user.picture)" />
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <a class="btn btn-primary float-right" [routerLink]="['../../edit', user.email]">Edit</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

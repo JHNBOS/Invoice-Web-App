@@ -1,0 +1,133 @@
+<a class="return" [routerLink]="['/invoices']" title="Return">
+    <i class="fa fa-arrow-left"></i>
+</a>
+
+<div class="row justify-content-around mt-3">
+    <div class="col-sm-12 col-md-10 col-lg-10 mx-auto table-responsive">
+        <form *ngIf="invoice">
+
+            <h4 class="text-muted"><span>Invoice Information</span></h4>
+            <small class="text-muted" *ngIf="invoice.concept">Concept</small>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="number">Invoice Number</label>
+                    <input type="text" name="invoice_num" class="form-control" id="number" value="{{ settings.invoice_prefix}}{{ invoice.invoice_number }}" readonly />
+                </div>
+                <div class="col-sm-6">
+                    <label for="debtor">Debtor</label>
+                    <input type="text" name="debtor_id" id="debtor" readonly class="form-control" *ngIf="invoice.debtor.company_name == null" value="{{ invoice.debtor.id }}&emsp;{{ invoice.debtor.first_name }} {{ invoice.debtor.last_name }}" />
+                    <input type="text" name="debtor_id" id="debtor" readonly class="form-control" *ngIf="invoice.debtor.company_name != null" value="{{ invoice.debtor.id }}&emsp;{{ invoice.debtor.company_name }}" />
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="created">Invoice Date</label>
+                    <input type="date" name="creation_date" class="form-control" id="created" [ngModel]="invoice.created_on | date: 'yyyy-MM-dd'" (ngModelChange)="invoice.created_on=$event" />
+                </div>
+                <div class="col-sm-6">
+                    <label for="expired">Due Date</label>
+                    <input type="date" name="expiration_date" class="form-control" id="expiration" [ngModel]="invoice.expired_on | date: 'yyyy-MM-dd'" (ngModelChange)="invoice.expired_on=$event" />
+                </div>
+            </div>
+
+            <h4 class="text-muted"><span>Invoice Details</span></h4>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="total">To be paid</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">&euro;</span>
+                        </div>
+                        <input name="total" class="form-control" id="total" [(ngModel)]="total" readonly currencyMask />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="discount">Discount</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">&euro;</span>
+                        </div>
+                        <input name="discount" class="form-control" id="discount" [(ngModel)]="invoice.discount" (blur)="calculateTotal()" currencyMask />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12 table-responsive">
+                    <table class="table table-sm table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Qty</th>
+                                <th>Tax</th>
+                                <th>Total</th>
+                                <th class="text-center"></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row" *ngFor="let row of invoice.items;let i = index">
+                                <td data-title="Name">
+                                    <input type="text" name="p_name" class="form-control form-control-sm" [value]="row.name" [readonly]="row.invoice_number != '-1'" />
+                                </td>
+                                <td data-title="Desc">
+                                    <input type="text" name="desc" class="form-control form-control-sm" [value]="row.description" [readonly]="row.invoice_number != '-1'" />
+                                </td>
+                                <td data-title="Price">
+                                    <input type="text" name="price" class="form-control form-control-sm" [value]="row.price | number: '1.2-2'" (ngModelChange)="row.price=$event" *ngIf="row.invoice_number != '-1'" readonly />
+                                    <input name="price" class="form-control form-control-sm" [(ngModel)]="row.price" (change)="calculatePrice(row)" (blur)="calculatePrice(row)" *ngIf="row.invoice_number == '-1'" currencyMask />
+                                </td>
+                                <td data-title="Quantity">
+                                    <input type="number" name="qnt" class="form-control form-control-sm" [value]="row.quantity" min="1" *ngIf="row.invoice_number != '-1'" readonly />
+                                    <input type="number" name="qnt" class="form-control form-control-sm" [(ngModel)]="row.quantity" min="1" (change)="calculatePrice(row)" (blur)="calculatePrice(row)" *ngIf="row.invoice_number == '-1'" required />
+                                </td>
+                                <td data-title="Tax">
+                                    <input type="number" name="tax" class="form-control form-control-sm" [value]="row.tax" min="0" [readonly]="row.invoice_number != '-1'" />
+                                </td>
+                                <td style="line-height:2;" data-title="Total">
+                                    <span style="font-weight: 500;">
+                                        &euro; {{ row.price * row.quantity | number: '1.2-2' }}
+                                    </span>
+                                </td>
+                                <td data-title="" [hidden]="row.invoice_number != '-1'">
+                                    <a *ngIf="i >= 1" class="btn-delete" (click)="deleteRow(row)" title="Remove">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--<a class="btn btn-primary add" (click)="addRow()" title="Add">
+                    <i class="fa fa-plus"></i>
+                </a>-->
+            </div>
+
+            <br />
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="comment">Comment</label>
+                    <textarea rows="3" name="comment" class="form-control" id="comment" [(ngModel)]="invoice.comment"></textarea>
+                </div>
+                <div class="col-sm-6"></div>
+            </div>
+
+            <br />
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-primary float-right" (click)="submitForm(false)">Save</button>
+                    <button type="button" class="btn btn-primary float-right mr-1" (click)="submitForm(true)">Save as concept</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
