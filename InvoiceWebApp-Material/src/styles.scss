@@ -4,6 +4,9 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 /*@import "~@ng-select/ng-select/themes/material.theme.css";*/
 
+/*-------------------------------------------------------------------------------------*/
+/*----- Main --------------*/
+
 html {
     position: relative;
     min-height: 100%;
@@ -20,15 +23,15 @@ body {
     width: 600px;
 }
 
-/* Begin of Input */
+/*-------------------------------------------------------------------------------------*/
+/*----- Input --------------*/
 
 mat-input {
     padding: 10px;
 }
 
-/* End of Input */
-
-/* Begin of Button */
+/*-------------------------------------------------------------------------------------*/
+/*----- Buttons --------------*/
 
 .edit-button mat-icon {
     color: mediumseagreen;
@@ -42,9 +45,8 @@ mat-input {
     color: limegreen;
 }
 
-/* End of Button */
-
-/* Begin of Fieldset */
+/*-------------------------------------------------------------------------------------*/
+/*----- Fieldset --------------*/
 
 fieldset {
     border: 2px solid #d0d0d0;
@@ -55,7 +57,6 @@ fieldset {
 }
 
 legend {
-    font-family: 'Lato';
     font-weight: 300;
     padding: 4px 10px 4px 8px;
     display: block;
@@ -74,9 +75,8 @@ legend {
     }
 }
 
-/* End of Fieldset */
-
-/* Begin of Material Card */
+/*-------------------------------------------------------------------------------------*/
+/*----- Material Card --------------*/
 
 .content-card {
     width: 75vw;
@@ -142,8 +142,21 @@ mat-icon {
     font-size: 25px !important
 }
 
-/* End of Material Card */
+/*-------------------------------------------------------------------------------------*/
+/*----- Links --------------*/
 
-@media (max-width: 992px) {
+.return {
+    position: absolute !important;
+    left: 4%;
+    top: 3%;
+}
 
+.return mat-icon {
+    font-size: 2rem !important;
+    font-weight: bold;
+    color: #35428b;
+}
+
+.return:hover mat-icon {
+    color: #2e3b82;
 }

@@ -1,85 +1,123 @@
-<a class="return" [routerLink]="['/users']" title="Return">
-    <i class="fa fa-arrow-left"></i>
-</a>
+<mat-card class="content-card mat-elevation-z15">
+    <mat-card-header>
+        <a mat-icon-button class="return" [routerLink]="['/users']" title="Return">
+            <mat-icon>keyboard_backspace</mat-icon>
+        </a>
 
-<div class="row justify-content-around mt-3">
-    <div class="col-sm-12 col-md-10 col-lg-9 mx-auto table-responsive">
+        <mat-card-title class="text-center">
+            <h2>Edit User</h2>
+            <mat-divider></mat-divider>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
         <form *ngIf="user && roles">
+            <fieldset>
+                <legend>User Information</legend>
 
-            <h4 class="text-muted"><span>User Information</span></h4>
+                <!-- Table when current user not equals user of details -->
+                <table cellspacing="0" *ngIf="user.email != currentUser.email">
+                    <tr>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>alternate_email</mat-icon>
+                                <input type="email" matInput [(ngModel)]="user.email" placeholder="E-mail" name="email" tabindex="1" disabled />
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <span matPrefix style="margin-right: 8px;">
+                                    <mat-icon>assignment_ind</mat-icon>
+                                </span>
 
-            <ng-container *ngIf="user.email != currentUser.email">
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <label for="email">E-mail</label>
-                        <input type="text" name="email" class="form-control" id="email" [(ngModel)]="user.email" readonly />
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="role">User Role</label>
-                        <select name="role" class="custom-select" id="role" [(ngModel)]="user.role_id" [disabled]="user.role_id == 2">
-                            <option selected>Select an user role</option>
-                            <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
-                        </select>
-                    </div>
-                </div>
-            </ng-container>
+                                <mat-select placeholder="User Role" [(value)]="user.role_id" [disabled]="user.role_id == 2">
+                                    <mat-option *ngFor="let role of roles" [value]="role.id">
+                                        {{ role.type }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>account_box</mat-icon>
+                                <input type="text" matInput [(ngModel)]="user.first_name" placeholder="First Name" name="fname" disabled tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>account_box</mat-icon>
+                                <input type="text" matInput [(ngModel)]="user.last_name" placeholder="Last Name" name="lname" disabled tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
 
-            <ng-container *ngIf="user.email == currentUser.email">
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <label for="email">E-mail</label>
-                        <input type="text" name="email" class="form-control" id="email" [(ngModel)]="user.email" readonly />
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="pass">Password</label>
-                        <input type="password" name="pass" class="form-control" id="pass" [(ngModel)]="user.password" />
-                    </div>
-                </div>
+                <!-- Table when current user equals user of details -->
+                <table cellspacing="0" *ngIf="user.email == currentUser.email">
+                    <tr>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>alternate_email</mat-icon>
+                                <input type="email" matInput [(ngModel)]="user.email" placeholder="E-mail" name="email" tabindex="1" disabled />
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>lock</mat-icon>
+                                <input type="password" matInput [(ngModel)]="user.password" placeholder="Password" name="pass" tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <span matPrefix style="margin-right: 8px;">
+                                    <mat-icon>assignment_ind</mat-icon>
+                                </span>
 
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <label for="role">User Role</label>
-                        <select name="role" class="custom-select" id="role" [(ngModel)]="user.role_id" [disabled]="user.role_id == 2">
-                            <option selected>Select an user role</option>
-                            <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-6"></div>
-                </div>
-            </ng-container>
+                                <mat-select placeholder="User Role" [(value)]="user.role_id" [disabled]="user.role_id == 2">
+                                    <mat-option *ngFor="let role of roles" [value]="role.id">
+                                        {{ role.type }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>account_box</mat-icon>
+                                <input type="text" matInput [(ngModel)]="user.first_name" placeholder="First Name" name="fname" disabled tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>account_box</mat-icon>
+                                <input type="text" matInput [(ngModel)]="user.last_name" placeholder="Last Name" name="lname" disabled tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
 
-            <br />
-
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="firstName">First Name</label>
-                    <input type="text" name="f_name" class="form-control" id="firstName" [(ngModel)]="user.first_name" />
-                </div>
-                <div class="col-sm-6">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" name="l_name" class="form-control" id="lastName" [(ngModel)]="user.last_name" />
-                </div>
-            </div>
-
-            <h4 class="text-muted">Profile Picture</h4>
-
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <div class="custom-file">
-                        <input id="fileInput" name="profile_pic" class="custom-file-input" #fileInput type="file" accept="image/*" title="Choose an image to upload as profile picture" (change)="setFileName()" />
-                        <label class="custom-file-label" for="fileInput">{{ fileLabel }}</label>
-                    </div>
-                </div>
-                <div class="col-sm-6"></div>
-            </div>
-
-            <br />
-
-            <div class="form-group row">
-                <div class="col-sm-12">
-                    <button type="button" class="btn btn-primary float-right" (click)="submitForm()">Save</button>
-                </div>
-            </div>
+            <fieldset>
+                <legend>Profile Picture</legend>
+                <table cellspacing="0">
+                    <tr>
+                        <td class="half-width-field text-left">
+                            <div class="custom-file">
+                                <input id="fileInput" name="profile_pic" class="custom-file-input" #fileInput type="file" accept="image/*" title="Choose an image to upload as profile picture" (change)="setFileName()" />
+                                <label class="custom-file-label" for="fileInput">{{ fileLabel }}</label>
+                            </div>
+                        </td>
+                        <td class="half-width-field"></td>
+                    </tr>
+                </table>
+            </fieldset>
         </form>
-    </div>
-</div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button class="mat-elevation-z2" mat-flat-button color="primary" (click)="submitForm();">Save</button>
+    </mat-card-actions>
+</mat-card>

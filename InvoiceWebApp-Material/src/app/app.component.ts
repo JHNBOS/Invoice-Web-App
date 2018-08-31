@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     title: string;
 
     sideNavOpened: boolean = false;
-    @ViewChild("page") page: ElementRef;
+    @ViewChild("spacer") spacer: ElementRef;
 
     constructor(private authService: AuthenticationService, private route: ActivatedRoute, private router: Router,
         private _sanitizer: DomSanitizer, private settingsService: SettingsService, private titleService: Title) {
@@ -66,9 +66,9 @@ export class AppComponent implements OnInit {
         }
     }
 
-    focusToolbar() {
+    setFocus() {
         setTimeout(() => {
-            this.page.nativeElement.focus();
+            this.spacer.nativeElement.focus();
         }, 250);
     }
 }
