@@ -38,14 +38,14 @@
                     <tr class="text-left">
                         <td>
                             <mat-form-field class="half-width-field">
-                                <input matInput name="creation_date" [matDatepicker]="creationPicker" [(ngModel)]="begin | date: 'yyyy-MM-dd'" [min]="minDate" placeholder="Invoice Date" (dateChange)="setExpired()">
+                                <input matInput name="creation_date" [matDatepicker]="creationPicker" [(ngModel)]="begin" [min]="minDate" placeholder="Invoice Date" (dateChange)="setExpired()">
                                 <mat-datepicker-toggle matSuffix [for]="creationPicker"></mat-datepicker-toggle>
                                 <mat-datepicker #creationPicker></mat-datepicker>
                             </mat-form-field>
                         </td>
                         <td>
                             <mat-form-field class="half-width-field">
-                                <input matInput name="expiration_date" [matDatepicker]="expirationPicker" [(ngModel)]="expiration | date: 'yyyy-MM-dd'" [min]="minDate" placeholder="Expiration Date" (dateChange)="setExpired()">
+                                <input matInput name="expiration_date" [matDatepicker]="expirationPicker" [(ngModel)]="expiration" [min]="minDate" placeholder="Expiration Date" (dateChange)="setExpired()">
                                 <mat-datepicker-toggle matSuffix [for]="expirationPicker"></mat-datepicker-toggle>
                                 <mat-datepicker #expirationPicker></mat-datepicker>
                             </mat-form-field>

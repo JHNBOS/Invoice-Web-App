@@ -24,7 +24,7 @@ export class EditInvoiceComponent implements OnInit {
     total: number;
 
     @ViewChild('table') table: MatTable<InvoiceItem>;
-    dataSource: MatTableDataSource<InvoiceItem> = new MatTableDataSource(this.invoice.items);
+    dataSource: MatTableDataSource<InvoiceItem>;
     displayedColumns: string[] = ['name', 'description', 'price', 'quantity', 'tax', 'total'];
 
     constructor(private invoiceService: InvoiceService, private itemService: InvoiceItemService, private router: Router, private route: ActivatedRoute,
@@ -65,6 +65,8 @@ export class EditInvoiceComponent implements OnInit {
         this.itemService.getByInvoice(invoice).subscribe(
             (response) => {
                 this.invoice.items = response;
+
+                this.dataSource = new MatTableDataSource(this.invoice.items);
                 this.table.dataSource = this.invoice.items;
                 this.table.renderRows();
             },
