@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTable, MatTableDataSource } from '@angular/material';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import Invoice from '../../../shared/models/invoice.model';
+import InvoiceItem from '../../../shared/models/invoice_item.model';
 import Settings from '../../../shared/models/settings.model';
 import User from '../../../shared/models/user.model';
 import { InvoiceService } from '../../../shared/services/invoice.service';
@@ -19,6 +21,10 @@ export class DetailInvoiceComponent implements OnInit {
     invoiceNumber: string;
     invoice: Invoice;
     show: boolean = false;
+
+    @ViewChild('table') table: MatTable<InvoiceItem>;
+    dataSource: MatTableDataSource<InvoiceItem> = new MatTableDataSource(this.invoice.items);
+    displayedColumns: string[] = ['name', 'description', 'price', 'quantity', 'tax', 'total'];
 
     constructor(private invoiceService: InvoiceService, private itemService: InvoiceItemService, private router: Router, private route: ActivatedRoute,
         private titleService: Title) { }
@@ -45,7 +51,11 @@ export class DetailInvoiceComponent implements OnInit {
 
     getItems(invoice: string) {
         this.itemService.getByInvoice(invoice).subscribe(
-            (response) => this.invoice.items = response,
+            (response) => {
+                this.invoice.items = response;
+                this.table.dataSource = this.invoice.items;
+                this.table.renderRows();
+            },
             (error) => { throw error; }
         );
     }

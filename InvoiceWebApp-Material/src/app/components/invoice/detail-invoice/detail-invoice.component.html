@@ -1,125 +1,177 @@
-<a class="return" [routerLink]="['/invoices']" title="Return">
-    <i class="fa fa-arrow-left"></i>
-</a>
+<mat-card class="content-card mat-elevation-z15">
+    <mat-card-header>
+        <a mat-icon-button class="return" [routerLink]="['/invoices']" title="Return">
+            <mat-icon>keyboard_backspace</mat-icon>
+        </a>
 
-<div class="row justify-content-around mt-3">
-    <div class="col-sm-12 col-md-10 col-lg-10 mx-auto table-responsive">
-        <form *ngIf="invoice">
-
-            <h4 class="text-muted"><span>Invoice Information</span></h4>
+        <mat-card-title class="text-center">
+            <h2>Invoice Details</h2>
             <small class="text-muted" *ngIf="invoice.concept">Concept</small>
+            <mat-divider></mat-divider>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form *ngIf="invoice">
+            <fieldset>
+                <legend>Invoice Information</legend>
+                <table cellspacing="0">
+                    <tr class="text-left">
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>plus_one</mat-icon>
+                                <input type="text" matInput placeholder="Invoice Number" name="invoice_number" value="{{ settings.invoice_prefix}}{{ invoice.invoice_number }}" disabled tabindex="1" />
+                            </mat-form-field>                        
+                        </td>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>person</mat-icon>
+                                <input matInput placeholder="Debtor" type="text" name="debtor_id" disabled *ngIf="invoice.debtor.company_name == null" value="{{ invoice.debtor.id }}&emsp;{{ invoice.debtor.first_name }} {{ invoice.debtor.last_name }}" />
+                                <input matInput placeholder="Debtor" type="text" name="debtor_id" disabled *ngIf="invoice.debtor.company_name != null" value="{{ invoice.debtor.id }}&emsp;{{ invoice.debtor.company_name }}" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
 
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="number">Invoice Number</label>
-                    <input type="text" name="invoice_num" class="form-control" id="number" value="{{ settings.invoice_prefix}}{{ invoice.invoice_number }}" readonly />
-                </div>
-                <div class="col-sm-6">
-                    <label for="debtor">Debtor</label>
-                    <input type="text" name="debtor_id" id="debtor" readonly class="form-control" *ngIf="invoice.debtor.company_name == null" value="{{ invoice.debtor.id }}&emsp;{{ invoice.debtor.first_name }} {{ invoice.debtor.last_name }}" />
-                    <input type="text" name="debtor_id" id="debtor" readonly class="form-control" *ngIf="invoice.debtor.company_name != null" value="{{ invoice.debtor.id }}&emsp;{{ invoice.debtor.company_name }}" />
-                </div>
-            </div>
+                <br />
 
-            <br />
+                <table cellspacing="0">
+                    <tr class="text-left">
+                        <td>
+                            <mat-form-field class="half-width-field">
+                                <input matInput name="creation_date" [matDatepicker]="creationPicker" [(ngModel)]="begin" [min]="minDate" placeholder="Invoice Date" disabled>
+                                <mat-datepicker-toggle matSuffix [for]="creationPicker"></mat-datepicker-toggle>
+                                <mat-datepicker #creationPicker></mat-datepicker>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="half-width-field">
+                                <input matInput name="expiration_date" [matDatepicker]="expirationPicker" [(ngModel)]="expiration" [min]="minDate" placeholder="Expiration Date" disabled>
+                                <mat-datepicker-toggle matSuffix [for]="expirationPicker"></mat-datepicker-toggle>
+                                <mat-datepicker #expirationPicker></mat-datepicker>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
 
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="created">Invoice Date</label>
-                    <input type="date" name="creation_date" class="form-control" id="created" [ngModel]="invoice.created_on | date: 'yyyy-MM-dd'" (ngModelChange)="invoice.created_on=$event" readonly />
-                </div>
-                <div class="col-sm-6">
-                    <label for="expired">Due Date</label>
-                    <input type="date" name="expiration_date" class="form-control" id="expiration" [ngModel]="invoice.expired_on | date: 'yyyy-MM-dd'" (ngModelChange)="invoice.expired_on=$event" readonly />
-                </div>
-            </div>
+            <fieldset>
+                <legend>Invoice Details</legend>
+                <table cellspacing="0">
+                    <tr>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>attach_money</mat-icon>
+                                <input type="text" matInput [(ngModel)]="invoice.total" placeholder="Total" name="totalprice" disabled currencyMask tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="full-width-field">
+                                <mat-icon matPrefix>attach_money</mat-icon>
+                                <input type="text" matInput [(ngModel)]="invoice.discount" placeholder="Discount" name="discount" disabled currencyMask tabindex="1" />
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
 
-            <h4 class="text-muted"><span>Invoice Details</span></h4>
+                <br />
 
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="total">To be paid</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">&euro;</span>
-                        </div>
-                        <input type="text" name="total" class="form-control" id="total" [ngModel]="invoice.total | number: '1.2-2'" (ngModelChange)="invoice.total=$event" readonly />
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <label for="discount">Discount</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">&euro;</span>
-                        </div>
-                        <input type="text" name="discount" class="form-control" id="discount" [ngModel]="invoice.discount | number: '1.2-2'" (ngModelChange)="invoice.discount=$event" readonly />
-                    </div>
-                </div>
-            </div>
+                <mat-table #table [dataSource]="dataSource">
 
-            <div class="form-group row">
-                <div class="col-sm-12 table-responsive">
-                    <table class="table table-sm table-condensed table-striped" *ngIf="invoice.items != null">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Qty</th>
-                                <th>Tax</th>
-                                <th>Total</th>
-                                <th class="text-center"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="table-row" *ngFor="let row of invoice.items">
-                                <td data-title="Name">
-                                    <input type="text" name="p_name" class="form-control form-control-sm" [value]="row.name" readonly />
-                                </td>
-                                <td data-title="Desc">
-                                    <input type="text" name="desc" class="form-control form-control-sm" [value]="row.description" readonly />
-                                </td>
-                                <td data-title="Price">
-                                    <input type="text" name="price" class="form-control form-control-sm" [value]="row.price | number: '1.2-2'" readonly />
-                                </td>
-                                <td data-title="Quantity">
-                                    <input type="number" name="qnt" class="form-control form-control-sm" [value]="row.quantity" min="1" readonly />
-                                </td>
-                                <td data-title="Tax">
-                                    <input type="number" name="tax" class="form-control form-control-sm" [value]="row.tax" min="0" readonly />
-                                </td>
-                                <td style="line-height:2;" data-title="Total">
-                                    <span style="font-weight: 500;">
-                                        &euro; {{ row.price * row.quantity | number: '1.2-2' }}
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                        <mat-cell *matCellDef="let item;let i = index;">
+                            <mat-form-field floatLabel="never">
+                                <input matInput placeholder="Name" name="name_{{i}}" [value]="item.name" [(ngModel)]="item.name" disabled>
+                            </mat-form-field>
+                        </mat-cell>
+                        <mat-footer-cell *matFooterCellDef> </mat-footer-cell>
+                    </ng-container>
 
-            <br />
+                    <!-- Description Column -->
+                    <ng-container matColumnDef="description">
+                        <mat-header-cell *matHeaderCellDef> Desc. </mat-header-cell>
+                        <mat-cell *matCellDef="let item;let i = index;">
+                            <mat-form-field floatLabel="never">
+                                <input matInput placeholder="Description" name="desc_{{i}}" [value]="item.description" [(ngModel)]="item.description" disabled>
+                            </mat-form-field>
+                        </mat-cell>
+                        <mat-footer-cell *matFooterCellDef> </mat-footer-cell>
+                    </ng-container>
 
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="comment">Comment</label>
-                    <textarea rows="3" name="comment" class="form-control" id="comment" [(ngModel)]="invoice.comment" readonly></textarea>
-                </div>
-                <div class="col-sm-6"></div>
-            </div>
+                    <!-- Price Column -->
+                    <ng-container matColumnDef="price">
+                        <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+                        <mat-cell *matCellDef="let item;let i = index;">
+                            <mat-form-field floatLabel="never">
+                                <input matInput placeholder="Price" name="price_{{i}}" [(ngModel)]="item.price" disabled currencyMask>
+                            </mat-form-field>
+                        </mat-cell>
+                        <mat-footer-cell *matFooterCellDef> </mat-footer-cell>
+                    </ng-container>
 
-            <br />
+                    <!-- Quantity Column -->
+                    <ng-container matColumnDef="quantity">
+                        <mat-header-cell *matHeaderCellDef> Qty. </mat-header-cell>
+                        <mat-cell *matCellDef="let item;let i = index;">
+                            <mat-form-field floatLabel="never">
+                                <input matInput placeholder="Qty." name="qty_{{i}}" min="1" [(ngModel)]="item.quantity" [value]="item.quantity" disabled>
+                            </mat-form-field>
+                        </mat-cell>
+                        <mat-footer-cell *matFooterCellDef> </mat-footer-cell>
+                    </ng-container>
 
-            <div class="form-group row">
-                <div class="col-sm-12">
-                    <a *ngIf="currentUser.role_id == 1" class="btn btn-primary float-right" [routerLink]="['../../edit', invoice.invoice_number]" title="Edit Invoice">Edit</a>
-                    <a *ngIf="currentUser.role_id == 2 && invoice.is_paid == false" class="btn btn-primary float-right" (click)="payInvoice()" style="color:#fff !important;" title="Pay Invoice">Pay Invoice</a>
-                </div>
-            </div>
+                    <!-- Tax Column -->
+                    <ng-container matColumnDef="tax">
+                        <mat-header-cell *matHeaderCellDef> Tax </mat-header-cell>
+                        <mat-cell *matCellDef="let item;let i = index;">
+                            <mat-form-field floatLabel="never">
+                                <input matInput placeholder="Tax" name="tax_{{i}}" min="0" [(ngModel)]="item.tax" [value]="item.tax" disabled>
+                            </mat-form-field>
+                        </mat-cell>
+                        <mat-footer-cell *matFooterCellDef> </mat-footer-cell>
+                    </ng-container>
+
+                    <!-- Total Column -->
+                    <ng-container matColumnDef="total">
+                        <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
+                        <mat-cell *matCellDef="let item;let i = index;">
+                            &euro; {{ item.total | number:'1.2-2' }}
+                        </mat-cell>
+                        <mat-footer-cell *matFooterCellDef> </mat-footer-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
+                </mat-table>
+
+                <br />
+
+                <table cellspacing="0">
+                    <tr class="text-left">
+                        <td>
+                            <mat-form-field class="half-width-field">
+                                <mat-label>Comment</mat-label>
+                                <textarea matInput
+                                          cdkTextareaAutosize
+                                          #autosize="cdkTextareaAutosize"
+                                          cdkAutosizeMinRows="3"
+                                          cdkAutosizeMaxRows="5"
+                                          name="comment"
+                                          [(ngModel)]="invoice.comment" disabled></textarea>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
         </form>
-    </div>
-</div>
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-flat-button color="primary" *ngIf="currentUser.role_id == 1" class="mat-elevation-z2" [routerLink]="['../../edit', invoice.invoice_number]" title="Edit Invoice">Edit</a>
+        <a mat-flat-button color="primary" *ngIf="currentUser.role_id == 2 && invoice.is_paid == false" class="mat-elevation-z2" (click)="payInvoice()" style="color:#fff !important;" title="Pay Invoice">Pay Invoice</a>
+    </mat-card-actions>
+</mat-card>
 
 <modal [title]="'Transaction Succeeded'" [showModal]="show" [redirectOnClose]="true" [redirectTo]="'/'">
     <modal-body>

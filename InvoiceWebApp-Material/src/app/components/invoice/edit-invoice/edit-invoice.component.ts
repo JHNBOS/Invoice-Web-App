@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import Invoice from '../../../shared/models/invoice.model';
@@ -7,6 +7,7 @@ import Settings from '../../../shared/models/settings.model';
 import User from '../../../shared/models/user.model';
 import { InvoiceService } from '../../../shared/services/invoice.service';
 import { InvoiceItemService } from '../../../shared/services/invoice_item.service';
+import { MatTable, MatTableDataSource } from '@angular/material';
 
 @Component({
     selector: 'app-edit-invoice',
@@ -21,6 +22,10 @@ export class EditInvoiceComponent implements OnInit {
     invoice: Invoice;
 
     total: number;
+
+    @ViewChild('table') table: MatTable<InvoiceItem>;
+    dataSource: MatTableDataSource<InvoiceItem> = new MatTableDataSource(this.invoice.items);
+    displayedColumns: string[] = ['name', 'description', 'price', 'quantity', 'tax', 'total'];
 
     constructor(private invoiceService: InvoiceService, private itemService: InvoiceItemService, private router: Router, private route: ActivatedRoute,
         private titleService: Title) { }
@@ -58,7 +63,11 @@ export class EditInvoiceComponent implements OnInit {
 
     getItems(invoice: string) {
         this.itemService.getByInvoice(invoice).subscribe(
-            (response) => this.invoice.items = response,
+            (response) => {
+                this.invoice.items = response;
+                this.table.dataSource = this.invoice.items;
+                this.table.renderRows();
+            },
             (error) => { throw error; }
         );
     }
@@ -69,19 +78,12 @@ export class EditInvoiceComponent implements OnInit {
     }
 
     calculateTotal() {
-        //for (var i = 0; i < this.invoice.items.filter(f => f.invoice_number == '-1').length; i++) {
-        //    let item = this.invoice.items[i];
-        //    this.total += item.total;
-        //}
-
         this.total = this.invoice.total;
         this.total = this.total - this.invoice.discount;
     }
 
-    submitForm(concept: boolean) {
+    submitForm() {
         this.invoice.total = this.total;
-        this.invoice.concept = concept;
-
         this.updateInvoice();
     }
 

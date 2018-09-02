@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTable, MatTableDataSource } from '@angular/material';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
@@ -25,6 +26,10 @@ export class CreateInvoiceComponent implements OnInit {
     begin: string = this.minDate;
     expiration: string;
 
+    @ViewChild('table') table: MatTable<InvoiceItem>;
+    dataSource: MatTableDataSource<InvoiceItem> = new MatTableDataSource(this.invoice.items);
+    displayedColumns: string[] = ['name', 'description', 'price', 'quantity', 'tax', 'total', 'delete'];
+
     constructor(private titleService: Title, private route: ActivatedRoute, private invoiceService: InvoiceService, private invoiceItemService: InvoiceItemService,
         private router: Router) { }
 
@@ -34,12 +39,12 @@ export class CreateInvoiceComponent implements OnInit {
         this.setExpired();
         this.setInitialRow();
         this.getInvoiceCount();
+
+        this.calculateTotal();
     }
 
     setInitialRow() {
         const row = new InvoiceItem();
-        row.invoice_number = this.invoice.invoice_number;
-
         this.invoice.items.push(row);
     }
 
@@ -97,10 +102,17 @@ export class CreateInvoiceComponent implements OnInit {
     addRow() {
         const row = new InvoiceItem();
         this.invoice.items.push(row);
+
+        this.table.dataSource = this.invoice.items;
+        this.table.renderRows();
     }
 
     deleteRow(row: InvoiceItem) {
         this.invoice.items.splice(this.invoice.items.indexOf(row), 1);
+        this.table.dataSource = this.invoice.items;
+
+        this.table.renderRows();
+        this.calculateTotal();
     }
 
     calculatePrice(item: InvoiceItem) {

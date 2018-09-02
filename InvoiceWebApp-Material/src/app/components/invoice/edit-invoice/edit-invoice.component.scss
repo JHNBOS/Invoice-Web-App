@@ -1,161 +1,102 @@
-button.btn {
-    width: 150px;
+::ng-deep .mat-card-header-text {
+    flex: 1;
 }
 
-a.btn > i {
-    color: #fff;
+.content-card mat-card-actions {
+    padding-right: 2rem;
 }
 
-.add {
-    margin-left: 1rem !important;
+.content-card mat-card-actions button {
+    float: right;
+    width: 180px;
+    font-size: 16px;
+    height: 50px;
 }
 
-.checkbox label:after {
-    content: '';
-    display: table;
-    clear: both;
-}
-
-.checkbox .cr {
+.content-card mat-card-actions .mat-slide-toggle {
     position: relative;
-    display: inline-block;
-    border: 1px solid #a9a9a9;
-    border-radius: .25em;
-    width: 1.3em;
-    height: 1.3em;
-    float: left;
-    margin-right: .5em;
+    margin-bottom: 1rem;
+    left: 85%;
 }
 
-.checkbox .cr .cr-icon {
-    position: absolute;
-    font-size: .8em;
-    line-height: 0;
-    top: 50%;
-    left: 20%;
-    transform: scale(1.5) translateY(-50%) !important;
+.content-card mat-card-content table tbody tr td {
+    padding: .4rem;
 }
 
-.checkbox label input[type="checkbox"] {
-    display: none;
+/* Datepicker icon */
+.mat-form-field-suffix .mat-datepicker-toggle-default-icon {
+    font-size: 24px;
 }
 
-.checkbox label input[type="checkbox"] + .cr > .cr-icon {
-    transform: scale(1.5);
-    opacity: 1;
-    transition: all .3s ease-in;
-    color: red;
+/* Material table */
+.mat-table {
+    overflow: auto;
+    max-height: 750px;
+    background: transparent;
 }
 
-.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon {
-    transform: scale(1);
-    opacity: 1;
-    color: green;
+mat-header-row {
+    border-bottom-width: 2px !important;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
 }
 
-.checkbox label input[type="checkbox"]:disabled + .cr {
-    opacity: .8;
+mat-row:last-child {
+    border-bottom-width: 2px !important;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
 }
 
-.form-group:last-child a.btn {
-    width: auto;
-    height: auto;
-
-    i {
-        display: block;
-    }
-
-    span {
-        display: none;
-    }
+mat-header-cell {
+    font-size: 14px;
+    font-weight: 600;
 }
 
-@media (max-width: 992px) {
-    .table thead, .table tbody,
-    .table th, .table td, .table tr {
-        display: block;
-    }
+mat-header-cell:nth-child(1),
+mat-header-cell:nth-child(2),
+mat-header-cell:nth-child(3) {
+    flex: 0 0 215px;
+}
 
-    .form-group:last-child {
-        text-align: center !important;
-    }
+mat-header-cell:nth-child(4),
+mat-header-cell:nth-child(5) {
+    flex: 0 0 90px;
+}
 
-    button.btn.btn-primary {
-        width: 60%;
-        height: 50px !important;
-        float: none !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        line-height: 2.5;
-    }
+mat-header-cell:nth-child(6) {
+    flex: 0 0 150px;
+}
 
-    button.btn.btn-primary:last-child {
-        margin-top: 1.5rem;
-        margin-bottom: 2.5rem;
-    }
+mat-header-cell:nth-child(7) {
+    flex: 0 0 80px;
+}
 
-    .form-group:last-child {
-        text-align: center;
-    }
+mat-cell:nth-child(1),
+mat-cell:nth-child(2),
+mat-cell:nth-child(3) {
+    flex: 0 0 215px;
+}
 
-    .form-group:last-child a.btn {
-        width: 80%;
-        text-align: center;
+mat-cell:nth-child(4),
+mat-cell:nth-child(5) {
+    flex: 0 0 90px;
+    margin-right: 15px;
+}
 
-        span.btn {
-            display: none;
-        }
+mat-cell:nth-child(6) {
+    flex: 0 0 150px;
+}
 
-        i {
-            display: none;
-        }
+mat-cell:nth-child(7) {
+    flex: 0 0 80px;
+}
 
-        span {
-            display: block;
-        }
-    }
+mat-footer-row {
+    margin-top: 1rem;
+}
 
-    .table {
-        margin-top: 1rem;
-    }
+mat-footer-cell:last-child {
+    justify-content: flex-end;
+}
 
-    .table thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-    }
-
-    .table tbody tr {
-        border: 1px solid dodgerblue;
-    }
-
-    .table tbody td {
-        /* Behave  like a "row" */
-        border: none;
-        border-bottom: 1px solid #eee;
-        position: relative;
-        white-space: normal;
-        text-align: right;
-    }
-
-    .table tbody td > input {
-        text-align: right;
-    }
-
-    .table td:before {
-        /* Now like a table header */
-        position: absolute;
-        /* Top/left values mimic padding */
-        top: 6px;
-        left: 6px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-        text-align: left;
-        font-weight: bold;
-    }
-
-    .table td:before {
-        content: attr(data-title);
-    }
+.add-button mat-icon {
+    font-size: 2.3rem !important;
 }

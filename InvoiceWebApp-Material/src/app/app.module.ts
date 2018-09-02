@@ -18,6 +18,7 @@ import { ApplicationService } from './shared/services/application.service';
 import { RoleService } from './shared/services/role.service';
 import { SettingsService } from './shared/services/settings.service';
 import { SharedService } from './shared/services/shared.service';
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 export function app_Init(appService: ApplicationService) {
     return () => appService.initializeApp();
@@ -50,7 +51,8 @@ export function app_Init(appService: ApplicationService) {
         { provide: AuthGuard, useClass: AuthGuard },
         { provide: AuthenticationService, useClass: AuthenticationService },
         { provide: ErrorHandler, useClass: CustomErrorHandler },
-        { provide: APP_INITIALIZER, useFactory: app_Init, deps: [ApplicationService], multi: true},
+        { provide: APP_INITIALIZER, useFactory: app_Init, deps: [ApplicationService], multi: true },
+        { provide: MAT_DATE_LOCALE, useValue: 'nl-NL' },
     ],
     bootstrap: [
         AppComponent

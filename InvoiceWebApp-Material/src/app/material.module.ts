@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatCardModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatPaginatorModule, MatProgressSpinnerModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatSnackBarModule, MatTableModule, MatToolbarModule, MatTooltipModule, MatGridListModule, MatTableDataSource } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatNativeDateModule, MatPaginatorModule, MatProgressSpinnerModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatSnackBarModule, MatTableModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
 
 @NgModule({
     imports: [
@@ -22,7 +22,9 @@ import { MatButtonModule, MatCardModule, MatDialogModule, MatDividerModule, MatF
         MatTableModule,
         MatPaginatorModule,
         MatListModule,
-        MatGridListModule
+        MatGridListModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
     ],
     exports: [
         CommonModule,
@@ -43,7 +45,9 @@ import { MatButtonModule, MatCardModule, MatDialogModule, MatDividerModule, MatF
         MatTableModule,
         MatPaginatorModule,
         MatListModule,
-        MatGridListModule
+        MatGridListModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
     ],
 })
 export class MaterialModule { }
