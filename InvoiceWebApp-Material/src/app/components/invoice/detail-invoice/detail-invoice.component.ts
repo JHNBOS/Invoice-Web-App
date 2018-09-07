@@ -20,7 +20,7 @@ export class DetailInvoiceComponent implements OnInit {
 
     invoiceNumber: string;
     invoice: Invoice;
-    show: boolean = false;
+    show: boolean;
 
     @ViewChild('table') table: MatTable<InvoiceItem>;
     dataSource: MatTableDataSource<InvoiceItem>;
@@ -31,6 +31,7 @@ export class DetailInvoiceComponent implements OnInit {
 
     ngOnInit() {
         this.titleService.setTitle('Invoice Details - ' + this.settings.company_name);
+        this.show = false;
         this.route.params.subscribe(
             (params) => {
                 this.invoiceNumber = params['id'];
