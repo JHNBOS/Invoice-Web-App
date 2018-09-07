@@ -168,8 +168,8 @@
         </form>
     </mat-card-content>
     <mat-card-actions>
-        <a mat-flat-button color="primary" *ngIf="currentUser.role_id == 1" class="mat-elevation-z2" [routerLink]="['../../edit', invoice?.invoice_number]" title="Edit Invoice">Edit</a>
-        <a mat-flat-button color="primary" *ngIf="currentUser.role_id == 2 && invoice.is_paid == false" class="mat-elevation-z2" (click)="payInvoice()" style="color:#fff !important;" title="Pay Invoice">Pay Invoice</a>
+        <a mat-flat-button color="primary" *ngIf="currentUser.role_id == 1 && invoice != null" class="mat-elevation-z2" [routerLink]="['../../edit', invoice.invoice_number]" title="Edit Invoice">Edit</a>
+        <a mat-flat-button color="primary" *ngIf="currentUser.role_id == 2 && invoice != null && invoice.is_paid == false" class="mat-elevation-z2" (click)="payInvoice()" style="color:#fff !important;" title="Pay Invoice">Pay Invoice</a>
     </mat-card-actions>
 </mat-card>
 
