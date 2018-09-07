@@ -38,14 +38,14 @@
                     <tr class="text-left">
                         <td>
                             <mat-form-field class="half-width-field">
-                                <input matInput name="creation_date" [matDatepicker]="creationPicker" [(ngModel)]="begin" [min]="minDate" placeholder="Invoice Date" disabled>
+                                <input matInput name="creation_date" [matDatepicker]="creationPicker" [(ngModel)]="invoice.created_on" placeholder="Invoice Date" disabled>
                                 <mat-datepicker-toggle matSuffix [for]="creationPicker"></mat-datepicker-toggle>
                                 <mat-datepicker #creationPicker></mat-datepicker>
                             </mat-form-field>
                         </td>
                         <td>
                             <mat-form-field class="half-width-field">
-                                <input matInput name="expiration_date" [matDatepicker]="expirationPicker" [(ngModel)]="expiration" [min]="minDate" placeholder="Expiration Date" disabled>
+                                <input matInput name="expiration_date" [matDatepicker]="expirationPicker" [(ngModel)]="invoice.expired_on" placeholder="Expiration Date" disabled>
                                 <mat-datepicker-toggle matSuffix [for]="expirationPicker"></mat-datepicker-toggle>
                                 <mat-datepicker #expirationPicker></mat-datepicker>
                             </mat-form-field>
@@ -136,7 +136,7 @@
                     <ng-container matColumnDef="total">
                         <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
                         <mat-cell *matCellDef="let item;let i = index;">
-                            &euro; {{ item.total | number:'1.2-2' }}
+                            <span class="disabled-text">&euro; {{ item.price * item.quantity | number:'1.2-2' }}</span>
                         </mat-cell>
                         <mat-footer-cell *matFooterCellDef> </mat-footer-cell>
                     </ng-container>
