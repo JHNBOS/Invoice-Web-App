@@ -27,11 +27,13 @@ export class DetailInvoiceComponent implements OnInit {
     displayedColumns: string[] = ['name', 'description', 'price', 'quantity', 'tax', 'total'];
 
     constructor(private invoiceService: InvoiceService, private itemService: InvoiceItemService, private router: Router, private route: ActivatedRoute,
-        private titleService: Title) { }
+        private titleService: Title) {
+
+        this.show = false;
+    }
 
     ngOnInit() {
         this.titleService.setTitle('Invoice Details - ' + this.settings.company_name);
-        this.show = false;
         this.route.params.subscribe(
             (params) => {
                 this.invoiceNumber = params['id'];
