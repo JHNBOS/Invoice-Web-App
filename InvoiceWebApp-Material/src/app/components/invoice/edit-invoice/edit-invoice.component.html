@@ -6,7 +6,7 @@
 
         <mat-card-title class="text-center">
             <h2>Edit Invoice</h2>
-            <small class="text-muted" *ngIf="invoice.concept">Concept</small>
+            <small class="text-muted" *ngIf="invoice?.concept">Concept</small>
             <mat-divider></mat-divider>
         </mat-card-title>
     </mat-card-header>
@@ -168,7 +168,7 @@
         </form>
     </mat-card-content>
     <mat-card-actions>
-        <mat-slide-toggle name="save_concept" [(ngModel)]="invoice.concept" *ngIf="invoice.concept == true">Save invoice as concept</mat-slide-toggle>
+        <mat-slide-toggle name="save_concept" [(ngModel)]="invoice.concept" *ngIf="invoice?.concept == true">Save invoice as concept</mat-slide-toggle>
 
         <br />
 
