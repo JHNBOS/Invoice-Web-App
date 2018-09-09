@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 import Settings from '../models/settings.model';
 
 @Injectable()
 export class SettingsService {
 
-    private apiUrl = 'http://invoice.jhnbos.nl:90/api/settings/';
+    private apiUrl = environment.apiBase + '/settings/';
 
     constructor(public http: HttpClient) { }
 

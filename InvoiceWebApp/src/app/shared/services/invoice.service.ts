@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 import Invoice from '../models/invoice.model';
 
 @Injectable()
 export class InvoiceService {
 
-    private apiUrl = 'http://invoice.jhnbos.nl:90/api/invoices/';
+    private apiUrl = environment.apiBase + '/invoices/';
 
     constructor(public http: HttpClient) { }
 

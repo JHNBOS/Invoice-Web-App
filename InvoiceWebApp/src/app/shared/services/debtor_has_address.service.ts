@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 import DebtorHasAddress from '../models/debtor_has_address.model';
 
 @Injectable()
 export class DebtorHasAddressService {
 
-    private apiUrl = 'http://invoice.jhnbos.nl:90/api/has_address/';
+    private apiUrl = environment.apiBase + '/has_address/';
 
     constructor(public http: HttpClient) { }
 

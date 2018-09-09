@@ -1,11 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 import Settings from '../models/settings.model';
 
 @Injectable()
 export class ApplicationService {
 
-    private apiUrl = 'http://invoice.jhnbos.nl:90/api/settings/';
+    private apiUrl = environment.apiBase + '/settings/';
 
     constructor(public http: HttpClient) { }
 

@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 import User from './models/user.model';
 
 @Injectable()
 export class AuthenticationService {
-    private apiUrl = 'http://invoice.jhnbos.nl:90/api/users/';
+    private apiUrl = environment.apiBase + '/users/';
 
     constructor(private http: HttpClient, private router: Router) { }
 

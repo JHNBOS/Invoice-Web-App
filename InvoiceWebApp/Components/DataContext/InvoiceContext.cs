@@ -29,7 +29,7 @@ namespace InvoiceWebApp.Components.DataContext
             if (!optionsBuilder.IsConfigured)
             {
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql("Server=jhnbos.nl;Port=3306;Database=invoice_app;User=jhnbos;Password=johanbos13579");
+                optionsBuilder.UseMySql("Server=127.0.0.1;Port=3306;Database=invoice_app;User=johan;Password=root");
             }
         }
 

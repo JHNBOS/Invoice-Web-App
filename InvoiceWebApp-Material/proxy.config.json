@@ -1,6 +1,0 @@
-{
-  "/api": {
-    "target": "http://invoice.jhnbos.nl:90",
-    "secure": false
-  }
-}
