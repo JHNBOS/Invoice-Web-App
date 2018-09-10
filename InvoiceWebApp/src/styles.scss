@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 @import "~@ng-select/ng-select/themes/default.theme.css";
@@ -53,19 +54,16 @@ h4.text-muted span {
     z-index: 1;
 }
 
-h4.text-muted::before {
-    background: #aaa;
-    opacity: .6;
-    content: "";
+h4.text-muted hr {
+    border-color: #aaa;
+    border-width: 1px;
     display: block;
-    height: 1px;
     position: absolute;
-    top: 50%;
+    right: 0;
+    top: 30%;
+    transform: translateY(-30%);
     width: 100%;
-}
-
-h4.text-muted::before {
-    left: 0;
+    overflow: hidden;
 }
 
 @media (max-width: 992px) {
@@ -73,7 +71,6 @@ h4.text-muted::before {
         top: 2%;
         left: 3%;
     }
-
     a.btn.btn-primary {
         width: 60%;
         height: 50px !important;

@@ -6,10 +6,14 @@
     <div class="col-sm-12 col-md-10 col-lg-9 mx-auto table-responsive">
         <form *ngIf="debtor">
 
-            <h4 class="text-muted"><span>{{ forCompany == true ? 'Business Information' : 'Personal Information' }}</span></h4>
+            <h4 class="text-muted">
+                <span>{{ forCompany == true ? 'Business Information' : 'Personal Information' }}</span>
+                <hr />
+            </h4>
 
             <div class="form-group row">
                 <div class="col-sm-6">
+                    <label for="id">{{ forCompany == true ? 'Business Number' : 'Social Security Number' }}</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="id-addon">
@@ -23,11 +27,10 @@
                 <div class="col-sm-6"></div>
             </div>
 
-            <br />
-
             <ng-container *ngIf="!forCompany">
                 <div class="form-group row">
                     <div class="col-sm-6">
+                        <label for="first_name">First Name</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="first_name-addon">
@@ -38,6 +41,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
+                        <label for="last_name">Last Name</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="last_name-addon">
@@ -53,6 +57,7 @@
             <ng-container *ngIf="forCompany">
                 <div class="form-group row">
                     <div class="col-sm-6">
+                        <label for="company_name">Company Name</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="company_name-addon">
@@ -70,6 +75,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-6">
+                    <label for="email">E-mail</label>
                     <div class="input-group mb-2">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="email-addon">
@@ -80,6 +86,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
+                    <label for="phone">Phone</label>
                     <div class="input-group mb-2">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="phone-addon">
@@ -93,6 +100,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-6">
+                    <label for="bank_account">Bank Account</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="bank-addon">
@@ -105,10 +113,14 @@
                 <div class="col-sm-6"></div>
             </div>
 
-            <h4 class="text-muted"><span>Address</span></h4>
+            <h4 class="text-muted">
+                <span>Address</span>
+                <hr />
+            </h4>
 
             <div class="form-group row">
                 <div class="col-sm-6">
+                    <label for="street">Street</label>
                     <div class="input-group mb-1">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="street-addon">
@@ -119,6 +131,7 @@
                     </div>
                 </div>
                 <div class="col-sm-2">
+                    <label for="number">Number</label>
                     <div class="input-group mb-1">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="number-addon">
@@ -129,6 +142,7 @@
                     </div>
                 </div>
                 <div class="col-sm-2">
+                    <label for="suffix">Suffix</label>
                     <div class="input-group mb-1">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="suffix-addon">
@@ -142,6 +156,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-6">
+                    <label for="postal_code">Postal Code</label>
                     <div class="input-group mb-1">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="postal-addon">
@@ -152,6 +167,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
+                    <label for="city">City</label>
                     <div class="input-group mb-1">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="city-addon">
@@ -165,6 +181,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-6">
+                    <label for="country">Country</label>
                     <div class="input-group mb-1">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="country-addon">
