@@ -2,6 +2,14 @@ a.btn {
     width: 150px;
 }
 
+label {
+    font-weight: 500;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    color: #787878;
+    margin-left: 5px;
+}
+
 .checkbox label:after {
     content: '';
     display: table;
@@ -32,42 +40,42 @@ a.btn {
     display: none;
 }
 
-.checkbox label input[type="checkbox"] + .cr > .cr-icon {
+.checkbox label input[type="checkbox"]+.cr>.cr-icon {
     transform: scale(1.5);
     opacity: 1;
     transition: all .3s ease-in;
     color: red;
 }
 
-.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon {
+.checkbox label input[type="checkbox"]:checked+.cr>.cr-icon {
     transform: scale(1);
     opacity: 1;
     color: green;
 }
 
-.checkbox label input[type="checkbox"]:disabled + .cr {
+.checkbox label input[type="checkbox"]:disabled+.cr {
     opacity: .8;
 }
 
 .form-group:last-child a.btn {
     width: auto;
     height: auto;
-
     i {
         display: block;
     }
-
     span {
         display: none;
     }
 }
 
 @media (max-width: 992px) {
-    .table thead, .table tbody,
-    .table th, .table td, .table tr {
+    .table thead,
+    .table tbody,
+    .table th,
+    .table td,
+    .table tr {
         display: block;
     }
-
     a.btn.btn-primary {
         width: 60%;
         height: 50px !important;
@@ -76,46 +84,36 @@ a.btn {
         margin-right: auto !important;
         line-height: 2.5;
     }
-
     a.btn.btn-primary:last-child {
         margin-bottom: 2.5rem;
     }
-
     .form-group:last-child {
         text-align: center;
     }
-
     .form-group:last-child a.btn {
         width: 80%;
         text-align: center;
-
         span.btn {
             display: none;
         }
-
         i {
             display: none;
         }
-
         span {
             display: block;
         }
     }
-
     .table {
         margin-top: 1rem;
     }
-
     .table thead tr {
         position: absolute;
         top: -9999px;
         left: -9999px;
     }
-
     .table tbody tr {
         border: 1px solid dodgerblue;
     }
-
     .table tbody td {
         /* Behave  like a "row" */
         border: none;
@@ -124,11 +122,9 @@ a.btn {
         white-space: normal;
         text-align: right;
     }
-
-    .table tbody td > input {
+    .table tbody td>input {
         text-align: right;
     }
-
     .table td:before {
         /* Now like a table header */
         position: absolute;
@@ -141,7 +137,6 @@ a.btn {
         text-align: left;
         font-weight: bold;
     }
-
     .table td:before {
         content: attr(data-title);
     }

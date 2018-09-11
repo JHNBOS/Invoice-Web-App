@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 import Invoice from '../../../shared/models/invoice.model';
 import InvoiceItem from '../../../shared/models/invoice_item.model';
 import Settings from '../../../shared/models/settings.model';
@@ -90,5 +91,12 @@ export class EditInvoiceComponent implements OnInit {
             (response) => this.router.navigate(['/invoices']),
             (error) => { throw (error); }
         );
+    }
+
+    setExpired() {
+        let date = moment(this.invoice.created_on).toDate();
+        let expiration = new Date(date.setDate(date.getDate() + 30));
+
+        this.invoice.expired_on = expiration;
     }
 }
