@@ -9,8 +9,18 @@
 
             <div class="form-row">
                 <div class="col-sm-12 col-md-6 mx-auto">
-                    <input id="fileInput" name="debtor_csv" class="custom-file-input" #fileInput type="file" accept=".csv" title="Choose a CSV file to upload" (change)="setFileName()" />
-                    <label class="custom-file-label" for="fileInput">{{ fileLabel }}</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="fileInput-addon">
+                                <i class="fa fa-file" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <div class="custom-file">
+                            <input id="fileInput" name="debtor_csv" class="custom-file-input" #fileInput type="file" accept="image/*" title="Choose a CSV file to upload"
+                                (change)="setFileName()" aria-describedby="fileInput-addon" />
+                            <label class="custom-file-label" for="fileInput">{{ fileLabel }}</label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>

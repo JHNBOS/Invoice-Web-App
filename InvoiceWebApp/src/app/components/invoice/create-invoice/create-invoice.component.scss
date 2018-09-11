@@ -2,7 +2,15 @@ button.btn {
     width: 150px;
 }
 
-a.btn > i {
+label {
+    font-weight: 500;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    color: #787878;
+    margin-left: 5px;
+}
+
+a.btn>i {
     color: #fff;
 }
 
@@ -10,14 +18,14 @@ a.btn > i {
     margin-left: 1rem !important;
 }
 
-.btn-delete > i {
+.btn-delete>i {
     background: transparent;
     border: none;
     font-size: 22px;
     color: red;
 }
 
-.btn-delete:hover > i {
+.btn-delete:hover>i {
     color: orangered;
     cursor: pointer;
 }
@@ -25,26 +33,25 @@ a.btn > i {
 .form-group:last-child a.btn {
     width: auto;
     height: auto;
-
     i {
         display: block;
     }
-
     span {
         display: none;
     }
 }
 
 @media (max-width: 992px) {
-    .table thead, .table tbody,
-    .table th, .table td, .table tr {
+    .table thead,
+    .table tbody,
+    .table th,
+    .table td,
+    .table tr {
         display: block;
     }
-
     .form-group:last-child {
         text-align: center !important;
     }
-
     button.btn.btn-primary {
         width: 60%;
         height: 50px !important;
@@ -53,47 +60,37 @@ a.btn > i {
         margin-right: auto !important;
         line-height: 2.5;
     }
-
     button.btn.btn-primary:last-child {
         margin-top: 1.5rem;
         margin-bottom: 2.5rem;
     }
-
     .form-group:last-child {
         text-align: center;
     }
-
     .form-group:last-child a.btn {
         width: 80%;
         text-align: center;
-
         span.btn {
             display: none;
         }
-
         i {
             display: none;
         }
-
         span {
             display: block;
         }
     }
-
     .table {
         margin-top: 1rem;
     }
-
     .table thead tr {
         position: absolute;
         top: -9999px;
         left: -9999px;
     }
-
     .table tbody tr {
         border: 1px solid dodgerblue;
     }
-
     .table tbody td {
         /* Behave  like a "row" */
         border: none;
@@ -102,11 +99,9 @@ a.btn > i {
         white-space: normal;
         text-align: right !important;
     }
-
-    .table tbody td > input {
+    .table tbody td>input {
         text-align: right;
     }
-
     .table td:before {
         /* Now like a table header */
         position: absolute;
@@ -119,7 +114,6 @@ a.btn > i {
         text-align: left;
         font-weight: bold;
     }
-
     .table td:before {
         content: attr(data-title);
     }
