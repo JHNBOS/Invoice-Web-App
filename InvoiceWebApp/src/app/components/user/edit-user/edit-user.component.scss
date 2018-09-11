@@ -2,11 +2,22 @@ button.btn {
     width: 150px;
 }
 
+label {
+    font-weight: 500;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    color: #787878;
+    margin-left: 5px;
+}
+
+.custom-file-label {
+    margin-left: 0 !important;
+}
+
 @media (max-width: 992px) {
     .row.form-group:last-child {
         text-align: center !important;
     }
-
     button.btn {
         width: 60%;
         height: 50px;
@@ -15,7 +26,6 @@ button.btn {
         margin-right: auto !important;
         line-height: 2.5;
     }
-
     button.btn.btn-primary:last-child {
         margin-bottom: 2.5rem;
     }

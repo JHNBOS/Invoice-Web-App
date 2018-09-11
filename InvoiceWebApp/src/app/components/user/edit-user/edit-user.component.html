@@ -12,14 +12,29 @@
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="email">E-mail</label>
-                        <input type="text" name="email" class="form-control" id="email" [(ngModel)]="user.email" readonly />
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="email-addon">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <input type="email" name="email" class="form-control" id="email" [(ngModel)]="user.email" placeholder="E-mail"
+                                aria-describedby="email-addon" readonly />
+                        </div>
                     </div>
                     <div class="col-sm-6">
                         <label for="role">User Role</label>
-                        <select name="role" class="custom-select" id="role" [(ngModel)]="user.role_id" [disabled]="user.role_id == 2">
-                            <option selected>Select an user role</option>
-                            <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
-                        </select>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="roles">
+                                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <select name="role" id="roles" class="custom-select" id="role" [(ngModel)]="user.role_id" [disabled]="user.role_id == 2">
+                                <option selected>Select an user role</option>
+                                <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </ng-container>
@@ -28,21 +43,43 @@
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="email">E-mail</label>
-                        <input type="text" name="email" class="form-control" id="email" [(ngModel)]="user.email" readonly />
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="email-addon">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <input type="email" name="email" class="form-control" id="email" [(ngModel)]="user.email" placeholder="E-mail"
+                                aria-describedby="email-addon" readonly />
+                        </div>
                     </div>
                     <div class="col-sm-6">
                         <label for="pass">Password</label>
-                        <input type="password" name="pass" class="form-control" id="pass" [(ngModel)]="user.password" />
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="pass-addon">
+                                    <i class="fa fa-lock" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <input type="password" name="pass" class="form-control" id="pass" [(ngModel)]="user.password" placeholder="Password"
+                                aria-describedby="pass-addon" required />
+                        </div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <label for="role">User Role</label>
-                        <select name="role" class="custom-select" id="role" [(ngModel)]="user.role_id" [disabled]="user.role_id == 2">
-                            <option selected>Select an user role</option>
-                            <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
-                        </select>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="roles">
+                                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            <select name="role" id="roles" class="custom-select" id="role" [(ngModel)]="user.role_id" [disabled]="user.role_id == 2">
+                                <option selected>Select an user role</option>
+                                <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="col-sm-6"></div>
                 </div>
@@ -52,12 +89,28 @@
 
             <div class="form-group row">
                 <div class="col-sm-6">
-                    <label for="firstName">First Name</label>
-                    <input type="text" name="f_name" class="form-control" id="firstName" [(ngModel)]="user.first_name" />
+                    <label for="first_name">First Name</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="first_name-addon">
+                                <i class="fa fa-font" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <input type="text" name="f_name" class="form-control" id="first_name" [(ngModel)]="user.first_name"
+                            placeholder="First Name" aria-describedby="first_name-addon" />
+                    </div>
                 </div>
                 <div class="col-sm-6">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" name="l_name" class="form-control" id="lastName" [(ngModel)]="user.last_name" />
+                    <label for="last_name">Last Name</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="last_name-addon">
+                                <i class="fa fa-font" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <input type="text" name="l_name" class="form-control" id="last_name" [(ngModel)]="user.last_name"
+                            placeholder="Last Name" aria-describedby="last_name-addon" />
+                    </div>
                 </div>
             </div>
 
@@ -65,9 +118,17 @@
 
             <div class="form-group row">
                 <div class="col-sm-6">
-                    <div class="custom-file">
-                        <input id="fileInput" name="profile_pic" class="custom-file-input" #fileInput type="file" accept="image/*" title="Choose an image to upload as profile picture" (change)="setFileName()" />
-                        <label class="custom-file-label" for="fileInput">{{ fileLabel }}</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="fileInput-addon">
+                                <i class="fa fa-camera" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <div class="custom-file">
+                            <input id="fileInput" name="profile_pic" class="custom-file-input" #fileInput type="file" accept="image/*"
+                                title="Choose an image to upload as profile picture" (change)="setFileName()" aria-describedby="fileInput-addon" />
+                            <label class="custom-file-label" for="fileInput">{{ fileLabel }}</label>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-6"></div>
