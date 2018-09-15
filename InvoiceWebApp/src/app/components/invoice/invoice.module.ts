@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CurrencyMaskModule } from 'ngx-currency-mask';
 import { CURRENCY_MASK_CONFIG, CurrencyMaskConfig } from 'ngx-currency-mask/src/currency-mask.config';
 import { ToastyModule } from 'ngx-toasty';
+
 import { CustomErrorHandler } from '../../shared/error-handler';
 import { AddressService } from '../../shared/services/address.service';
 import { DebtorService } from '../../shared/services/debtor.service';
@@ -19,14 +20,14 @@ import { InvoiceComponent } from './invoice.component';
 import { InvoiceRoutingModule } from './invoice.routing';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
-    align: "left",
+    align: 'left',
     allowNegative: false,
     allowZero: true,
-    decimal: ",",
+    decimal: ',',
     precision: 2,
-    prefix: "",
-    suffix: "",
-    thousands: "."
+    prefix: '',
+    suffix: '',
+    thousands: '.'
 };
 
 @NgModule({

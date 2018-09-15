@@ -27,8 +27,9 @@
                                 <i class="fa fa-calendar" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input type="date" name="creation_date" class="form-control" id="created" [min]="minDate" [(ngModel)]="begin" (change)="setExpired()"
-                            aria-describedby="creation-addon" autofocus required />
+                        <input type="date" name="creation_date" class="form-control" id="created" [min]="minDate"
+                            [(ngModel)]="begin" (change)="setExpired()" aria-describedby="creation-addon" autofocus
+                            required />
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -39,8 +40,8 @@
                                 <i class="fa fa-calendar" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input type="date" name="expiration_date" class="form-control" id="expired" [min]="minDate" [(ngModel)]="expiration"
-                            aria-describedby="expiration-addon" required />
+                        <input type="date" name="expiration_date" class="form-control" id="expired" [min]="minDate"
+                            [(ngModel)]="expiration" aria-describedby="expiration-addon" required />
                     </div>
                 </div>
             </div>
@@ -54,7 +55,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">&euro;</span>
                         </div>
-                        <input type="text" name="total" class="form-control" id="total" [ngModel]="invoice.total | number: '1.2-2'" (ngModelChange)="invoice.total=$event" readonly />
+                        <input type="text" name="total" class="form-control" id="total" [ngModel]="invoice.total | number: '1.2-2'"
+                            (ngModelChange)="invoice.total=$event" readonly />
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -63,7 +65,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">&euro;</span>
                         </div>
-                        <input class="form-control" name="discount" id="discount" [(ngModel)]="invoice.discount" (change)="calculateTotal()" (blur)="calculateTotal(row)" required currencyMask />
+                        <input class="form-control" name="discount" id="discount" [(ngModel)]="invoice.discount"
+                            (change)="calculateTotal()" (blur)="calculateTotal(row)" required currencyMask />
                     </div>
                 </div>
             </div>
@@ -85,19 +88,23 @@
                         <tbody>
                             <tr class="table-row" *ngFor="let row of invoice.items;let i = index">
                                 <td data-title="Name">
-                                    <input type="text" name="p_name" class="form-control form-control-sm" [(ngModel)]="row.name" required />
+                                    <input type="text" name="p_name" class="form-control form-control-sm" [(ngModel)]="row.name"
+                                        required />
                                 </td>
                                 <td data-title="Desc">
                                     <input type="text" name="desc" class="form-control form-control-sm" [(ngModel)]="row.description" />
                                 </td>
                                 <td data-title="Price">
-                                    <input name="price" class="form-control form-control-sm" [(ngModel)]="row.price" (change)="calculatePrice(row)" (blur)="calculatePrice(row)" currencyMask />
+                                    <input name="price" class="form-control form-control-sm" [(ngModel)]="row.price"
+                                        (change)="calculatePrice(row)" (blur)="calculatePrice(row)" currencyMask />
                                 </td>
                                 <td data-title="Quantity">
-                                    <input type="number" name="qnt" class="form-control form-control-sm" [(ngModel)]="row.quantity" min="1" (change)="calculatePrice(row)" (blur)="calculatePrice(row)" required />
+                                    <input type="number" name="qnt" class="form-control form-control-sm" [(ngModel)]="row.quantity"
+                                        min="1" (change)="calculatePrice(row)" (blur)="calculatePrice(row)" required />
                                 </td>
                                 <td data-title="Tax">
-                                    <input type="number" name="tax" class="form-control form-control-sm" [(ngModel)]="row.tax" min="0" required />
+                                    <input type="number" name="tax" class="form-control form-control-sm" [(ngModel)]="row.tax"
+                                        min="0" required />
                                 </td>
                                 <td data-title="Total">
                                     <span style="font-weight: 500;">
@@ -133,7 +140,8 @@
             <div class="form-group row">
                 <div class="col-sm-12">
                     <button type="button" class="btn btn-primary float-right" (click)="submitForm(false)">Save</button>
-                    <button type="button" class="btn btn-primary float-right mr-1" (click)="submitForm(true)">Save as concept</button>
+                    <button type="button" class="btn btn-primary float-right mr-1" (click)="submitForm(true)">Save as
+                        concept</button>
                 </div>
             </div>
         </form>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
+
 import Debtor from '../../../shared/models/debtor.model';
 import Invoice from '../../../shared/models/invoice.model';
 import InvoiceItem from '../../../shared/models/invoice_item.model';
@@ -19,14 +20,14 @@ export class CreateInvoiceComponent implements OnInit {
 
     invoice: Invoice = new Invoice;
     debtor: Debtor;
-    invoiceLength: number = 0;
+    invoiceLength = 0;
 
     minDate: string = new Date().toJSON().split('T')[0];
     begin: string = this.minDate;
     expiration: string;
 
-    constructor(private titleService: Title, private route: ActivatedRoute, private invoiceService: InvoiceService, private invoiceItemService: InvoiceItemService,
-        private router: Router) { }
+    constructor(private titleService: Title, private route: ActivatedRoute, private invoiceService: InvoiceService,
+        private invoiceItemService: InvoiceItemService, private router: Router) { }
 
     ngOnInit() {
         this.titleService.setTitle('Create Invoice - ' + this.settings.company_name);
@@ -44,8 +45,8 @@ export class CreateInvoiceComponent implements OnInit {
     }
 
     setExpired() {
-        let date = moment(this.begin).toDate();
-        let expiration = new Date(date.setDate(date.getDate() + 30));
+        const date = moment(this.begin).toDate();
+        const expiration = new Date(date.setDate(date.getDate() + 30));
 
         this.expiration = expiration.toJSON().split('T')[0];
     }
@@ -55,7 +56,7 @@ export class CreateInvoiceComponent implements OnInit {
     }
 
     submitForm(concept: boolean) {
-        //Set invoice properties
+        // Set invoice properties
         this.invoice.created_on = moment(this.begin).toDate();
         this.invoice.expired_on = moment(this.expiration).toDate();
         this.invoice.customer_id = this.debtor.id;
@@ -78,14 +79,14 @@ export class CreateInvoiceComponent implements OnInit {
     }
 
     saveInvoiceItems() {
-        for (var i = 0; i < this.invoice.items.length; i++) {
-            let item = this.invoice.items[i];
+        for (let i = 0; i < this.invoice.items.length; i++) {
+            const item = this.invoice.items[i];
             item.item_number = 0;
             item.invoice_number = this.invoice.invoice_number;
 
             this.invoiceItemService.create(item).subscribe(
                 (response) => {
-                    if (i == (this.invoice.items.length - 1)) {
+                    if (i === (this.invoice.items.length - 1)) {
                         this.router.navigate(['/invoices']);
                     }
                 },
@@ -111,8 +112,8 @@ export class CreateInvoiceComponent implements OnInit {
     calculateTotal() {
         this.invoice.total = 0;
 
-        for (var i = 0; i < this.invoice.items.length; i++) {
-            let item = this.invoice.items[i];
+        for (let i = 0; i < this.invoice.items.length; i++) {
+            const item = this.invoice.items[i];
             this.invoice.total += item.total;
         }
 

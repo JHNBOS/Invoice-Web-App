@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+
 import Settings from '../../../shared/models/settings.model';
 import { UserService } from '../../../shared/services/user.service';
 
@@ -13,7 +14,7 @@ export class ResetPasswordComponent implements OnInit {
     settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
 
     email: string;
-    show: boolean = false;
+    show = false;
 
     constructor(private userService: UserService, private router: Router, private titleService: Title) {
     }

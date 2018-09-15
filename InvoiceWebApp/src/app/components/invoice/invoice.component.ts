@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import Debtor from '../../shared/models/debtor.model';
 import Invoice from '../../shared/models/invoice.model';
 import Settings from '../../shared/models/settings.model';
@@ -19,13 +20,17 @@ export class InvoiceComponent implements OnInit {
 
     debtor: Debtor = null;
     invoices: Invoice[] = [];
+    href: string;
 
-    constructor(private titleService: Title, private route: ActivatedRoute, private invoiceService: InvoiceService, private debtorService: DebtorService, private router: Router) { }
+    constructor(private titleService: Title, private route: ActivatedRoute, private invoiceService: InvoiceService,
+        private debtorService: DebtorService, private router: Router) { }
 
     ngOnInit() {
         this.titleService.setTitle('Invoices - ' + this.settings.company_name);
 
-        if (this.currentUser.role_id == 2) {
+        this.href = window.location.origin;
+
+        if (this.currentUser.role_id === 2) {
             this.getDebtor();
         } else {
             this.getAllInvoices();

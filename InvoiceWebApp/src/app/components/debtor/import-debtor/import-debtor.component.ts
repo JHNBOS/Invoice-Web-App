@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastOptions, ToastyService } from 'ngx-toasty';
+
 import Address from '../../../shared/models/address.model';
 import Debtor from '../../../shared/models/debtor.model';
 import DebtorHasAddress from '../../../shared/models/debtor_has_address.model';
@@ -23,10 +24,11 @@ export class ImportDebtorComponent implements OnInit {
     addresses: Address[] = [];
     livesAts: DebtorHasAddress[] = [];
     toastOptions: ToastOptions;
-    fileLabel: string = 'Choose a CSV file to upload';
+    fileLabel = 'Choose a CSV file to upload';
 
     constructor(private titleService: Title, private debtorService: DebtorService, private addressService: AddressService,
-        private debtorHasAddressService: DebtorHasAddressService, private toastyService: ToastyService, private route: ActivatedRoute, private router: Router) {
+        private debtorHasAddressService: DebtorHasAddressService, private toastyService: ToastyService,
+        private route: ActivatedRoute, private router: Router) {
 
         this.titleService.setTitle('Import Debtors - ' + this.settings.company_name);
         this.toastOptions = {
@@ -45,9 +47,9 @@ export class ImportDebtorComponent implements OnInit {
     }
 
     setFileName() {
-        let fi = this.fileInput.nativeElement;
+        const fi = this.fileInput.nativeElement;
         if (fi.files && fi.files[0]) {
-            let fileToUpload = fi.files[0];
+            const fileToUpload = fi.files[0];
 
             if (fileToUpload) {
                 this.fileLabel = fileToUpload.name;
@@ -85,11 +87,11 @@ export class ImportDebtorComponent implements OnInit {
     }
 
     private extractData(fileInput: any) {
-        let fi = this.fileInput.nativeElement;
+        const fi = this.fileInput.nativeElement;
         const lines = [];
 
         if (fi.files && fi.files[0]) {
-            let fileToUpload = fi.files[0];
+            const fileToUpload = fi.files[0];
 
             const reader: FileReader = new FileReader();
             reader.readAsText(fileToUpload);

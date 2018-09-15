@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import Settings from '../../shared/models/settings.model';
 import User from '../../shared/models/user.model';
 import { UserService } from '../../shared/services/user.service';

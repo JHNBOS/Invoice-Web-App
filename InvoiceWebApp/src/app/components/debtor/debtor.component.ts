@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import Debtor from '../../shared/models/debtor.model';
 import Settings from '../../shared/models/settings.model';
 import { DebtorService } from '../../shared/services/debtor.service';
@@ -16,7 +17,8 @@ export class DebtorComponent implements OnInit {
 
     debtors: Debtor[] = [];
 
-    constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService, private router: Router) { }
+    constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService,
+        private router: Router) { }
 
     ngOnInit() {
         this.titleService.setTitle('Debtors - ' + this.settings.company_name);

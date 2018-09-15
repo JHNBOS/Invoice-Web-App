@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import Address from '../../../shared/models/address.model';
 import Debtor from '../../../shared/models/debtor.model';
 import DebtorHasAddress from '../../../shared/models/debtor_has_address.model';
@@ -22,8 +23,8 @@ export class EditDebtorComponent implements OnInit {
     lives_at: DebtorHasAddress;
     address: Address;
 
-    constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService, private debtorHasAddressService: DebtorHasAddressService,
-        private addressService: AddressService, private router: Router) { }
+    constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService,
+        private debtorHasAddressService: DebtorHasAddressService, private addressService: AddressService, private router: Router) { }
 
     ngOnInit() {
         this.titleService.setTitle('Edit Debtor - ' + this.settings.company_name);
@@ -65,7 +66,8 @@ export class EditDebtorComponent implements OnInit {
     submitForm() {
         this.debtorService.update(this.debtor).subscribe(
             (response) => {
-                if ((this.debtor.address.postal_code != this.address.postal_code) && (this.debtor.address.number != this.address.number)) {
+                if ((this.debtor.address.postal_code !== this.address.postal_code)
+                    && (this.debtor.address.number !== this.address.number)) {
                     this.createAddress();
                 } else {
                     this.router.navigate(['/debtors']);
@@ -76,12 +78,12 @@ export class EditDebtorComponent implements OnInit {
     }
 
     createAddress() {
-        var exists = this.addressService.getAddress(this.address.postal_code, this.address.number).subscribe(
+        const exists = this.addressService.getAddress(this.address.postal_code, this.address.number).subscribe(
             (response) => {
-                if (response != null) {
-                    true;
+                if (response !== null) {
+                    return true;
                 } else {
-                    false;
+                    return false;
                 }
             },
             (error) => { }
@@ -98,12 +100,12 @@ export class EditDebtorComponent implements OnInit {
     }
 
     private linkAddress() {
-        var exists = this.debtorHasAddressService.getByDebtorId(this.debtor.id).subscribe(
+        const exists = this.debtorHasAddressService.getByDebtorId(this.debtor.id).subscribe(
             (response) => {
                 if (response != null) {
-                    true;
+                    return true;
                 } else {
-                    false;
+                    return false;
                 }
             },
             (error) => { }

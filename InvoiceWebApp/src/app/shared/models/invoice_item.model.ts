@@ -3,16 +3,8 @@ export default class InvoiceItem {
     invoice_number: string = null;
     name: string = null;
     description: string = null;
-    tax: number = 0;
-    price: number = 0;
-    quantity: number = 1;
-
-    total: number = 0;
-
-    public isValid(): boolean {
-        if (this.item_number != null && this.invoice_number != null && this.name != null && this.tax != null && this.price != null && this.quantity != null) {
-            return true;
-        }
-        return false;
-    }
+    tax = 0;
+    price = 0;
+    quantity = 1;
+    total = 0;
 }

@@ -16,7 +16,8 @@ export class DebtorDropdownComponent implements OnInit {
 
     @Output() chosenDebtor = new EventEmitter<Debtor>();
 
-    constructor(private debtorService: DebtorService, private debtorHasAddressService: DebtorHasAddressService, private addressService: AddressService) { }
+    constructor(private debtorService: DebtorService, private debtorHasAddressService: DebtorHasAddressService,
+        private addressService: AddressService) { }
 
     ngOnInit() {
         this.getAllDebtors();

@@ -16,7 +16,8 @@ export class DetailDebtorComponent implements OnInit {
     debtorId: string;
     debtor: Debtor;
 
-    constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService, private router: Router) { }
+    constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService,
+        private router: Router) { }
 
     ngOnInit() {
         this.titleService.setTitle('Debtor Details - ' + this.settings.company_name);

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+
+import Settings from '../../shared/models/settings.model';
 import User from '../../shared/models/user.model';
 import { InvoiceService } from '../../shared/services/invoice.service';
 import { UserService } from '../../shared/services/user.service';
-import Settings from '../../shared/models/settings.model';
 
 @Component({
     selector: 'app-dashboard',
@@ -13,7 +14,7 @@ import Settings from '../../shared/models/settings.model';
 export class DashboardComponent implements OnInit {
     settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
     currentUser: User = JSON.parse(sessionStorage.getItem('signedInUser'));
-    invoice_count: number = 0;
+    invoice_count = 0;
 
     constructor(private titleService: Title, private userService: UserService, private invoiceService: InvoiceService) { }
 
@@ -24,7 +25,7 @@ export class DashboardComponent implements OnInit {
 
     getUnpaidInvoiceCount() {
         this.invoiceService.getAll().subscribe(
-            (response) => this.invoice_count = response.filter(f => f.is_paid == false).length,
+            (response) => this.invoice_count = response.filter(f => f.is_paid === false).length,
             (error) => { throw error; }
         );
     }

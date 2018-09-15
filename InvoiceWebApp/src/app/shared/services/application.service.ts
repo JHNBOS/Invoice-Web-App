@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { environment } from '../../../environments/environment';
 import Settings from '../models/settings.model';
 
@@ -13,14 +14,14 @@ export class ApplicationService {
     initializeApp(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.http.get(this.apiUrl + 'get')
-            .toPromise()
-            .then(
-                (response) => {
-                    const data = response as Settings;
-                    sessionStorage.setItem('settings', JSON.stringify(data));
-                    resolve();
-                }
-            ).catch(this.handleError());
+                .toPromise()
+                .then(
+                    (response) => {
+                        const data = response as Settings;
+                        sessionStorage.setItem('settings', JSON.stringify(data));
+                        resolve();
+                    }
+                ).catch(this.handleError());
         });
     }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import Address from '../../../shared/models/address.model';
 import Debtor from '../../../shared/models/debtor.model';
 import DebtorHasAddress from '../../../shared/models/debtor_has_address.model';
@@ -17,7 +18,7 @@ import { DebtorHasAddressService } from '../../../shared/services/debtor_has_add
 export class AddDebtorComponent implements OnInit {
     settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
 
-    forCompany: boolean = false;
+    forCompany = false;
     debtor: Debtor = new Debtor;
     address: Address = new Address;
 
@@ -28,7 +29,7 @@ export class AddDebtorComponent implements OnInit {
         this.titleService.setTitle('Create Debtor - ' + this.settings.company_name);
         this.route.params.subscribe(
             (params) => {
-                this.forCompany = params['company'] == 'yes' ? true : false;
+                this.forCompany = params['company'] === 'yes' ? true : false;
             }
         );
     }
@@ -36,7 +37,8 @@ export class AddDebtorComponent implements OnInit {
     submitForm() {
         this.debtorService.create(this.debtor).subscribe(
             (response) => {
-                if ((this.debtor.address.postal_code != this.address.postal_code) && (this.debtor.address.number != this.address.number)) {
+                if ((this.debtor.address.postal_code !== this.address.postal_code)
+                    && (this.debtor.address.number !== this.address.number)) {
                     this.createAddress();
                 } else {
                     this.router.navigate(['/debtors']);
@@ -47,12 +49,12 @@ export class AddDebtorComponent implements OnInit {
     }
 
     private createAddress() {
-        var exists = this.addressService.getAddress(this.address.postal_code, this.address.number).subscribe(
+        const exists = this.addressService.getAddress(this.address.postal_code, this.address.number).subscribe(
             (response) => {
                 if (response != null) {
-                    true;
+                    return true;
                 } else {
-                    false;
+                    return false;
                 }
             },
             (error) => { }
@@ -69,12 +71,12 @@ export class AddDebtorComponent implements OnInit {
     }
 
     private linkAddress() {
-        var exists = this.debtorHasAddressService.getByDebtorId(this.debtor.id).subscribe(
+        const exists = this.debtorHasAddressService.getByDebtorId(this.debtor.id).subscribe(
             (response) => {
                 if (response != null) {
-                    true;
+                    return true;
                 } else {
-                    false;
+                    return false;
                 }
             },
             (error) => { }

@@ -17,15 +17,15 @@
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input type="email" name="email" class="form-control" id="email" [(ngModel)]="user.email" placeholder="E-mail"
-                            aria-describedby="email-addon" autofocus required />
+                        <input type="email" name="email" class="form-control" id="email" [(ngModel)]="user.email"
+                            placeholder="E-mail" aria-describedby="email-addon" autofocus required />
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <label for="role">User Role</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="roles">
+                            <label class="input-group-text" for="roles" style="margin-left: 0px;">
                                 <i class="fa fa-user-circle" aria-hidden="true"></i>
                             </label>
                         </div>
@@ -77,7 +77,9 @@
                             </span>
                         </div>
                         <div class="custom-file">
-                            <input id="fileInput" name="profile_pic" class="custom-file-input" #fileInput type="file" accept="image/*" title="Choose an image to upload as profile picture" (change)="setFileName()" aria-describedby="fileInput-addon" />
+                            <input id="fileInput" name="profile_pic" class="custom-file-input" #fileInput type="file"
+                                accept="image/*" title="Choose an image to upload as profile picture" (change)="setFileName()"
+                                aria-describedby="fileInput-addon" />
                             <label class="custom-file-label" for="fileInput">{{ fileLabel }}</label>
                         </div>
                     </div>

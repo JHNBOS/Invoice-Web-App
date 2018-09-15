@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import Role from '../../../shared/models/role.model';
 import Settings from '../../../shared/models/settings.model';
 import User from '../../../shared/models/user.model';
@@ -18,9 +19,10 @@ export class AddUserComponent implements OnInit {
 
     user: User = new User;
     roles: Role[] = null;
-    fileLabel: string = 'Choose an image to use as profile picture';
+    fileLabel = 'Choose an image to use as profile picture';
 
-    constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService, private roleService: RoleService, private router: Router) { }
+    constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService,
+        private roleService: RoleService, private router: Router) { }
 
     ngOnInit() {
         this.titleService.setTitle('Create User - ' + this.settings.company_name);
@@ -47,9 +49,9 @@ export class AddUserComponent implements OnInit {
     }
 
     fileUpload(): void {
-        let fi = this.fileInput.nativeElement;
+        const fi = this.fileInput.nativeElement;
         if (fi.files && fi.files[0]) {
-            let fileToUpload = fi.files[0];
+            const fileToUpload = fi.files[0];
 
             if (fileToUpload) {
                 this.userService.upload(fileToUpload, this.user).subscribe(
@@ -63,9 +65,9 @@ export class AddUserComponent implements OnInit {
     }
 
     setFileName() {
-        let fi = this.fileInput.nativeElement;
+        const fi = this.fileInput.nativeElement;
         if (fi.files && fi.files[0]) {
-            let fileToUpload = fi.files[0];
+            const fileToUpload = fi.files[0];
 
             if (fileToUpload) {
                 this.fileLabel = fileToUpload.name;

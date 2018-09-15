@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import Settings from '../../shared/models/settings.model';
 import { SettingsService } from '../../shared/services/settings.service';
 
@@ -11,7 +12,7 @@ import { SettingsService } from '../../shared/services/settings.service';
 })
 export class SettingsComponent implements OnInit {
     settings: Settings = null;
-    fileLabel: string = 'Choose an image to use as logo';
+    fileLabel = 'Choose an image to use as logo';
 
     @ViewChild('fileInput') fileInput: ElementRef;
 
@@ -35,9 +36,9 @@ export class SettingsComponent implements OnInit {
     }
 
     fileUpload(settings: Settings): void {
-        let fi = this.fileInput.nativeElement;
+        const fi = this.fileInput.nativeElement;
         if (fi.files && fi.files[0]) {
-            let fileToUpload = fi.files[0];
+            const fileToUpload = fi.files[0];
 
             if (fileToUpload) {
                 this.settingsService.upload(fileToUpload, settings).subscribe(
@@ -54,9 +55,9 @@ export class SettingsComponent implements OnInit {
     }
 
     setFileName() {
-        let fi = this.fileInput.nativeElement;
+        const fi = this.fileInput.nativeElement;
         if (fi.files && fi.files[0]) {
-            let fileToUpload = fi.files[0];
+            const fileToUpload = fi.files[0];
 
             if (fileToUpload) {
                 this.fileLabel = fileToUpload.name;

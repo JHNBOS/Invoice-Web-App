@@ -16,7 +16,8 @@
             </thead>
             <tbody>
                 <tr *ngFor="let invoice of invoices">
-                    <td class="text-muted py-2 pl-3" data-title="Due date">{{ invoice.expired_on | date: 'MMMM dd, yyyy' }}</td>
+                    <td class="text-muted py-2 pl-3" data-title="Due date">{{ invoice.expired_on | date: 'MMMM dd,
+                        yyyy' }}</td>
                     <td class="p-2" data-title="Invoice Nr.">
                         <a [routerLink]="['details', invoice.invoice_number]" title="View invoice details">
                             {{ settings.invoice_prefix }}{{ invoice.invoice_number }}
@@ -26,7 +27,9 @@
                         {{ getLocaleString(invoice.total) }}
                     </td>
                     <td class="p-2" data-title="Debtor">
-                        {{ invoice.debtor.id }} - <span *ngIf="invoice.debtor.company_name == null">{{ invoice.debtor.first_name }} {{ invoice.debtor.last_name }}</span> <span *ngIf="invoice.debtor.company_name != null">{{ invoice.debtor.company_name }}</span>
+                        {{ invoice.debtor.id }} - <span *ngIf="invoice.debtor.company_name == null">{{
+                            invoice.debtor.first_name }} {{ invoice.debtor.last_name }}</span> <span *ngIf="invoice.debtor.company_name != null">{{
+                            invoice.debtor.company_name }}</span>
                     </td>
                     <td class="p-2" data-title="Paid">
                         {{ invoice.is_paid == true ? 'Yes' : 'No' }}
@@ -35,13 +38,15 @@
                         {{ invoice.concept == true ? 'Yes' : 'No' }}
                     </td>
                     <td class="text-right py-2 pr-3" date-title="">
-                        <a href="http://invoice.jhnbos.nl:90/api/invoices/pdf?invoice={{invoice.invoice_number}}" target="_blank" class="btn-download" title="Open PDF">
+                        <a href="{{href}}/api/invoices/pdf?invoice={{invoice.invoice_number}}" target="_blank" class="btn-download"
+                            title="Open PDF">
                             <i class="fa fa-download"></i>
                         </a>
                         <button class="btn-edit" [routerLink]="['edit', invoice.invoice_number]" title="Edit" [hidden]="currentUser.role_id == 2">
                             <i class="fa fa-edit"></i>
                         </button>
-                        <button class="btn-delete" type="button" (click)="deleteInvoice(invoice.invoice_number)" title="Remove" [hidden]="currentUser.role_id == 2">
+                        <button class="btn-delete" type="button" (click)="deleteInvoice(invoice.invoice_number)" title="Remove"
+                            [hidden]="currentUser.role_id == 2">
                             <i class="fa fa-trash"></i>
                         </button>
                     </td>

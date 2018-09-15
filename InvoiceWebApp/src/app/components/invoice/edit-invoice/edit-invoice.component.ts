@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
+
 import Invoice from '../../../shared/models/invoice.model';
 import InvoiceItem from '../../../shared/models/invoice_item.model';
 import Settings from '../../../shared/models/settings.model';
@@ -23,8 +24,8 @@ export class EditInvoiceComponent implements OnInit {
 
     total: number;
 
-    constructor(private invoiceService: InvoiceService, private itemService: InvoiceItemService, private router: Router, private route: ActivatedRoute,
-        private titleService: Title) { }
+    constructor(private invoiceService: InvoiceService, private itemService: InvoiceItemService, private router: Router,
+        private route: ActivatedRoute, private titleService: Title) { }
 
     ngOnInit() {
         this.titleService.setTitle('Edit Invoice - ' + this.settings.company_name);
@@ -70,11 +71,6 @@ export class EditInvoiceComponent implements OnInit {
     }
 
     calculateTotal() {
-        //for (var i = 0; i < this.invoice.items.filter(f => f.invoice_number == '-1').length; i++) {
-        //    let item = this.invoice.items[i];
-        //    this.total += item.total;
-        //}
-
         this.total = this.invoice.total;
         this.total = this.total - this.invoice.discount;
     }
@@ -94,8 +90,8 @@ export class EditInvoiceComponent implements OnInit {
     }
 
     setExpired() {
-        let date = moment(this.invoice.created_on).toDate();
-        let expiration = new Date(date.setDate(date.getDate() + 30));
+        const date = moment(this.invoice.created_on).toDate();
+        const expiration = new Date(date.setDate(date.getDate() + 30));
 
         this.invoice.expired_on = expiration;
     }

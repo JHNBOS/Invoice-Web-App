@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+
 import { environment } from '../../../environments/environment';
 import User from '../models/user.model';
 
@@ -43,9 +44,9 @@ export class UserService {
     }
 
     upload(file: any, user: User): Observable<User> {
-        let formData = new FormData();
-        formData.append("file", file);
-        formData.append("model", JSON.stringify(user));
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('model', JSON.stringify(user));
 
         return this.http.post<User>(this.apiUrl + 'upload', formData)
             .pipe(catchError(error => throwError(error)));

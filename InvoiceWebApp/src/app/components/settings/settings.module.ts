@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToastyModule } from 'ngx-toasty';
+
 import { CustomErrorHandler } from '../../shared/error-handler';
 import { SettingsService } from '../../shared/services/settings.service';
 import { SettingsComponent } from './settings.component';

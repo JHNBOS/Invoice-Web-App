@@ -20,9 +20,10 @@ export class EditUserComponent implements OnInit {
     email: string;
     user: User;
     roles: Role[] = null;
-    fileLabel: string = 'Choose an image to use as profile picture';
+    fileLabel = 'Choose an image to use as profile picture';
 
-    constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService, private roleService: RoleService, private router: Router) { }
+    constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService,
+        private roleService: RoleService, private router: Router) { }
 
     ngOnInit() {
         this.titleService.setTitle('Edit User - ' + this.settings.company_name);
@@ -63,9 +64,9 @@ export class EditUserComponent implements OnInit {
     }
 
     fileUpload(): void {
-        let fi = this.fileInput.nativeElement;
+        const fi = this.fileInput.nativeElement;
         if (fi.files && fi.files[0]) {
-            let fileToUpload = fi.files[0];
+            const fileToUpload = fi.files[0];
 
             if (fileToUpload) {
                 this.userService.upload(fileToUpload, this.user).subscribe(
@@ -79,9 +80,9 @@ export class EditUserComponent implements OnInit {
     }
 
     setFileName() {
-        let fi = this.fileInput.nativeElement;
+        const fi = this.fileInput.nativeElement;
         if (fi.files && fi.files[0]) {
-            let fileToUpload = fi.files[0];
+            const fileToUpload = fi.files[0];
 
             if (fileToUpload) {
                 this.fileLabel = fileToUpload.name;

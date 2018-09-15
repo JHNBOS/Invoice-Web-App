@@ -2,16 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'modal',
+    selector: 'app-modal',
     templateUrl: './modal.component.html',
     styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent implements OnInit {
 
-    @Input('title') title: string = 'Title';
-    @Input('redirectOnClose') redirectOnClose: boolean = false;
-    @Input('redirectTo') redirectTo: string = '/';
-    @Input('showModal') showModal: boolean = false;
+    @Input('title') title = 'Title';
+    @Input('redirectOnClose') redirectOnClose = false;
+    @Input('redirectTo') redirectTo = '/';
+    @Input('showModal') showModal = false;
 
     constructor(private router: Router) { }
 

@@ -21,7 +21,8 @@
                     </td>
                     <td class="p-2" data-title="Name">
                         <a routerLinkActive="active" [routerLink]="['details', debtor.id]" title="View debtor details">
-                            <span *ngIf="debtor.company_name == null">{{ debtor.first_name }} {{ debtor.last_name }}</span><span *ngIf="debtor.company_name != null">{{ debtor.company_name }}</span>
+                            <span *ngIf="debtor.company_name == null">{{ debtor.first_name }} {{ debtor.last_name }}</span><span
+                                *ngIf="debtor.company_name != null">{{ debtor.company_name }}</span>
                         </a>
                     </td>
                     <td class="p-2" data-title="Email">
