@@ -211,6 +211,8 @@ namespace InvoiceWebApp.Components.Helpers
 
             y = y - 50;
 
+            cb.BeginText();
+
             // Subtotal
             cb.SetFontAndSize(helvetica, 10f);
             cb.ShowTextAligned(Element.ALIGN_RIGHT, "Subtotal", 390, y, 0);
@@ -234,6 +236,48 @@ namespace InvoiceWebApp.Components.Helpers
             cb.SetFontAndSize(helveticaBold, 10f);
             cb.ShowTextAligned(Element.ALIGN_RIGHT, "Total", 390, y - 49, 0);
             cb.ShowTextAligned(Element.ALIGN_RIGHT, "€ " + invoice.Total.ToString("N2"), 509, y - 49, 0);
+
+            cb.EndText();
+
+            // Disclaimer
+            var disclaimerText = "We kindly request you to pay the amount of";
+            var disclaimerTotal = String.Format("€{0:N2}", invoice.Total.ToString("N2"));
+            var disclaimerText2 = "described above before";
+            var disclaimerDate = invoice.ExpiredOn.ToString("dd-MM-yyyy");
+
+            var disclaimerText3 = "on our bank account";
+            var disclaimerBankAccount = settings.BankAccount;
+            var disclaimerText4 = "in the name of";
+            var disclaimerCompany = settings.CompanyName + ",";
+            var disclaimerText5 = "indicating the invoice number";
+            var disclaimerInvoice = invoiceNumber + ".";
+            var disclaimerText6 = "For questions, please contact.";
+
+            cb.BeginText();
+            cb.SetFontAndSize(helvetica, 9f);
+
+            cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerText, 110, 50, 0);
+            cb.SetFontAndSize(helveticaBold, 9f);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerTotal, 290, 50, 0);
+            cb.SetFontAndSize(helvetica, 9f);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerText2, 345, 50, 0);
+            cb.SetFontAndSize(helveticaBold, 9f);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerDate, 441, 50, 0);
+            cb.SetFontAndSize(helvetica, 9f);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerText3, 150, 38, 0);
+            cb.SetFontAndSize(helveticaBold, 9f);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerBankAccount, 236, 38, 0);
+            cb.SetFontAndSize(helvetica, 9f);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerText4, 326, 38, 0);
+            cb.SetFontAndSize(helveticaBold, 9f);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerCompany, 386, 38, 0);
+            cb.SetFontAndSize(helvetica, 9f);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerText5, 150, 26, 0);
+            cb.SetFontAndSize(helveticaBold, 9f);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerInvoice, 270, 26, 0);
+            cb.SetFontAndSize(helvetica, 9f);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerText6, 313, 26, 0);
+            cb.EndText();
 
             // Close and return pdf
             doc.Close();
