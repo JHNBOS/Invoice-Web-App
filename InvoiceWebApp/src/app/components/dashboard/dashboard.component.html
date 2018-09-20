@@ -1,11 +1,18 @@
 <div class="row">
     <div class="col-sm-12 col-md-10 col-lg-10 mx-auto">
         <h3 class="text-center">Welcome, {{ currentUser?.first_name }}</h3>
-        <p class="lead text-center">
-            Currently, there {{ invoice_count == 1 ? 'is' : 'are' }}
-            <strong>
-                <i>{{ invoice_count }} unpaid {{ invoice_count == 1 ? 'invoice' : 'invoices' }}.</i>
-            </strong>
-        </p>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-sm-12 col-md-6 mx-auto">
+        <div>
+            <canvas id="chart-one"></canvas>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 mx-auto">
+        <div>
+            <canvas id="chart-two"></canvas>
+        </div>
     </div>
 </div>
