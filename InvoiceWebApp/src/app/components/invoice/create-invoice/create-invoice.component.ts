@@ -71,18 +71,20 @@ export class CreateInvoiceComponent implements OnInit {
         this.invoiceService.create(this.invoice).subscribe(
             (response) => {
                 setTimeout(() => {
-                    this.saveInvoiceItems();
-                }, 500);
+                    this.saveInvoiceItems(response.invoice_number);
+                }, 600);
             },
             (error) => { throw (error); }
         );
     }
 
-    saveInvoiceItems() {
+    saveInvoiceItems(invoice: string) {
         for (let i = 0; i < this.invoice.items.length; i++) {
             const item = this.invoice.items[i];
-            item.item_number = 0;
-            item.invoice_number = this.invoice.invoice_number;
+            item.item_number = -1;
+            item.invoice_number = invoice;
+
+            console.log(invoice);
 
             this.invoiceItemService.create(item).subscribe(
                 (response) => {

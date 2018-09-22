@@ -335,7 +335,11 @@ namespace InvoiceWebApp.Controllers
             if (invoice.InvoiceNumber == "-1")
             {
                 var today = DateTime.Now;
-                var prefix = _settings.InvoicePrefix;
+                var prefix = "";
+                if (!String.IsNullOrEmpty(_settings.InvoicePrefix))
+                {
+                    prefix = _settings.InvoicePrefix;
+                }
 
                 var invoiceCount = await this._repo.GetCount();
                 var leadingZeros = "";
@@ -363,8 +367,8 @@ namespace InvoiceWebApp.Controllers
             invoice.Total = Convert.ToDecimal(totalString);
 
             //Insert invoice
-            var result = await _repo.Insert(invoice);
-            if (result == null)
+            var data = await _repo.Insert(invoice);
+            if (data == null)
             {
                 return StatusCode(500, "A problem occured while saving the record. Please try again!");
             }
@@ -383,6 +387,9 @@ namespace InvoiceWebApp.Controllers
                     CompanyName = model.Debtor.CompanyName
                 });
             }
+
+            var result = new InvoiceViewModel();
+            result.SetProperties(data);
 
             return Ok(result);
         }

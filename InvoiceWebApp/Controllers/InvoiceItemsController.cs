@@ -148,7 +148,6 @@ namespace InvoiceWebApp.Controllers
             InvoiceItem invoiceItem = new InvoiceItem
             {
                 InvoiceNumber = model.InvoiceNumber,
-                ItemNumber = model.ItemNumber,
                 Name = model.Name,
                 Description = model.Description,
                 Tax = model.Tax,
@@ -161,11 +160,14 @@ namespace InvoiceWebApp.Controllers
             invoiceItem.Price = Convert.ToDecimal(priceString);
 
             //Insert invoice item
-            var result = await _repo.Insert(invoiceItem);
-            if (result == null)
+            var data = await _repo.Insert(invoiceItem);
+            if (data == null)
             {
                 return StatusCode(500, "A problem occured while saving the record. Please try again!");
             }
+
+            var result = new InvoiceItemViewModel();
+            result.SetProperties(data);
 
             return Ok(result);
         }

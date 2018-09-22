@@ -53,7 +53,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "invoice-app:build"
+            "browserTarget": "invoice-app:build",
+            "port": 90
           },
           "configurations": {
             "production": {

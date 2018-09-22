@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Chart, ChartConfiguration } from 'chart.js';
+import 'chartjs-plugin-labels';
 
 import Settings from '../../shared/models/settings.model';
 import User from '../../shared/models/user.model';
@@ -67,11 +68,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                 responsive: true,
                 title: {
                     display: true,
-                    text: 'Total Paid/Unpaid Invoices',
+                    text: 'Total paid & unpaid invoices',
                     position: 'bottom'
                 },
                 legend: {
-                    display: true
+                    display: false
                 },
                 scales: {
                     xAxes: [{
@@ -80,6 +81,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                     yAxes: [{
                         display: false
                     }],
+                },
+                plugins: {
+                    labels: {
+                        render: 'label',
+                        fontColor: '#fff',
+                        precision: 2,
+                        arc: false
+                    }
                 }
             },
         });
@@ -95,17 +104,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                 labels: ['Amount to be cashed', 'Currently cashed amount'],
                 datasets: [
                     {
-                        label: 'Amount to be cashed',
-                        data: [this.invoice_cash[0]],
-                        backgroundColor: ['#f4d41f'],
-                        borderColor: ['#e8c620'],
-                        fill: true
-                    },
-                    {
-                        label: 'Currently cashed amount',
-                        data: [this.invoice_cash[1]],
-                        backgroundColor: ['#12a4e8'],
-                        borderColor: ['#1095d3'],
+                        data: [this.invoice_cash[0], this.invoice_cash[1]],
+                        backgroundColor: ['#f4d41f', '#12a4e8'],
+                        borderColor: ['#e8c620', '#1095d3'],
                         fill: true
                     },
                 ]
@@ -114,15 +115,15 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                 responsive: true,
                 title: {
                     display: true,
-                    text: 'Total Amount Cashed',
+                    text: 'Total amount cashed',
                     position: 'bottom'
                 },
                 legend: {
-                    display: true
+                    display: false,
                 },
                 scales: {
                     xAxes: [{
-                        display: false,
+                        display: true,
                         maxBarThickness: 100,
                     }],
                     yAxes: [{
@@ -145,12 +146,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                                 const xLabel = d.datasets[t.datasetIndex].label;
                                 // tslint:disable-next-line:max-line-length
                                 const yLabel = parseInt(t.yLabel, 2) >= 1000 ? this.getLocaleString(t.yLabel) : '€' + t.yLabel;
-                                return xLabel + ': ' + yLabel;
+                                return yLabel;
                             } else if (t.datasetIndex === 1) {
                                 const xLabel = d.datasets[t.datasetIndex].label;
                                 // tslint:disable-next-line:max-line-length
                                 const yLabel = parseInt(t.yLabel, 2) >= 1000 ? this.getLocaleString(t.yLabel) : '€' + t.yLabel;
-                                return xLabel + ': ' + yLabel;
+                                return yLabel;
                             }
                         }
                     }
