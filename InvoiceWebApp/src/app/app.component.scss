@@ -83,6 +83,11 @@ $mainWidth: calc(100vw - #{$sidebarWidth});
     top: 80px;
     width: 100vw;
     left: 0;
+    border: 1px solid #cacaca;
+}
+
+#mobileMenu .nav-item {
+    border-bottom: .5px solid #ececec;
 }
 
 #mobileMenu .nav-item a.active {
@@ -100,6 +105,19 @@ $mainWidth: calc(100vw - #{$sidebarWidth});
 .navbar-fixed-bottom .navbar-collapse,
 .navbar-fixed-top .navbar-collapse {
     max-height: none;
+}
+
+.title-bar {
+    height: 2.5rem;
+    background: #007bff;
+    width: 100vw;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    padding: .4rem 0 .5rem 4rem;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
 }
 
 /* Main */
@@ -169,6 +187,7 @@ main .container-fluid {
     font-weight: 600;
     text-decoration: none;
     text-transform: uppercase;
+    transition: all ease-in 200ms;
 }
 
 .sidebar .nav-top a>img.logo {
@@ -197,6 +216,10 @@ main .container-fluid {
     padding: 10px 25px;
     color: #ddd !important;
     text-align: left;
+}
+
+.sidebar .nav-item a i {
+    transition: all ease-in 200ms;
 }
 
 .sidebar .nav-item:hover a {
@@ -237,6 +260,17 @@ main .container-fluid {
         left: 0 !important;
         width: 100vw;
         padding: 14px 10px;
+        top: 120px;
+    }
+    .title-bar {
+        display: block;
+    }
+    .show-md {
+        display: none;
+    }
+    .show-sm {
+        display: block;
+        font-size: 26px;
     }
 }
 
@@ -244,7 +278,26 @@ main .container-fluid {
     .sidebar .nav-top {
         padding: 0px 5px 0px 5px;
     }
-    .sidebar .nav-top a {
-        font-size: 14px;
+    .sidebar .nav-top a span {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 993px) and (max-width: 1200px) {
+    .sidebar .nav-item a i {
+        display: none;
+    }
+}
+
+@media (min-width: 993px) {
+    .show-md {
+        display: block;
+        font-size: 24px;
+    }
+    .show-sm {
+        display: none;
+    }
+    .title-bar {
+        display: none;
     }
 }

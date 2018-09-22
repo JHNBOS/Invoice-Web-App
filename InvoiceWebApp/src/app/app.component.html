@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
-    <h1 class="navbar-brand">{{ title }}</h1>
+    <h1 class="navbar-brand">
+        <span class="show-md">{{ title }}</span>
+        <span class="show-sm">{{ settings.company_name }}</span>
+    </h1>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBar" aria-controls="navBar"
         aria-expanded="false" aria-label="Toggle navigation" *ngIf="isSignedIn && currentUser != null">
@@ -42,6 +45,9 @@
                 </a>
             </li>
         </ul>
+    </div>
+    <div class="title-bar">
+        {{ title }}
     </div>
 </nav>
 
