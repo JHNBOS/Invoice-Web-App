@@ -130,10 +130,16 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                         ticks: {
                             beginAtZero: true,
                             callback: function (value, index, values) {
-                                if (parseInt(value, 2) >= 1000) {
-                                    return this.getLocaleString(value);
+                                if (parseInt(value, 0) >= 1000) {
+                                    let label = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+                                    const lastDot = label.lastIndexOf('.');
+                                    const lastComma = ',';
+                                    label = label.substring(0, lastDot) + lastComma + label.substring(lastDot + 1);
+
+                                    return '€ ' + label;
                                 } else {
-                                    return '€' + value;
+                                    return '€ ' + value;
                                 }
                             }
                         }
@@ -141,17 +147,17 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                 },
                 tooltips: {
                     callbacks: {
-                        label: function (t, d) {
-                            if (t.datasetIndex === 0) {
-                                const xLabel = d.datasets[t.datasetIndex].label;
-                                // tslint:disable-next-line:max-line-length
-                                const yLabel = parseInt(t.yLabel, 2) >= 1000 ? this.getLocaleString(t.yLabel) : '€' + t.yLabel;
-                                return yLabel;
-                            } else if (t.datasetIndex === 1) {
-                                const xLabel = d.datasets[t.datasetIndex].label;
-                                // tslint:disable-next-line:max-line-length
-                                const yLabel = parseInt(t.yLabel, 2) >= 1000 ? this.getLocaleString(t.yLabel) : '€' + t.yLabel;
-                                return yLabel;
+                        label: function (tooltip, data) {
+                            if (parseInt(tooltip.yLabel.toString(), 0) >= 1000) {
+                                let label = tooltip.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+                                const lastDot = label.lastIndexOf('.');
+                                const lastComma = ',';
+                                label = label.substring(0, lastDot) + lastComma + label.substring(lastDot + 1);
+
+                                return ' € ' + label;
+                            } else {
+                                return ' € ' + tooltip.yLabel;
                             }
                         }
                     }
@@ -162,5 +168,30 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     getLocaleString(total: number): string {
         return total.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR' });
+    }
+
+    number_format(number, decimals, dec_point, thousands_sep): any {
+        number = (number + '').replace(',', '').replace(' ', '');
+        const n = !isFinite(+number) ? 0 : +number;
+        const prec = !isFinite(+decimals) ? 0 : Math.abs(decimals);
+        const sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep;
+        const dec = (typeof dec_point === 'undefined') ? '.' : dec_point;
+        let s = [];
+        // tslint:disable-next-line:no-shadowed-variable
+        const toFixedFix = function (n, prec) {
+            const k = Math.pow(10, prec);
+            return '' + Math.round(n * k) / k;
+        };
+
+        // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+        s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+        if (s[0].length > 3) {
+            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+        }
+        if ((s[1] || '').length < prec) {
+            s[1] = s[1] || '';
+            s[1] += new Array(prec - s[1].length + 1).join('0');
+        }
+        return s.join(dec);
     }
 }
