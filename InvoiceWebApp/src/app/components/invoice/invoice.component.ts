@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 
 import Debtor from '../../shared/models/debtor.model';
 import Invoice from '../../shared/models/invoice.model';
@@ -72,5 +73,9 @@ export class InvoiceComponent implements OnInit {
 
     getLocaleString(total: number): string {
         return total.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR' });
+    }
+
+    isExpirationExpired(invoice: Invoice): boolean {
+        return moment(invoice.expired_on).isBefore(moment(new Date()));
     }
 }

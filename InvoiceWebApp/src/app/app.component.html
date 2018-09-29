@@ -1,8 +1,10 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
-    <h1 class="navbar-brand">
+    <h1 class="navbar-brand" *ngIf="settings?.show_logo">
         <span class="show-md">{{ title }}</span>
-        <span class="show-sm">{{ settings.company_name }}</span>
+        <span class="show-sm" *ngIf="!settings?.show_logo">{{ settings.company_name }}</span>
     </h1>
+
+    <img *ngIf="settings?.show_logo" class="navbar-logo" [src]="_sanitizer.bypassSecurityTrustUrl(settings?.logo)" />
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBar" aria-controls="navBar"
         aria-expanded="false" aria-label="Toggle navigation" *ngIf="isSignedIn && currentUser != null">

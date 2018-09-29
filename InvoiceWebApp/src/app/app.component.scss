@@ -272,6 +272,15 @@ main .container-fluid {
         display: block;
         font-size: 26px;
     }
+    .navbar-logo {
+        display: block;
+        max-height: 65px;
+        height: 100%;
+        position: absolute;
+        top: .8rem;
+        left: 1.5rem;
+        padding: .2rem;
+    }
 }
 
 @media (min-width: 993px) and (max-width: 1400px) {
@@ -298,6 +307,9 @@ main .container-fluid {
         display: none;
     }
     .title-bar {
+        display: none;
+    }
+    .navbar-logo {
         display: none;
     }
 }
