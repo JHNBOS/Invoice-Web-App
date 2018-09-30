@@ -278,7 +278,8 @@ main .container-fluid {
         height: 100%;
         position: absolute;
         top: .8rem;
-        left: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
         padding: .2rem;
     }
 }
