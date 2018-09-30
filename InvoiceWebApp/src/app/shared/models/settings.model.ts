@@ -26,4 +26,5 @@ export default class Settings {
     logo: string = null;
     show_logo: boolean = null;
     show_logo_in_pdf: boolean = null;
+    color: string = null;
 }

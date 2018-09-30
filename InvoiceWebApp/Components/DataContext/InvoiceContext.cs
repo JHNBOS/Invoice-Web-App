@@ -365,6 +365,9 @@ namespace InvoiceWebApp.Components.DataContext
                 entity.Property(e => e.Logo)
                     .HasColumnName("logo");
 
+                entity.Property(e => e.Color)
+                    .HasColumnName("color");
+
                 entity.Property(e => e.ShowLogo)
                     .IsRequired()
                     .HasColumnName("show_logo")

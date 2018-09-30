@@ -87,7 +87,8 @@ namespace InvoiceWebApp.Controllers
                 ShowLogoInPDF = model.ShowLogoInPDF,
                 Bank = model.Bank,
                 BankAccount = model.BankAccount,
-                InvoicePrefix = model.InvoicePrefix
+                InvoicePrefix = model.InvoicePrefix,
+                Color = model.Color
             };
 
             //Update settings

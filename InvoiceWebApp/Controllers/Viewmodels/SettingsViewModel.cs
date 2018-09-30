@@ -53,6 +53,8 @@ namespace InvoiceWebApp.Controllers.ViewModels
         public bool ShowLogo { get; set; }
         [JsonProperty("show_logo_in_pdf")]
         public bool ShowLogoInPDF { get; set; }
+        [JsonProperty("color")]
+        public string Color { get; set; }
 
         public SettingsViewModel()
         {
@@ -81,6 +83,7 @@ namespace InvoiceWebApp.Controllers.ViewModels
             this.Logo = model.Logo;
             this.ShowLogo = model.ShowLogo;
             this.ShowLogoInPDF = model.ShowLogoInPDF;
+            this.Color = model.Color;
 
             this.Address = model.Address;
             this.PostalCode = model.PostalCode;

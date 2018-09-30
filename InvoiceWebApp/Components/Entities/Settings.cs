@@ -29,5 +29,6 @@
         public string Logo { get; set; }
         public bool ShowLogo { get; set; }
         public bool ShowLogoInPDF { get; set; }
+        public string Color { get; set; }
     }
 }
