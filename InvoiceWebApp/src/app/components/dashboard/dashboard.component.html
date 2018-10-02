@@ -4,7 +4,11 @@
     </div>
 </div>
 
-<div class="row mt-5 mx-auto">
+<p class="text-center mt-2" *ngIf="this.invoice_count[0]===0 && this.invoice_count[1]===0">
+    There currently are no invoices.
+</p>
+
+<div class="row mt-5 mx-auto" [hidden]="this.invoice_count[0] === 0 && this.invoice_count[1] === 0">
     <div class="col-sm-12 col-md-12 col-lg-6">
         <div class="mx-auto">
             <canvas id="chart-one"></canvas>

@@ -11,6 +11,7 @@ import { DebtorService } from '../../../shared/services/debtor.service';
 import { DebtorHasAddressService } from '../../../shared/services/debtor_has_address.service';
 import { UserService } from '../../../shared/services/user.service';
 import User from '../../../shared/models/user.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-add-debtor',
@@ -23,6 +24,9 @@ export class AddDebtorComponent implements OnInit {
     forCompany = false;
     debtor: Debtor = new Debtor;
     address: Address = new Address;
+
+    addressExists = false;
+    linkExists = false;
 
     constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService,
         private debtorHasAddressService: DebtorHasAddressService, private addressService: AddressService, private userService: UserService,
@@ -40,8 +44,7 @@ export class AddDebtorComponent implements OnInit {
     submitForm() {
         this.debtorService.create(this.debtor).subscribe(
             (response) => {
-                if ((this.debtor.address.postal_code !== this.address.postal_code)
-                    && (this.debtor.address.number !== this.address.number)) {
+                if (this.debtor.address == null) {
                     this.createAddress();
                 } else {
                     this.router.navigate(['/debtors']);
@@ -52,40 +55,51 @@ export class AddDebtorComponent implements OnInit {
     }
 
     private createAddress() {
-        const exists = this.addressService.getAddress(this.address.postal_code, this.address.number).subscribe(
-            (response) => {
-                if (response != null) {
-                    return true;
+        this.addressService.getAddress(this.address.postal_code, this.address.number).subscribe(
+            (response: Address) => {
+                this.addressExists = true;
+
+                if (this.addressExists) {
+                    this.linkAddress();
                 } else {
-                    return false;
+                    this.addressService.create(this.address).subscribe(
+                        (res) => this.linkAddress(),
+                        (error) => { throw error; }
+                    );
                 }
             },
-            (error) => { }
-        );
+            (error: HttpErrorResponse) => {
+                if (error.status === 500) {
+                    this.addressExists = true;
+                }
 
-        if (exists) {
-            this.linkAddress();
-        } else {
-            this.addressService.create(this.address).subscribe(
-                (response) => this.linkAddress(),
-                (error) => { throw error; }
-            );
-        }
+                if (this.addressExists) {
+                    this.linkAddress();
+                } else {
+                    this.addressService.create(this.address).subscribe(
+                        (response) => this.linkAddress(),
+                        (err) => { throw error; }
+                    );
+                }
+            }
+        );
     }
 
     private linkAddress() {
-        const exists = this.debtorHasAddressService.getByDebtorId(this.debtor.id).subscribe(
-            (response) => {
-                if (response != null) {
-                    return true;
-                } else {
-                    return false;
-                }
+        this.debtorHasAddressService.getByDebtorId(this.debtor.id).subscribe(
+            (response: DebtorHasAddress) => {
+                this.linkExists = true;
             },
-            (error) => { }
+            (error: HttpErrorResponse) => {
+                if (error.status === 500) {
+                    this.linkExists = false;
+                } else {
+                    this.linkExists = true;
+                }
+            }
         );
 
-        if (exists) {
+        if (this.linkExists) {
             this.debtorHasAddressService.deleteDebtorHasAddress(this.debtor.id, this.address.postal_code, this.address.number).subscribe(
                 (response) => { },
                 (error) => { }

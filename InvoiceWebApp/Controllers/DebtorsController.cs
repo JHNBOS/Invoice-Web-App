@@ -184,7 +184,7 @@ namespace InvoiceWebApp.Controllers
             }
 
             var result = new DebtorViewModel();
-            result.SetProperties(data, false);
+            result.SetProperties(data, true);
 
             return Ok(result);
         }

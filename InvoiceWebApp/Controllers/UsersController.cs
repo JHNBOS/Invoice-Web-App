@@ -175,6 +175,7 @@ namespace InvoiceWebApp.Controllers
             {
                 user.Password = String.Format("{0}{1}{2}", user.LastName, user.FirstName[0], DateTime.Now.Minute);
             }
+            var tempPassword = user.Password;
 
             //Insert user
             var data = await _repo.Insert(user);
@@ -187,7 +188,10 @@ namespace InvoiceWebApp.Controllers
             result.SetProperties(data);
 
             //Send email with credentials
-            await _email.SendCredentials(user);
+            var credentialsUser = user;
+            credentialsUser.Password = tempPassword;
+
+            await _email.SendCredentials(credentialsUser);
 
             return Ok(result);
         }

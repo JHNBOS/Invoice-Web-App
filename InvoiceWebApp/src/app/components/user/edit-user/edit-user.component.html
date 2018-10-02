@@ -31,7 +31,7 @@
                                 </label>
                             </div>
                             <select name="role" id="roles" class="custom-select" id="role" [(ngModel)]="user.role_id"
-                                [disabled]="user.role_id == 2">
+                                [disabled]="user.role_id == 2 || currentUser == user">
                                 <option selected>Select an user role</option>
                                 <option *ngFor="let role of roles" [value]="role.id">{{ role.type }}</option>
                             </select>
