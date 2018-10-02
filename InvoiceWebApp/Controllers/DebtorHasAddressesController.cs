@@ -145,6 +145,27 @@ namespace InvoiceWebApp.Controllers
         }
 
         /// <summary>
+        /// Checks if a relation between debtor and address by debtor id exists.
+        /// </summary>
+        /// <param name="id">Id of debtor</param>
+        [HttpGet("hasAddressExists")]
+        [ProducesResponseType(typeof(bool), 200)]
+        [ProducesResponseType(typeof(void), 400)]
+        public async Task<IActionResult> HasAddressExists(string id)
+        {
+            if (String.IsNullOrEmpty(id))
+            {
+                return StatusCode(400, "Invalid parameter(s).");
+            }
+
+            //Get debtor address link
+            var data = await _repo.GetAddressByDebtorId(id);
+
+            var result = data != null ? true : false;
+            return Ok(result);
+        }
+
+        /// <summary>
         /// Creates a relation between debtor and address.
         /// </summary>
         /// <param name="model">Debtor has Address object</param>

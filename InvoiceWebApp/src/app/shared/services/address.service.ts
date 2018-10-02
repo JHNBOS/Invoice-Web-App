@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
 import { environment } from '../../../environments/environment';
 import Address from '../models/address.model';
 
@@ -30,6 +29,11 @@ export class AddressService {
 
     getAddress(postal: string, number: number): Observable<Address> {
         return this.http.get<Address>(this.apiUrl + 'getByNumberAndPostalCode?number=' + number + '&postal=' + postal)
+            .pipe(catchError(error => throwError(error)));
+    }
+
+    addressExists(postal: string, number: number): Observable<boolean> {
+        return this.http.get<boolean>(this.apiUrl + 'addressExists?number=' + number + '&postal=' + postal)
             .pipe(catchError(error => throwError(error)));
     }
 

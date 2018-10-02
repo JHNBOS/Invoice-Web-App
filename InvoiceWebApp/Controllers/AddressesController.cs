@@ -130,7 +130,7 @@ namespace InvoiceWebApp.Controllers
         /// <param name="number">Number of adresss</param>
         /// <param name="postal">Postal code of address</param>
         [HttpGet("getByNumberAndPostalCode")]
-        [ProducesResponseType(typeof(UserViewModel), 200)]
+        [ProducesResponseType(typeof(AddressViewModel), 200)]
         [ProducesResponseType(typeof(void), 400)]
         [ProducesResponseType(typeof(void), 500)]
         public async Task<IActionResult> GetByNumberAndPostalCode(int? number, string postal)
@@ -151,6 +151,28 @@ namespace InvoiceWebApp.Controllers
             var result = new AddressViewModel();
             result.SetProperties(data);
 
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Checks if an address by number and postal code exists.
+        /// </summary>
+        /// <param name="number">Number of adresss</param>
+        /// <param name="postal">Postal code of address</param>
+        [HttpGet("addressExists")]
+        [ProducesResponseType(typeof(bool), 200)]
+        [ProducesResponseType(typeof(void), 400)]
+        public async Task<IActionResult> AddressExists(int? number, string postal)
+        {
+            if (!number.HasValue || String.IsNullOrEmpty(postal))
+            {
+                return StatusCode(400, "Invalid parameter(s).");
+            }
+
+            //Get address
+            var data = await _repo.GetAddressByPostalAndNumber(number.Value, postal);
+
+            var result = data != null ? true : false;
             return Ok(result);
         }
 

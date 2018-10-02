@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import Address from '../../../shared/models/address.model';
 import Debtor from '../../../shared/models/debtor.model';
 import DebtorHasAddress from '../../../shared/models/debtor_has_address.model';
 import Settings from '../../../shared/models/settings.model';
+import User from '../../../shared/models/user.model';
 import { AddressService } from '../../../shared/services/address.service';
 import { DebtorService } from '../../../shared/services/debtor.service';
 import { DebtorHasAddressService } from '../../../shared/services/debtor_has_address.service';
 import { UserService } from '../../../shared/services/user.service';
-import User from '../../../shared/models/user.model';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-add-debtor',
@@ -26,7 +24,7 @@ export class AddDebtorComponent implements OnInit {
     address: Address = new Address;
 
     addressExists = false;
-    linkExists = false;
+    hasAddressExists = false;
 
     constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService,
         private debtorHasAddressService: DebtorHasAddressService, private addressService: AddressService, private userService: UserService,
@@ -45,7 +43,7 @@ export class AddDebtorComponent implements OnInit {
         this.debtorService.create(this.debtor).subscribe(
             (response) => {
                 if (this.debtor.address == null) {
-                    this.createAddress();
+                    this.checkAddressExists();
                 } else {
                     this.router.navigate(['/debtors']);
                 }
@@ -54,65 +52,56 @@ export class AddDebtorComponent implements OnInit {
         );
     }
 
-    private createAddress() {
-        this.addressService.getAddress(this.address.postal_code, this.address.number).subscribe(
-            (response: Address) => {
-                this.addressExists = true;
-
-                if (this.addressExists) {
-                    this.linkAddress();
-                } else {
-                    this.addressService.create(this.address).subscribe(
-                        (res) => this.linkAddress(),
-                        (error) => { throw error; }
-                    );
-                }
+    private checkAddressExists() {
+        this.addressService.addressExists(this.address.postal_code, this.address.number).subscribe(
+            (response) => {
+                this.addressExists = response;
+                this.createAddress();
             },
-            (error: HttpErrorResponse) => {
-                if (error.status === 500) {
-                    this.addressExists = true;
-                }
-
-                if (this.addressExists) {
-                    this.linkAddress();
-                } else {
-                    this.addressService.create(this.address).subscribe(
-                        (response) => this.linkAddress(),
-                        (err) => { throw error; }
-                    );
-                }
-            }
+            (error) => { throw error; }
         );
     }
 
-    private linkAddress() {
-        this.debtorHasAddressService.getByDebtorId(this.debtor.id).subscribe(
-            (response: DebtorHasAddress) => {
-                this.linkExists = true;
-            },
-            (error: HttpErrorResponse) => {
-                if (error.status === 500) {
-                    this.linkExists = false;
-                } else {
-                    this.linkExists = true;
-                }
-            }
-        );
-
-        if (this.linkExists) {
-            this.debtorHasAddressService.deleteDebtorHasAddress(this.debtor.id, this.address.postal_code, this.address.number).subscribe(
-                (response) => { },
-                (error) => { }
+    private createAddress() {
+        if (this.addressExists) {
+            this.checkHasAddressExists();
+        } else {
+            this.addressService.create(this.address).subscribe(
+                (res) => this.checkHasAddressExists(),
+                (error) => { throw error; }
             );
         }
+    }
 
-        const debtorAddressLink = new DebtorHasAddress();
-        debtorAddressLink.debtor_id = this.debtor.id;
-        debtorAddressLink.address_postal = this.address.postal_code;
-        debtorAddressLink.address_number = this.address.number;
+    private checkHasAddressExists() {
+        this.debtorHasAddressService.hasAddressExists(this.debtor.id).subscribe(
+            (response) => {
+                this.hasAddressExists = response;
+                this.createHasAddress();
+            },
+            (error) => { throw error; }
+        );
+    }
 
-        this.debtorHasAddressService.create(debtorAddressLink).subscribe(
-            (response) => this.createUser(),
+    private createHasAddress() {
+        if (this.hasAddressExists) {
+            this.deleteHasAddress();
+        } else {
+            const debtorAddressLink = new DebtorHasAddress();
+            debtorAddressLink.debtor_id = this.debtor.id;
+            debtorAddressLink.address_postal = this.address.postal_code;
+            debtorAddressLink.address_number = this.address.number;
+
+            this.debtorHasAddressService.create(debtorAddressLink).subscribe(
+                (response) => this.createUser(),
+                (error) => { throw error; }
+            );
+        }
+    }
+
+    private deleteHasAddress() {
+        this.debtorHasAddressService.deleteDebtorHasAddress(this.debtor.id, this.address.postal_code, this.address.number).subscribe(
+            (response) => { this.createHasAddress(); },
             (error) => { throw error; }
         );
     }
