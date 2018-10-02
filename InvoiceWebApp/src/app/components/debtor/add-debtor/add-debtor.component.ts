@@ -9,6 +9,8 @@ import Settings from '../../../shared/models/settings.model';
 import { AddressService } from '../../../shared/services/address.service';
 import { DebtorService } from '../../../shared/services/debtor.service';
 import { DebtorHasAddressService } from '../../../shared/services/debtor_has_address.service';
+import { UserService } from '../../../shared/services/user.service';
+import User from '../../../shared/models/user.model';
 
 @Component({
     selector: 'app-add-debtor',
@@ -23,7 +25,8 @@ export class AddDebtorComponent implements OnInit {
     address: Address = new Address;
 
     constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService,
-        private debtorHasAddressService: DebtorHasAddressService, private addressService: AddressService, private router: Router) { }
+        private debtorHasAddressService: DebtorHasAddressService, private addressService: AddressService, private userService: UserService,
+        private router: Router) { }
 
     ngOnInit() {
         this.titleService.setTitle('Create Debtor - ' + this.settings.company_name);
@@ -95,6 +98,19 @@ export class AddDebtorComponent implements OnInit {
         debtorAddressLink.address_number = this.address.number;
 
         this.debtorHasAddressService.create(debtorAddressLink).subscribe(
+            (response) => this.createUser(),
+            (error) => { throw error; }
+        );
+    }
+
+    private createUser() {
+        const user = new User();
+        user.email = this.debtor.email;
+        user.first_name = this.debtor.first_name;
+        user.last_name = this.debtor.last_name;
+        user.role_id = 2;
+
+        this.userService.create(user).subscribe(
             (response) => this.router.navigate(['/debtors']),
             (error) => { throw error; }
         );
