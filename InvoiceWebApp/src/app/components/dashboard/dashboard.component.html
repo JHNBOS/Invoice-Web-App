@@ -4,19 +4,46 @@
     </div>
 </div>
 
-<p class="text-center mt-2" *ngIf="this.invoice_count[0]===0 && this.invoice_count[1]===0">
-    There currently are no invoices.
-</p>
+<ng-container *ngIf="currentUser.role_id == 1">
+    <p class="text-center mt-2" *ngIf="this.admin_invoice_count[0]===0 && this.admin_invoice_count[1]===0">
+        There currently are no invoices.
+    </p>
+</ng-container>
 
-<div class="row mt-5 mx-auto" [hidden]="this.invoice_count[0] === 0 && this.invoice_count[1] === 0">
-    <div class="col-sm-12 col-md-12 col-lg-6">
-        <div class="mx-auto">
-            <canvas id="chart-one"></canvas>
+<ng-container *ngIf="currentUser.role_id == 2">
+    <p class="text-center mt-2" *ngIf="this.debtor_invoice_count[0]===0 && this.debtor_invoice_count[1]===0">
+        There currently are no invoices.
+    </p>
+</ng-container>
+
+<!-- Admin charts -->
+<ng-container *ngIf="currentUser.role_id == 1">
+    <div class="row mt-5 mx-auto">
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <div class="mx-auto" [hidden]="this.admin_invoice_count[0] === 0 && this.admin_invoice_count[1] === 0">
+                <canvas id="chart-one"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <div class="mx-auto" [hidden]="this.admin_invoice_cash[0] === 0 && this.admin_invoice_cash[1] === 0">
+                <canvas id="chart-two"></canvas>
+            </div>
         </div>
     </div>
-    <div class="col-sm-12 col-md-12 col-lg-6">
-        <div class="mx-auto">
-            <canvas id="chart-two"></canvas>
+</ng-container>
+
+<!-- Debtor charts -->
+<ng-container *ngIf="currentUser.role_id == 2">
+    <div class="row mt-5 mx-auto">
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <div class="mx-auto" [hidden]="this.debtor_invoice_cash[0] === 0 && this.debtor_invoice_cash[1] === 0">
+                <canvas id="chart-one"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <div class="mx-auto" [hidden]="this.debtor_invoice_count[0] === 0 && this.debtor_invoice_count[1] === 0">
+                <canvas id="chart-two"></canvas>
+            </div>
         </div>
     </div>
-</div>
+</ng-container>

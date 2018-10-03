@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
-
 import Debtor from '../../shared/models/debtor.model';
 import Invoice from '../../shared/models/invoice.model';
 import Settings from '../../shared/models/settings.model';
@@ -22,6 +21,8 @@ export class InvoiceComponent implements OnInit {
     debtor: Debtor = null;
     invoices: Invoice[] = [];
     href: string;
+
+    query = '';
 
     constructor(private titleService: Title, private route: ActivatedRoute, private invoiceService: InvoiceService,
         private debtorService: DebtorService, private router: Router) { }
@@ -71,11 +72,28 @@ export class InvoiceComponent implements OnInit {
         }
     }
 
+    search() {
+        return this.invoices.filter(f => f.customer_id.includes(this.query)
+            || f.invoice_number.includes(this.query)
+            || f.debtor.id.includes(this.query) || f.debtor.first_name != null ? f.debtor.first_name.includes(this.query) : null
+                || f.debtor.last_name != null ? f.debtor.last_name.includes(this.query) : null
+                    || f.debtor.company_name != null ? f.debtor.company_name.includes(this.query) : null
+                    || f.expired_on.toLocaleDateString().includes(this.query)
+                    || f.created_on.toLocaleDateString().includes(this.query));
+    }
+
     getLocaleString(total: number): string {
         return total.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR' });
     }
 
     isExpirationExpired(invoice: Invoice): boolean {
         return moment(invoice.expired_on).isBefore(moment(new Date()));
+    }
+
+    differenceInDays(date: Date) {
+        const difference = Math.abs(date.getTime() - new Date().getTime());
+        const differenceInDays = Math.ceil(difference / (1000 * 3600 * 24));
+
+        return differenceInDays;
     }
 }

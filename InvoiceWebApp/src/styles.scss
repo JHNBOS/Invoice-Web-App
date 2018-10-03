@@ -70,6 +70,22 @@ h4.text-muted hr {
     color: rgba(73, 80, 87, 0.80);
 }
 
+.input-icon {
+    position: absolute;
+    right: 15px;
+    top: calc(50% - 0.5em);
+    color: #757575;
+}
+
+#search {
+    padding-left: 8px;
+}
+
+.input-wrapper {
+    position: relative;
+    width: 80%;
+}
+
 @media (max-width: 992px) {
     .return {
         top: 2%;

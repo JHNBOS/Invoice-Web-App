@@ -1,3 +1,13 @@
+<div class="row mb-5">
+    <div class="col-sm-12 col-md-5 mx-auto">
+        <div class="input-wrapper">
+            <input class="form-control" type="text" name="search" id="search" placeholder="Type to start searching..."
+                [(ngModel)]="query" />
+            <label for="search" class="fa fa-search input-icon"></label>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-sm-12 col-md-10 col-lg-10 mx-auto table-responsive">
         <h3 class="text-center" *ngIf="invoices?.length == 0">No invoices.</h3>
@@ -15,10 +25,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let invoice of invoices">
+                <tr *ngFor="let invoice of search()">
                     <td class="py-2 pl-3" data-title="Due date" [ngClass]="(isExpirationExpired(invoice)) ? 'text-danger' : 'text-muted'"
                         style="font-weight: 600;">
-                        {{ invoice.expired_on | date: 'MMMM dd, yyyy' }}
+                        <span *ngIf="!isExpirationExpired(invoice)">{{ invoice.expired_on | date: 'MMMM dd, yyyy' }}</span>
+                        <span *ngIf="isExpirationExpired(invoice)">{{ differenceInDays(invoice.expired_on) }} days
+                            overdue</span>
                     </td>
                     <td class="p-2" data-title="Invoice Nr.">
                         <a [routerLink]="['details', invoice.invoice_number]" title="View invoice details">
