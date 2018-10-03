@@ -1,3 +1,24 @@
+<div class="search-row row mb-4">
+    <div class="col-sm-12 col-lg-5 mx-auto">
+        <div class="input-wrapper">
+            <input class="form-control" type="text" name="search" id="search" placeholder="Type to start searching..."
+                [(ngModel)]="query" />
+            <label for="search" class="fa fa-search input-icon"></label>
+        </div>
+        <div class="search-buttons" [hidden]="currentUser?.role_id == 2">
+            <a [routerLink]="['add']" class="btn btn-primary" title="Add user">
+                <i class="fa fa-plus"></i><span>Add user</span>
+            </a>
+
+            <a [routerLink]="['import']" class="btn btn-primary" title="Add users by CSV">
+                <i class="fa fa-file-excel-o"></i><span>Import CSV</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<hr class="search-divider" />
+
 <div class="row">
     <div class="col-sm-12 col-md-10 col-lg-10 mx-auto table-responsive">
         <h3 class="text-center" *ngIf="users?.length == 0">No users.</h3>
@@ -11,7 +32,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of users">
+                <tr *ngFor="let user of search()">
                     <td class="text-muted py-2 pl-3" data-title="User">
                         <a [routerLink]="['details', user.email]" title="View user details">
                             {{ user.first_name }} {{ user.last_name }}
@@ -33,17 +54,5 @@
                 </tr>
             </tbody>
         </table>
-
-        <div class="form-group row">
-            <div class="col-sm-12">
-                <a [routerLink]="['add']" class="btn btn-primary mt-3 mr-1" title="Add user">
-                    <i class="fa fa-plus"></i><span>Add user</span>
-                </a>
-
-                <a [routerLink]="['import']" class="btn btn-primary mt-3" title="Add users by CSV">
-                    <i class="fa fa-file-excel-o"></i><span>Import CSV</span>
-                </a>
-            </div>
-        </div>
     </div>
 </div>

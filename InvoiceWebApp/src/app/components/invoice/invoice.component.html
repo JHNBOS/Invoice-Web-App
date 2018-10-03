@@ -1,12 +1,19 @@
-<div class="row mb-5">
-    <div class="col-sm-12 col-md-5 mx-auto">
+<div class="search-row row mb-4">
+    <div class="col-sm-12 col-lg-5 mx-auto">
         <div class="input-wrapper">
             <input class="form-control" type="text" name="search" id="search" placeholder="Type to start searching..."
                 [(ngModel)]="query" />
             <label for="search" class="fa fa-search input-icon"></label>
         </div>
+        <div class="search-buttons" [hidden]="currentUser?.role_id == 2">
+            <a [routerLink]="['create']" class="btn btn-primary" title="Create invoice">
+                <i class="fa fa-plus"></i><span>Create invoice</span>
+            </a>
+        </div>
     </div>
 </div>
+
+<hr class="search-divider" />
 
 <div class="row">
     <div class="col-sm-12 col-md-10 col-lg-10 mx-auto table-responsive">
@@ -67,13 +74,5 @@
                 </tr>
             </tbody>
         </table>
-
-        <div class="form-group row" [hidden]="currentUser.role_id == 2">
-            <div class="col-sm-12">
-                <a [routerLink]="['create']" class="btn btn-primary mt-3 mr-1" title="Create invoice">
-                    <i class="fa fa-plus"></i><span>Create invoice</span>
-                </a>
-            </div>
-        </div>
     </div>
 </div>

@@ -73,13 +73,35 @@ export class InvoiceComponent implements OnInit {
     }
 
     search() {
-        return this.invoices.filter(f => f.customer_id.includes(this.query)
-            || f.invoice_number.includes(this.query)
-            || f.debtor.id.includes(this.query) || f.debtor.first_name != null ? f.debtor.first_name.includes(this.query) : null
-                || f.debtor.last_name != null ? f.debtor.last_name.includes(this.query) : null
-                    || f.debtor.company_name != null ? f.debtor.company_name.includes(this.query) : null
-                    || f.expired_on.toLocaleDateString().includes(this.query)
-                    || f.created_on.toLocaleDateString().includes(this.query));
+        const results: Invoice[] = [];
+        this.invoices.forEach(f => {
+            if (f.debtor.company_name == null) {
+                if (f.customer_id.toLowerCase().includes(this.query.toLowerCase())
+                    || f.invoice_number.includes(this.query.toLowerCase())
+                    || this.getLocaleString(f.total).toLowerCase().includes(this.query.toLowerCase())
+                    || moment(f.expired_on).format('MMMM DD, YYYY').toLowerCase().includes(this.query.toLowerCase())
+                    || moment(f.created_on).format('MMMM DD, YYYY').toLowerCase().includes(this.query.toLowerCase())
+                    || f.debtor.email.toLowerCase().includes(this.query.toLowerCase())
+                    || f.debtor.first_name.toLowerCase().includes(this.query.toLowerCase())
+                    || f.debtor.last_name.toLowerCase().includes(this.query.toLowerCase())) {
+
+                    results.push(f);
+                }
+            } else {
+                if (f.customer_id.toLowerCase().includes(this.query.toLowerCase())
+                    || f.invoice_number.includes(this.query.toLowerCase())
+                    || this.getLocaleString(f.total).toLowerCase().includes(this.query.toLowerCase())
+                    || moment(f.expired_on).format('MMMM DD, YYYY').toLowerCase().includes(this.query.toLowerCase())
+                    || moment(f.created_on).format('MMMM DD, YYYY').toLowerCase().includes(this.query.toLowerCase())
+                    || f.debtor.email.toLowerCase().includes(this.query.toLowerCase())
+                    || f.debtor.company_name.toLowerCase().includes(this.query.toLowerCase())) {
+
+                    results.push(f);
+                }
+            }
+        });
+
+        return results;
     }
 
     getLocaleString(total: number): string {

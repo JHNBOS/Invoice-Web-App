@@ -16,6 +16,7 @@ export class UserComponent implements OnInit {
     settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
 
     users: User[] = [];
+    query = '';
 
     constructor(private titleService: Title, private route: ActivatedRoute,
         private userService: UserService, private router: Router) { }
@@ -39,5 +40,27 @@ export class UserComponent implements OnInit {
                 (error) => { throw (error); }
             );
         }
+    }
+
+    search() {
+        const results: User[] = [];
+        this.users.forEach(f => {
+            if (f.company_name == null) {
+                if (f.email.toLowerCase().includes(this.query.toLowerCase())
+                    || f.first_name.toLowerCase().includes(this.query.toLowerCase())
+                    || f.last_name.toLowerCase().includes(this.query.toLowerCase())) {
+
+                    results.push(f);
+                }
+            } else {
+                if (f.email.toLowerCase().includes(this.query.toLowerCase())
+                    || f.company_name.toLowerCase().includes(this.query.toLowerCase())) {
+
+                    results.push(f);
+                }
+            }
+        });
+
+        return results;
     }
 }

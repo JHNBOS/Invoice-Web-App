@@ -253,14 +253,16 @@ namespace InvoiceWebApp.Components.DataContext
                     .HasMaxLength(255);
 
                 entity.Property(e => e.FirstName)
-                    .IsRequired()
                     .HasColumnName("first_name")
                     .HasMaxLength(150);
 
                 entity.Property(e => e.LastName)
-                    .IsRequired()
                     .HasColumnName("last_name")
                     .HasMaxLength(175);
+
+                entity.Property(e => e.CompanyName)
+                    .HasColumnName("company_name")
+                    .HasMaxLength(250);
 
                 entity.Property(e => e.Password)
                     .IsRequired()

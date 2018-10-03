@@ -40,32 +40,52 @@
 
             <br />
 
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="first_name">First Name</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="first_name-addon">
-                                <i class="fa fa-font" aria-hidden="true"></i>
-                            </span>
+            <ng-container *ngIf="!user.company_name">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="first_name">First Name</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="first_name-addon">
+                                    <i class="fa fa-font" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <input type="text" name="f_name" class="form-control" id="first_name" [(ngModel)]="user.first_name"
+                                placeholder="First Name" aria-describedby="first_name-addon" readonly />
                         </div>
-                        <input type="text" name="f_name" class="form-control" id="first_name" [(ngModel)]="user.first_name"
-                            placeholder="First Name" aria-describedby="first_name-addon" readonly />
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="last_name">Last Name</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="last_name-addon">
+                                    <i class="fa fa-font" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <input type="text" name="l_name" class="form-control" id="last_name" [(ngModel)]="user.last_name"
+                                placeholder="Last Name" aria-describedby="last_name-addon" readonly />
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <label for="last_name">Last Name</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="last_name-addon">
-                                <i class="fa fa-font" aria-hidden="true"></i>
-                            </span>
+            </ng-container>
+
+            <ng-container *ngIf="user.company_name">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="company_name">Company Name</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="company_name-addon">
+                                    <i class="fa fa-font" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <input type="text" name="company" class="form-control" id="company" [(ngModel)]="user.company_name"
+                                placeholder="Company Name" aria-describedby="company_name-addon" readonly />
                         </div>
-                        <input type="text" name="l_name" class="form-control" id="last_name" [(ngModel)]="user.last_name"
-                            placeholder="Last Name" aria-describedby="last_name-addon" readonly />
                     </div>
+                    <div class="col-sm-6"></div>
                 </div>
-            </div>
+            </ng-container>
 
             <h4 class="text-muted">Profile Picture</h4>
 

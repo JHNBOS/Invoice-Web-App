@@ -45,10 +45,11 @@ export class ImportUserComponent implements OnInit {
         const user = new User();
         user.first_name = data[0];
         user.last_name = data[1];
-        user.email = data[2];
-        user.password = data[3];
-        user.picture = data[4];
-        user.role_id = data[5];
+        user.company_name = data[2];
+        user.email = data[3];
+        user.password = data[4];
+        user.picture = data[5];
+        user.role_id = data[6];
 
         this.users.push(user);
     }

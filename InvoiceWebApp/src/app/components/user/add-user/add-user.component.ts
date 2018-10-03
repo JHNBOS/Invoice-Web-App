@@ -17,6 +17,7 @@ export class AddUserComponent implements OnInit {
     settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
     @ViewChild('fileInput') fileInput: ElementRef;
 
+    forCompany = false;
     user: User = new User;
     roles: Role[] = null;
     fileLabel = 'Choose an image to use as profile picture';
@@ -26,6 +27,11 @@ export class AddUserComponent implements OnInit {
 
     ngOnInit() {
         this.titleService.setTitle('Create User - ' + this.settings.company_name);
+        this.route.params.subscribe(
+            (params) => {
+                this.forCompany = params['company'] === 'yes' ? true : false;
+            }
+        );
         this.getRoles();
     }
 

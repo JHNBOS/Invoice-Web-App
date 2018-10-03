@@ -55,6 +55,7 @@ namespace InvoiceWebApp.Controllers
                 Password = s.Password,
                 FirstName = s.FirstName,
                 LastName = s.LastName,
+                CompanyName = s.CompanyName,
                 Role = s.Role,
                 Picture = s.Picture
             });
@@ -152,6 +153,7 @@ namespace InvoiceWebApp.Controllers
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
+                CompanyName = model.CompanyName,
                 Email = model.Email,
                 Password = model.Password,
                 Role = model.Role,
@@ -217,6 +219,7 @@ namespace InvoiceWebApp.Controllers
                 Password = model.Password,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
+                CompanyName = model.CompanyName,
                 Role = model.Role,
                 Picture = model.Picture
             };

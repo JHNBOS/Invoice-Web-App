@@ -13,6 +13,8 @@ namespace InvoiceWebApp.Controllers.ViewModels
         public string FirstName { get; set; }
         [JsonProperty("last_name")]
         public string LastName { get; set; }
+        [JsonProperty("company_name")]
+        public string CompanyName { get; set; }
         [JsonProperty("role_id")]
         public int Role { get; set; }
         [JsonProperty("picture")]
@@ -28,6 +30,7 @@ namespace InvoiceWebApp.Controllers.ViewModels
             this.Password = model.Password;
             this.FirstName = model.FirstName;
             this.LastName = model.LastName;
+            this.CompanyName = model.CompanyName;
             this.Role = model.Role;
             this.Picture = model.Picture;
         }
