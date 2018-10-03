@@ -109,9 +109,14 @@ export class AddDebtorComponent implements OnInit {
     private createUser() {
         const user = new User();
         user.email = this.debtor.email;
-        user.first_name = this.debtor.first_name;
-        user.last_name = this.debtor.last_name;
         user.role_id = 2;
+
+        if (this.debtor.company_name == null) {
+            user.first_name = this.debtor.first_name;
+            user.last_name = this.debtor.last_name;
+        } else {
+            user.company_name = this.debtor.company_name;
+        }
 
         this.userService.create(user).subscribe(
             (response) => this.router.navigate(['/debtors']),
