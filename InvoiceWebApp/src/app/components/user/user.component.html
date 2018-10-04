@@ -7,10 +7,10 @@
         </div>
         <div class="search-buttons" [hidden]="currentUser?.role_id == 2">
             <a [routerLink]="['add', 'no']" class="btn btn-primary" title="Add user for client">
-                <i class="fa fa-plus"></i><span>Add user</span>
+                <i class="fa fa-user-plus"></i><span>Add user</span>
             </a>
-            <a [routerLink]="['add', 'ýes']" class="btn btn-primary" title="Add user for company">
-                <i class="fa fa-plus"></i><span>Add user</span>
+            <a [routerLink]="['add', 'yes']" class="btn btn-primary" title="Add user for company">
+                <i class="fa fa-building-o"></i><span>Add user</span>
             </a>
             <a [routerLink]="['import']" class="btn btn-primary" title="Add users by CSV">
                 <i class="fa fa-file-excel-o"></i><span>Import CSV</span>
@@ -23,9 +23,9 @@
 
 <div class="row">
     <div class="col-sm-12 col-md-10 col-lg-10 mx-auto table-responsive">
-        <h3 class="text-center" *ngIf="users?.length == 0">No users.</h3>
+        <h3 class="text-center" *ngIf="search()?.length == 0">No users.</h3>
 
-        <table class="table table-hover table-sm table-condensed" *ngIf="users?.length > 0">
+        <table class="table table-hover table-sm table-condensed" *ngIf="search()?.length > 0">
             <thead>
                 <tr>
                     <th class="pl-3">User</th>
@@ -57,7 +57,7 @@
             </tbody>
         </table>
 
-        <div class="pager">
+        <div class="pager" *ngIf="search()?.length > 0">
             <div class="right" *ngIf="pagedResult != null">
                 <button [disabled]="pagedResult.current_page == pagedResult.total_pages" class="btn btn-primary"
                     (click)="getPage(pagedResult.current_page + 1)">

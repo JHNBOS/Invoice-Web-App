@@ -17,9 +17,9 @@
 
 <div class="row">
     <div class="col-sm-12 col-md-10 col-lg-10 mx-auto table-responsive">
-        <h3 class="text-center" *ngIf="invoices?.length == 0">No invoices.</h3>
+        <h3 class="text-center" *ngIf="search()?.length == 0">No invoices.</h3>
 
-        <table class="table table-hover table-sm table-condensed" *ngIf="invoices?.length > 0">
+        <table class="table table-hover table-sm table-condensed" *ngIf="search()?.length > 0">
             <thead>
                 <tr>
                     <th class="pl-3">Due date</th>
@@ -75,7 +75,7 @@
             </tbody>
         </table>
 
-        <div class="pager">
+        <div class="pager" *ngIf="search()?.length > 0">
             <div class="right" *ngIf="pagedResult != null">
                 <button [disabled]="pagedResult.current_page == pagedResult.total_pages" class="btn btn-primary"
                     (click)="getPage(pagedResult.current_page + 1)">
