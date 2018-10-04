@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
 import { environment } from '../../../environments/environment';
+import { PaginationResult } from '../models/pagination.result';
 import User from '../models/user.model';
+
 
 @Injectable()
 export class UserService {
@@ -20,6 +21,11 @@ export class UserService {
 
     getAll(): Observable<User[]> {
         return this.http.get<User[]>(this.apiUrl + 'getAll')
+            .pipe(catchError(error => throwError(error)));
+    }
+
+    index(page: number, pageSize: number = 10): Observable<PaginationResult<User>> {
+        return this.http.get<PaginationResult<User>>(this.apiUrl + 'index?page=' + page + '&pageSize=' + pageSize)
             .pipe(catchError(error => throwError(error)));
     }
 

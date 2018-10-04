@@ -31,6 +31,62 @@ namespace InvoiceWebApp.Controllers
         }
 
         /// <summary>
+        /// Debtor pagination.
+        /// </summary>
+        /// <param name="page">Page</param>
+        /// <param name="pageSize">Amount of items on one page</param>
+        [HttpGet("index")]
+        [ProducesResponseType(typeof(PaginationResult<DebtorViewModel>), 200)]
+        [ProducesResponseType(typeof(void), 500)]
+        public async Task<IActionResult> Index(int? page, int? pageSize)
+        {
+            if (!page.HasValue || !pageSize.HasValue)
+            {
+                return StatusCode(400, String.Format("Invalid parameter(s)."));
+            }
+
+            //Get data
+            var data = await _repo.GetDebtors();
+            if (data == null)
+            {
+                return StatusCode(500, "Debtors could not be found.");
+            }
+
+            //Convert to viewmodel
+            var result = new List<DebtorViewModel>();
+            foreach (var debtor in data)
+            {
+                //Debtor --> Address
+                var hasAddress = debtor.Addresses.ToList()[0];
+                var address = await _addressRepository.GetAddressByPostalAndNumber(hasAddress.Number, hasAddress.PostalCode);
+
+                //Address model
+                var addressViewModel = new AddressViewModel();
+                addressViewModel.SetProperties(address);
+
+                //Debtor model
+                var debtorModel = new DebtorViewModel();
+                debtorModel.Address = addressViewModel;
+                debtorModel.SetProperties(debtor, false);
+
+                result.Add(debtorModel);
+            }
+
+            var totalPages = ((result.Count() - 1) / pageSize.Value) + 1;
+            var requestedData = result.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value).ToList();
+
+            var paging = new PaginationResult<DebtorViewModel>(page.Value, totalPages, requestedData);
+            var pagingResult = new PaginationResultViewModel<DebtorViewModel>
+            {
+                Data = paging.Data,
+                TotalPages = paging.TotalPages,
+                CurrentPage = paging.CurrentPage
+            };
+
+            return Ok(pagingResult);
+        }
+
+        /// <summary>
         /// Gets a list with all debtors.
         /// </summary>
         [HttpGet("getAll")]

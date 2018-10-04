@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
 import { environment } from '../../../environments/environment';
 import Invoice from '../models/invoice.model';
+import { PaginationResult } from '../models/pagination.result';
+
 
 @Injectable()
 export class InvoiceService {
@@ -35,6 +36,11 @@ export class InvoiceService {
 
     getAll(): Observable<Invoice[]> {
         return this.http.get<Invoice[]>(this.apiUrl + 'getAll')
+            .pipe(catchError(error => throwError(error)));
+    }
+
+    index(page: number, pageSize: number = 10): Observable<PaginationResult<Invoice>> {
+        return this.http.get<PaginationResult<Invoice>>(this.apiUrl + 'index?page=' + page + '&pageSize=' + pageSize)
             .pipe(catchError(error => throwError(error)));
     }
 

@@ -34,6 +34,54 @@ namespace InvoiceWebApp.Controllers
         }
 
         /// <summary>
+        /// User pagination.
+        /// </summary>
+        /// <param name="page">Page</param>
+        /// <param name="pageSize">Amount of items on one page</param>
+        [HttpGet("index")]
+        [ProducesResponseType(typeof(PaginationResult<UserViewModel>), 200)]
+        [ProducesResponseType(typeof(void), 500)]
+        public async Task<IActionResult> Index(int? page, int? pageSize)
+        {
+            if (!page.HasValue || !pageSize.HasValue)
+            {
+                return StatusCode(400, String.Format("Invalid parameter(s)."));
+            }
+
+            //Get data
+            var data = await _repo.GetUsers();
+            if (data == null)
+            {
+                return StatusCode(500, "Users could not be found.");
+            }
+
+            //Convert to viewmodel
+            var result = data.Select(s => new UserViewModel
+            {
+                Email = s.Email,
+                Password = s.Password,
+                FirstName = s.FirstName,
+                LastName = s.LastName,
+                CompanyName = s.CompanyName,
+                Role = s.Role,
+                Picture = s.Picture
+            });
+
+            var totalPages = ((result.Count() - 1) / pageSize.Value) + 1;
+            var requestedData = result.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value).ToList();
+
+            var paging = new PaginationResult<UserViewModel>(page.Value, totalPages, requestedData);
+            var pagingResult = new PaginationResultViewModel<UserViewModel>
+            {
+                Data = paging.Data,
+                TotalPages = paging.TotalPages,
+                CurrentPage = paging.CurrentPage
+            };
+
+            return Ok(pagingResult);
+        }
+
+        /// <summary>
         /// Gets a list with all users.
         /// </summary>
         [HttpGet("getAll")]

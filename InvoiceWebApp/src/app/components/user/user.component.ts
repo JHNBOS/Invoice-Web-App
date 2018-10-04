@@ -1,7 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { PaginationResult } from '../../shared/models/pagination.result';
 import Settings from '../../shared/models/settings.model';
 import User from '../../shared/models/user.model';
 import { UserService } from '../../shared/services/user.service';
@@ -16,14 +17,16 @@ export class UserComponent implements OnInit {
     settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
 
     users: User[] = [];
+
     query = '';
+    pagedResult: PaginationResult<User>;
 
     constructor(private titleService: Title, private route: ActivatedRoute,
         private userService: UserService, private router: Router) { }
 
     ngOnInit() {
         this.titleService.setTitle('Users - ' + this.settings.company_name);
-        this.getAllUsers();
+        this.getPage(1);
     }
 
     getAllUsers() {
@@ -62,5 +65,15 @@ export class UserComponent implements OnInit {
         });
 
         return results;
+    }
+
+    getPage(page: number) {
+        this.userService.index(page).subscribe(
+            (response) => {
+                this.pagedResult = response;
+                this.users = this.pagedResult.data;
+            },
+            (error: HttpErrorResponse) => { throw error; }
+        );
     }
 }

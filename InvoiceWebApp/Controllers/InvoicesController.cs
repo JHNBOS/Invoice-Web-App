@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
@@ -34,6 +35,67 @@ namespace InvoiceWebApp.Controllers
             this._pdf = new PDF();
 
             Task.Run(async () => this._settings = await this._settingRepository.GetSettings());
+        }
+
+        /// <summary>
+        /// Invoice pagination.
+        /// </summary>
+        /// <param name="page">Page</param>
+        /// <param name="pageSize">Amount of items on one page</param>
+        [HttpGet("index")]
+        [ProducesResponseType(typeof(PaginationResult<InvoiceViewModel>), 200)]
+        [ProducesResponseType(typeof(void), 500)]
+        public async Task<IActionResult> Index(int? page, int? pageSize)
+        {
+            if (!page.HasValue || !pageSize.HasValue)
+            {
+                return StatusCode(400, String.Format("Invalid parameter(s)."));
+            }
+
+            //Get data
+            var data = await _repo.GetInvoices();
+            if (data == null)
+            {
+                return StatusCode(500, "Invoices could not be found.");
+            }
+
+            //Convert to viewmodel
+            var result = new List<InvoiceViewModel>();
+            foreach (var invoice in data)
+            {
+                var debtor = invoice.Debtor;
+                var debtorModel = new DebtorViewModel();
+                debtorModel.SetProperties(debtor, true);
+
+                var invoiceModel = new InvoiceViewModel
+                {
+                    InvoiceNumber = invoice.InvoiceNumber,
+                    CustomerId = invoice.CustomerId,
+                    Total = invoice.Total,
+                    Discount = invoice.Discount,
+                    Comment = invoice.Comment,
+                    CreatedOn = invoice.CreatedOn,
+                    ExpiredOn = invoice.ExpiredOn,
+                    Debtor = debtorModel,
+                    IsPaid = invoice.IsPaid,
+                    Concept = invoice.Concept
+                };
+
+                result.Add(invoiceModel);
+            }
+
+            var totalPages = ((result.Count() - 1) / pageSize.Value) + 1;
+            var requestedData = result.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value).ToList();
+
+            var paging = new PaginationResult<InvoiceViewModel>(page.Value, totalPages, requestedData);
+            var pagingResult = new PaginationResultViewModel<InvoiceViewModel>
+            {
+                Data = paging.Data,
+                TotalPages = paging.TotalPages,
+                CurrentPage = paging.CurrentPage
+            };
+
+            return Ok(pagingResult);
         }
 
         /// <summary>

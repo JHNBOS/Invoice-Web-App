@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
 import { environment } from '../../../environments/environment';
 import Debtor from '../models/debtor.model';
+import { PaginationResult } from '../models/pagination.result';
+
 
 @Injectable()
 export class DebtorService {
@@ -25,6 +26,11 @@ export class DebtorService {
 
     getAll(): Observable<Debtor[]> {
         return this.http.get<Debtor[]>(this.apiUrl + 'getAll')
+            .pipe(catchError(error => throwError(error)));
+    }
+
+    index(page: number, pageSize: number = 10): Observable<PaginationResult<Debtor>> {
+        return this.http.get<PaginationResult<Debtor>>(this.apiUrl + 'index?page=' + page + '&pageSize=' + pageSize)
             .pipe(catchError(error => throwError(error)));
     }
 

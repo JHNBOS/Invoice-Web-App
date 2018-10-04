@@ -1,9 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import Debtor from '../../shared/models/debtor.model';
 import Invoice from '../../shared/models/invoice.model';
+import { PaginationResult } from '../../shared/models/pagination.result';
 import Settings from '../../shared/models/settings.model';
 import User from '../../shared/models/user.model';
 import { DebtorService } from '../../shared/services/debtor.service';
@@ -23,6 +25,7 @@ export class InvoiceComponent implements OnInit {
     href: string;
 
     query = '';
+    pagedResult: PaginationResult<Invoice>;
 
     constructor(private titleService: Title, private route: ActivatedRoute, private invoiceService: InvoiceService,
         private debtorService: DebtorService, private router: Router) { }
@@ -35,7 +38,7 @@ export class InvoiceComponent implements OnInit {
         if (this.currentUser.role_id === 2) {
             this.getDebtor();
         } else {
-            this.getAllInvoices();
+            this.getPage(1);
         }
     }
 
@@ -46,18 +49,11 @@ export class InvoiceComponent implements OnInit {
         );
     }
 
-    getInvoicesByDebtor() {
-        this.invoiceService.getByDebtorId(this.debtor.id).subscribe(
-            (response) => this.invoices = response,
-            (error) => { throw error; }
-        );
-    }
-
     getDebtor() {
         this.debtorService.getByEmail(this.currentUser.email).subscribe(
             (response) => {
                 this.debtor = response;
-                this.getInvoicesByDebtor();
+                this.getPage(1);
             },
             (error) => { throw error; }
         );
@@ -102,6 +98,20 @@ export class InvoiceComponent implements OnInit {
         });
 
         return results;
+    }
+
+    getPage(page: number) {
+        this.invoiceService.index(page).subscribe(
+            (response) => {
+                if (this.currentUser.role_id === 2) {
+                    response.data = response.data.filter(f => f.customer_id === this.debtor.id);
+                }
+
+                this.pagedResult = response;
+                this.invoices = this.pagedResult.data;
+            },
+            (error: HttpErrorResponse) => { throw error; }
+        );
     }
 
     getLocaleString(total: number): string {
