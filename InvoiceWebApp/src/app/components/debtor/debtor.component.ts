@@ -21,17 +21,23 @@ export class DebtorComponent implements OnInit {
     query = '';
     pagedResult: PaginationResult<Debtor>;
 
+    isDesc = false;
+    column: string;
+
     constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService,
         private router: Router) { }
 
     ngOnInit() {
         this.titleService.setTitle('Debtors - ' + this.settings.company_name);
-        this.getPage(1);
+        this.getAllDebtors();
     }
 
     getAllDebtors() {
         this.debtorService.getAll().subscribe(
-            (response) => this.debtors = response,
+            (response) => {
+                this.debtors = response;
+                this.getPage(1);
+            },
             (error) => { throw error; }
         );
     }
@@ -75,9 +81,24 @@ export class DebtorComponent implements OnInit {
         this.debtorService.index(page).subscribe(
             (response) => {
                 this.pagedResult = response;
-                this.debtors = this.pagedResult.data;
             },
             (error: HttpErrorResponse) => { throw error; }
         );
+    }
+
+    sort(property: string) {
+        this.isDesc = !this.isDesc;
+        this.column = property;
+        const direction = this.isDesc ? 1 : -1;
+
+        this.pagedResult.data.sort(function (a, b) {
+            if (a[property] < b[property]) {
+                return -1 * direction;
+            } else if (a[property] > b[property]) {
+                return 1 * direction;
+            } else {
+                return 0;
+            }
+        });
     }
 }

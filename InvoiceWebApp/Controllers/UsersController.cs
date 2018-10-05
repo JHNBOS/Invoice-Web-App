@@ -64,7 +64,8 @@ namespace InvoiceWebApp.Controllers
                 LastName = s.LastName,
                 CompanyName = s.CompanyName,
                 Role = s.Role,
-                Picture = s.Picture
+                Picture = s.Picture,
+                NameLabel = s.CompanyName == null ? s.FirstName + " " + s.LastName : s.CompanyName
             });
 
             var totalPages = ((result.Count() - 1) / pageSize.Value) + 1;
@@ -105,7 +106,8 @@ namespace InvoiceWebApp.Controllers
                 LastName = s.LastName,
                 CompanyName = s.CompanyName,
                 Role = s.Role,
-                Picture = s.Picture
+                Picture = s.Picture,
+                NameLabel = s.CompanyName == null ? s.FirstName + " " + s.LastName : s.CompanyName
             });
 
             return Ok(result);
@@ -141,7 +143,7 @@ namespace InvoiceWebApp.Controllers
 
             //Convert to view model
             var result = new UserViewModel();
-            result.SetProperties(data);
+            result.SetProperties(data, false);
 
             return Ok(result);
         }
@@ -177,7 +179,7 @@ namespace InvoiceWebApp.Controllers
 
             //Convert to view model
             var result = new UserViewModel();
-            result.SetProperties(data);
+            result.SetProperties(data, false);
 
             return Ok(result);
         }
@@ -235,7 +237,7 @@ namespace InvoiceWebApp.Controllers
             }
 
             var result = new UserViewModel();
-            result.SetProperties(data);
+            result.SetProperties(data, true);
 
             //Send email with credentials
             var credentialsUser = user;
@@ -280,7 +282,7 @@ namespace InvoiceWebApp.Controllers
             }
 
             var result = new UserViewModel();
-            result.SetProperties(data);
+            result.SetProperties(data, false);
 
             return Ok(result);
         }

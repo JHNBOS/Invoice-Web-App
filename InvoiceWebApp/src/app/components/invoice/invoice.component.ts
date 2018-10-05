@@ -27,6 +27,9 @@ export class InvoiceComponent implements OnInit {
     query = '';
     pagedResult: PaginationResult<Invoice>;
 
+    isDesc = false;
+    column: string;
+
     constructor(private titleService: Title, private route: ActivatedRoute, private invoiceService: InvoiceService,
         private debtorService: DebtorService, private router: Router) { }
 
@@ -38,13 +41,16 @@ export class InvoiceComponent implements OnInit {
         if (this.currentUser.role_id === 2) {
             this.getDebtor();
         } else {
-            this.getPage(1);
+            this.getAllInvoices();
         }
     }
 
     getAllInvoices() {
         this.invoiceService.getAll().subscribe(
-            (response) => this.invoices = response,
+            (response) => {
+                this.invoices = response;
+                this.getPage(1);
+            },
             (error) => { throw error; }
         );
     }
@@ -108,10 +114,25 @@ export class InvoiceComponent implements OnInit {
                 }
 
                 this.pagedResult = response;
-                this.invoices = this.pagedResult.data;
             },
             (error: HttpErrorResponse) => { throw error; }
         );
+    }
+
+    sort(property: string) {
+        this.isDesc = !this.isDesc;
+        this.column = property;
+        const direction = this.isDesc ? 1 : -1;
+
+        this.pagedResult.data.sort(function (a, b) {
+            if (a[property] < b[property]) {
+                return -1 * direction;
+            } else if (a[property] > b[property]) {
+                return 1 * direction;
+            } else {
+                return 0;
+            }
+        });
     }
 
     getLocaleString(total: number): string {

@@ -6,4 +6,5 @@ export default class User {
     picture: string = null;
     password: string = null;
     role_id: number = null;
+    name_label: string = null;
 }

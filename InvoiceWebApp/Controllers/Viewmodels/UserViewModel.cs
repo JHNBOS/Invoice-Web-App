@@ -19,12 +19,14 @@ namespace InvoiceWebApp.Controllers.ViewModels
         public int Role { get; set; }
         [JsonProperty("picture")]
         public string Picture { get; set; }
+        [JsonProperty("name_label")]
+        public string NameLabel { get; set; }
 
         public UserViewModel()
         {
 
         }
-        public void SetProperties(User model)
+        public void SetProperties(User model, bool skipLabel)
         {
             this.Email = model.Email;
             this.Password = model.Password;
@@ -33,6 +35,16 @@ namespace InvoiceWebApp.Controllers.ViewModels
             this.CompanyName = model.CompanyName;
             this.Role = model.Role;
             this.Picture = model.Picture;
+
+            if (!skipLabel)
+            {
+                if (this.CompanyName != null || !string.IsNullOrEmpty(this.CompanyName))
+                {
+                    this.NameLabel = string.Format("{0}", this.CompanyName);
+                }
+
+                this.NameLabel = string.Format("{0} {1}", this.FirstName, this.LastName);
+            }
         }
     }
 }

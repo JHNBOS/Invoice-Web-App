@@ -29,14 +29,26 @@
             <thead>
                 <tr>
                     <th class="pl-3">ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
+                    <th class="pointer" (click)="sort('name_label')">
+                        Name
+                        <i class="fa" [ngClass]="{'fa-sort': column != 'name_label', 
+                                                                        'fa-sort-asc': (column == 'name_label' && !isDesc), 
+                                                                        'fa-sort-desc': (column == 'name_label' && isDesc) }"
+                            aria-hidden="true"> </i>
+                    </th>
+                    <th class="pointer" (click)="sort('email')">
+                        Email
+                        <i class="fa" [ngClass]="{'fa-sort': column != 'email', 
+                                                                        'fa-sort-asc': (column == 'email' && !isDesc), 
+                                                                        'fa-sort-desc': (column == 'email' && isDesc) }"
+                            aria-hidden="true"> </i>
+                    </th>
                     <th>City</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let debtor of search()">
+                <tr *ngFor="let debtor of pagedResult?.data">
                     <td class="text-muted py-2 pl-3" data-title="ID">
                         <a routerLinkActive="active" [routerLink]="['details', debtor.id]" title="View debtor details">
                             {{ debtor.id }}
@@ -44,8 +56,7 @@
                     </td>
                     <td class="p-2" data-title="Name">
                         <a routerLinkActive="active" [routerLink]="['details', debtor.id]" title="View debtor details">
-                            <span *ngIf="debtor.company_name == null">{{ debtor.first_name }} {{ debtor.last_name }}</span><span
-                                *ngIf="debtor.company_name != null">{{ debtor.company_name }}</span>
+                            {{ debtor.name_label }}
                         </a>
                     </td>
                     <td class="p-2" data-title="Email">
@@ -69,10 +80,11 @@
         <div class="pager" *ngIf="search()?.length > 0">
             <div class="right" *ngIf="pagedResult != null">
                 <button [disabled]="pagedResult.current_page == pagedResult.total_pages" class="btn btn-primary"
-                    (click)="getPage(pagedResult.current_page + 1)">
+                    (click)="getPage(pagedResult.current_page + 1)" title="Next Page">
                     <i class="fa fa-chevron-right"></i>
                 </button>
-                <button [disabled]="pagedResult.current_page == 1" class="btn btn-primary" (click)="getPage(pagedResult.current_page - 1)">
+                <button [disabled]="pagedResult.current_page == 1" class="btn btn-primary" (click)="getPage(pagedResult.current_page - 1)"
+                    title="Previous Page">
                     <i class="fa fa-chevron-left"></i>
                 </button>
             </div>

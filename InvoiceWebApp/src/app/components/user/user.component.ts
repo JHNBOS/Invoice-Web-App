@@ -21,17 +21,23 @@ export class UserComponent implements OnInit {
     query = '';
     pagedResult: PaginationResult<User>;
 
+    isDesc = false;
+    column: string;
+
     constructor(private titleService: Title, private route: ActivatedRoute,
         private userService: UserService, private router: Router) { }
 
     ngOnInit() {
         this.titleService.setTitle('Users - ' + this.settings.company_name);
-        this.getPage(1);
+        this.getAllUsers();
     }
 
     getAllUsers() {
         this.userService.getAll().subscribe(
-            (response) => this.users = response,
+            (response) => {
+                this.users = response;
+                this.getPage(1);
+            },
             (error) => { throw (error); }
         );
     }
@@ -71,9 +77,24 @@ export class UserComponent implements OnInit {
         this.userService.index(page).subscribe(
             (response) => {
                 this.pagedResult = response;
-                this.users = this.pagedResult.data;
             },
             (error: HttpErrorResponse) => { throw error; }
         );
+    }
+
+    sort(property: string) {
+        this.isDesc = !this.isDesc;
+        this.column = property;
+        const direction = this.isDesc ? 1 : -1;
+
+        this.pagedResult.data.sort(function (a, b) {
+            if (a[property] < b[property]) {
+                return -1 * direction;
+            } else if (a[property] > b[property]) {
+                return 1 * direction;
+            } else {
+                return 0;
+            }
+        });
     }
 }

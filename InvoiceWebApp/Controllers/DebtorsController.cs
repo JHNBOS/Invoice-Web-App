@@ -67,7 +67,7 @@ namespace InvoiceWebApp.Controllers
                 //Debtor model
                 var debtorModel = new DebtorViewModel();
                 debtorModel.Address = addressViewModel;
-                debtorModel.SetProperties(debtor, false);
+                debtorModel.SetProperties(debtor, false, false);
 
                 result.Add(debtorModel);
             }
@@ -116,7 +116,7 @@ namespace InvoiceWebApp.Controllers
                 //Debtor model
                 var debtorModel = new DebtorViewModel();
                 debtorModel.Address = addressViewModel;
-                debtorModel.SetProperties(debtor, false);
+                debtorModel.SetProperties(debtor, false, false);
 
                 result.Add(debtorModel);
             }
@@ -163,7 +163,7 @@ namespace InvoiceWebApp.Controllers
             //Debtor model
             var result = new DebtorViewModel();
             result.Address = addressViewModel;
-            result.SetProperties(data, false);
+            result.SetProperties(data, false, false);
 
             return Ok(result);
         }
@@ -201,7 +201,7 @@ namespace InvoiceWebApp.Controllers
             //Debtor model
             var result = new DebtorViewModel();
             result.Address = addressViewModel;
-            result.SetProperties(data, false);
+            result.SetProperties(data, false, false);
 
             return Ok(result);
         }
@@ -240,7 +240,7 @@ namespace InvoiceWebApp.Controllers
             }
 
             var result = new DebtorViewModel();
-            result.SetProperties(data, true);
+            result.SetProperties(data, true, true);
 
             return Ok(result);
         }
@@ -279,7 +279,7 @@ namespace InvoiceWebApp.Controllers
             }
 
             var result = new DebtorViewModel();
-            result.SetProperties(data, false);
+            result.SetProperties(data, false, false);
 
             return Ok(result);
         }

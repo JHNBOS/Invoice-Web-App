@@ -22,17 +22,35 @@
         <table class="table table-hover table-sm table-condensed" *ngIf="search()?.length > 0">
             <thead>
                 <tr>
-                    <th class="pl-3">Due date</th>
+                    <th class="pl-3 pointer" (click)="sort('expired_on')">
+                        Due date
+                        <i class="fa" [ngClass]="{'fa-sort': column != 'expired_on', 
+                                                'fa-sort-asc': (column == 'expired_on' && !isDesc), 
+                                                'fa-sort-desc': (column == 'expired_on' && isDesc) }"
+                            aria-hidden="true"> </i>
+                    </th>
                     <th>Invoice Nr.</th>
                     <th>Total</th>
                     <th>Debtor</th>
-                    <th>Paid</th>
-                    <th>Concept</th>
+                    <th class="pointer" (click)="sort('is_paid')">
+                        Paid
+                        <i class="fa" [ngClass]="{'fa-sort': column != 'is_paid', 
+                                                'fa-sort-asc': (column == 'is_paid' && !isDesc), 
+                                                'fa-sort-desc': (column == 'is_paid' && isDesc) }"
+                            aria-hidden="true"> </i>
+                    </th>
+                    <th class="pointer" (click)="sort('concept')">
+                        Concept
+                        <i class="fa" [ngClass]="{'fa-sort': column != 'concept', 
+                                                'fa-sort-asc': (column == 'concept' && !isDesc), 
+                                                'fa-sort-desc': (column == 'concept' && isDesc) }"
+                            aria-hidden="true"> </i>
+                    </th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let invoice of search()">
+                <tr *ngFor="let invoice of pagedResult?.data">
                     <td class="py-2 pl-3" data-title="Due date" [ngClass]="(isExpirationExpired(invoice)) ? 'text-danger' : 'text-muted'"
                         style="font-weight: 600;">
                         <span *ngIf="!isExpirationExpired(invoice)">{{ invoice.expired_on | date: 'MMMM dd, yyyy' }}</span>
@@ -78,10 +96,11 @@
         <div class="pager" *ngIf="search()?.length > 0">
             <div class="right" *ngIf="pagedResult != null">
                 <button [disabled]="pagedResult.current_page == pagedResult.total_pages" class="btn btn-primary"
-                    (click)="getPage(pagedResult.current_page + 1)">
+                    (click)="getPage(pagedResult.current_page + 1)" title="Next Page">
                     <i class="fa fa-chevron-right"></i>
                 </button>
-                <button [disabled]="pagedResult.current_page == 1" class="btn btn-primary" (click)="getPage(pagedResult.current_page - 1)">
+                <button [disabled]="pagedResult.current_page == 1" class="btn btn-primary" (click)="getPage(pagedResult.current_page - 1)"
+                    title="Previous Page">
                     <i class="fa fa-chevron-left"></i>
                 </button>
             </div>

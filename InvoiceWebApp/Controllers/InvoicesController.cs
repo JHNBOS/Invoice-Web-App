@@ -65,7 +65,7 @@ namespace InvoiceWebApp.Controllers
             {
                 var debtor = invoice.Debtor;
                 var debtorModel = new DebtorViewModel();
-                debtorModel.SetProperties(debtor, true);
+                debtorModel.SetProperties(debtor, true, true);
 
                 var invoiceModel = new InvoiceViewModel
                 {
@@ -119,7 +119,7 @@ namespace InvoiceWebApp.Controllers
             {
                 var debtor = invoice.Debtor;
                 var debtorModel = new DebtorViewModel();
-                debtorModel.SetProperties(debtor, true);
+                debtorModel.SetProperties(debtor, true, true);
 
                 var invoiceModel = new InvoiceViewModel
                 {
@@ -166,7 +166,7 @@ namespace InvoiceWebApp.Controllers
             //Get debtor
             var debtor = data.Debtor;
             var debtorModel = new DebtorViewModel();
-            debtorModel.SetProperties(debtor, true);
+            debtorModel.SetProperties(debtor, true, true);
 
             //Convert to view model
             var result = new InvoiceViewModel();
@@ -204,7 +204,7 @@ namespace InvoiceWebApp.Controllers
             {
                 var debtors = invoice.Debtor;
                 var debtorModel = new DebtorViewModel();
-                debtorModel.SetProperties(debtors, true);
+                debtorModel.SetProperties(debtors, true, true);
 
                 var invoiceModel = new InvoiceViewModel
                 {
@@ -254,7 +254,7 @@ namespace InvoiceWebApp.Controllers
             {
                 var debtor = invoice.Debtor;
                 var debtorModel = new DebtorViewModel();
-                debtorModel.SetProperties(debtor, true);
+                debtorModel.SetProperties(debtor, true, true);
 
                 var invoiceModel = new InvoiceViewModel
                 {
@@ -298,7 +298,7 @@ namespace InvoiceWebApp.Controllers
             {
                 var debtor = invoice.Debtor;
                 var debtorModel = new DebtorViewModel();
-                debtorModel.SetProperties(debtor, true);
+                debtorModel.SetProperties(debtor, true, true);
 
                 var invoiceModel = new InvoiceViewModel
                 {

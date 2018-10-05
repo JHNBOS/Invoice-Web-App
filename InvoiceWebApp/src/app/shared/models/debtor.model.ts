@@ -10,4 +10,5 @@ export default class Debtor {
     bank_account: string = null;
     address: Address = null;
     label: string = null;
+    name_label: string = null;
 }
