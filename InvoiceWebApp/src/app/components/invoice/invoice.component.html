@@ -30,7 +30,13 @@
                             aria-hidden="true"> </i>
                     </th>
                     <th>Invoice Nr.</th>
-                    <th>Total</th>
+                    <th class="pointer" (click)="sort('total')">
+                        Total
+                        <i class="fa" [ngClass]="{'fa-sort': column != 'total', 
+                                                'fa-sort-asc': (column == 'total' && !isDesc), 
+                                                'fa-sort-desc': (column == 'total' && isDesc) }"
+                            aria-hidden="true"> </i>
+                    </th>
                     <th>Debtor</th>
                     <th class="pointer" (click)="sort('is_paid')">
                         Paid

@@ -26,6 +26,10 @@ export class CreateInvoiceComponent implements OnInit {
     begin: string = this.minDate;
     expiration: string;
 
+    showRepeat = false;
+    recurring_invoice = 'Select an option';
+    recurring_times = 1;
+
     constructor(private titleService: Title, private route: ActivatedRoute, private invoiceService: InvoiceService,
         private invoiceItemService: InvoiceItemService, private router: Router) { }
 
@@ -64,15 +68,45 @@ export class CreateInvoiceComponent implements OnInit {
         this.invoice.concept = concept;
         this.invoice.debtor = this.debtor;
 
-        this.saveInvoice();
+        this.saveInvoice(this.invoice);
+
+        if (this.showRepeat) {
+            const previous = null;
+            for (let index = 0; index < this.recurring_times; index++) {
+                const element = previous == null ? this.invoice : previous;
+
+                switch (this.recurring_invoice) {
+                    case 'week':
+                        element.created_on.setDate(element.created_on.getDate() + 7);
+                        element.expired_on.setDate(element.expired_on.getDate() + 7);
+                        break;
+                    case 'month':
+                        element.created_on.setMonth(element.created_on.getMonth() + 1);
+                        element.expired_on.setMonth(element.expired_on.getMonth() + 1);
+                        break;
+                    case 'year':
+                        element.created_on.setFullYear(element.created_on.getFullYear() + 1);
+                        element.expired_on.setFullYear(element.expired_on.getFullYear() + 1);
+                        break;
+                }
+
+                setTimeout(() => {
+                    this.saveInvoice(element);
+                }, 1500);
+            }
+        }
+
+        this.router.navigate(['/invoices']);
     }
 
-    saveInvoice() {
-        this.invoiceService.create(this.invoice).subscribe(
+    saveInvoice(invoice: Invoice) {
+        this.invoiceService.create(invoice).subscribe(
             (response) => {
                 setTimeout(() => {
                     this.saveInvoiceItems(response.invoice_number);
-                }, 600);
+                }, 250);
+
+                return true;
             },
             (error) => { throw (error); }
         );
@@ -84,13 +118,9 @@ export class CreateInvoiceComponent implements OnInit {
             item.item_number = -1;
             item.invoice_number = invoice;
 
-            console.log(invoice);
-
             this.invoiceItemService.create(item).subscribe(
                 (response) => {
-                    if (i === (this.invoice.items.length - 1)) {
-                        this.router.navigate(['/invoices']);
-                    }
+                    return true;
                 },
                 (error) => { throw (error); }
             );

@@ -10,6 +10,15 @@ label {
     margin-left: 5px;
 }
 
+.custom-file-label {
+    margin-left: 0 !important;
+}
+
+.custom-checkbox .custom-control-label::before {
+    border-radius: .25rem;
+    border: 1px solid #b8b8b8;
+}
+
 a.btn>i {
     color: #fff;
 }

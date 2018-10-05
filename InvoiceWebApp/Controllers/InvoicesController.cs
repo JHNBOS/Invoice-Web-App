@@ -398,10 +398,10 @@ namespace InvoiceWebApp.Controllers
             {
                 var today = DateTime.Now;
                 var prefix = "";
-                if (!String.IsNullOrEmpty(_settings.InvoicePrefix))
-                {
-                    prefix = _settings.InvoicePrefix;
-                }
+                // if (!String.IsNullOrEmpty(_settings.InvoicePrefix))
+                // {
+                //     prefix = _settings.InvoicePrefix;
+                // }
 
                 var invoiceCount = await this._repo.GetCount();
                 var leadingZeros = "";
