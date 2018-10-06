@@ -18,6 +18,7 @@ import { ApplicationService } from './shared/services/application.service';
 import { RoleService } from './shared/services/role.service';
 import { SettingsService } from './shared/services/settings.service';
 import { SharedService } from './shared/services/shared.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 export function app_Init(appService: ApplicationService) {
     return () => appService.initializeApp();
@@ -36,6 +37,7 @@ export function app_Init(appService: ApplicationService) {
         InvoiceModule,
         SettingsModule,
         ModalModule,
+        NgxSpinnerModule,
         ToastyModule.forRoot(),
         AppRoutingModule
     ],

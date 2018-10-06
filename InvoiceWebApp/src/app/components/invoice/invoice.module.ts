@@ -18,6 +18,7 @@ import { DetailInvoiceComponent } from './detail-invoice/detail-invoice.componen
 import { EditInvoiceComponent } from './edit-invoice/edit-invoice.component';
 import { InvoiceComponent } from './invoice.component';
 import { InvoiceRoutingModule } from './invoice.routing';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     align: 'left',
@@ -44,6 +45,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
         DebtorDropdownModule,
         CurrencyMaskModule,
         ModalModule,
+        NgxSpinnerModule,
         ToastyModule.forRoot(),
         InvoiceRoutingModule
     ],

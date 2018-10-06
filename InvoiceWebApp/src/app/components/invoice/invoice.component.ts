@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
+import { NgxSpinnerService } from 'ngx-spinner';
 import Debtor from '../../shared/models/debtor.model';
 import Invoice from '../../shared/models/invoice.model';
 import { PaginationResult } from '../../shared/models/pagination.result';

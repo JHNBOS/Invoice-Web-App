@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 import Debtor from '../../../shared/models/debtor.model';
 import Invoice from '../../../shared/models/invoice.model';
 import InvoiceItem from '../../../shared/models/invoice_item.model';
 import Settings from '../../../shared/models/settings.model';
 import { InvoiceService } from '../../../shared/services/invoice.service';
 import { InvoiceItemService } from '../../../shared/services/invoice_item.service';
+
 
 @Component({
     selector: 'app-create-invoice',
@@ -31,7 +32,7 @@ export class CreateInvoiceComponent implements OnInit {
     recurring_times = 1;
 
     constructor(private titleService: Title, private route: ActivatedRoute, private invoiceService: InvoiceService,
-        private invoiceItemService: InvoiceItemService, private router: Router) { }
+        private invoiceItemService: InvoiceItemService, private spinner: NgxSpinnerService, private router: Router) { }
 
     ngOnInit() {
         this.titleService.setTitle('Create Invoice - ' + this.settings.company_name);
@@ -60,9 +61,12 @@ export class CreateInvoiceComponent implements OnInit {
     }
 
     submitForm(concept: boolean) {
+        // Show spinner
+        this.spinner.show();
+
         // Set invoice properties
-        this.invoice.created_on = moment(this.begin).toDate();
-        this.invoice.expired_on = moment(this.expiration).toDate();
+        this.invoice.created_on = moment.utc(this.begin).toDate();
+        this.invoice.expired_on = moment.utc(this.expiration).toDate();
         this.invoice.customer_id = this.debtor.id;
         this.invoice.invoice_number = '-1';
         this.invoice.concept = concept;
@@ -71,24 +75,31 @@ export class CreateInvoiceComponent implements OnInit {
         this.saveInvoice(this.invoice);
 
         if (this.showRepeat) {
-            const previous = null;
             for (let index = 0; index < this.recurring_times; index++) {
-                const element = previous == null ? this.invoice : previous;
+                const element = this.invoice;
+
+                // tslint:disable-next-line:prefer-const
+                let creationDate = moment.utc(this.begin);
+                // tslint:disable-next-line:prefer-const
+                let expirationDate = moment.utc(this.expiration);
 
                 switch (this.recurring_invoice) {
                     case 'week':
-                        element.created_on.setDate(element.created_on.getDate() + 7);
-                        element.expired_on.setDate(element.expired_on.getDate() + 7);
+                        creationDate.add((7 * (index + 1)), 'days');
+                        expirationDate.add((7 * (index + 1)), 'days');
                         break;
                     case 'month':
-                        element.created_on.setMonth(element.created_on.getMonth() + 1);
-                        element.expired_on.setMonth(element.expired_on.getMonth() + 1);
+                        creationDate.add((1 * (index + 1)), 'months');
+                        expirationDate.add((1 * (index + 1)), 'months');
                         break;
                     case 'year':
-                        element.created_on.setFullYear(element.created_on.getFullYear() + 1);
-                        element.expired_on.setFullYear(element.expired_on.getFullYear() + 1);
+                        creationDate.add((1 * (index + 1)), 'years');
+                        expirationDate.add((1 * (index + 1)), 'years');
                         break;
                 }
+
+                element.created_on = creationDate.toDate();
+                element.expired_on = expirationDate.toDate();
 
                 setTimeout(() => {
                     this.saveInvoice(element);
@@ -96,7 +107,12 @@ export class CreateInvoiceComponent implements OnInit {
             }
         }
 
-        this.router.navigate(['/invoices']);
+        setTimeout(() => {
+            // Hide spinner
+            this.spinner.hide();
+
+            this.router.navigate(['/invoices']);
+        }, 1500);
     }
 
     saveInvoice(invoice: Invoice) {

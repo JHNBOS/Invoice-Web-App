@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 import Invoice from '../../../shared/models/invoice.model';
 import InvoiceItem from '../../../shared/models/invoice_item.model';
 import Settings from '../../../shared/models/settings.model';
 import User from '../../../shared/models/user.model';
 import { InvoiceService } from '../../../shared/services/invoice.service';
 import { InvoiceItemService } from '../../../shared/services/invoice_item.service';
+
 
 @Component({
     selector: 'app-edit-invoice',
@@ -25,7 +26,7 @@ export class EditInvoiceComponent implements OnInit {
     total: number;
 
     constructor(private invoiceService: InvoiceService, private itemService: InvoiceItemService, private router: Router,
-        private route: ActivatedRoute, private titleService: Title) { }
+        private route: ActivatedRoute, private spinner: NgxSpinnerService, private titleService: Title) { }
 
     ngOnInit() {
         this.titleService.setTitle('Edit Invoice - ' + this.settings.company_name);
@@ -79,12 +80,22 @@ export class EditInvoiceComponent implements OnInit {
         this.invoice.total = this.total;
         this.invoice.concept = concept;
 
+        // Show spinner
+        this.spinner.show();
+
         this.updateInvoice();
     }
 
     updateInvoice() {
         this.invoiceService.update(this.invoice).subscribe(
-            (response) => this.router.navigate(['/invoices']),
+            (response) => {
+                // Hide spinner
+                this.spinner.hide();
+
+                setTimeout(() => {
+                    this.router.navigate(['/invoices']);
+                }, 1500);
+            },
             (error) => { throw (error); }
         );
     }

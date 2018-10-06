@@ -1,12 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable, NgZone } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastOptions, ToastyService } from 'ngx-toasty';
 
 @Injectable()
 export class CustomErrorHandler implements ErrorHandler {
     toastOptions: ToastOptions;
 
-    constructor(private ngZone: NgZone, private toastyService: ToastyService) {
+    constructor(private ngZone: NgZone, private toastyService: ToastyService, private spinner: NgxSpinnerService) {
         this.toastOptions = {
             title: 'Error',
             msg: '',
@@ -37,6 +38,9 @@ export class CustomErrorHandler implements ErrorHandler {
 
                 // Show message
                 this.toastyService.error(this.toastOptions);
+
+                // Hide spinner on error
+                this.spinner.hide();
             }
         });
     }

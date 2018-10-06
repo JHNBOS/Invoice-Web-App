@@ -33,6 +33,7 @@
     "jquery": "^3.3.1",
     "moment": "^2.22.2",
     "ngx-currency-mask": "^4.3.2",
+    "ngx-spinner": "^6.1.2",
     "ngx-toasty": "^1.0.0",
     "npm": "^6.4.1",
     "popper": "^1.0.1",

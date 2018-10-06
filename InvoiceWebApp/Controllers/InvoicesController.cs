@@ -11,7 +11,9 @@ using InvoiceWebApp.Components.Services.Interfaces;
 using InvoiceWebApp.Controllers.ViewModels;
 
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace InvoiceWebApp.Controllers
 {
@@ -21,7 +23,7 @@ namespace InvoiceWebApp.Controllers
     public class InvoicesController : Controller
     {
         private IInvoiceRepository _repo;
-        private ISettingRepository _settingRepository;
+        private ISettingRepository _settingsRepo;
         private Settings _settings;
         private Email _email;
         private PDF _pdf;
@@ -29,12 +31,12 @@ namespace InvoiceWebApp.Controllers
         public InvoicesController()
         {
             this._repo = new InvoiceRepository();
-            this._settingRepository = new SettingRepository();
+            this._settingsRepo = new SettingRepository();
 
             this._email = new Email();
             this._pdf = new PDF();
 
-            Task.Run(async () => this._settings = await this._settingRepository.GetSettings());
+            Task.Run(async () => { this._settings = await this._settingsRepo.GetSettings(); }).Wait();
         }
 
         /// <summary>
@@ -397,11 +399,7 @@ namespace InvoiceWebApp.Controllers
             if (invoice.InvoiceNumber == "-1")
             {
                 var today = DateTime.Now;
-                var prefix = "";
-                // if (!String.IsNullOrEmpty(_settings.InvoicePrefix))
-                // {
-                //     prefix = _settings.InvoicePrefix;
-                // }
+                var prefix = String.IsNullOrEmpty(_settings.InvoicePrefix) ? _settings.InvoicePrefix : "";
 
                 var invoiceCount = await this._repo.GetCount();
                 var leadingZeros = "";
@@ -421,7 +419,7 @@ namespace InvoiceWebApp.Controllers
                         break;
                 }
 
-                invoice.InvoiceNumber = today.Year + '-' + (leadingZeros + invoiceCount);
+                invoice.InvoiceNumber = prefix + today.Year + '-' + (leadingZeros + invoiceCount);
             }
 
             //Swap comma with dots

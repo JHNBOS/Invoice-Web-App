@@ -2,9 +2,10 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-
+using InvoiceWebApp.Components.DataContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -52,11 +53,11 @@ namespace InvoiceWebApp
                 options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
 
-            services.AddMvc();
+            services.AddMvc().AddSessionStateTempDataProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider svp)
         {
             app.Use(async (context, next) =>
             {
@@ -69,10 +70,10 @@ namespace InvoiceWebApp
                 }
             });
 
-            app.UseMvcWithDefaultRoute();
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseSwagger();
+            app.UseMvcWithDefaultRoute();
 
             app.UseSwaggerUI(c =>
             {
