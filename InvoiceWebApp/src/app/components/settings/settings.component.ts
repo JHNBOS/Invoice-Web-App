@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 import Settings from '../../shared/models/settings.model';
 import { SettingsService } from '../../shared/services/settings.service';
+
 
 @Component({
     selector: 'app-settings',
@@ -17,7 +18,7 @@ export class SettingsComponent implements OnInit {
     @ViewChild('fileInput') fileInput: ElementRef;
 
     constructor(private settingsService: SettingsService, private titleService: Title, private route: ActivatedRoute,
-        private router: Router) { }
+        private router: Router, private spinner: NgxSpinnerService) { }
 
     ngOnInit() {
         this.titleService.setTitle('Settings - Invoice Panel');
@@ -29,6 +30,9 @@ export class SettingsComponent implements OnInit {
     }
 
     submitForm() {
+        // Show spinner
+        this.spinner.show();
+
         this.settingsService.update(this.settings).subscribe(
             (response) => this.fileUpload(response),
             (error) => { throw error; }
@@ -44,13 +48,24 @@ export class SettingsComponent implements OnInit {
                 this.settingsService.upload(fileToUpload, settings).subscribe(
                     (response) => {
                         sessionStorage.setItem('settings', JSON.stringify(response));
-                        this.router.navigate(['/']);
+
+                        setTimeout(() => {
+                            // Hide spinner
+                            this.spinner.hide();
+
+                            this.router.navigate(['/']);
+                        }, 1500);
                     },
                     (error) => { throw (error); }
                 );
             }
         } else {
-            this.router.navigate(['/']);
+            setTimeout(() => {
+                // Hide spinner
+                this.spinner.hide();
+
+                this.router.navigate(['/']);
+            }, 1500);
         }
     }
 

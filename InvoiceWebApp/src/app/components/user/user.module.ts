@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastyModule } from 'ngx-toasty';
-
 import { CustomErrorHandler } from '../../shared/error-handler';
 import { UserService } from '../../shared/services/user.service';
 import { ModalModule } from '../modal/modal.module';
@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UserComponent } from './user.component';
 import { UserRoutingModule } from './user.routing';
+
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { UserRoutingModule } from './user.routing';
         HttpClientModule,
         FormsModule,
         ModalModule,
+        NgxSpinnerModule,
         ToastyModule.forRoot(),
         UserRoutingModule
     ],

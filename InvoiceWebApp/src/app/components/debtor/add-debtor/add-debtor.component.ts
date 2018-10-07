@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import Address from '../../../shared/models/address.model';
 import Debtor from '../../../shared/models/debtor.model';
 import DebtorHasAddress from '../../../shared/models/debtor_has_address.model';
@@ -28,7 +29,7 @@ export class AddDebtorComponent implements OnInit {
 
     constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService,
         private debtorHasAddressService: DebtorHasAddressService, private addressService: AddressService, private userService: UserService,
-        private router: Router) { }
+        private router: Router, private spinner: NgxSpinnerService) { }
 
     ngOnInit() {
         this.titleService.setTitle('Create Debtor - ' + this.settings.company_name);
@@ -40,12 +41,20 @@ export class AddDebtorComponent implements OnInit {
     }
 
     submitForm() {
+        // Show spinner
+        this.spinner.show();
+
         this.debtorService.create(this.debtor).subscribe(
             (response) => {
                 if (this.debtor.address == null) {
                     this.checkAddressExists();
                 } else {
-                    this.router.navigate(['/debtors']);
+                    setTimeout(() => {
+                        // Hide spinner
+                        this.spinner.hide();
+
+                        this.router.navigate(['/debtors']);
+                    }, 1500);
                 }
             },
             (error) => { throw error; }
@@ -119,7 +128,14 @@ export class AddDebtorComponent implements OnInit {
         }
 
         this.userService.create(user).subscribe(
-            (response) => this.router.navigate(['/debtors']),
+            (response) => {
+                setTimeout(() => {
+                    // Hide spinner
+                    this.spinner.hide();
+
+                    this.router.navigate(['/debtors']);
+                }, 1500);
+            },
             (error) => { throw error; }
         );
     }

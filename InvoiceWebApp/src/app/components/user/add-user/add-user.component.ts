@@ -1,12 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 import Role from '../../../shared/models/role.model';
 import Settings from '../../../shared/models/settings.model';
 import User from '../../../shared/models/user.model';
 import { RoleService } from '../../../shared/services/role.service';
 import { UserService } from '../../../shared/services/user.service';
+
 
 @Component({
     selector: 'app-add-user',
@@ -23,7 +24,7 @@ export class AddUserComponent implements OnInit {
     fileLabel = 'Choose an image to use as profile picture';
 
     constructor(private titleService: Title, private route: ActivatedRoute, private userService: UserService,
-        private roleService: RoleService, private router: Router) { }
+        private roleService: RoleService, private router: Router, private spinner: NgxSpinnerService) { }
 
     ngOnInit() {
         this.titleService.setTitle('Create User - ' + this.settings.company_name);
@@ -43,6 +44,9 @@ export class AddUserComponent implements OnInit {
     }
 
     submitForm() {
+        // Show spinner
+        this.spinner.show();
+
         this.user.role_id = Number(this.user.role_id);
         this.userService.create(this.user).subscribe(
             (response) => {
@@ -61,12 +65,24 @@ export class AddUserComponent implements OnInit {
 
             if (fileToUpload) {
                 this.userService.upload(fileToUpload, this.user).subscribe(
-                    (response) => this.router.navigate(['/users']),
+                    (response) => {
+                        setTimeout(() => {
+                            // Hide spinner
+                            this.spinner.hide();
+
+                            this.router.navigate(['/users']);
+                        }, 1500);
+                    },
                     (error) => { throw (error); }
                 );
             }
         } else {
-            this.router.navigate(['/users']);
+            setTimeout(() => {
+                // Hide spinner
+                this.spinner.hide();
+
+                this.router.navigate(['/users']);
+            }, 1500);
         }
     }
 

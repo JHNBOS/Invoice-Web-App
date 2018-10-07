@@ -89,10 +89,10 @@ export class EditInvoiceComponent implements OnInit {
     updateInvoice() {
         this.invoiceService.update(this.invoice).subscribe(
             (response) => {
-                // Hide spinner
-                this.spinner.hide();
-
                 setTimeout(() => {
+                    // Hide spinner
+                    this.spinner.hide();
+
                     this.router.navigate(['/invoices']);
                 }, 1500);
             },

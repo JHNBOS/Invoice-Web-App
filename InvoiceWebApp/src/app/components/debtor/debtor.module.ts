@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastyModule } from 'ngx-toasty';
-
 import { CustomErrorHandler } from '../../shared/error-handler';
 import { AddressService } from '../../shared/services/address.service';
 import { DebtorService } from '../../shared/services/debtor.service';
@@ -15,6 +15,7 @@ import { DebtorRoutingModule } from './debtor.routing';
 import { DetailDebtorComponent } from './detail-debtor/detail-debtor.component';
 import { EditDebtorComponent } from './edit-debtor/edit-debtor.component';
 import { ImportDebtorComponent } from './import-debtor/import-debtor.component';
+
 
 @NgModule({
     declarations: [
@@ -29,6 +30,7 @@ import { ImportDebtorComponent } from './import-debtor/import-debtor.component';
         HttpClientModule,
         FormsModule,
         ModalModule,
+        NgxSpinnerModule,
         ToastyModule.forRoot(),
         DebtorRoutingModule
     ],

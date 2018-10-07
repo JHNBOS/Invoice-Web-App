@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 import Address from '../../../shared/models/address.model';
 import Debtor from '../../../shared/models/debtor.model';
 import DebtorHasAddress from '../../../shared/models/debtor_has_address.model';
@@ -9,6 +9,7 @@ import Settings from '../../../shared/models/settings.model';
 import { AddressService } from '../../../shared/services/address.service';
 import { DebtorService } from '../../../shared/services/debtor.service';
 import { DebtorHasAddressService } from '../../../shared/services/debtor_has_address.service';
+
 
 @Component({
     selector: 'app-edit-debtor',
@@ -24,7 +25,8 @@ export class EditDebtorComponent implements OnInit {
     address: Address;
 
     constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService,
-        private debtorHasAddressService: DebtorHasAddressService, private addressService: AddressService, private router: Router) { }
+        private debtorHasAddressService: DebtorHasAddressService, private addressService: AddressService, private router: Router,
+        private spinner: NgxSpinnerService) { }
 
     ngOnInit() {
         this.titleService.setTitle('Edit Debtor - ' + this.settings.company_name);
@@ -64,13 +66,21 @@ export class EditDebtorComponent implements OnInit {
     }
 
     submitForm() {
+        // Show spinner
+        this.spinner.show();
+
         this.debtorService.update(this.debtor).subscribe(
             (response) => {
                 if ((this.debtor.address.postal_code !== this.address.postal_code)
                     && (this.debtor.address.number !== this.address.number)) {
                     this.createAddress();
                 } else {
-                    this.router.navigate(['/debtors']);
+                    setTimeout(() => {
+                        // Hide spinner
+                        this.spinner.hide();
+
+                        this.router.navigate(['/debtors']);
+                    }, 1500);
                 }
             },
             (error) => { throw error; }
@@ -124,7 +134,14 @@ export class EditDebtorComponent implements OnInit {
         debtorAddressLink.address_number = this.address.number;
 
         this.debtorHasAddressService.create(debtorAddressLink).subscribe(
-            (response) => this.router.navigate(['/debtors']),
+            (response) => {
+                setTimeout(() => {
+                    // Hide spinner
+                    this.spinner.hide();
+
+                    this.router.navigate(['/debtors']);
+                }, 1500);
+            },
             (error) => { throw error; }
         );
     }

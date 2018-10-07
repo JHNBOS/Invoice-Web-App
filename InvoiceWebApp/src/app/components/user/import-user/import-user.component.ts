@@ -1,10 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 import Settings from '../../../shared/models/settings.model';
 import User from '../../../shared/models/user.model';
 import { UserService } from '../../../shared/services/user.service';
+
 
 @Component({
     selector: 'app-import-user',
@@ -18,7 +19,8 @@ export class ImportUserComponent implements OnInit {
     users: User[] = [];
     fileLabel = 'Choose a CSV file to upload';
 
-    constructor(private titleService: Title, private userService: UserService, private route: ActivatedRoute, private router: Router) { }
+    constructor(private titleService: Title, private userService: UserService, private route: ActivatedRoute, private router: Router,
+        private spinner: NgxSpinnerService) { }
 
     ngOnInit() {
         this.titleService.setTitle('Import Users - ' + this.settings.company_name);
@@ -55,6 +57,9 @@ export class ImportUserComponent implements OnInit {
     }
 
     private extractData(fileInput: any) {
+        // Show spinner
+        this.spinner.show();
+
         const fi = this.fileInput.nativeElement;
         const lines = [];
 
@@ -98,7 +103,10 @@ export class ImportUserComponent implements OnInit {
         }
 
         setTimeout(() => {
+            // Hide spinner
+            this.spinner.hide();
+
             this.router.navigate(['/users']);
-        }, 500);
+        }, 1500);
     }
 }

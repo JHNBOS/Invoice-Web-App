@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastOptions, ToastyService } from 'ngx-toasty';
-
 import Address from '../../../shared/models/address.model';
 import Debtor from '../../../shared/models/debtor.model';
 import DebtorHasAddress from '../../../shared/models/debtor_has_address.model';
@@ -10,6 +10,7 @@ import Settings from '../../../shared/models/settings.model';
 import { AddressService } from '../../../shared/services/address.service';
 import { DebtorService } from '../../../shared/services/debtor.service';
 import { DebtorHasAddressService } from '../../../shared/services/debtor_has_address.service';
+
 
 @Component({
     selector: 'app-import-debtor',
@@ -28,7 +29,7 @@ export class ImportDebtorComponent implements OnInit {
 
     constructor(private titleService: Title, private debtorService: DebtorService, private addressService: AddressService,
         private debtorHasAddressService: DebtorHasAddressService, private toastyService: ToastyService,
-        private route: ActivatedRoute, private router: Router) {
+        private route: ActivatedRoute, private router: Router, private spinner: NgxSpinnerService) {
 
         this.titleService.setTitle('Import Debtors - ' + this.settings.company_name);
         this.toastOptions = {
@@ -87,6 +88,9 @@ export class ImportDebtorComponent implements OnInit {
     }
 
     private extractData(fileInput: any) {
+        // Show spinner
+        this.spinner.show();
+
         const fi = this.fileInput.nativeElement;
         const lines = [];
 
@@ -148,6 +152,9 @@ export class ImportDebtorComponent implements OnInit {
         }
 
         setTimeout(() => {
+            // Hide spinner
+            this.spinner.hide();
+
             this.router.navigate(['/debtors']);
         }, 3000);
     }
