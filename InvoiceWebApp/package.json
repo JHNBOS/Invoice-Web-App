@@ -4,12 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "start": "ng build --prod && dotnet run environment=staging",
+    "watch": "ng build --watch --output-hashing=none && dotnet watch run"
   },
   "private": true,
   "dependencies": {

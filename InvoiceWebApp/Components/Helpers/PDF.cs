@@ -268,9 +268,9 @@ namespace InvoiceWebApp.Components.Helpers
             cb.SetFontAndSize(helveticaBold, 9f);
             cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerBankAccount, 236, 38, 0);
             cb.SetFontAndSize(helvetica, 9f);
-            cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerText4, 326, 38, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerText4, 350, 38, 0);
             cb.SetFontAndSize(helveticaBold, 9f);
-            cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerCompany, 386, 38, 0);
+            cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerCompany, 410, 38, 0);
             cb.SetFontAndSize(helvetica, 9f);
             cb.ShowTextAligned(Element.ALIGN_LEFT, disclaimerText5, 150, 26, 0);
             cb.SetFontAndSize(helveticaBold, 9f);

@@ -8,6 +8,7 @@ import User from '../../shared/models/user.model';
 import { DebtorService } from '../../shared/services/debtor.service';
 import { InvoiceService } from '../../shared/services/invoice.service';
 import { UserService } from '../../shared/services/user.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
     selector: 'app-dashboard',
@@ -28,10 +29,16 @@ export class DashboardComponent implements OnInit {
     chartTwo: any = null;
 
     constructor(private titleService: Title, private userService: UserService, private invoiceService: InvoiceService,
-        private debtorService: DebtorService) { }
+        private debtorService: DebtorService, private router: Router, private route: ActivatedRoute) { }
 
     ngOnInit() {
         this.titleService.setTitle('Home - ' + this.settings.company_name);
+        this.route.params.subscribe((params: Params) => {
+            if (params != null && params['reload'] === '1') {
+                location.reload(true);
+                this.router.navigate(['/']);
+            }
+        });
 
         if (this.currentUser.role_id === 1) {
             this.getAdminChartData();
@@ -173,7 +180,7 @@ export class DashboardComponent implements OnInit {
                                     let label = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
                                     const lastDot = label.lastIndexOf('.');
-                                    const lastComma = ',';
+                                    const lastComma = '.';
                                     label = label.substring(0, lastDot) + lastComma + label.substring(lastDot + 1);
 
                                     return '€ ' + label;
@@ -191,7 +198,7 @@ export class DashboardComponent implements OnInit {
                                 let label = tooltip.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
                                 const lastDot = label.lastIndexOf('.');
-                                const lastComma = ',';
+                                const lastComma = '.';
                                 label = label.substring(0, lastDot) + lastComma + label.substring(lastDot + 1);
 
                                 return ' € ' + label;
@@ -247,7 +254,7 @@ export class DashboardComponent implements OnInit {
                             if (parseInt(data.datasets[0].data[tooltip.index].toString(), 0) >= 1000) {
                                 let label = data.datasets[0].data[tooltip.index].toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
                                 const lastDot = label.lastIndexOf('.');
-                                const lastComma = ',';
+                                const lastComma = '.';
                                 label = label.substring(0, lastDot) + lastComma + label.substring(lastDot + 1);
 
                                 return ' € ' + label;

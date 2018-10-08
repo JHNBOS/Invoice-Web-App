@@ -53,6 +53,11 @@ export class EditUserComponent implements OnInit {
                 if (response != null && (this.fileInput.nativeElement.files && this.fileInput.nativeElement.files[0])) {
                     this.fileUpload();
                 } else {
+                    // IF current user equals currently signed in user then update user in session storage
+                    if (this.user.email === this.currentUser.email) {
+                        sessionStorage.setItem('signedInUser', JSON.stringify(response));
+                    }
+
                     setTimeout(() => {
                         // Hide spinner
                         this.spinner.hide();
@@ -80,6 +85,11 @@ export class EditUserComponent implements OnInit {
             if (fileToUpload) {
                 this.userService.upload(fileToUpload, this.user).subscribe(
                     (response) => {
+                        // IF current user equals currently signed in user then update user in session storage
+                        if (this.user.email === this.currentUser.email) {
+                            sessionStorage.setItem('signedInUser', JSON.stringify(response));
+                        }
+
                         setTimeout(() => {
                             // Hide spinner
                             this.spinner.hide();

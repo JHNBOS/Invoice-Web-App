@@ -53,18 +53,20 @@ export class SettingsComponent implements OnInit {
                             // Hide spinner
                             this.spinner.hide();
 
-                            this.router.navigate(['/']);
+                            this.router.navigate(['/dashboard', 1]);
                         }, 1500);
                     },
                     (error) => { throw (error); }
                 );
             }
         } else {
+            sessionStorage.setItem('settings', JSON.stringify(settings));
+
             setTimeout(() => {
                 // Hide spinner
                 this.spinner.hide();
 
-                this.router.navigate(['/']);
+                this.router.navigate(['/dashboard', 1]);
             }, 1500);
         }
     }
