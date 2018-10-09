@@ -20,6 +20,11 @@ $mainWidth: calc(100vw - #{$sidebarWidth});
     transform: translateY(-50%);
 }
 
+.navbar-nav {
+    width: 100%;
+    justify-content: flex-end;
+}
+
 .navbar-nav:nth-child(2) .nav-item {
     text-align: center;
 }
