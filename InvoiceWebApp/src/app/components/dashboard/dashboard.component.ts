@@ -47,8 +47,8 @@ export class DashboardComponent implements OnInit {
         }
     }
 
-    getAdminChartData() {
-        this.invoiceService.getAll().subscribe(
+    async getAdminChartData() {
+        await this.invoiceService.getAll().toPromise().then(
             (response) => {
                 this.admin_invoice_count[0] = response.filter(f => f.is_paid === false).length;
                 this.admin_invoice_count[1] = response.filter(f => f.is_paid === true).length;
@@ -61,15 +61,15 @@ export class DashboardComponent implements OnInit {
         );
     }
 
-    getDebtor() {
-        return this.debtorService.getByEmail(this.currentUser.email).subscribe(
+    async getDebtor() {
+        await this.debtorService.getByEmail(this.currentUser.email).toPromise().then(
             (response) => { this.getDebtorChartData(response); },
             (error) => { throw error; }
         );
     }
 
-    getDebtorChartData(debtor: Debtor) {
-        this.invoiceService.getByDebtorId(debtor.id).subscribe(
+    async getDebtorChartData(debtor: Debtor) {
+        await this.invoiceService.getByDebtorId(debtor.id).toPromise().then(
             (response) => {
                 this.debtor_invoice_count[0] = response.filter(f => f.is_paid === false).length;
                 this.debtor_invoice_count[1] = response.filter(f => f.is_paid === true).length;

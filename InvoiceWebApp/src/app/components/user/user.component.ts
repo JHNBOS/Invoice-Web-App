@@ -32,8 +32,8 @@ export class UserComponent implements OnInit {
         this.getAllUsers();
     }
 
-    getAllUsers() {
-        this.userService.getAll().subscribe(
+    async getAllUsers() {
+        await this.userService.getAll().toPromise().then(
             (response) => {
                 this.users = response;
                 this.getPage(1);
@@ -73,8 +73,8 @@ export class UserComponent implements OnInit {
         return results;
     }
 
-    getPage(page: number) {
-        this.userService.index(page).subscribe(
+    async getPage(page: number) {
+        await this.userService.index(page).toPromise().then(
             (response) => {
                 this.pagedResult = response;
             },

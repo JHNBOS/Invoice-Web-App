@@ -46,8 +46,8 @@ export class InvoiceComponent implements OnInit {
         }
     }
 
-    getAllInvoices() {
-        this.invoiceService.getAll().subscribe(
+    async getAllInvoices() {
+        await this.invoiceService.getAll().toPromise().then(
             (response) => {
                 this.invoices = response;
                 this.getPage(1);
@@ -56,8 +56,8 @@ export class InvoiceComponent implements OnInit {
         );
     }
 
-    getDebtor() {
-        this.debtorService.getByEmail(this.currentUser.email).subscribe(
+    async getDebtor() {
+        await this.debtorService.getByEmail(this.currentUser.email).toPromise().then(
             (response) => {
                 this.debtor = response;
                 this.getPage(1);
@@ -107,8 +107,8 @@ export class InvoiceComponent implements OnInit {
         return results;
     }
 
-    getPage(page: number) {
-        this.invoiceService.index(page).subscribe(
+    async getPage(page: number) {
+        await this.invoiceService.index(page).toPromise().then(
             (response) => {
                 if (this.currentUser.role_id === 2) {
                     response.data = response.data.filter(f => f.customer_id === this.debtor.id);

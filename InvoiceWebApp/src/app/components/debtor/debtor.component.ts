@@ -32,8 +32,8 @@ export class DebtorComponent implements OnInit {
         this.getAllDebtors();
     }
 
-    getAllDebtors() {
-        this.debtorService.getAll().subscribe(
+    async getAllDebtors() {
+        await this.debtorService.getAll().toPromise().then(
             (response) => {
                 this.debtors = response;
                 this.getPage(1);
@@ -77,8 +77,8 @@ export class DebtorComponent implements OnInit {
         return results;
     }
 
-    getPage(page: number) {
-        this.debtorService.index(page).subscribe(
+    async getPage(page: number) {
+        await this.debtorService.index(page).toPromise().then(
             (response) => {
                 this.pagedResult = response;
             },
