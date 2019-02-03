@@ -2,10 +2,9 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using InvoiceWebApp.Components.DataContext;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -36,8 +35,7 @@ namespace InvoiceWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             // Register the Swagger generator, defining one or more Swagger documents  
-            services.AddSwaggerGen(c =>
-            {
+            services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new Info { Title = "Invoice App API", Version = "v1" });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 
@@ -48,8 +46,7 @@ namespace InvoiceWebApp
             });
 
             // CORS
-            services.AddCors(options =>
-            {
+            services.AddCors(options => {
                 options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
 
@@ -59,8 +56,7 @@ namespace InvoiceWebApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider svp)
         {
-            app.Use(async (context, next) =>
-            {
+            app.Use(async (context, next) => {
                 await next();
                 if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value) &&
                      !context.Request.Path.Value.StartsWith("/api/"))
@@ -75,16 +71,14 @@ namespace InvoiceWebApp
             app.UseSwagger();
             app.UseMvcWithDefaultRoute();
 
-            app.UseSwaggerUI(c =>
-            {
+            app.UseSwaggerUI(c => {
                 c.RoutePrefix = "api";
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HINT Reservation System API");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Invoice Web API");
             });
 
             app.UseCors("AllowAll");
 
-            app.UseMvc(routes =>
-            {
+            app.UseMvc(routes => {
                 routes.MapRoute(
                   name: "api",
                   template: "api/{controller}/{action}/{id?}"

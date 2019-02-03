@@ -145,6 +145,7 @@ export class InvoiceComponent implements OnInit {
     }
 
     differenceInDays(date: Date) {
+        console.log(typeof date);
         const difference = Math.abs(date.getTime() - new Date().getTime());
         const differenceInDays = Math.ceil(difference / (1000 * 3600 * 24));
 
