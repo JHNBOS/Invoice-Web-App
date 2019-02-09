@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import 'chartjs-plugin-labels';
 import Debtor from '../../shared/models/debtor.model';
@@ -8,7 +9,6 @@ import User from '../../shared/models/user.model';
 import { DebtorService } from '../../shared/services/debtor.service';
 import { InvoiceService } from '../../shared/services/invoice.service';
 import { UserService } from '../../shared/services/user.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
     selector: 'app-dashboard',
@@ -100,21 +100,21 @@ export class DashboardComponent implements OnInit {
         this.chartOne = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ['Unpaid', 'Paid'],
+                labels: ['Pending', 'Collected'],
                 datasets: [
                     {
                         data: [this.admin_invoice_count[0], this.admin_invoice_count[1]],
-                        backgroundColor: ['#f4d41f', '#12a4e8'],
-                        borderColor: ['#e8c620', '#1095d3'],
-                        fill: true
+                        backgroundColor: ['#3e95cd', '#3cba9f'],
+                        fill: true,
+                        borderWidth: 1
                     },
                 ]
             },
             options: {
-                responsive: true,
+                responsive: false,
                 title: {
-                    display: true,
-                    text: 'Total paid & unpaid invoices',
+                    display: false,
+                    text: '',
                     position: 'bottom'
                 },
                 legend: {
@@ -145,36 +145,42 @@ export class DashboardComponent implements OnInit {
         const ctx = canvas.getContext('2d');
 
         this.chartTwo = new Chart(ctx, {
-            type: 'bar',
+            type: 'horizontalBar',
             data: {
-                labels: ['Amount to be cashed', 'Currently cashed amount'],
+                labels: ['Outstanding amount', 'Paid amount'],
                 datasets: [
                     {
                         data: [this.admin_invoice_cash[0], this.admin_invoice_cash[1]],
-                        backgroundColor: ['#f4d41f', '#12a4e8'],
-                        borderColor: ['#e8c620', '#1095d3'],
-                        fill: true
-                    },
+                        backgroundColor: ['#6465a5', '#f3e96b'],
+                        fill: true,
+                    }
                 ]
             },
             options: {
-                responsive: true,
+                responsive: false,
                 title: {
-                    display: true,
-                    text: 'Total amount cashed',
+                    display: false,
+                    text: '',
                     position: 'bottom'
                 },
                 legend: {
                     display: false,
                 },
                 scales: {
-                    xAxes: [{
-                        display: true,
-                        maxBarThickness: 100,
-                    }],
                     yAxes: [{
+                        display: true,
+                        maxBarThickness: 120,
                         ticks: {
+                            display: true,
+                            fontStyle: 'bold'
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            display: true,
                             beginAtZero: true,
+                            max: this.calculateMaxLimit(),
+                            stepSize: 5,
                             callback: function (value, index, values) {
                                 if (parseInt(value, 0) >= 1000) {
                                     let label = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -194,8 +200,8 @@ export class DashboardComponent implements OnInit {
                 tooltips: {
                     callbacks: {
                         label: function (tooltip, data) {
-                            if (parseInt(tooltip.yLabel.toString(), 0) >= 1000) {
-                                let label = tooltip.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                            if (parseInt(tooltip.xLabel.toString(), 0) >= 1000) {
+                                let label = tooltip.xLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
                                 const lastDot = label.lastIndexOf('.');
                                 const lastComma = '.';
@@ -203,9 +209,10 @@ export class DashboardComponent implements OnInit {
 
                                 return ' € ' + label;
                             } else {
-                                return ' € ' + tooltip.yLabel;
+                                return ' € ' + tooltip.xLabel;
                             }
-                        }
+                        },
+                        title: () => null,
                     }
                 },
             },
@@ -220,7 +227,7 @@ export class DashboardComponent implements OnInit {
         this.chartOne = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ['To be paid', 'Already paid'],
+                labels: ['Outstanding amount', 'Paid amount'],
                 datasets: [
                     {
                         data: [10, 20],
@@ -231,10 +238,10 @@ export class DashboardComponent implements OnInit {
                 ]
             },
             options: {
-                responsive: true,
+                responsive: false,
                 title: {
-                    display: true,
-                    text: 'Total amount of money paid',
+                    display: false,
+                    text: '',
                     position: 'bottom'
                 },
                 legend: {
@@ -283,7 +290,7 @@ export class DashboardComponent implements OnInit {
         this.chartTwo = new Chart(ctx, {
             type: 'horizontalBar',
             data: {
-                labels: ['Paid Invoices', 'Unpaid Invoices'],
+                labels: ['Pending', 'Collected'],
                 datasets: [
                     {
                         data: [this.debtor_invoice_count[0], this.debtor_invoice_count[1]],
@@ -294,9 +301,9 @@ export class DashboardComponent implements OnInit {
                 ]
             },
             options: {
-                responsive: true,
+                responsive: false,
                 title: {
-                    display: true,
+                    display: false,
                     text: 'Total invoices',
                     position: 'bottom'
                 },
@@ -350,5 +357,14 @@ export class DashboardComponent implements OnInit {
             s[1] += new Array(prec - s[1].length + 1).join('0');
         }
         return s.join(dec);
+    }
+
+    calculateMaxLimit(): number {
+        let limit = this.admin_invoice_cash[0] + ((this.admin_invoice_cash[0] / 100) * 5);
+
+        if (this.admin_invoice_cash[1] > limit) {
+            limit = this.admin_invoice_cash[1] + ((this.admin_invoice_cash[1] / 100) * 5);
+        }
+        return limit;
     }
 }

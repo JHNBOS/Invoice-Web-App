@@ -1,7 +1,9 @@
-$navbarHeight: 80px;
+$navbarHeight: 75px;
 $sidebarWidth: 11vw;
 $sidebarWidthSmall: 7vw;
 $mainWidth: 100vw - $sidebarWidth;
+$mainWidthSmall: 100vw - $sidebarWidthSmall;
+$pageTitleHeight: 50px;
 
 /*----------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------*/
@@ -142,7 +144,7 @@ $mainWidth: 100vw - $sidebarWidth;
 /* Main */
 
 main {
-    position: fixed;
+    position: absolute;
     left: $sidebarWidth;
     top: $navbarHeight;
     bottom: 0;
@@ -150,10 +152,7 @@ main {
     overflow-x: auto;
     width: $mainWidth;
     height: calc(100vh - 80px);
-
-    .container-fluid {
-        height: 100% !important;
-    }
+    padding: .3rem 1rem !important;
 
     .page-title {
         background-color: #eef1f7;
@@ -162,6 +161,29 @@ main {
         font-weight: 700;
         color: #4b5961;
         font-size: 1.2rem;
+        width: $mainWidth;
+        height: $pageTitleHeight;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .router-title {
+        position: absolute;
+        left: 0;
+        top: $pageTitleHeight;
+        right: 0;
+        bottom: 0;
+        padding-top: 2rem;
+    }
+
+    .router {
+        position: absolute;
+        left: 0;
+        top: 5px;
+        right: 0;
+        bottom: 0;
+        padding-top: 2rem;
     }
 }
 
@@ -299,6 +321,12 @@ main {
 }
 
 @media (min-width: 993px) and (max-width: 1200px) {
+
+    main,
+    .page-title {
+        width: $mainWidthSmall;
+    }
+
     .sidebar {
         width: $sidebarWidthSmall;
 

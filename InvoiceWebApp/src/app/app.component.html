@@ -90,7 +90,9 @@
 
 <main>
     <div class="page-title" [hidden]="title === ' '">{{ title }}</div>
-    <router-outlet class="container-fluid" (activate)="checkIfLoggedIn()"></router-outlet>
+    <div class="router" [className]="title === ' ' ? 'router' : 'router-title'">
+        <router-outlet (activate)="checkIfLoggedIn()"></router-outlet>
+    </div>
     <ng2-toasty [position]="'bottom-right'"></ng2-toasty>
 </main>
 
