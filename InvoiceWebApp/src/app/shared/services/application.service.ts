@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import { environment } from '../../../environments/environment';
 import Settings from '../models/settings.model';
 
 @Injectable()
 export class ApplicationService {
-
     private apiUrl = environment.apiBase + '/settings/';
 
     constructor(public http: HttpClient) { }

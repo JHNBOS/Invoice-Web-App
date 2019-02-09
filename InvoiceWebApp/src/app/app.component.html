@@ -1,17 +1,18 @@
+<!-- Header -->
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
-    <h1 class="navbar-brand" *ngIf="settings?.show_logo">
-        <span class="show-md">{{ title }}</span>
-        <span class="show-sm" *ngIf="!settings?.show_logo">{{ settings.company_name }}</span>
-    </h1>
+    <div class="logo">
+        <h1 class="navbar-brand">{{ settings.company_name }}</h1>
+        <!-- <img *ngIf="settings?.show_logo" class="navbar-logo" [src]="_sanitizer.bypassSecurityTrustUrl(settings?.logo)" /> -->
+    </div>
 
-    <img *ngIf="settings?.show_logo" class="navbar-logo" [src]="_sanitizer.bypassSecurityTrustUrl(settings?.logo)" />
-
+    <!-- Mobile menu toggle-->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBar" aria-controls="navBar"
         aria-expanded="false" aria-label="Toggle navigation" *ngIf="isSignedIn && currentUser != null">
         <i class="fa fa-navicon"></i>
     </button>
 
-    <div class="collapse navbar-collapse" id="navBar" *ngIf="isSignedIn && currentUser != null">
+    <!-- Mobile menu -->
+    <div class="collapse navbar-collapse" *ngIf="isSignedIn && currentUser != null">
         <ul class="navbar-nav mr-auto d-md-flex d-lg-none" id="mobileMenu">
             <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                 <a [routerLink]="['/']" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
@@ -35,6 +36,7 @@
             </li>
         </ul>
 
+        <!-- Profile and sign out -->
         <ul class="navbar-nav justify-content-end d-none d-lg-flex" *ngIf="isSignedIn && currentUser != null">
             <li class="nav-item" routerLinkActive="active">
                 <a [routerLink]="['/users/edit', currentUser.email]" class="nav-link" href="#" title="{{currentUser.first_name}} {{currentUser.last_name}}">
@@ -48,50 +50,46 @@
             </li>
         </ul>
     </div>
-    <div class="title-bar">
-        {{ title }}
-    </div>
 </nav>
 
-<nav class="bg-faded sidebar d-none d-lg-block">
-    <div class="nav-top" [ngStyle]="{'background-color': settings?.color }">
-        <a [routerLink]="['/']" class="navbar-brand" *ngIf="settings != null">
-            <span *ngIf="!settings?.show_logo">{{ settings.company_name }}</span>
-            <img *ngIf="settings?.show_logo" class="logo" [src]="_sanitizer.bypassSecurityTrustUrl(settings?.logo)" />
-        </a>
-    </div>
+<!-- Sidebar -->
+<nav class="sidebar bg-faded d-none d-lg-block">
     <ul class="nav nav-pills flex-column" *ngIf="isSignedIn && currentUser != null">
         <li class="nav-item">
             <a [routerLink]="['/']" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <i class="fa fa-home mr-2" aria-hidden="true"></i>Home
+                <i class="fa fa-home mr-2" aria-hidden="true"></i>
+                <span>Home</span>
             </a>
         </li>
         <li class="nav-item" [hidden]="currentUser.role_id == 2">
             <a [routerLink]="['/debtors']" class="nav-link" routerLinkActive="active">
-                <i class="fa fa-address-book mr-2" aria-hidden="true"></i>Debtors
+                <i class="fa fa-address-book mr-2" aria-hidden="true"></i>
+                <span>Debtors</span>
             </a>
         </li>
         <li class="nav-item">
             <a [routerLink]="['/invoices']" class="nav-link" routerLinkActive="active">
-                <i class="fa fa-file-text mr-2" aria-hidden="true"></i>Invoices
+                <i class="fa fa-file-text mr-2" aria-hidden="true"></i>
+                <span>Invoices</span>
             </a>
         </li>
         <li class="nav-item" [hidden]="currentUser.role_id == 2">
             <a [routerLink]="['/users']" class="nav-link" routerLinkActive="active">
-                <i class="fa fa-users mr-2" aria-hidden="true"></i>Users
+                <i class="fa fa-users mr-2" aria-hidden="true"></i>
+                <span>Users</span>
             </a>
         </li>
-    </ul>
-    <ul class="nav nav-pills flex-column nav-bottom" *ngIf="isSignedIn && currentUser != null">
-        <li class="nav-item" [hidden]="currentUser.role_id == 2">
+        <li class="nav-item bottom" [hidden]="currentUser.role_id == 2" *ngIf="isSignedIn && currentUser != null">
             <a [routerLink]="['/settings']" class="nav-link" routerLinkActive="active">
-                <i class="fa fa-cog mr-2" aria-hidden="true"></i>Settings
+                <i class="fa fa-cog mr-2" aria-hidden="true"></i>
+                <span>Settings</span>
             </a>
         </li>
     </ul>
 </nav>
 
 <main>
+    <div class="page-title" [hidden]="title === ' '">{{ title }}</div>
     <router-outlet class="container-fluid" (activate)="checkIfLoggedIn()"></router-outlet>
     <ng2-toasty [position]="'bottom-right'"></ng2-toasty>
 </main>

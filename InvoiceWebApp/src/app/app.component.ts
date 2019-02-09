@@ -1,8 +1,7 @@
-import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
-
 import { AuthenticationService } from './shared/authentication.service';
 import Settings from './shared/models/settings.model';
 import User from './shared/models/user.model';

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
 import { environment } from '../../environments/environment';
 import User from './models/user.model';
 
@@ -19,7 +18,7 @@ export class AuthenticationService {
     }
 
     logout() {
-        // remove user from local storage to log user out
+        // Remove user from local storage to log user out
         sessionStorage.removeItem('signedInUser');
     }
 }

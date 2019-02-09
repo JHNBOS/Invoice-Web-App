@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DebtorComponent } from './components/debtor/debtor.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';

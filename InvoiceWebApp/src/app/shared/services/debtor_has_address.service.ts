@@ -7,7 +7,6 @@ import DebtorHasAddress from '../models/debtor_has_address.model';
 
 @Injectable()
 export class DebtorHasAddressService {
-
     private apiUrl = environment.apiBase + '/has_address/';
 
     constructor(public http: HttpClient) { }

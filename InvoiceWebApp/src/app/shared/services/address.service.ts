@@ -7,7 +7,6 @@ import Address from '../models/address.model';
 
 @Injectable()
 export class AddressService {
-
     private apiUrl = environment.apiBase + '/address/';
 
     constructor(public http: HttpClient) { }

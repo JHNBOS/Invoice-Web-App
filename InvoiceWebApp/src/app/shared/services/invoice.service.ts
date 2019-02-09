@@ -6,10 +6,8 @@ import { environment } from '../../../environments/environment';
 import Invoice from '../models/invoice.model';
 import { PaginationResult } from '../models/pagination.result';
 
-
 @Injectable()
 export class InvoiceService {
-
     private apiUrl = environment.apiBase + '/invoices/';
 
     constructor(public http: HttpClient) { }

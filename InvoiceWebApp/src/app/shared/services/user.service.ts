@@ -6,10 +6,8 @@ import { environment } from '../../../environments/environment';
 import { PaginationResult } from '../models/pagination.result';
 import User from '../models/user.model';
 
-
 @Injectable()
 export class UserService {
-
     private apiUrl = environment.apiBase + '/users/';
 
     constructor(public http: HttpClient) { }

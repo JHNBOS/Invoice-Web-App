@@ -1,8 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastyModule } from 'ngx-toasty';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { DashboardModule } from './components/dashboard/dashboard.module';
@@ -18,7 +18,6 @@ import { ApplicationService } from './shared/services/application.service';
 import { RoleService } from './shared/services/role.service';
 import { SettingsService } from './shared/services/settings.service';
 import { SharedService } from './shared/services/shared.service';
-import { NgxSpinnerModule } from 'ngx-spinner';
 
 export function app_Init(appService: ApplicationService) {
     return () => appService.initializeApp();

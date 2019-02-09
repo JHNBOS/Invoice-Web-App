@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-
 import User from './models/user.model';
 
 @Injectable()
@@ -20,7 +19,7 @@ export class AuthGuard implements CanActivate {
             }
         }
 
-        // not logged in so redirect to login page with the return url and return false
+        // Not logged in so redirect to login page with the return url and return false
         this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
         return false;
     }
