@@ -1,32 +1,29 @@
-<div class="search-row row mb-4">
-    <div class="col-sm-12 col-lg-5 mx-auto">
-        <div class="input-wrapper">
-            <input class="form-control" type="text" name="search" id="search" placeholder="Type to start searching..."
-                [(ngModel)]="query" />
-            <label for="search" class="fa fa-search input-icon"></label>
+<div class="data-table">
+    <div class="actions" [hidden]="currentUser?.role_id == 2">
+        <div class="buttons">
+            <div class="btn-group">
+                <a routerLinkActive="active" [routerLink]="['add', 'no']" class="btn btn-outline-light" title="Add user for client">
+                    <i class="fa fa-user-plus"></i><span>Add user</span>
+                </a>
+                <a routerLinkActive="active" [routerLink]="['add', 'yes']" class="btn btn-outline-light" title="Add user for company">
+                    <i class="fa fa-building-o"></i><span>Add user</span>
+                </a>
+                <a routerLinkActive="active" [routerLink]="['import']" class="btn btn-outline-light" title="Add users by CSV">
+                    <i class="fa fa-file-excel-o"></i><span>Import CSV</span>
+                </a>
+            </div>
         </div>
-        <div class="search-buttons" [hidden]="currentUser?.role_id == 2">
-            <a [routerLink]="['add', 'no']" class="btn btn-primary" title="Add user for client">
-                <i class="fa fa-user-plus"></i><span>Add user</span>
-            </a>
-            <a [routerLink]="['add', 'yes']" class="btn btn-primary" title="Add user for company">
-                <i class="fa fa-building-o"></i><span>Add user</span>
-            </a>
-            <a [routerLink]="['import']" class="btn btn-primary" title="Add users by CSV">
-                <i class="fa fa-file-excel-o"></i><span>Import CSV</span>
-            </a>
+        <div class="search">
+            <div class="input-wrapper">
+                <input class="form-control" type="text" name="search" id="search" placeholder="Type to start searching..."
+                    [(ngModel)]="query" />
+                <label for="search" class="fa fa-search input-icon"></label>
+            </div>
         </div>
     </div>
-</div>
-
-<hr class="search-divider" />
-
-<div class="row">
-    <div class="col-sm-12 col-md-10 col-lg-10 mx-auto table-responsive">
-        <h3 class="text-center" *ngIf="search()?.length == 0">No users.</h3>
-
-        <table class=" table table-hover table-sm
-            table-condensed" *ngIf="search()?.length > 0">
+    <div class="data">
+        <p class="text-center py-2" *ngIf="search()?.length == 0">No users available.</p>
+        <table class="table table-hover" *ngIf="search()?.length > 0">
             <thead>
                 <tr>
                     <th class="pl-3 pointer" (click)="sort('name_label')">
@@ -47,19 +44,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of pagedResult?.data">
-                    <td class="text-muted py-2 pl-3" data-title="User">
+                <tr class="data-row" *ngFor="let user of pagedResult?.data">
+                    <td data-title="User">
                         <a [routerLink]="['details', user.email]" title="View user details">
                             {{ user.name_label }}
                         </a>
                     </td>
-                    <td class="p-2" data-title="Email">
+                    <td data-title="Email">
                         <a [routerLink]="['details', user.email]" title="View user details">
                             {{ user.email }}
                         </a>
                     </td>
-                    <td class="text-right py-2 pr-3" data-title="">
-                        <button class="btn-edit" [routerLink]="['edit', user.email]" title="Edit">
+                    <td data-title="">
+                        <button class="btn-edit" routerLinkActive="active" [routerLink]="['edit', user.email]" title="Edit">
                             <i class="fa fa-edit"></i>
                         </button>
                         <button class="btn-delete" type="button" (click)="deleteUser(user.email)" title="Remove">
@@ -69,19 +66,18 @@
                 </tr>
             </tbody>
         </table>
+    </div>
 
-        <div class="pager" *ngIf="search()?.length > 0">
-            <div class="right" *ngIf="pagedResult != null">
-                <button [disabled]="pagedResult.current_page == pagedResult.total_pages" class="btn btn-primary"
-                    (click)="getPage(pagedResult.current_page + 1)" title="Next Page">
-                    <i class="fa fa-chevron-right"></i>
-                </button>
-                <button [disabled]="pagedResult.current_page == 1" class="btn btn-primary" (click)="getPage(pagedResult.current_page - 1)"
-                    title="Previous Page">
-                    <i class="fa fa-chevron-left"></i>
-                </button>
-            </div>
+    <div class="pager" *ngIf="search()?.length > 0">
+        <div class="right" *ngIf="pagedResult != null">
+            <button [disabled]="pagedResult.current_page == pagedResult.total_pages" class="btn btn-primary" (click)="getPage(pagedResult.current_page + 1)"
+                title="Next Page">
+                <i class="fa fa-chevron-right"></i>
+            </button>
+            <button [disabled]="pagedResult.current_page == 1" class="btn btn-primary" (click)="getPage(pagedResult.current_page - 1)"
+                title="Previous Page">
+                <i class="fa fa-chevron-left"></i>
+            </button>
         </div>
-
     </div>
 </div>

@@ -3,8 +3,8 @@
 /* Navbar Variables */
 $navbarHeight: 75px;
 $navbarHeightSmall: 65px;
-$sidebarWidth: 9vw;
-$sidebarWidthSmall: 6vw;
+$sidebarWidth: 8vw;
+$sidebarWidthSmall: 5vw;
 $fullWidth: 100vw;
 $mainWidth: 100vw - $sidebarWidth;
 $mainWidthSmall: 100vw - $sidebarWidthSmall;
@@ -20,3 +20,5 @@ $navbar-hover: #30373f;
 $header-bg: #eef1f7;
 $header-text: #4b5961;
 $header-border: 1px solid #b8bec9;
+
+$link: #44c361;
