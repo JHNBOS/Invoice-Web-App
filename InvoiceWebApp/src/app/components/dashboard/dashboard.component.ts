@@ -111,7 +111,8 @@ export class DashboardComponent implements OnInit {
                 ]
             },
             options: {
-                responsive: false,
+                responsive: true,
+                maintainAspectRatio: true,
                 title: {
                     display: false,
                     text: '',
@@ -157,7 +158,8 @@ export class DashboardComponent implements OnInit {
                 ]
             },
             options: {
-                responsive: false,
+                responsive: true,
+                maintainAspectRatio: true,
                 title: {
                     display: false,
                     text: '',

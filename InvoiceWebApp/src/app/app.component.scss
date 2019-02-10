@@ -158,7 +158,7 @@ main {
         font-weight: 700;
         color: $header-text;
         font-size: 1.2rem;
-        width: $mainWidth;
+        width: 100%;
         height: $pageTitleHeight;
         position: absolute;
         left: 0;
@@ -181,7 +181,7 @@ main {
     .router {
         position: absolute;
         left: 0;
-        top: 5px;
+        top: 0;
         right: 0;
         bottom: 0;
         padding-top: 2rem;
@@ -313,7 +313,6 @@ main {
 
         .page-title {
             padding: 13px 20px;
-            width: $fullWidth !important;
             height: 55px;
             font-size: 1.3rem;
         }
@@ -354,10 +353,6 @@ main {
     main {
         left: $sidebarWidthSmall;
         width: $mainWidthSmall;
-    }
-
-    .page-title {
-        width: $mainWidthSmall !important;
     }
 
     .sidebar {
