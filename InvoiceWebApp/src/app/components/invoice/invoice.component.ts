@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
-import { NgxSpinnerService } from 'ngx-spinner';
 import Debtor from '../../shared/models/debtor.model';
 import Invoice from '../../shared/models/invoice.model';
 import { PaginationResult } from '../../shared/models/pagination.result';
@@ -22,12 +21,10 @@ export class InvoiceComponent implements OnInit {
     currentUser: User = JSON.parse(sessionStorage.getItem('signedInUser'));
 
     debtor: Debtor = null;
-    invoices: Invoice[] = [];
     href: string;
 
     query = '';
     pagedResult: PaginationResult<Invoice>;
-
     isDesc = false;
     column: string;
 
@@ -42,18 +39,8 @@ export class InvoiceComponent implements OnInit {
         if (this.currentUser.role_id === 2) {
             this.getDebtor();
         } else {
-            this.getAllInvoices();
+            this.getPage(1);
         }
-    }
-
-    async getAllInvoices() {
-        await this.invoiceService.getAll().toPromise().then(
-            (response) => {
-                this.invoices = response;
-                this.getPage(1);
-            },
-            (error) => { throw error; }
-        );
     }
 
     async getDebtor() {
@@ -76,33 +63,36 @@ export class InvoiceComponent implements OnInit {
     }
 
     search() {
-        const results: Invoice[] = [];
-        this.invoices.forEach(f => {
-            if (f.debtor.company_name == null) {
-                if (f.customer_id.toLowerCase().includes(this.query.toLowerCase())
-                    || f.invoice_number.includes(this.query.toLowerCase())
-                    || this.getLocaleString(f.total).toLowerCase().includes(this.query.toLowerCase())
-                    || moment(f.expired_on).format('MMMM DD, YYYY').toLowerCase().includes(this.query.toLowerCase())
-                    || moment(f.created_on).format('MMMM DD, YYYY').toLowerCase().includes(this.query.toLowerCase())
-                    || f.debtor.email.toLowerCase().includes(this.query.toLowerCase())
-                    || f.debtor.first_name.toLowerCase().includes(this.query.toLowerCase())
-                    || f.debtor.last_name.toLowerCase().includes(this.query.toLowerCase())) {
+        let results: Invoice[] = [];
 
-                    results.push(f);
-                }
-            } else {
-                if (f.customer_id.toLowerCase().includes(this.query.toLowerCase())
-                    || f.invoice_number.includes(this.query.toLowerCase())
-                    || this.getLocaleString(f.total).toLowerCase().includes(this.query.toLowerCase())
-                    || moment(f.expired_on).format('MMMM DD, YYYY').toLowerCase().includes(this.query.toLowerCase())
-                    || moment(f.created_on).format('MMMM DD, YYYY').toLowerCase().includes(this.query.toLowerCase())
-                    || f.debtor.email.toLowerCase().includes(this.query.toLowerCase())
-                    || f.debtor.company_name.toLowerCase().includes(this.query.toLowerCase())) {
+        if (this.pagedResult) {
+            this.pagedResult.data.forEach(f => {
+                if (f.debtor.company_name == null) {
+                    if (f.customer_id.toLowerCase().includes(this.query.toLowerCase())
+                        || f.invoice_number.includes(this.query.toLowerCase())
+                        || this.getLocaleString(f.total).toLowerCase().includes(this.query.toLowerCase())
+                        || moment(f.expired_on).format('MMMM DD, YYYY').toLowerCase().includes(this.query.toLowerCase())
+                        || moment(f.created_on).format('MMMM DD, YYYY').toLowerCase().includes(this.query.toLowerCase())
+                        || f.debtor.email.toLowerCase().includes(this.query.toLowerCase())
+                        || f.debtor.first_name.toLowerCase().includes(this.query.toLowerCase())
+                        || f.debtor.last_name.toLowerCase().includes(this.query.toLowerCase())) {
 
-                    results.push(f);
+                        results.push(f);
+                    }
+                } else {
+                    if (f.customer_id.toLowerCase().includes(this.query.toLowerCase())
+                        || f.invoice_number.includes(this.query.toLowerCase())
+                        || this.getLocaleString(f.total).toLowerCase().includes(this.query.toLowerCase())
+                        || moment(f.expired_on).format('MMMM DD, YYYY').toLowerCase().includes(this.query.toLowerCase())
+                        || moment(f.created_on).format('MMMM DD, YYYY').toLowerCase().includes(this.query.toLowerCase())
+                        || f.debtor.email.toLowerCase().includes(this.query.toLowerCase())
+                        || f.debtor.company_name.toLowerCase().includes(this.query.toLowerCase())) {
+
+                        results.push(f);
+                    }
                 }
-            }
-        });
+            });
+        }
 
         return results;
     }

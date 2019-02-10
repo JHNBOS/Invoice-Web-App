@@ -54,7 +54,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="data-row" *ngFor="let invoice of pagedResult?.data">
+                <tr class="data-row" *ngFor="let invoice of search()">
                     <td data-title="Due date" [ngClass]="(isExpirationExpired(invoice)) ? 'text-danger' : ''" style="font-weight: 600;">
                         <span *ngIf="!isExpirationExpired(invoice)">{{ invoice.expired_on | date: 'MMMM dd, yyyy' }}</span>
                         <span *ngIf="isExpirationExpired(invoice)">{{ differenceInDays(invoice.expired_on) }} days
@@ -97,7 +97,7 @@
         </table>
     </div>
 
-    <div class="pager" *ngIf="search()?.length > 0">
+    <div class="pager" *ngIf="search()?.length > 0 && pagedResult.total_pages > 1">
         <div class="right" *ngIf="pagedResult != null">
             <button [disabled]="pagedResult.current_page == pagedResult.total_pages" class="btn btn-primary" (click)="getPage(pagedResult.current_page + 1)"
                 title="Next Page">

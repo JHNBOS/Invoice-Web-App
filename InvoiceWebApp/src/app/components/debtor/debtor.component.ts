@@ -16,11 +16,8 @@ import { DebtorService } from '../../shared/services/debtor.service';
 export class DebtorComponent implements OnInit {
     settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
 
-    debtors: Debtor[] = [];
-
     query = '';
     pagedResult: PaginationResult<Debtor>;
-
     isDesc = false;
     column: string;
 
@@ -29,17 +26,7 @@ export class DebtorComponent implements OnInit {
 
     ngOnInit() {
         this.titleService.setTitle('Debtors - ' + this.settings.company_name);
-        this.getAllDebtors();
-    }
-
-    async getAllDebtors() {
-        await this.debtorService.getAll().toPromise().then(
-            (response) => {
-                this.debtors = response;
-                this.getPage(1);
-            },
-            (error) => { throw error; }
-        );
+        this.getPage(1);
     }
 
     deleteDebtor(id: string) {
@@ -52,27 +39,30 @@ export class DebtorComponent implements OnInit {
     }
 
     search() {
-        const results: Debtor[] = [];
-        this.debtors.forEach(f => {
-            if (f.company_name == null) {
-                if (f.id.toLowerCase().includes(this.query.toLowerCase()) || f.email.toLowerCase().includes(this.query.toLowerCase())
-                    || f.address.city.toLowerCase().includes(this.query.toLowerCase())
-                    || f.address.country.toLowerCase().includes(this.query.toLowerCase())
-                    || f.first_name.toLowerCase().includes(this.query.toLowerCase())
-                    || f.last_name.toLowerCase().includes(this.query.toLowerCase())) {
+        let results: Debtor[] = [];
 
-                    results.push(f);
-                }
-            } else {
-                if (f.id.toLowerCase().includes(this.query.toLowerCase()) || f.email.toLowerCase().includes(this.query.toLowerCase())
-                    || f.address.city.toLowerCase().includes(this.query.toLowerCase())
-                    || f.address.country.toLowerCase().includes(this.query.toLowerCase())
-                    || f.company_name.toLowerCase().includes(this.query.toLowerCase())) {
+        if (this.pagedResult) {
+            this.pagedResult.data.forEach(f => {
+                if (f.company_name == null) {
+                    if (f.id.toLowerCase().includes(this.query.toLowerCase()) || f.email.toLowerCase().includes(this.query.toLowerCase())
+                        || f.address.city.toLowerCase().includes(this.query.toLowerCase())
+                        || f.address.country.toLowerCase().includes(this.query.toLowerCase())
+                        || f.first_name.toLowerCase().includes(this.query.toLowerCase())
+                        || f.last_name.toLowerCase().includes(this.query.toLowerCase())) {
 
-                    results.push(f);
+                        results.push(f);
+                    }
+                } else {
+                    if (f.id.toLowerCase().includes(this.query.toLowerCase()) || f.email.toLowerCase().includes(this.query.toLowerCase())
+                        || f.address.city.toLowerCase().includes(this.query.toLowerCase())
+                        || f.address.country.toLowerCase().includes(this.query.toLowerCase())
+                        || f.company_name.toLowerCase().includes(this.query.toLowerCase())) {
+
+                        results.push(f);
+                    }
                 }
-            }
-        });
+            });
+        }
 
         return results;
     }

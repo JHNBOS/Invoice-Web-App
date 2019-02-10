@@ -44,7 +44,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="data-row" *ngFor="let user of pagedResult?.data">
+                <tr class="data-row" *ngFor="let user of search()">
                     <td data-title="User">
                         <a [routerLink]="['details', user.email]" title="View user details">
                             {{ user.name_label }}
@@ -68,7 +68,7 @@
         </table>
     </div>
 
-    <div class="pager" *ngIf="search()?.length > 0">
+    <div class="pager" *ngIf="search()?.length > 0 && pagedResult.total_pages > 1">
         <div class="right" *ngIf="pagedResult != null">
             <button [disabled]="pagedResult.current_page == pagedResult.total_pages" class="btn btn-primary" (click)="getPage(pagedResult.current_page + 1)"
                 title="Next Page">

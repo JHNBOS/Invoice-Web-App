@@ -16,11 +16,8 @@ import { UserService } from '../../shared/services/user.service';
 export class UserComponent implements OnInit {
     settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
 
-    users: User[] = [];
-
     query = '';
     pagedResult: PaginationResult<User>;
-
     isDesc = false;
     column: string;
 
@@ -29,17 +26,7 @@ export class UserComponent implements OnInit {
 
     ngOnInit() {
         this.titleService.setTitle('Users - ' + this.settings.company_name);
-        this.getAllUsers();
-    }
-
-    async getAllUsers() {
-        await this.userService.getAll().toPromise().then(
-            (response) => {
-                this.users = response;
-                this.getPage(1);
-            },
-            (error) => { throw (error); }
-        );
+        this.getPage(1);
     }
 
     deleteUser(email: string) {
@@ -52,23 +39,26 @@ export class UserComponent implements OnInit {
     }
 
     search() {
-        const results: User[] = [];
-        this.users.forEach(f => {
-            if (f.company_name == null) {
-                if (f.email.toLowerCase().includes(this.query.toLowerCase())
-                    || f.first_name.toLowerCase().includes(this.query.toLowerCase())
-                    || f.last_name.toLowerCase().includes(this.query.toLowerCase())) {
+        let results: User[] = [];
 
-                    results.push(f);
-                }
-            } else {
-                if (f.email.toLowerCase().includes(this.query.toLowerCase())
-                    || f.company_name.toLowerCase().includes(this.query.toLowerCase())) {
+        if (this.pagedResult) {
+            this.pagedResult.data.forEach(f => {
+                if (f.company_name == null) {
+                    if (f.email.toLowerCase().includes(this.query.toLowerCase())
+                        || f.first_name.toLowerCase().includes(this.query.toLowerCase())
+                        || f.last_name.toLowerCase().includes(this.query.toLowerCase())) {
 
-                    results.push(f);
+                        results.push(f);
+                    }
+                } else {
+                    if (f.email.toLowerCase().includes(this.query.toLowerCase())
+                        || f.company_name.toLowerCase().includes(this.query.toLowerCase())) {
+
+                        results.push(f);
+                    }
                 }
-            }
-        });
+            });
+        }
 
         return results;
     }
