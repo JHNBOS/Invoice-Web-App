@@ -309,11 +309,13 @@ main {
         left: 0 !important;
         width: 100vw;
         padding: 14px 10px;
-        top: 55px;
+        top: 55px !important;
 
         .page-title {
             padding: 13px 20px;
             width: $fullWidth !important;
+            height: 55px;
+            font-size: 1.3rem;
         }
     }
 
