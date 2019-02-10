@@ -1,3 +1,5 @@
+@import '../../../vars.scss';
+
 hr {
     border-top: 2px solid rgba(0, 0, 0, 0.1);
 }
@@ -6,10 +8,10 @@ hr {
     border: 1px solid rgba(255, 255, 255, 0.5);
 
     .card-header {
-        background-color: #eef1f7;
-        border-bottom: 1px solid #b8bec9;
+        background-color: $header-bg;
+        border-bottom: $header-border;
         font-weight: 700;
-        color: #4b5961;
+        color: $header-text;
         font-size: .9rem;
         font-family: 'Open Sans';
     }

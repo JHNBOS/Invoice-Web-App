@@ -12,7 +12,7 @@
     </button>
 
     <!-- Mobile menu -->
-    <div class="collapse navbar-collapse" *ngIf="isSignedIn && currentUser != null">
+    <div id="navBar" class="collapse navbar-collapse" *ngIf="isSignedIn && currentUser != null">
         <ul class="navbar-nav mr-auto d-md-flex d-lg-none" id="mobileMenu">
             <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                 <a [routerLink]="['/']" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
@@ -53,8 +53,8 @@
 </nav>
 
 <!-- Sidebar -->
-<nav class="sidebar bg-faded d-none d-lg-block">
-    <ul class="nav nav-pills flex-column" *ngIf="isSignedIn && currentUser != null">
+<nav class="sidebar bg-faded d-none d-lg-block" *ngIf="isSignedIn && currentUser != null">
+    <ul class="nav nav-pills flex-column">
         <li class="nav-item">
             <a [routerLink]="['/']" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <i class="fa fa-home mr-2" aria-hidden="true"></i>
@@ -88,8 +88,8 @@
     </ul>
 </nav>
 
-<main>
-    <div class="page-title" [hidden]="title === ' '">{{ title }}</div>
+<main [className]="isSignedIn ? '' : 'full-width'">
+    <div class="page-title" [hidden]="title === ' '" [className]="isSignedIn ? 'page-title' : 'page-title full'">{{title}}</div>
     <div class="router" [className]="title === ' ' ? 'router' : 'router-title'">
         <router-outlet (activate)="checkIfLoggedIn()"></router-outlet>
     </div>
