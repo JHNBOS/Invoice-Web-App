@@ -1,25 +1,23 @@
-<div class="search-row row mb-4">
-    <div class="col-sm-12 col-lg-5 mx-auto">
-        <div class="input-wrapper">
-            <input class="form-control" type="text" name="search" id="search" placeholder="Type to start searching..."
-                [(ngModel)]="query" />
-            <label for="search" class="fa fa-search input-icon"></label>
+<div class="data-table">
+    <div class="actions" [hidden]="currentUser?.role_id == 2">
+        <div class="buttons">
+            <div class="btn-group">
+                <a routerLinkActive="active" [routerLink]="['create']" class="btn btn-outline-light" title="Create invoice">
+                    <i class="fa fa-plus"></i><span>Create invoice</span>
+                </a>
+            </div>
         </div>
-        <div class="search-buttons" [hidden]="currentUser?.role_id == 2">
-            <a [routerLink]="['create']" class="btn btn-primary" title="Create invoice">
-                <i class="fa fa-plus"></i><span>Create invoice</span>
-            </a>
+        <div class="search">
+            <div class="input-wrapper">
+                <input class="form-control" type="text" name="search" id="search" placeholder="Type to start searching..."
+                    [(ngModel)]="query" />
+                <label for="search" class="fa fa-search input-icon"></label>
+            </div>
         </div>
     </div>
-</div>
-
-<hr class="search-divider" />
-
-<div class="row">
-    <div class="col-sm-12 col-md-10 col-lg-10 mx-auto table-responsive">
-        <h3 class="text-center" *ngIf="search()?.length == 0">No invoices.</h3>
-
-        <table class="table table-hover table-sm table-condensed" *ngIf="search()?.length > 0">
+    <div class="data">
+        <p class="text-center py-2" *ngIf="search()?.length == 0">No invoices available.</p>
+        <table class="table table-hover" *ngIf="search()?.length > 0">
             <thead>
                 <tr>
                     <th class="pl-3 pointer" (click)="sort('expired_on')">
@@ -56,33 +54,32 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let invoice of pagedResult?.data">
-                    <td class="py-2 pl-3" data-title="Due date" [ngClass]="(isExpirationExpired(invoice)) ? 'text-danger' : 'text-muted'"
-                        style="font-weight: 600;">
+                <tr class="data-row" *ngFor="let invoice of pagedResult?.data">
+                    <td data-title="Due date" [ngClass]="(isExpirationExpired(invoice)) ? 'text-danger' : ''" style="font-weight: 600;">
                         <span *ngIf="!isExpirationExpired(invoice)">{{ invoice.expired_on | date: 'MMMM dd, yyyy' }}</span>
                         <span *ngIf="isExpirationExpired(invoice)">{{ differenceInDays(invoice.expired_on) }} days
                             overdue</span>
                     </td>
-                    <td class="p-2" data-title="Invoice Nr.">
+                    <td data-title="Invoice Nr.">
                         <a [routerLink]="['details', invoice.invoice_number]" title="View invoice details">
                             {{ settings.invoice_prefix }}{{ invoice.invoice_number }}
                         </a>
                     </td>
-                    <td class="p-2" data-title="Total">
+                    <td data-title="Total">
                         {{ getLocaleString(invoice.total) }}
                     </td>
-                    <td class="p-2" data-title="Debtor">
+                    <td data-title="Debtor">
                         {{ invoice.debtor.id }} - <span *ngIf="invoice.debtor.company_name == null">{{
                             invoice.debtor.first_name }} {{ invoice.debtor.last_name }}</span> <span *ngIf="invoice.debtor.company_name != null">{{
                             invoice.debtor.company_name }}</span>
                     </td>
-                    <td class="p-2" data-title="Paid">
+                    <td data-title="Paid">
                         {{ invoice.is_paid == true ? 'Yes' : 'No' }}
                     </td>
-                    <td class="p-2" data-title="Concept">
+                    <td data-title="Concept">
                         {{ invoice.concept == true ? 'Yes' : 'No' }}
                     </td>
-                    <td class="text-right py-2 pr-3" date-title="">
+                    <td date-title="">
                         <a href="{{href}}/api/invoices/pdf?invoice={{invoice.invoice_number}}" target="_blank" class="btn-download"
                             title="Open PDF">
                             <i class="fa fa-download"></i>
@@ -98,19 +95,18 @@
                 </tr>
             </tbody>
         </table>
+    </div>
 
-        <div class="pager" *ngIf="search()?.length > 0">
-            <div class="right" *ngIf="pagedResult != null">
-                <button [disabled]="pagedResult.current_page == pagedResult.total_pages" class="btn btn-primary"
-                    (click)="getPage(pagedResult.current_page + 1)" title="Next Page">
-                    <i class="fa fa-chevron-right"></i>
-                </button>
-                <button [disabled]="pagedResult.current_page == 1" class="btn btn-primary" (click)="getPage(pagedResult.current_page - 1)"
-                    title="Previous Page">
-                    <i class="fa fa-chevron-left"></i>
-                </button>
-            </div>
+    <div class="pager" *ngIf="search()?.length > 0">
+        <div class="right" *ngIf="pagedResult != null">
+            <button [disabled]="pagedResult.current_page == pagedResult.total_pages" class="btn btn-primary" (click)="getPage(pagedResult.current_page + 1)"
+                title="Next Page">
+                <i class="fa fa-chevron-right"></i>
+            </button>
+            <button [disabled]="pagedResult.current_page == 1" class="btn btn-primary" (click)="getPage(pagedResult.current_page - 1)"
+                title="Previous Page">
+                <i class="fa fa-chevron-left"></i>
+            </button>
         </div>
-
     </div>
 </div>

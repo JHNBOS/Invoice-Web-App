@@ -129,6 +129,24 @@ body {
                         }
                     }
 
+                    a.btn-download {
+                        background: transparent;
+                        border: none;
+                        font-size: 1.4rem;
+                        color: #10d110;
+                        vertical-align: middle;
+                        padding: 0 6px;
+
+                        &:hover {
+                            color: #12eb12;
+                            cursor: pointer;
+                        }
+
+                        i {
+                            vertical-align: middle;
+                        }
+                    }
+
                     .btn-edit {
                         background: transparent;
                         border: none;
