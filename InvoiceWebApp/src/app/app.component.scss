@@ -118,7 +118,7 @@
                 height: auto;
                 max-width: 55px;
                 border-radius: 50%;
-                border: 2px solid rgba(0, 123, 255, 0.1);
+                border: 2px solid rgba(255, 255, 255, 0.2);
                 z-index: 999999;
                 position: relative;
                 top: 50%;
@@ -224,7 +224,7 @@ main {
             font-family: 'Nunito', sans-serif;
 
             a {
-                padding: 10px 15px;
+                padding: .7rem .5rem .7rem 1.2rem;
                 color: #ddd !important;
                 text-align: left;
                 font-family: 'Nunito', sans-serif;
@@ -241,11 +241,6 @@ main {
                     padding-left: .4rem;
                 }
 
-                .nav-link.active {
-                    background: $navbar-hover;
-                    color: $navbar-text;
-                }
-
                 +.nav-item {
                     margin-left: 0;
                 }
@@ -255,6 +250,11 @@ main {
                     color: $navbar-text;
                 }
             }
+
+            .nav-link.active {
+                background: $navbar-active !important;
+                color: $navbar-text;
+            }
         }
 
         .bottom {
@@ -262,7 +262,6 @@ main {
             right: 0;
             bottom: 0;
             left: 0;
-            z-index: -1030;
         }
     }
 }

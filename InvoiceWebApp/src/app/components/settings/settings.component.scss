@@ -1,3 +1,17 @@
+legend {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 1.3rem;
+    margin-top: 2rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: inherit;
+    color: #4c5962;
+    border: 0;
+    border-bottom: 1px solid #b9bfca;
+}
+
 button.btn {
     width: 150px;
 }
@@ -29,6 +43,7 @@ label {
     .row.form-group:last-child {
         text-align: center !important;
     }
+
     button.btn {
         width: 60%;
         height: 50px;
@@ -37,6 +52,7 @@ label {
         margin-right: auto !important;
         line-height: 2.5;
     }
+
     button.btn.btn-primary:last-child {
         margin-bottom: 2.5rem;
     }

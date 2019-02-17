@@ -1,290 +1,303 @@
-<div class="row justify-content-around mt-3">
-    <div class="wrapper col-sm-12 col-md-10 col-lg-9 mx-auto table-responsive">
+<div class="row justify-content-around my-3">
+    <div class="wrapper col-sm-12 col-md-10 col-lg-10 mx-auto table-responsive">
         <form *ngIf="settings">
-
-            <h4><span>Business Information</span></h4>
-
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="businessName">Name of business</label>
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="company-addon">
-                                <i class="fa fa-font" aria-hidden="true"></i>
-                            </span>
+            <fieldset>
+                <!-- Business section -->
+                <legend>Business</legend>
+                <div class="form-group row">
+                    <div class="col-sm-12 col-md-6">
+                        <!-- Company name -->
+                        <div class="form-group">
+                            <label for="businessName">Name of business</label>
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="company-addon">
+                                        <i class="fa fa-tag" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="bname" class="form-control" id="businessName" [(ngModel)]="settings.company_name"
+                                    placeholder="Company Name" autofocus required aria-describedby="company-addon" />
+                            </div>
                         </div>
-                        <input type="text" name="bname" class="form-control" id="businessName" [(ngModel)]="settings.company_name"
-                            placeholder="Company Name" autofocus required aria-describedby="company-addon" />
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <label for="prefix">Prefix for invoice number</label>
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="prefix-addon">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <input type="text" name="prefix" class="form-control" id="prefix" [(ngModel)]="settings.invoice_prefix"
-                            placeholder="Prefix" aria-describedby="prefix-addon" />
-                    </div>
-                </div>
-            </div>
 
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="businessNumber">Business Number</label>
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="bus-addon">
-                                <i class="fa fa-building" aria-hidden="true"></i>
-                            </span>
+                        <!-- Business number -->
+                        <div class="form-group">
+                            <label for="businessNumber">Business Number</label>
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="bus-addon">
+                                        <i class="fa fa-building" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="bid" class="form-control" id="businessNumber" [(ngModel)]="settings.business_number"
+                                    required aria-describedby="bus-addon" />
+                            </div>
                         </div>
-                        <input type="text" name="bid" class="form-control" id="businessNumber" [(ngModel)]="settings.business_number"
-                            required aria-describedby="bus-addon" />
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <label for="vat">VAT Number</label>
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="vat-addon">
-                                <i class="fa fa-id-badge" aria-hidden="true"></i>
-                            </span>
+
+                        <!-- Website -->
+                        <div class="form-group">
+                            <label for="web">Website</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="web-addon">
+                                        <i class="fa fa-internet-explorer" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="web" class="form-control" id="web" [(ngModel)]="settings.website"
+                                    aria-describedby="web-addon" />
+                            </div>
                         </div>
-                        <input type="text" name="vat" class="form-control" id="vat" [(ngModel)]="settings.vat" required
-                            aria-describedby="vat-addon" />
                     </div>
-                </div>
-            </div>
-
-            <br />
-
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="web">Website</label>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="web-addon">
-                                <i class="fa fa-globe" aria-hidden="true"></i>
-                            </span>
+                    <div class="col-sm-12 col-md-6">
+                        <!-- Invoice prefix -->
+                        <div class="form-group">
+                            <label for="prefix">Prefix for invoice number</label>
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="prefix-addon">
+                                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="prefix" class="form-control" id="prefix" [(ngModel)]="settings.invoice_prefix"
+                                    placeholder="Prefix" aria-describedby="prefix-addon" />
+                            </div>
                         </div>
-                        <input type="text" name="web" class="form-control" id="web" [(ngModel)]="settings.website"
-                            aria-describedby="web-addon" />
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <label for="phone">Phone</label>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="phone-addon">
-                                <i class="fa fa-phone" aria-hidden="true"></i>
-                            </span>
+
+                        <!-- VAT number -->
+                        <div class="form-group">
+                            <label for="vat">VAT Number</label>
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="vat-addon">
+                                        <i class="fa fa-id-card" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="vat" class="form-control" id="vat" [(ngModel)]="settings.vat"
+                                    required aria-describedby="vat-addon" />
+                            </div>
                         </div>
-                        <input type="text" name="phone" class="form-control" id="phone" [(ngModel)]="settings.phone"
-                            aria-describedby="phone-addon" />
-                    </div>
-                </div>
-            </div>
 
-            <h4 class="mt-5"><span>Bank</span></h4>
-
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="bank">Name of bank</label>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="bank-addon">
-                                <i class="fa fa-university" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <input type="text" name="bank" class="form-control" id="bank" [(ngModel)]="settings.bank"
-                            required aria-describedby="bank-addon" />
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <label for="bankAccount">Bank Account</label>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="account-addon">
-                                <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <input type="text" name="bankaccount" class="form-control" id="bankAccount" [(ngModel)]="settings.bank_account"
-                            required aria-describedby="account-addon" />
-                    </div>
-                </div>
-            </div>
-
-            <h4 class="mt-5"><span>E-mail</span></h4>
-
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="email">E-mail address</label>
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="email-addon">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <input type="email" name="email" class="form-control" id="email" [(ngModel)]="settings.email"
-                            required aria-describedby="email-addon" />
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <label for="pass">Password</label>
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="pass-addon">
-                                <i class="fa fa-lock" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <input type="password" name="pass" class="form-control" id="pass" [(ngModel)]="settings.password"
-                            placeholder="Password" aria-describedby="pass-addon" required />
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="smtp">SMTP server</label>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="smtp-addon">
-                                <i class="fa fa-inbox" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <input type="text" name="smtp" class="form-control" id="smtp" [(ngModel)]="settings.smtp"
-                            required aria-describedby="smtp-addon" />
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <label for="port">SMTP Port</label>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="port-addon">
-                                <i class="fa fa-exchange" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <input type="number" name="port" class="form-control" id="port" [(ngModel)]="settings.smtp_port"
-                            required aria-describedby="port-addon" />
-                    </div>
-                </div>
-            </div>
-
-            <h4 class="mt-5"><span>Address</span></h4>
-
-            <div class="form-group row">
-                <div class="col-sm-8">
-                    <label for="address">Address</label>
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="address-addon">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <input type="text" name="address" class="form-control" id="address" [(ngModel)]="settings.address"
-                            placeholder="Address" aria-describedby="address-addon" required />
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="postal_code">Postal Code</label>
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="postal-addon">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <input type="text" name="postal" class="form-control" id="postal" [(ngModel)]="settings.postal_code"
-                            placeholder="Postal Code" aria-describedby="postal-addon" required />
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <label for="city">City</label>
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="city-addon">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <input type="text" name="city" class="form-control" id="city" [(ngModel)]="settings.city"
-                            placeholder="City" aria-describedby="city-addon" required />
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="country">Country</label>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="country-addon">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <input type="text" name="country" class="form-control" id="country" [(ngModel)]="settings.country"
-                            placeholder="Country" aria-describedby="country-addon" required />
-                    </div>
-                </div>
-                <div class="col-sm-6"></div>
-            </div>
-
-            <h4 class="mt-5"><span>Logo</span></h4>
-
-            <div class="form-group row">
-                <div class="col-sm-8">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" name="logoweb" id="logoweb" [(ngModel)]="settings.show_logo"
-                            required />
-                        <label class="custom-control-label" for="logoweb">Use logo on website</label>
-                    </div>
-                </div>
-                <div class="col-sm-8">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" name="logopdf" id="logopdf" [(ngModel)]="settings.show_logo_in_pdf"
-                            required />
-                        <label class="custom-control-label" for="logopdf">Use logo in PDF</label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="color">Choose background color for logo</label>
-                    <input type="color" class="form-control" name="bgcolor" id="color" [(ngModel)]="settings.color"
-                        required />
-                </div>
-                <div class="col-sm-6">
-                </div>
-            </div> -->
-
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="fileInput-addon">
-                                <i class="fa fa-camera" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <div class="custom-file">
-                            <input id="fileInput" name="profile_pic" class="custom-file-input" #fileInput type="file"
-                                accept="image/*" title="Choose an image to upload as logo" (change)="setFileName()"
-                                aria-describedby="fileInput-addon" />
-                            <label class="custom-file-label" for="fileInput">{{ fileLabel }}</label>
+                        <!-- Phone -->
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="phone-addon">
+                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="phone" class="form-control" id="phone" [(ngModel)]="settings.phone"
+                                    aria-describedby="phone-addon" />
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6"></div>
-            </div>
 
-            <div class="form-group row">
-                <div class="col-sm-12">
-                    <button type="button" class="btn btn-primary float-right" (click)="submitForm()">Save</button>
+                <!-- Banking section -->
+                <legend>Banking</legend>
+                <div class="form-group row">
+                    <div class="col-sm-12 col-md-6">
+                        <!-- Bank name -->
+                        <div class="form-group">
+                            <label for="bank">Name of bank</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="bank-addon">
+                                        <i class="fa fa-university" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="bank" class="form-control" id="bank" [(ngModel)]="settings.bank"
+                                    required aria-describedby="bank-addon" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <!-- Bank account -->
+                        <div class="form-group">
+                            <label for="bankAccount">Bank Account</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="account-addon">
+                                        <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="bankaccount" class="form-control" id="bankAccount" [(ngModel)]="settings.bank_account"
+                                    required aria-describedby="account-addon" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+                <!-- Email section -->
+                <legend>E-mail</legend>
+                <div class="form-group row">
+                    <div class="col-sm-12 col-md-6">
+                        <!-- E-mail address -->
+                        <div class="form-group">
+                            <label for="email">E-mail address</label>
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="email-addon">
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="email" name="email" class="form-control" id="email" [(ngModel)]="settings.email"
+                                    required aria-describedby="email-addon" />
+                            </div>
+                        </div>
+
+                        <!-- SMTP server -->
+                        <div class="form-group">
+                            <label for="smtp">SMTP server</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="smtp-addon">
+                                        <i class="fa fa-inbox" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="smtp" class="form-control" id="smtp" [(ngModel)]="settings.smtp"
+                                    required aria-describedby="smtp-addon" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label for="pass">Password</label>
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="pass-addon">
+                                        <i class="fa fa-lock" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="password" name="pass" class="form-control" id="pass" [(ngModel)]="settings.password"
+                                    placeholder="Password" aria-describedby="pass-addon" required />
+                            </div>
+                        </div>
+
+                        <!-- SMTP port -->
+                        <div class="form-group">
+                            <label for="port">SMTP Port</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="port-addon">
+                                        <i class="fa fa-exchange" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="number" name="port" class="form-control" id="port" [(ngModel)]="settings.smtp_port"
+                                    required aria-describedby="port-addon" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Adress section -->
+                <legend>Address</legend>
+                <div class="form-group row">
+                    <div class="col-sm-12 col-md-6">
+                        <!-- Street and number -->
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="address-addon">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="address" class="form-control" id="address" [(ngModel)]="settings.address"
+                                    placeholder="Address" aria-describedby="address-addon" required />
+                            </div>
+                        </div>
+
+                        <!-- City -->
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="city-addon">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="city" class="form-control" id="city" [(ngModel)]="settings.city"
+                                    placeholder="City" aria-describedby="city-addon" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <!-- Postal/Zip code -->
+                        <div class="form-group">
+                            <label for="postal_code">Postal Code</label>
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="postal-addon">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="postal" class="form-control" id="postal" [(ngModel)]="settings.postal_code"
+                                    placeholder="Postal Code" aria-describedby="postal-addon" required />
+                            </div>
+                        </div>
+
+                        <!-- Country -->
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="country-addon">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="country" class="form-control" id="country" [(ngModel)]="settings.country"
+                                    placeholder="Country" aria-describedby="country-addon" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Branding section -->
+                <legend>Branding</legend>
+                <div class="form-group row">
+                    <div class="col-sm-12 col-md-6">
+                        <!-- Logo on website -->
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="logoweb" id="logoweb"
+                                    [(ngModel)]="settings.show_logo" required />
+                                <label class="custom-control-label" for="logoweb">Use logo on website</label>
+                            </div>
+                        </div>
+
+                        <!-- Logo in PDF -->
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="logopdf" id="logopdf"
+                                    [(ngModel)]="settings.show_logo_in_pdf" required />
+                                <label class="custom-control-label" for="logopdf">Use logo in PDF</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <!-- Logo upload -->
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="fileInput-addon">
+                                        <i class="fa fa-camera" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <div class="custom-file">
+                                    <input id="fileInput" name="profile_pic" class="custom-file-input" #fileInput type="file"
+                                        accept="image/*" title="Choose an image to upload as logo" (change)="setFileName()"
+                                        aria-describedby="fileInput-addon" />
+                                    <label class="custom-file-label" for="fileInput">{{ fileLabel }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <button type="button" class="btn btn-primary float-right mt-5" (click)="submitForm()">Save</button>
         </form>
     </div>
 </div>
