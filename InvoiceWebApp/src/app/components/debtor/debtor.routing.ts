@@ -20,7 +20,7 @@ const routes: Routes = [
                 data: { title: 'Debtors', roles: [1] }
             },
             {
-                path: 'add/:company',
+                path: 'add',
                 component: AddDebtorComponent,
                 pathMatch: 'full',
                 canActivate: [AuthGuard],

@@ -2,13 +2,8 @@
     <div class="actions" [hidden]="currentUser?.role_id == 2">
         <div class="buttons">
             <div class="btn-group">
-                <a routerLinkActive="active" [routerLink]="['add', 'no']" class="btn btn-outline-light" role="button"
-                    title="Add private debtor">
-                    <i class="fa fa-male"></i><span>Add private debtor</span>
-                </a>
-                <a routerLinkActive="active" [routerLink]="['add', 'yes']" class="btn btn-outline-light" role="button"
-                    title="Add business debtor">
-                    <i class="fa fa-building-o"></i><span>Add business debtor</span>
+                <a routerLinkActive="active" [routerLink]="['add']" class="btn btn-outline-light" role="button" title="Add debtor">
+                    <i class="fa fa-male"></i><span>Add debtor</span>
                 </a>
                 <a routerLinkActive="active" [routerLink]="['import']" class="btn btn-outline-light" role="button"
                     title="Add debtors by CSV">

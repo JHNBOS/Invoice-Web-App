@@ -10,7 +10,6 @@ import { AddressService } from '../../../shared/services/address.service';
 import { DebtorService } from '../../../shared/services/debtor.service';
 import { DebtorHasAddressService } from '../../../shared/services/debtor_has_address.service';
 
-
 @Component({
     selector: 'app-edit-debtor',
     templateUrl: './edit-debtor.component.html',

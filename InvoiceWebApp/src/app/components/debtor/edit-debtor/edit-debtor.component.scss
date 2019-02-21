@@ -11,9 +11,6 @@ label {
 }
 
 @media (max-width: 992px) {
-    .row.form-group:last-child {
-        text-align: center !important;
-    }
     button.btn {
         width: 60%;
         height: 50px;
@@ -21,7 +18,9 @@ label {
         margin-left: auto !important;
         margin-right: auto !important;
         line-height: 2.5;
+        display: block;
     }
+
     button.btn.btn-primary:last-child {
         margin-bottom: 2.5rem;
     }

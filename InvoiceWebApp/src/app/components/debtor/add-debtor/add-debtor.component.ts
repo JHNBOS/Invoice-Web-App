@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Address from '../../../shared/models/address.model';
 import Debtor from '../../../shared/models/debtor.model';
@@ -20,24 +20,31 @@ import { UserService } from '../../../shared/services/user.service';
 export class AddDebtorComponent implements OnInit {
     settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
 
-    forCompany = false;
+    forCompany: boolean;
     debtor: Debtor = new Debtor;
     address: Address = new Address;
 
     addressExists = false;
     hasAddressExists = false;
 
-    constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService,
-        private debtorHasAddressService: DebtorHasAddressService, private addressService: AddressService, private userService: UserService,
-        private router: Router, private spinner: NgxSpinnerService) { }
+    constructor(private titleService: Title, private debtorService: DebtorService, private debtorHasAddressService: DebtorHasAddressService,
+        private addressService: AddressService, private userService: UserService, private router: Router,
+        private spinner: NgxSpinnerService) { }
 
     ngOnInit() {
         this.titleService.setTitle('Create Debtor - ' + this.settings.company_name);
-        this.route.params.subscribe(
-            (params) => {
-                this.forCompany = params['company'] === 'yes' ? true : false;
-            }
-        );
+        this.forCompany = false;
+    }
+
+    changeForm(event: any) {
+        console.log(event);
+        if (event.target.checked) {
+            this.forCompany = true;
+        } else {
+            this.forCompany = false;
+        }
+
+        console.log(this.forCompany);
     }
 
     submitForm() {
