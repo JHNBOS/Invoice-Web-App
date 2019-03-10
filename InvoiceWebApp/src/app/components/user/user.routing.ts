@@ -31,7 +31,7 @@ const routes: Routes = [
                 }
             },
             {
-                path: 'add/:company',
+                path: 'add',
                 component: AddUserComponent,
                 canActivate: [AuthGuard],
                 data: {

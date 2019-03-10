@@ -7,7 +7,7 @@
                 <legend>Type of debtor</legend>
                 <div class="form-group row">
                     <div class="col-sm-12 col-md-6">
-                        <span class="mr-3 pl-2">Debtor is a company</span>
+                        <span class="mr-3 pl-2">Debtor is a business</span>
 
                         <span class="switch">
                             <input type="checkbox" class="switch" id="switch-id" (change)="changeForm($event)">
@@ -198,7 +198,7 @@
 
                         <!-- Company name -->
                         <div class="form-group">
-                            <label for="companyName">Company Name</label>
+                            <label for="companyName">Business Name</label>
                             <div class="input-group mb-1">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="companyName-addon">
@@ -206,7 +206,7 @@
                                     </span>
                                 </div>
                                 <input type="text" name="companyName" class="form-control" id="companyName" [(ngModel)]="debtor.company_name"
-                                    required placeholder="Company Name" aria-describedby="companyName-addon" />
+                                    required placeholder="Business Name" aria-describedby="companyName-addon" />
                             </div>
                         </div>
 

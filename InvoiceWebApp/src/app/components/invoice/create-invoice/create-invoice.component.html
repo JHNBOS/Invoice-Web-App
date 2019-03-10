@@ -1,177 +1,169 @@
-<a class="return" [routerLink]="['/invoices']" title="Return">
-    <i class="fa fa-arrow-left"></i>
-</a>
-
-<div class="row justify-content-around mt-3">
-    <div class="col-sm-12 col-md-10 col-lg-10 mx-auto table-responsive">
+<div class="row justify-content-around my-3">
+    <div class="wrapper col-sm-12 col-md-10 col-lg-10 mx-auto table-responsive">
         <form *ngIf="invoice">
 
-            <h4 class="text-muted"><span>Invoice Information</span></h4>
+            <!-- Invoice options -->
+            <fieldset class="mb-3">
+                <legend>Invoice Options</legend>
+                <div class="form-group row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            <span class="mr-3 pl-2">Recurring invoice</span>
 
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label>Debtor</label>
-                    <app-debtor-dropdown (chosenDebtor)="getDebtorChoice($event)"></app-debtor-dropdown>
-                </div>
-                <div class="col-sm-6"></div>
-            </div>
-
-            <br />
-
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="created">Invoice Date</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="creation-addon">
-                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            <span class="switch switch-sm">
+                                <input type="checkbox" class="switch" id="switch-id" (change)="changeForm($event)">
+                                <label for="switch-id"></label>
                             </span>
                         </div>
-                        <input type="date" name="creation_date" class="form-control" id="created" [min]="minDate"
-                            [(ngModel)]="begin" (blur)="setExpired()" aria-describedby="creation-addon" autofocus
-                            required />
+                        <div class="form-group mt-3">
+                            <div class="input-group my-1" *ngIf="showRepeat">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="repeats" style="margin-left: 0px;">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    </label>
+                                </div>
+                                <select name="repeats" id="repeats" class="custom-select" [(ngModel)]="recurring_invoice">
+                                    <option selected>Select an option</option>
+                                    <option value="week">Weekly</option>
+                                    <option value="month">Monthly</option>
+                                    <option value="year">Yearly</option>
+                                </select>
+                                <input class="form-control ml-1" name="repeat_times" id="repeat_times" type="number"
+                                    min="1" [(ngModel)]="recurring_times" *ngIf="recurring_invoice != 'Select an option'" />
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <label for="expired">Due Date</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="expiration-addon">
-                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            <span class="mr-3 pl-2">Save as concept</span>
+
+                            <span class="switch switch-sm">
+                                <input type="checkbox" class="switch" id="switch-id-2" (change)="changeInvoiceType($event)">
+                                <label for="switch-id-2"></label>
                             </span>
                         </div>
-                        <input type="date" name="expiration_date" class="form-control" id="expired" [min]="minDate"
-                            [(ngModel)]="expiration" aria-describedby="expiration-addon" required />
                     </div>
                 </div>
-            </div>
+            </fieldset>
 
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" name="repeat" id="repeat" [(ngModel)]="showRepeat" />
-                        <label class="custom-control-label" for="repeat">Recurring invoice?</label>
-                    </div>
-
-                    <br />
-
-                    <div class="input-group mb-3" *ngIf="showRepeat">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="repeats" style="margin-left: 0px;">
-                                <i class="fa fa-clock-o" aria-hidden="true"></i>
-                            </label>
-                        </div>
-                        <select name="repeats" id="repeats" class="custom-select" [(ngModel)]="recurring_invoice">
-                            <option selected>Select an option</option>
-                            <option value="week">Weekly</option>
-                            <option value="month">Monthly</option>
-                            <option value="year">Yearly</option>
-                        </select>
-                        <input class="form-control ml-1" name="repeat_times" id="repeat_times" type="number" min="1"
-                            [(ngModel)]="recurring_times" *ngIf="recurring_invoice != 'Select an option'" />
-                    </div>
-                </div>
-                <div class="col-sm-6"></div>
-            </div>
-
-            <h4 class="text-muted"><span>Invoice Details</span></h4>
-
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="total">To be paid</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">&euro;</span>
-                        </div>
-                        <input type="text" name="total" class="form-control" id="total" [ngModel]="invoice.total | number: '1.2-2'"
-                            (ngModelChange)="invoice.total=$event" readonly />
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <label for="discount">Discount</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">&euro;</span>
-                        </div>
-                        <input class="form-control" name="discount" id="discount" [(ngModel)]="invoice.discount"
-                            (change)="calculateTotal()" (blur)="calculateTotal(row)" required currencyMask />
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-12 table-responsive">
-                    <table class="table table-sm table-condensed table-striped">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Qty</th>
-                                <th>Tax</th>
-                                <th>Total</th>
-                                <th class="text-center"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="table-row" *ngFor="let row of invoice.items;let i = index">
-                                <td data-title="Name">
-                                    <input type="text" name="p_name" class="form-control form-control-sm" [(ngModel)]="row.name"
-                                        required />
-                                </td>
-                                <td data-title="Desc">
-                                    <input type="text" name="desc" class="form-control form-control-sm" [(ngModel)]="row.description" />
-                                </td>
-                                <td data-title="Price">
-                                    <input name="price" class="form-control form-control-sm" [(ngModel)]="row.price"
-                                        (change)="calculatePrice(row)" (blur)="calculatePrice(row)" currencyMask />
-                                </td>
-                                <td data-title="Quantity">
-                                    <input type="number" name="qnt" class="form-control form-control-sm" [(ngModel)]="row.quantity"
-                                        min="1" (change)="calculatePrice(row)" (blur)="calculatePrice(row)" required />
-                                </td>
-                                <td data-title="Tax">
-                                    <input type="number" name="tax" class="form-control form-control-sm" [(ngModel)]="row.tax"
-                                        min="0" required />
-                                </td>
-                                <td data-title="Total">
-                                    <span style="font-weight: 500;">
-                                        &euro; {{ row.total | number:'1.2-2' }}
+            <!-- Invoice -->
+            <fieldset>
+                <!-- Invoice information section -->
+                <legend>Invoice Information</legend>
+                <div class="form-group row">
+                    <div class="col-sm-12 col-md-6">
+                        <!-- Invoice date -->
+                        <div class="form-group">
+                            <label for="created">Invoice Date</label>
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="creation-addon">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
                                     </span>
-                                </td>
-                                <td data-title="">
-                                    <a *ngIf="i >= 1" class="btn-delete" (click)="deleteRow(row)" title="Remove">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                </div>
+                                <input type="date" name="creation_date" class="form-control" id="created" [min]="minDate"
+                                    [(ngModel)]="begin" (blur)="setExpired()" aria-describedby="creation-addon"
+                                    autofocus required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <!-- Expiration date -->
+                        <div class="form-group">
+                            <label for="expired">Due Date</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="expiration-addon">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="date" name="expiration_date" class="form-control" id="expired" [min]="minDate"
+                                    [(ngModel)]="expiration" aria-describedby="expiration-addon" required />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <a class="btn btn-primary add" (click)="addRow()" title="Add">
-                    <i class="fa fa-plus"></i>
-                </a>
-            </div>
+            </fieldset>
 
-            <br />
-
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="comment">Comment</label>
-                    <textarea rows="3" name="comment" class="form-control" id="comment" [(ngModel)]="invoice.comment"></textarea>
+            <fieldset>
+                <!-- Invoice items section -->
+                <legend>Invoice Details</legend>
+                <div class="form-group row">
+                    <div class="col-sm-12 col-md-12 table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th>Tax</th>
+                                    <th>Total</th>
+                                    <th class="text-center"></th>
+                                    <th class="text-center">
+                                        <a class="btn add" (click)="addRow()" title="Add">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-row" *ngFor="let row of invoice.items;let i = index">
+                                    <td data-title="Name">
+                                        <input type="text" name="p_name" class="form-control form-control-sm"
+                                            [(ngModel)]="row.name" required />
+                                    </td>
+                                    <td data-title="Desc">
+                                        <input type="text" name="desc" class="form-control form-control-sm" [(ngModel)]="row.description" />
+                                    </td>
+                                    <td data-title="Price">
+                                        <input name="price" class="form-control form-control-sm" [(ngModel)]="row.price"
+                                            (change)="calculatePrice(row)" (blur)="calculatePrice(row)" currencyMask />
+                                    </td>
+                                    <td data-title="Quantity">
+                                        <input type="number" name="qnt" class="form-control form-control-sm"
+                                            [(ngModel)]="row.quantity" min="1" (change)="calculatePrice(row)" (blur)="calculatePrice(row)"
+                                            required />
+                                    </td>
+                                    <td data-title="Tax">
+                                        <input type="number" name="tax" class="form-control form-control-sm"
+                                            [(ngModel)]="row.tax" min="0" required />
+                                    </td>
+                                    <td data-title="Total">
+                                        <span style="font-weight: 500;">
+                                            &euro; {{ row.total | number:'1.2-2' }}
+                                        </span>
+                                    </td>
+                                    <td data-title="">
+                                        <a *ngIf="i >= 1" class="btn-delete" (click)="deleteRow(row)" title="Remove">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="col-sm-6"></div>
-            </div>
+            </fieldset>
 
-            <br />
-
-            <div class="form-group row">
-                <div class="col-sm-12">
-                    <button type="button" class="btn btn-primary float-right" (click)="submitForm(false)">Save</button>
-                    <button type="button" class="btn btn-primary float-right mr-1" (click)="submitForm(true)">Save as
-                        concept</button>
+            <fieldset>
+                <!-- Extra section -->
+                <legend>Extra</legend>
+                <div class="form-group row">
+                    <div class="col-sm-12 col-md-6">
+                        <!-- Comment -->
+                        <div class="form-group">
+                            <label for="comment">Comment</label>
+                            <textarea rows="3" name="comment" class="form-control" id="comment" [(ngModel)]="invoice.comment"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6"></div>
                 </div>
-            </div>
+            </fieldset>
+
+            <button type="button" class="btn btn-light float-right mt-5" routerLink="/invoices">Cancel</button>
+            <button type="button" class="btn btn-primary mr-2 float-right mt-5" (click)="submitForm(true)">Save</button>
         </form>
     </div>
 </div>

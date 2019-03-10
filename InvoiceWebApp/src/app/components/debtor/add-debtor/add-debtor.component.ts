@@ -37,14 +37,11 @@ export class AddDebtorComponent implements OnInit {
     }
 
     changeForm(event: any) {
-        console.log(event);
         if (event.target.checked) {
             this.forCompany = true;
         } else {
             this.forCompany = false;
         }
-
-        console.log(this.forCompany);
     }
 
     submitForm() {

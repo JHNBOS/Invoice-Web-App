@@ -15,6 +15,7 @@ import { UserService } from '../../../shared/services/user.service';
 })
 export class DetailUserComponent implements OnInit {
     settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
+    currentUser: User = JSON.parse(sessionStorage.getItem('signedInUser'));
 
     email: string;
     user: User;

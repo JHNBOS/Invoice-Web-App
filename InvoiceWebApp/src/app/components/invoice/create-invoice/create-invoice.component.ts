@@ -20,6 +20,7 @@ export class CreateInvoiceComponent implements OnInit {
     settings: Settings = JSON.parse(sessionStorage.getItem('settings'));
 
     invoice: Invoice = new Invoice;
+    concept: boolean = false;
     debtor: Debtor;
     invoiceLength = 0;
 
@@ -42,6 +43,22 @@ export class CreateInvoiceComponent implements OnInit {
         this.getInvoiceCount();
     }
 
+    changeForm(event: any) {
+        if (event.target.checked) {
+            this.showRepeat = true;
+        } else {
+            this.showRepeat = false;
+        }
+    }
+
+    changeInvoiceType(event: any) {
+        if (event.target.checked) {
+            this.concept = true;
+        } else {
+            this.concept = false;
+        }
+    }
+
     setInitialRow() {
         const row = new InvoiceItem();
         row.invoice_number = this.invoice.invoice_number;
@@ -60,7 +77,7 @@ export class CreateInvoiceComponent implements OnInit {
         this.debtor = event;
     }
 
-    submitForm(concept: boolean) {
+    submitForm() {
         // Show spinner
         this.spinner.show();
 
@@ -69,7 +86,7 @@ export class CreateInvoiceComponent implements OnInit {
         this.invoice.expired_on = moment.utc(this.expiration).toDate();
         this.invoice.customer_id = this.debtor.id;
         this.invoice.invoice_number = '-1';
-        this.invoice.concept = concept;
+        this.invoice.concept = this.concept;
         this.invoice.debtor = this.debtor;
 
         this.saveInvoice(this.invoice);

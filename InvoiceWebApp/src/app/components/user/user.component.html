@@ -2,11 +2,8 @@
     <div class="actions" [hidden]="currentUser?.role_id == 2">
         <div class="buttons">
             <div class="btn-group">
-                <a routerLinkActive="active" [routerLink]="['add', 'no']" class="btn btn-outline-light" title="Add user for client">
+                <a routerLinkActive="active" [routerLink]="['add']" class="btn btn-outline-light" title="Add user">
                     <i class="fa fa-user-plus"></i><span>Add user</span>
-                </a>
-                <a routerLinkActive="active" [routerLink]="['add', 'yes']" class="btn btn-outline-light" title="Add user for company">
-                    <i class="fa fa-building-o"></i><span>Add user</span>
                 </a>
                 <a routerLinkActive="active" [routerLink]="['import']" class="btn btn-outline-light" title="Add users by CSV">
                     <i class="fa fa-file-excel-o"></i><span>Import CSV</span>
