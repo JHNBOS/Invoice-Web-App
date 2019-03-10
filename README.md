@@ -17,6 +17,13 @@ How to use:
   <li>Run the command 'npm install' in a command prompt</li>
   <li>Make sure that all NuGet packages are installed.</li>
   <li>Run the SQL script in 'docs/sql/invoice_app.sql'</li>
+  <li>Change the database connection details as described earlier.</li>
+  <li>In two seperate command prompts, run the following commands, in this order:
+    <ul>
+      <li>ng build</li>
+      <li>dotnet run</li>
+    </ul>
+  </li>
   <li>*this project makes use of .NET Core SDK 2.2</li>
 </ul>
 
