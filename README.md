@@ -4,14 +4,14 @@ ASP.NET Core + Angular 6 Project
 
 This project makes use of a backend API created with ASP.NET Core, and a website based in Angular 6.
 
-Things to change before use:
+<b>Things to change before use</b>
 
 <ul>
   <li>Change database connection details in 'Components/DataContext/InvoiceContext.cs'</li>
   <li>Change port in 'Program.cs', and in '/src/environments/environment.ts' and '/src/environments/environment.prod.ts'</li>
 </ul>
 
-How to use:
+<b>How to use</b>
 
 <ul>
   <li>Run the command 'npm install' in a command prompt</li>
@@ -24,10 +24,10 @@ How to use:
       <li>dotnet run</li>
     </ul>
   </li>
-  <li>*this project makes use of .NET Core SDK 2.2</li>
 </ul>
+<small>*this project makes use of .NET Core SDK 2.2</small>
 
-Extra:
+<b>Extra</b>
 
 <ul>
   <li>For the CSV import functionality, inside 'docs' there are two .CSV files for both debtors and users.</li>
