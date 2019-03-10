@@ -25,5 +25,4 @@ Extra:
 <ul>
   <li>For the CSV import functionality, inside 'docs' there are two .CSV files for both debtors and users.</li>
   <li>For an entity relationship diagram, there is one created with Astah located in 'docs/uml/Invoice ERD.asta'</li>
-  <li>Run the SQL script in 'docs/sql/invoice_app.sql'</li>
 </ul>
