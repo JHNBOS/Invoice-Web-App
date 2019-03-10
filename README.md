@@ -7,7 +7,7 @@ This project makes use of a backend API created with ASP.NET Core, and a website
 
 <ul>
   <li>Change database connection details in <b><i>'Components/DataContext/InvoiceContext.cs'</b></i></li>
-  <li>Change port in <b><i>'Program.cs'</b></i>, and in <b><i>'/src/environments/environment.ts'</b></i> and <b><i>'/src/environments/environment.prod.ts'</b></i></li>
+  <li>Change port in <b><i>'Program.cs'</b></i>, <b><i>'proxy.config.json'</b></i> and in <b><i>'/src/environments/environment.ts'</b></i> and <b><i>'/src/environments/environment.prod.ts'</b></i></li>
 </ul>
 
 <b>How to use</b>
