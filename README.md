@@ -26,7 +26,7 @@ This project makes use of a backend API created with ASP.NET Core, and a website
 </ul>
 <small>*this project makes use of .NET Core SDK 2.2</small>
 
-<br />
+<br /><br />
 
 <b>Extra</b>
 
