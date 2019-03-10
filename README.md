@@ -14,7 +14,7 @@ This project makes use of a backend API created with ASP.NET Core, and a website
 
 <ul>
   <li>Run the command <b><i>'npm install'</b></i> in a command prompt</li>
-  <li>Make sure that all NuGet packages are installed.</li>
+  <li>Make sure that all NuGet packages are installed with <b><i>'dotnet restore'</b></i>.</li>
   <li>Run the SQL script in <b><i>'docs/sql/invoice_app.sql'</b></i></li>
   <li>Change the database connection details as described earlier.</li>
   <li>In two seperate command prompts, run the following commands, in this order:
@@ -25,6 +25,8 @@ This project makes use of a backend API created with ASP.NET Core, and a website
   </li>
 </ul>
 <small>*this project makes use of .NET Core SDK 2.2</small>
+
+<br />
 
 <b>Extra</b>
 
