@@ -1,5 +1,4 @@
-# Invoice-Web-App
-ASP.NET Core + Angular 6 Project
+# Invoice Web App
 
 
 This project makes use of a backend API created with ASP.NET Core, and a website based in Angular 6.
