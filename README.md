@@ -3,12 +3,16 @@
 
 This project makes use of a backend API created with ASP.NET Core, and a website based in Angular 6.
 
+<br />
+
 <b>Things to change before use</b>
 
 <ul>
   <li>Change database connection details in <b><i>'Components/DataContext/InvoiceContext.cs'</b></i></li>
   <li>Change port in <b><i>'Program.cs'</b></i>, <b><i>'proxy.config.json'</b></i>, in <b><i>'/src/environments/environment.ts'</b></i> <br /> and <b><i>'/src/environments/environment.prod.ts'</b></i></li>
 </ul>
+
+<br />
 
 <b>How to use</b>
 
@@ -26,7 +30,7 @@ This project makes use of a backend API created with ASP.NET Core, and a website
 </ul>
 <small>*this project makes use of .NET Core SDK 2.2</small>
 
-<br /><br />
+<br />
 
 <b>Extra</b>
 
