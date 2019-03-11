@@ -22,6 +22,7 @@ export class EditInvoiceComponent implements OnInit {
 
     invoiceNumber: string;
     invoice: Invoice;
+    concept: boolean = false;
 
     total: number;
 
@@ -36,6 +37,14 @@ export class EditInvoiceComponent implements OnInit {
                 this.getInvoice(this.invoiceNumber);
             }
         );
+    }
+
+    changeInvoiceType(event: any) {
+        if (event.target.checked) {
+            this.concept = true;
+        } else {
+            this.concept = false;
+        }
     }
 
     getInvoice(invoice: string) {
@@ -76,9 +85,9 @@ export class EditInvoiceComponent implements OnInit {
         this.total = this.total - this.invoice.discount;
     }
 
-    submitForm(concept: boolean) {
+    submitForm() {
         this.invoice.total = this.total;
-        this.invoice.concept = concept;
+        this.invoice.concept = this.concept;
 
         // Show spinner
         this.spinner.show();

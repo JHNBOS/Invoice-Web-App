@@ -154,46 +154,46 @@ legend {
                     }
 
                     a.btn-download {
+                        width: 30px;
+                        height: 28px;
                         background: transparent;
                         border: none;
-                        font-size: 1.4rem;
-                        color: #10d110;
-                        vertical-align: middle;
-                        padding: 0 6px;
+                        font-size: 1.2rem;
+                        color: #10d11a;
+                        padding: 1px 6px;
+                        text-align: center;
 
                         &:hover {
-                            color: #12eb12;
+                            color: #0fbe26;
                             cursor: pointer;
-                        }
-
-                        i {
-                            vertical-align: middle;
                         }
                     }
 
                     .btn-edit {
+                        width: 30px;
+                        height: 28px;
                         background: transparent;
                         border: none;
-                        font-size: 1.4rem;
-                        color: #09c109;
-                        vertical-align: middle;
+                        font-size: 1.2rem;
+                        color: #0959c1;
+                        padding: 1px 6px;
+                        text-align: center;
 
                         &:hover {
-                            color: mediumseagreen;
+                            color: #0850af;
                             cursor: pointer;
-                        }
-
-                        i {
-                            vertical-align: middle;
                         }
                     }
 
                     .btn-delete {
+                        width: 30px;
+                        height: 28px;
                         background: transparent;
                         border: none;
-                        font-size: 1.4rem;
+                        font-size: 1.2rem;
                         color: #c70202;
-                        vertical-align: middle;
+                        padding: 1px 6px;
+                        text-align: center;
 
                         &:hover {
                             color: red;
@@ -201,8 +201,7 @@ legend {
                         }
 
                         i {
-                            vertical-align: middle;
-                            line-height: 40px;
+                            transform: translateY(-2px);
                         }
                     }
                 }

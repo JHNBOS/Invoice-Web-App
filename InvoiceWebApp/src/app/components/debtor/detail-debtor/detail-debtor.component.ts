@@ -16,6 +16,8 @@ export class DetailDebtorComponent implements OnInit {
     debtorId: string;
     debtor: Debtor;
 
+    streetWithNumber: string;
+
     constructor(private titleService: Title, private route: ActivatedRoute, private debtorService: DebtorService,
         private router: Router) { }
 
@@ -31,7 +33,10 @@ export class DetailDebtorComponent implements OnInit {
 
     getDebtor(id: string) {
         this.debtorService.getById(id).subscribe(
-            (response) => this.debtor = response,
+            (response) => {
+                this.debtor = response;
+                this.streetWithNumber = this.debtor.address.street + ' ' + this.debtor.address.number;
+            },
             (error) => { throw (error); }
         );
     }

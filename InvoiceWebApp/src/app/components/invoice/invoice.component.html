@@ -50,15 +50,14 @@
                                                 'fa-sort-desc': (column == 'concept' && isDesc) }"
                             aria-hidden="true"> </i>
                     </th>
+                    <th>Status</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="data-row" *ngFor="let invoice of search()">
-                    <td data-title="Due date" [ngClass]="(isExpirationExpired(invoice)) ? 'text-danger' : ''" style="font-weight: 600;">
-                        <span *ngIf="!isExpirationExpired(invoice)">{{ invoice.expired_on | date: 'MMMM dd, yyyy' }}</span>
-                        <span *ngIf="isExpirationExpired(invoice)">{{ differenceInDays(invoice.expired_on) }} days
-                            overdue</span>
+                    <td data-title="Due date" style="font-weight: 600;">
+                        <span>{{ invoice.expired_on | date: 'MMMM dd, yyyy' }}</span>
                     </td>
                     <td data-title="Invoice Nr.">
                         <a [routerLink]="['details', invoice.invoice_number]" title="View invoice details">
@@ -79,9 +78,17 @@
                     <td data-title="Concept">
                         {{ invoice.concept == true ? 'Yes' : 'No' }}
                     </td>
+                    <td data-title="Status">
+                        <span class="badge badge-primary py-1 px-1" *ngIf="!isExpirationExpired(invoice)">
+                            Sent
+                        </span>
+                        <span class="badge badge-danger py-1 px-1" *ngIf="isExpirationExpired(invoice)">
+                            {{ differenceInDays(invoice.expired_on) }} days overdue
+                        </span>
+                    </td>
                     <td date-title="">
-                        <a href="{{href}}/api/invoices/pdf?invoice={{invoice.invoice_number}}" target="_blank" class="btn-download"
-                            title="Open PDF">
+                        <a role="button" href="{{href}}/api/invoices/pdf?invoice={{invoice.invoice_number}}" target="_blank"
+                            class="btn-download" title="Open PDF">
                             <i class="fa fa-download"></i>
                         </a>
                         <button class="btn-edit" [routerLink]="['edit', invoice.invoice_number]" title="Edit" [hidden]="currentUser.role_id == 2">
