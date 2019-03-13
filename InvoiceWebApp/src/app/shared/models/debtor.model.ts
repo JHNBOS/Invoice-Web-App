@@ -1,6 +1,7 @@
 import Address from './address.model';
 
 export default class Debtor {
+    selected: boolean = false;
     id: string = null;
     first_name: string = null;
     last_name: string = null;

@@ -34,6 +34,7 @@
     "ngx-toasty": "^1.0.0",
     "npm": "^6.7.0",
     "popper": "^1.0.1",
+    "popper.js": "^1.14.7",
     "rxjs": "6.4.0",
     "rxjs-compat": "^6.3.3",
     "tether": "^1.4.5",

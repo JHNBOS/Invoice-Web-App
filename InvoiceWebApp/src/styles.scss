@@ -62,7 +62,7 @@ legend {
 /* Data Table */
 
 .data-table {
-    width: 75%;
+    width: 80%;
     height: auto;
     margin: 0 auto;
 
@@ -145,10 +145,11 @@ legend {
                     border-top: 1px solid #dee2e6;
 
                     a {
-                        color: $link;
+                        color: $link-color;
                         font-weight: 500;
 
                         &:hover {
+                            color: darken($color: $link-color, $amount: $hover-darken);
                             text-decoration: none;
                         }
                     }
@@ -159,12 +160,12 @@ legend {
                         background: transparent;
                         border: none;
                         font-size: 1.2rem;
-                        color: #10d11a;
+                        color: $download-color;
                         padding: 1px 6px;
                         text-align: center;
 
                         &:hover {
-                            color: #0fbe26;
+                            color: darken($color: $download-color, $amount: $hover-darken);
                             cursor: pointer;
                         }
                     }
@@ -175,12 +176,12 @@ legend {
                         background: transparent;
                         border: none;
                         font-size: 1.2rem;
-                        color: #0959c1;
+                        color: $edit-color;
                         padding: 1px 6px;
                         text-align: center;
 
                         &:hover {
-                            color: #0850af;
+                            color: darken($color: $edit-color, $amount: $hover-darken);
                             cursor: pointer;
                         }
                     }
@@ -191,12 +192,12 @@ legend {
                         background: transparent;
                         border: none;
                         font-size: 1.2rem;
-                        color: #c70202;
+                        color: $delete-color;
                         padding: 1px 6px;
                         text-align: center;
 
                         &:hover {
-                            color: red;
+                            color: darken($color: $delete-color, $amount: $hover-darken);
                             cursor: pointer;
                         }
 
@@ -251,4 +252,17 @@ legend {
             right: 85px;
         }
     }
+}
+
+/*----------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------*/
+/* Input */
+
+.custom-checkbox .custom-control-label::before {
+    border-radius: .25rem;
+    border: 1px solid #b8b8b8;
+}
+
+.custom-file-label {
+    margin-left: 0 !important;
 }

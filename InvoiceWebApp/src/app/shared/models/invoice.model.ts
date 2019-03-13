@@ -2,6 +2,7 @@ import Debtor from './debtor.model';
 import InvoiceItem from './invoice_item.model';
 
 export default class Invoice {
+    selected: boolean = false;
     invoice_number: string = null;
     customer_id: string = null;
     created_on: Date = null;

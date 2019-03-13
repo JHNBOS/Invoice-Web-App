@@ -24,9 +24,12 @@ export class InvoiceComponent implements OnInit {
     href: string;
 
     query = '';
+    originalData: Invoice[];
     pagedResult: PaginationResult<Invoice>;
     isDesc = false;
     column: string;
+
+    selectedRows: string[] = [];
 
     constructor(private titleService: Title, private route: ActivatedRoute, private invoiceService: InvoiceService,
         private debtorService: DebtorService, private router: Router) { }
@@ -53,16 +56,8 @@ export class InvoiceComponent implements OnInit {
         );
     }
 
-    deleteInvoice(invoice: string) {
-        if (confirm('Are you sure you want to delete this invoice?')) {
-            this.invoiceService.delete(invoice).subscribe(
-                (response) => this.ngOnInit(),
-                (error) => { throw error; }
-            );
-        }
-    }
-
     search() {
+        this.pagedResult.data = this.originalData;
         let results: Invoice[] = [];
 
         if (this.pagedResult) {
@@ -94,7 +89,7 @@ export class InvoiceComponent implements OnInit {
             });
         }
 
-        return results;
+        this.pagedResult.data = results;
     }
 
     async getPage(page: number) {
@@ -124,6 +119,77 @@ export class InvoiceComponent implements OnInit {
                 return 0;
             }
         });
+    }
+
+    selectAll(event: any) {
+        if (event.target.checked) {
+            this.pagedResult.data.forEach(invoice => {
+                invoice.selected = true;
+                this.selectedRows.push(invoice.invoice_number);
+            });
+        } else {
+            this.pagedResult.data.forEach(invoice => {
+                invoice.selected = false;
+            });
+
+            this.selectedRows.splice(0, this.selectedRows.length);
+        }
+    }
+
+    selected(invoice: Invoice, event: any) {
+        if (event.target.checked) {
+            if (this.selectedRows.length === this.pagedResult.data.length - 1 && this.selectedRows.indexOf(invoice.invoice_number) === -1) {
+                let selectAllBox = <HTMLInputElement>document.querySelector('#selectAll');
+                selectAllBox.checked = true;
+            }
+
+            invoice.selected = true;
+            this.selectedRows.push(invoice.invoice_number);
+        } else {
+            if (this.selectedRows.length === 1 && this.selectedRows.indexOf(invoice.invoice_number) !== -1) {
+                let selectAllBox = <HTMLInputElement>document.querySelector('#selectAll');
+                selectAllBox.checked = false;
+            }
+
+            invoice.selected = false;
+            this.selectedRows.splice(this.selectedRows.indexOf(invoice.invoice_number), 1);
+        }
+    }
+
+    deleteSelected(id?: string) {
+        if (id) {
+            this.invoiceService.delete(id).subscribe(
+                () => this.ngOnInit(),
+                (error) => { throw error; }
+            );
+
+            if (confirm('Are you sure you want to delete this invoice?')) {
+                this.invoiceService.delete(id).subscribe(
+                    (response) => this.ngOnInit(),
+                    (error) => { throw error; }
+                );
+            }
+        } else {
+            if (this.selectedRows.length == 0) {
+                confirm('Please select one or more invoices.');
+            } else {
+                let confirmText = '';
+                if (this.selectedRows.length === 1) {
+                    confirmText = 'Are you sure you want to delete this invoice?';
+                } else if (this.selectedRows.length > 1) {
+                    confirmText = 'Are you sure you want to delete these invoices?';
+                }
+
+                if (confirm(confirmText)) {
+                    this.selectedRows.forEach(row => {
+                        this.invoiceService.delete(row).subscribe(
+                            () => this.ngOnInit(),
+                            (error) => { throw error; }
+                        );
+                    });
+                }
+            }
+        }
     }
 
     getLocaleString(total: number): string {

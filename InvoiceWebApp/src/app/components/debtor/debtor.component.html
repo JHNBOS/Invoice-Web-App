@@ -1,4 +1,4 @@
-<div class="data-table">
+<div class="data-table" *ngIf="pagedResult">
     <div class="actions" [hidden]="currentUser?.role_id == 2">
         <div class="buttons">
             <div class="btn-group">
@@ -9,21 +9,37 @@
                     title="Add debtors by CSV">
                     <i class="fa fa-file-excel-o"></i><span>Import CSV</span>
                 </a>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-light dropdown-toggle font-weight-bold" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        More
+                    </button>
+                    <div class="dropdown-menu">
+                        <button class="dropdown-item" type="button" (click)="deleteSelected()">Delete</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="search">
             <div class="input-wrapper">
                 <input class="form-control" type="text" name="search" id="search" placeholder="Type to start searching..."
-                    [(ngModel)]="query" />
+                    [(ngModel)]="query" (keyup)="search()" />
                 <label for="search" class="fa fa-search input-icon"></label>
             </div>
         </div>
     </div>
     <div class="data">
-        <p class="text-center py-2" *ngIf="search()?.length == 0">No debtors available.</p>
-        <table class="table table-hover" *ngIf="search()?.length > 0">
+        <p class="text-center py-2" *ngIf="pagedResult.data.length == 0">No debtors available.</p>
+        <table class="table table-hover" *ngIf="pagedResult.data.length > 0">
             <thead>
                 <tr>
+                    <th class="pl-3">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="selectAll" id="selectAll"
+                                (change)="selectAll($event)" />
+                            <label class="custom-control-label" for="selectAll"></label>
+                        </div>
+                    </th>
                     <th class="pl-3">ID</th>
                     <th class="pointer" (click)="sort('name_label')">
                         Name
@@ -44,7 +60,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="data-row" *ngFor="let debtor of search()">
+                <tr class="data-row" *ngFor="let debtor of pagedResult.data;let i=index;">
+                    <td>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" [checked]="debtor.selected" class="custom-control-input" id="select{{i}}"
+                                (change)="selected(debtor, $event)" />
+                            <label class="custom-control-label" for="select{{i}}"></label>
+                        </div>
+                    </td>
                     <td data-title="ID">
                         <a routerLinkActive="active" [routerLink]="['details', debtor.id]" title="View debtor details">
                             {{ debtor.id }}
@@ -65,7 +88,7 @@
                         <button class="btn-edit" routerLinkActive="active" [routerLink]="['edit', debtor.id]" title="Edit">
                             <i class="fa fa-edit"></i>
                         </button>
-                        <button class="btn-delete" type="button" (click)="deleteDebtor(debtor.id)" title="Remove">
+                        <button class="btn-delete" type="button" (click)="deleteSelected(debtor.id)" title="Remove">
                             <i class="fa fa-trash"></i>
                         </button>
                     </td>
@@ -74,7 +97,7 @@
         </table>
     </div>
 
-    <div class="pager" *ngIf="search()?.length > 0 && pagedResult.total_pages > 1">
+    <div class="pager" *ngIf="pagedResult.data.length > 0 && pagedResult.total_pages > 1">
         <div class="right" *ngIf="pagedResult != null">
             <button [disabled]="pagedResult.current_page == pagedResult.total_pages" class="btn btn-primary" (click)="getPage(pagedResult.current_page + 1)"
                 title="Next Page">
