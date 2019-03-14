@@ -24,15 +24,6 @@ label {
     margin-left: 5px;
 }
 
-.custom-file-label {
-    margin-left: 0 !important;
-}
-
-.custom-checkbox .custom-control-label::before {
-    border-radius: .25rem;
-    border: 1px solid #b8b8b8;
-}
-
 #color {
     padding: .1rem .3rem;
     width: 14%;
@@ -40,20 +31,12 @@ label {
 }
 
 @media (max-width: 992px) {
-    .row.form-group:last-child {
-        text-align: center !important;
-    }
-
-    button.btn {
-        width: 60%;
+    .btn {
+        width: 60% !important;
         height: 50px;
         float: none !important;
         margin-left: auto !important;
         margin-right: auto !important;
         line-height: 2.5;
-    }
-
-    button.btn.btn-primary:last-child {
-        margin-bottom: 2.5rem;
     }
 }

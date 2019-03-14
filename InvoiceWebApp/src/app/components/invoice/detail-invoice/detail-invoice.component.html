@@ -11,7 +11,7 @@
                             <span class="mr-3 pl-2">Save as concept</span>
 
                             <span class="switch switch-sm">
-                                <input type="checkbox" class="switch" id="switch-id-2" (change)="changeInvoiceType($event)"
+                                <input type="checkbox" class="switch" name="switch-id-2" id="switch-id-2" [(ngModel)]="invoice.concept"
                                     disabled>
                                 <label for="switch-id-2"></label>
                             </span>
@@ -194,10 +194,10 @@
                 </div>
             </fieldset>
 
-            <button *ngIf="currentUser.role_id == 1" type="button" class="btn btn-primary float-right mt-5"
+            <button *ngIf="currentUser.role_id == 1" type="button" class="btn btn-primary d-block mx-sm-auto float-md-right mt-5"
                 [routerLink]="['../../edit', invoice.invoice_number]">Edit</button>
-            <button *ngIf="currentUser.role_id == 2" type="button" class="btn btn-primary mr-2 float-right mt-5"
-                (click)="payInvoice()">Pay Invoice</button>
+            <button *ngIf="currentUser.role_id == 2" type="button" class="btn btn-success d-block mx-sm-auto float-md-right mt-5 mr-md-3"
+                (click)="payInvoice()">Save</button>
         </form>
     </div>
 </div>

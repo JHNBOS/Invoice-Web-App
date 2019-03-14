@@ -260,20 +260,18 @@
                     <div class="col-sm-12 col-md-6">
                         <!-- Logo on website -->
                         <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="logoweb" id="logoweb"
-                                    [(ngModel)]="settings.show_logo" required />
-                                <label class="custom-control-label" for="logoweb">Use logo on website</label>
-                            </div>
+                            <span class="switch switch-sm">
+                                <input type="checkbox" class="switch" name="logoweb" id="logoweb" [(ngModel)]="settings.show_logo">
+                                <label for="logoweb">Use logo on website</label>
+                            </span>
                         </div>
 
                         <!-- Logo in PDF -->
                         <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="logopdf" id="logopdf"
-                                    [(ngModel)]="settings.show_logo_in_pdf" required />
-                                <label class="custom-control-label" for="logopdf">Use logo in PDF</label>
-                            </div>
+                            <span class="switch switch-sm">
+                                <input type="checkbox" class="switch" name="logopdf" id="logopdf" [(ngModel)]="settings.show_logo_in_pdf">
+                                <label for="logopdf">Use logo in PDF</label>
+                            </span>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-6">
@@ -297,7 +295,7 @@
                 </div>
             </fieldset>
 
-            <button type="button" class="btn btn-primary float-right mt-5" (click)="submitForm()">Save</button>
+            <button type="button" class="btn btn-primary d-block mx-sm-auto float-md-right mt-5 mr-md-3" (click)="submitForm()">Save</button>
         </form>
     </div>
 </div>
