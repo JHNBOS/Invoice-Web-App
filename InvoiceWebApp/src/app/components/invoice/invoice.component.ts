@@ -100,6 +100,7 @@ export class InvoiceComponent implements OnInit {
                 }
 
                 this.pagedResult = response;
+                this.originalData = response.data;
             },
             (error: HttpErrorResponse) => { throw error; }
         );

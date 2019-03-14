@@ -20,15 +20,6 @@ const routes: Routes = [
         }
     },
     {
-        path: 'dashboard/:reload',
-        component: DashboardComponent,
-        canActivate: [AuthGuard],
-        data: {
-            title: ' ',
-            roles: [1, 2]
-        }
-    },
-    {
         path: 'users',
         component: UserComponent,
         canActivate: [AuthGuard],

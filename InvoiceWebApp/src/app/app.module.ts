@@ -17,7 +17,6 @@ import { CustomErrorHandler } from './shared/error-handler';
 import { ApplicationService } from './shared/services/application.service';
 import { RoleService } from './shared/services/role.service';
 import { SettingsService } from './shared/services/settings.service';
-import { SharedService } from './shared/services/shared.service';
 
 export function app_Init(appService: ApplicationService) {
     return () => appService.initializeApp();
@@ -44,7 +43,6 @@ export function app_Init(appService: ApplicationService) {
         ToastyModule
     ],
     providers: [
-        SharedService,
         RoleService,
         SettingsService,
         ApplicationService,

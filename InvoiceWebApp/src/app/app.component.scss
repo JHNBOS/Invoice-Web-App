@@ -31,11 +31,11 @@
 
         .navbar-logo {
             display: block;
-            max-width: 300px;
-            height: auto;
+            height: $navbarHeight - 5px;
             margin: 0 auto;
             padding: 0;
-            max-height: $navbarHeight;
+            max-height: $navbarHeight - 5px;
+            width: 100%;
         }
     }
 

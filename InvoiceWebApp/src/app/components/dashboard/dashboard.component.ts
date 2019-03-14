@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import 'chartjs-plugin-labels';
 import Debtor from '../../shared/models/debtor.model';
@@ -8,7 +7,6 @@ import Settings from '../../shared/models/settings.model';
 import User from '../../shared/models/user.model';
 import { DebtorService } from '../../shared/services/debtor.service';
 import { InvoiceService } from '../../shared/services/invoice.service';
-import { UserService } from '../../shared/services/user.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -28,17 +26,15 @@ export class DashboardComponent implements OnInit {
     chartOne: any = null;
     chartTwo: any = null;
 
-    constructor(private titleService: Title, private userService: UserService, private invoiceService: InvoiceService,
-        private debtorService: DebtorService, private router: Router, private route: ActivatedRoute) { }
+    constructor(private titleService: Title, private invoiceService: InvoiceService, private debtorService: DebtorService) { }
 
     ngOnInit() {
         this.titleService.setTitle('Home - ' + this.settings.company_name);
-        this.route.params.subscribe((params: Params) => {
-            if (params != null && params['reload'] === '1') {
-                location.reload(true);
-                this.router.navigate(['/']);
-            }
-        });
+
+        if (JSON.parse(sessionStorage.getItem('force')) === true) {
+            sessionStorage.removeItem('force');
+            location.reload(true);
+        }
 
         if (this.currentUser.role_id === 1) {
             this.getAdminChartData();
@@ -183,7 +179,7 @@ export class DashboardComponent implements OnInit {
                             beginAtZero: true,
                             max: this.calculateMaxLimit(),
                             stepSize: 5,
-                            callback: function (value, index, values) {
+                            callback: function (value) {
                                 if (parseInt(value, 0) >= 1000) {
                                     let label = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
@@ -201,7 +197,7 @@ export class DashboardComponent implements OnInit {
                 },
                 tooltips: {
                     callbacks: {
-                        label: function (tooltip, data) {
+                        label: function (tooltip) {
                             if (parseInt(tooltip.xLabel.toString(), 0) >= 1000) {
                                 let label = tooltip.xLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
