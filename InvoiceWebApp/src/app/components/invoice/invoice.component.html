@@ -102,10 +102,13 @@
                         {{ invoice.concept == true ? 'Yes' : 'No' }}
                     </td>
                     <td data-title="Status">
-                        <span class="badge badge-primary py-1 px-1" *ngIf="!isExpirationExpired(invoice)">
+                        <span class="badge badge-primary py-1 px-1" *ngIf="!isExpirationExpired(invoice) && !invoice.is_paid">
                             Sent
                         </span>
-                        <span class="badge badge-danger py-1 px-1" *ngIf="isExpirationExpired(invoice)">
+                        <span class="badge badge-success py-1 px-1" *ngIf="invoice.is_paid">
+                            Paid
+                        </span>
+                        <span class="badge badge-danger py-1 px-1" *ngIf="isExpirationExpired(invoice) && !invoice.is_paid">
                             {{ differenceInDays(invoice.expired_on) }} days overdue
                         </span>
                     </td>
