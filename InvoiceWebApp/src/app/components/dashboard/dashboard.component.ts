@@ -104,7 +104,7 @@ export class DashboardComponent implements OnInit {
                 datasets: [
                     {
                         data: [this.admin_invoice_count[0], this.admin_invoice_count[1]],
-                        backgroundColor: ['#3e95cd', '#3cba9f'],
+                        backgroundColor: ['#49A9EA', '#36CAAB'],
                         fill: true,
                         borderWidth: 1
                     },
@@ -152,7 +152,7 @@ export class DashboardComponent implements OnInit {
                 datasets: [
                     {
                         data: [this.admin_invoice_cash[0], this.admin_invoice_cash[1]],
-                        backgroundColor: ['#6465a5', '#f3e96b'],
+                        backgroundColor: ['#34495E', '#9A32C3'],
                         fill: true,
                     }
                 ]
