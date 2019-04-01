@@ -162,6 +162,70 @@ body {
   background: #f9bf00;
 }
 
+.navbar .top .user-options {
+  background-color: #fff;
+  display: none;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  align-items: center;
+  width: 12vw;
+  padding: 0.8rem;
+  position: absolute;
+  right: 50px;
+  top: 76px;
+  z-index: 1;
+  border: 1px solid #eee;
+  -webkit-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.25);
+          box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.25);
+}
+
+.navbar .top .user-options ul {
+  width: 100%;
+  list-style-type: none;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.navbar .top .user-options ul li {
+  width: 100%;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.navbar .top .user-options ul li a {
+  display: block;
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: #a8a8a8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.095em;
+}
+
+.navbar .top .user-options ul li a:hover {
+  color: #747474;
+}
+
+.navbar .top .show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .nav-menu {
   background-color: #fff;
   -webkit-box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.16);
@@ -540,6 +604,9 @@ section.debtor-info {
   }
   .navbar .top .user-menu .avatar {
     margin-right: 1rem;
+  }
+  .navbar .top .user-options {
+    min-width: 25vw;
   }
   .nav-menu {
     height: 28vh;

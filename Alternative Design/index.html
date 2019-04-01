@@ -26,10 +26,21 @@
                     <p class="name">
                         John Doe
 
-                        <span class="user-more">
+                        <span id="user-more" class="user-more">
                             <i class="fas fa-angle-down"></i>
                         </span>
                     </p>
+                </div>
+
+                <div id="user-options" class="user-options">
+                    <ul>
+                        <li>
+                            <a href="#">Manage</a>
+                        </li>
+                        <li>
+                            <a href="#">Sign out</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
@@ -156,6 +167,12 @@
             </section>
         </main>
     </div>
+
+    <script>
+        document.getElementById('user-more').addEventListener('click', function () {
+            document.getElementById('user-options').classList.toggle('show');
+        });
+    </script>
 </body>
 
 </html>
