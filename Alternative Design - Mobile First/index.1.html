@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Invoice Web App</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <nav class="navbar">
+            <div class="top">
+                <div class="branding">
+                    <img class="logo" src="img/circle.svg" />
+                    <a>inVoice</a>
+                </div>
+
+                <div class="user-menu">
+                    <img class="avatar" src="img/circle.svg" />
+                    <p class="name">
+                        John Doe
+
+                        <span id="user-more" class="user-more">
+                            <i class="fas fa-angle-down"></i>
+                        </span>
+                    </p>
+                </div>
+
+                <div id="user-options" class="user-options">
+                    <ul>
+                        <li>
+                            <a href="#">Manage</a>
+                        </li>
+                        <li>
+                            <a href="#">Sign out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="nav-menu">
+                <ul class="nav-menu-links" role="navigation">
+                    <li class="active">
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Debtors</a>
+                    </li>
+                    <li>
+                        <a href="#">Invoices</a>
+                    </li>
+                    <li>
+                        <a href="#">Users</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main>
+            <section class="title">
+                <h4>Welcome, John</h4>
+            </section>
+
+            <section class="charts">
+                <div class="card">
+                    <div class="col box">
+                        <h2 class="number">24</h2>
+                        <p class="desc">Paid invoices</p>
+                        <div class="bar"></div>
+                    </div>
+                    <div class="col box">
+                        <h2 class="number">10</h2>
+                        <p class="desc">Outstanding invoices</p>
+                        <div class="bar"></div>
+                    </div>
+                    <div class="col box">
+                        <h2 class="number">07</h2>
+                        <p class="desc">Concepts</p>
+                        <div class="bar"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="col box">
+                        <h2 class="number">
+                            &euro; 11.619,98
+                        </h2>
+                        <p class="desc">Total collected</p>
+                    </div>
+                    <div class="col box">
+                        <img class="chart-img" src="img/chart.svg" />
+                    </div>
+                </div>
+            </section>
+
+            <section class="debtor-info">
+                <div class="table">
+                    <div class="table-head">
+                        <ul>
+                            <li>
+                                <input type="checkbox">
+                            </li>
+                            <li>Number</th>
+                            <li>Client</li>
+                            <li>Amount</li>
+                            <li>Date</li>
+                            <li>Status</li>
+                        </ul>
+                    </div>
+                    <div class="table-body">
+                        <ul class="table-row">
+                            <li>
+                                <input type="checkbox">
+                            </li>
+                            <li>2019318</th>
+                            <li>Harry Potter</li>
+                            <li><span class="valuta"></span>109,99</li>
+                            <li>20 March 2019</li>
+                            <li>
+                                <span class="pill pill-green">Paid</span>
+                            </li>
+                        </ul>
+                        <ul class="table-row">
+                            <li>
+                                <input type="checkbox">
+                            </li>
+                            <li>2019311</th>
+                            <li>James Bond</li>
+                            <li><span class="valuta"></span>2.119,75</li>
+                            <li>11 March 2019</li>
+                            <li>
+                                <span class="pill pill-blue">Sent</span>
+                            </li>
+                        </ul>
+                        <ul class="table-row">
+                            <li>
+                                <input type="checkbox">
+                            </li>
+                            <li>20191318</th>
+                            <li>Tony Stark</li>
+                            <li><span class="valuta"></span>15.486,27</li>
+                            <li>09 December 2018</li>
+                            <li>
+                                <span class="pill pill-blue">Sent</span>
+                            </li>
+                        </ul>
+                        <ul class="table-row">
+                            <li>
+                                <input type="checkbox">
+                            </li>
+                            <li>20181103</th>
+                            <li>Homer Simpson</li>
+                            <li><span class="valuta"></span>27,95</li>
+                            <li>03 November 2018</li>
+                            <li>
+                                <span class="pill pill-red">Expired</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('user-more').addEventListener('click', function () {
+            document.getElementById('user-options').classList.toggle('show');
+        });
+    </script>
+</body>
+
+</html>

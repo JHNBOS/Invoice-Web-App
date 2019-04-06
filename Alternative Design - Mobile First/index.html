@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Invoice Web App</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <nav class="navbar">
+                <div class="branding">
+                    <h1>inVoice</h1>
+                </div>
+
+                <button id="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <div id="nav-menu">
+                    <ul>
+                        <li><a class="active" href="#">Home</a></li>
+                        <li><a href="#">Debtors</a></li>
+                        <li><a href="#">Invoices</a></li>
+                        <li><a href="#">Users</a></li>
+                        <li><a href="#">Manage</a></li>
+                        <li><a href="#">Sign out</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div class="container">
+                <section class="card-section">
+                    <div class="card">
+                        <div class="card-column">
+                            <div class="flex">
+                                <h2 class="spacing">24</h2>
+                                <p>Paid invoices</p>
+                            </div>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-column">
+                            <div class="flex">
+                                <h2 class="spacing">10</h2>
+                                <p>Outstanding invoices</p>
+                            </div>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-column">
+                            <div class="flex">
+                                <h2 class="spacing">07</h2>
+                                <p>Concepts</p>
+                            </div>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card-section">
+                    <div class="card">
+                        <div class="card-column">
+                            <div class="flex">
+                                <h3 class="spacing">&euro; 11.619,88</h3>
+                            </div>
+                            <div class="flex">
+                                <p>Total collected</p>
+                            </div>
+                        </div>
+                        <div class="card-column">
+                            <div class="flex">
+                                <img src="img/chart-2.svg">
+                            </div>
+                        </div>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <p>Copyright &copy; 2019</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('nav-toggle').addEventListener('click', function () {
+            document.getElementById('nav-menu').classList.toggle('show');
+            this.classList.toggle('focus');
+        });
+
+    </script>
+</body>
+
+</html>
