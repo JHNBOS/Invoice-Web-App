@@ -31,6 +31,20 @@
                         <li><a href="#">Debtors</a></li>
                         <li><a href="#">Invoices</a></li>
                         <li><a href="#">Users</a></li>
+                        <li class="mobile-only"><a href="#">Manage</a></li>
+                        <li class="mobile-only"><a href="#">Sign out</a></li>
+                        <li class="desktop-only spacer"><img src="img/circle.svg"></li>
+                        <li class="desktop-only">
+                            <p>John Doe</p>
+                            <span id="more-toggle">
+                                <i class="fas fa-angle-down"></i>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="more-menu">
+                    <ul>
                         <li><a href="#">Manage</a></li>
                         <li><a href="#">Sign out</a></li>
                     </ul>
@@ -40,6 +54,10 @@
 
         <main>
             <div class="container">
+                <section class="welcome-section">
+                    <h2>Welcome, John</h2>
+                </section>
+
                 <section class="card-section">
                     <div class="card">
                         <div class="card-column">
@@ -68,9 +86,6 @@
                             <div class="bar"></div>
                         </div>
                     </div>
-                </section>
-
-                <section class="card-section">
                     <div class="card">
                         <div class="card-column">
                             <div class="flex">
@@ -143,6 +158,11 @@
             document.getElementById('nav-menu').classList.toggle('show');
             this.classList.toggle('focus');
         });
+
+        document.getElementById('more-toggle').addEventListener('click', function () {
+                document.getElementById('more-menu').classList.toggle('show');
+                this.classList.toggle('focus');
+            });
 
     </script>
 </body>
