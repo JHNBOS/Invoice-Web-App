@@ -24,36 +24,11 @@ html {
   -o-background-size: cover;
   background-size: cover;
   background: rgb(0, 134, 185);
-  background: -webkit-linear-gradient(
-      45deg,
-      rgba(0, 134, 185, 1) 0%,
-      rgba(68, 204, 255, 1) 100%
-    )
-    fixed;
-  background: -moz-linear-gradient(
-      45deg,
-      rgba(0, 134, 185, 1) 0%,
-      rgba(68, 204, 255, 1) 100%
-    )
-    fixed;
-  background: -ms-linear-gradient(
-      45deg,
-      rgba(0, 134, 185, 1) 0%,
-      rgba(68, 204, 255, 1) 100%
-    )
-    fixed;
-  background: -o-linear-gradient(
-      45deg,
-      rgba(0, 134, 185, 1) 0%,
-      rgba(68, 204, 255, 1) 100%
-    )
-    fixed;
-  background: linear-gradient(
-      45deg,
-      rgba(0, 134, 185, 1) 0%,
-      rgba(68, 204, 255, 1) 100%
-    )
-    fixed;
+  background: -webkit-linear-gradient(45deg, rgba(0, 134, 185, 1) 0%, rgba(68, 204, 255, 1) 100%) fixed;
+  background: -moz-linear-gradient(45deg, rgba(0, 134, 185, 1) 0%, rgba(68, 204, 255, 1) 100%) fixed;
+  background: -ms-linear-gradient(45deg, rgba(0, 134, 185, 1) 0%, rgba(68, 204, 255, 1) 100%) fixed;
+  background: -o-linear-gradient(45deg, rgba(0, 134, 185, 1) 0%, rgba(68, 204, 255, 1) 100%) fixed;
+  background: linear-gradient(45deg, rgba(0, 134, 185, 1) 0%, rgba(68, 204, 255, 1) 100%) fixed;
   background-repeat: no-repeat;
 }
 
@@ -474,6 +449,14 @@ footer {
             &:hover {
               color: $color-white;
             }
+
+            &::selection {
+              background-color: rgba($color-accent, 1);
+            }
+
+            &::-moz-selection {
+              background-color: rgba($color-accent, 1);
+            }
           }
 
           p {
@@ -481,7 +464,7 @@ footer {
             height: 100%;
             margin: 0 auto;
             padding: 0.6rem 0.2rem;
-            color: #e6e6e6;
+            color: #fff;
             font-size: 1rem;
             font-weight: 600;
             text-decoration: none;
@@ -494,6 +477,14 @@ footer {
 
             &.focus {
               color: $color-accent;
+
+              i {
+                transform: rotate(-90deg);
+              }
+            }
+
+            i {
+              transition: transform 0.3s ease-in-out;
             }
           }
         }
@@ -505,7 +496,7 @@ footer {
       width: 15vw;
       height: auto;
       position: absolute;
-      top: 95%;
+      top: 100%;
       right: -15vw;
       z-index: 1;
       opacity: 0;

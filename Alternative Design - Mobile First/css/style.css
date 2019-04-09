@@ -501,12 +501,21 @@ footer {
   .navbar #nav-menu ul li a:hover {
     color: #fff;
   }
+  .navbar #nav-menu ul li a::-moz-selection {
+    background-color: #f9bf00;
+  }
+  .navbar #nav-menu ul li a::selection {
+    background-color: #f9bf00;
+  }
+  .navbar #nav-menu ul li a::-moz-selection {
+    background-color: #f9bf00;
+  }
   .navbar #nav-menu ul li p {
     display: inline-block;
     height: 100%;
     margin: 0 auto;
     padding: 0.6rem 0.2rem;
-    color: #e6e6e6;
+    color: #fff;
     font-size: 1rem;
     font-weight: 600;
     text-decoration: none;
@@ -519,12 +528,22 @@ footer {
   .navbar #nav-menu ul li #more-toggle.focus {
     color: #f9bf00;
   }
+  .navbar #nav-menu ul li #more-toggle.focus i {
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+  }
+  .navbar #nav-menu ul li #more-toggle i {
+    -webkit-transition: -webkit-transform 0.3s ease-in-out;
+    transition: -webkit-transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  }
   .navbar #more-menu {
     display: block;
     width: 15vw;
     height: auto;
     position: absolute;
-    top: 95%;
+    top: 100%;
     right: -15vw;
     z-index: 1;
     opacity: 0;
