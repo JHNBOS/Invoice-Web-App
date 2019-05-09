@@ -22,13 +22,13 @@ namespace InvoiceWebApp.Controllers {
     [Route("api/users")]
     public class UsersController : Controller
     {
-        private IUserRepository _repo { get; set; }
+		private readonly IUserRepository _repo;
 		private Email _email;
 
-        public UsersController(IUserRepository repo)
+        public UsersController(IUserRepository repo, Email email)
         {
 			this._repo = repo;
-			this._email = new Email();
+			this._email = email;
         }
 
         /// <summary>

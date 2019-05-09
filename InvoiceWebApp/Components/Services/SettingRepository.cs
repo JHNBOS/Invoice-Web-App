@@ -1,18 +1,21 @@
-﻿using System.Threading.Tasks;
-
-using InvoiceWebApp.Components.DataContext;
+﻿using InvoiceWebApp.Components.DataContext;
 using InvoiceWebApp.Components.Entities;
 using InvoiceWebApp.Components.Services.Interfaces;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace InvoiceWebApp.Components.Services
-{
-    public class SettingRepository : ISettingRepository
-    {
-        private InvoiceContext _context = new InvoiceContext();
+using System.Threading.Tasks;
 
-        public async Task<Settings> GetSettings()
+namespace InvoiceWebApp.Components.Services {
+	public class SettingRepository : ISettingRepository
+    {
+		private readonly InvoiceContext _context;
+
+		public SettingRepository(InvoiceContext context) {
+			this._context = context;
+		}
+
+		public async Task<Settings> GetSettings()
         {
             var response = await _context.Settings.FirstOrDefaultAsync();
             return response;

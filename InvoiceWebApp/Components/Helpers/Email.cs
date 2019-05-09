@@ -1,15 +1,14 @@
+using InvoiceWebApp.Components.DataContext;
+using InvoiceWebApp.Components.Entities;
+
 using System;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
-using InvoiceWebApp.Components.DataContext;
-using InvoiceWebApp.Components.Entities;
-
-namespace InvoiceWebApp.Components.Helpers
-{
-    public class Email
+namespace InvoiceWebApp.Components.Helpers {
+	public class Email
     {
         private string Host;
         private int Port;
@@ -18,12 +17,12 @@ namespace InvoiceWebApp.Components.Helpers
         private string Password;
         private NetworkCredential Credentials;
 
-        private InvoiceContext _context;
+        private readonly InvoiceContext _context;
         private Settings Settings;
 
-        public Email()
+        public Email(InvoiceContext context)
         {
-            _context = new InvoiceContext();
+            _context = context;
             this.GetSettings();
 
             this.EmailAddress = this.Settings.Email;

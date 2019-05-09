@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using InvoiceWebApp.Components.DataContext;
+﻿using InvoiceWebApp.Components.DataContext;
 using InvoiceWebApp.Components.Entities;
-using InvoiceWebApp.Components.Helpers;
 using InvoiceWebApp.Components.Services.Interfaces;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace InvoiceWebApp.Components.Services
-{
-    public class AddressRepository : IAddressRepository
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace InvoiceWebApp.Components.Services {
+	public class AddressRepository : IAddressRepository
     {
-        private InvoiceContext _context = new InvoiceContext();
-        private Encryptor _encryptor = new Encryptor();
-        private Random random = new Random();
+		private readonly InvoiceContext _context;
+
+		public AddressRepository(InvoiceContext context) {
+			this._context = context;
+		}
 
         public async Task<ICollection<Address>> GetAddresses()
         {

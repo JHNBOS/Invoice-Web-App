@@ -1,26 +1,32 @@
-using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
+using InvoiceWebApp.Components.DataContext;
+using InvoiceWebApp.Components.Helpers;
 using InvoiceWebApp.Components.Services;
 using InvoiceWebApp.Components.Services.Interfaces;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace InvoiceWebApp
-{
-    public class Startup
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+
+namespace InvoiceWebApp {
+	public class Startup
     {
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public Startup(IHostingEnvironment env)
+		public IConfiguration Configuration { get; }
+
+		public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
@@ -29,8 +35,6 @@ namespace InvoiceWebApp
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -51,15 +55,23 @@ namespace InvoiceWebApp
                 options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
 
-			// Singleton repos
-			services.AddSingleton<IAddressRepository, AddressRepository>();
-			services.AddSingleton<IDebtorHasAddressRepository, DebtorHasAddressRepository>();
-			services.AddSingleton<IDebtorRepository, DebtorRepository>();
-			services.AddSingleton<IInvoiceItemRepository, InvoiceItemRepository>();
-			services.AddSingleton<IInvoiceRepository, InvoiceRepository>();
-			services.AddSingleton<IRoleRepository, RoleRepository>();
-			services.AddSingleton<ISettingRepository, SettingRepository>();
-			services.AddSingleton<IUserRepository, UserRepository>();
+			// Database context
+			var connectionString = Configuration.GetConnectionString("MySQLConnection");
+			services.AddDbContext<InvoiceContext>(options => options.UseMySql(connectionString));
+
+			// Scoped services
+			services.AddScoped<Email>();
+			services.AddScoped<PDF>();
+
+			// Scoped repos
+			services.AddScoped<IAddressRepository, AddressRepository>();
+			services.AddScoped<IDebtorHasAddressRepository, DebtorHasAddressRepository>();
+			services.AddScoped<IDebtorRepository, DebtorRepository>();
+			services.AddScoped<IInvoiceItemRepository, InvoiceItemRepository>();
+			services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+			services.AddScoped<IRoleRepository, RoleRepository>();
+			services.AddScoped<ISettingRepository, SettingRepository>();
+			services.AddScoped<IUserRepository, UserRepository>();
 
 			services.AddMvc().AddSessionStateTempDataProvider().AddControllersAsServices();
         }

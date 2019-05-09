@@ -20,7 +20,7 @@ namespace InvoiceWebApp.Controllers {
     [Route("api/settings")]
     public class SettingsController : Controller
     {
-        private ISettingRepository _repo { get; set; }
+		private readonly ISettingRepository _repo;
 
 		public SettingsController(ISettingRepository repo)
         {

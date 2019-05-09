@@ -1,23 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using InvoiceWebApp.Components.DataContext;
+﻿using InvoiceWebApp.Components.DataContext;
 using InvoiceWebApp.Components.Entities;
 using InvoiceWebApp.Components.Helpers;
 using InvoiceWebApp.Components.Services.Interfaces;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace InvoiceWebApp.Components.Services
-{
-    public class UserRepository : IUserRepository
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace InvoiceWebApp.Components.Services {
+	public class UserRepository : IUserRepository
     {
-        private InvoiceContext _context = new InvoiceContext();
-        private Encryptor _encryptor = new Encryptor();
+		private readonly InvoiceContext _context;
+		private Encryptor _encryptor = new Encryptor();
         private Random random = new Random();
 
-        public async Task<User> Authenticate(string email, string password)
+		public UserRepository(InvoiceContext context) {
+			this._context = context;
+		}
+
+		public async Task<User> Authenticate(string email, string password)
         {
             //Encrypt password to match 
             string encryptedPassword = _encryptor.Encrypt(password);

@@ -1,20 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using InvoiceWebApp.Components.DataContext;
+﻿using InvoiceWebApp.Components.DataContext;
 using InvoiceWebApp.Components.Entities;
 using InvoiceWebApp.Components.Services.Interfaces;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace InvoiceWebApp.Components.Services
-{
-    public class DebtorRepository : IDebtorRepository
-    {
-        private InvoiceContext _context = new InvoiceContext();
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-        public async Task<ICollection<Debtor>> GetDebtors()
+namespace InvoiceWebApp.Components.Services {
+	public class DebtorRepository : IDebtorRepository
+    {
+		private readonly InvoiceContext _context;
+
+		public DebtorRepository(InvoiceContext context) {
+			this._context = context;
+		}
+
+		public async Task<ICollection<Debtor>> GetDebtors()
         {
             var response = await _context.Debtors.Include(i => i.Addresses).Include(i => i.Invoices).ToListAsync();
             return response;

@@ -17,19 +17,19 @@ namespace InvoiceWebApp.Controllers {
     [Route("api/invoices")]
     public class InvoicesController : Controller
     {
-        private IInvoiceRepository _repo { get; set; }
-		private ISettingRepository _settingsRepo { get; set; }
+		private readonly IInvoiceRepository _repo;
+		private readonly ISettingRepository _settingsRepo;
 		private Settings _settings;
         private Email _email;
         private PDF _pdf;
 
-        public InvoicesController(IInvoiceRepository repo, ISettingRepository settingsRepo)
+        public InvoicesController(IInvoiceRepository repo, ISettingRepository settingsRepo, Email email, PDF pdf)
         {
 			this._repo = repo;
 			this._settingsRepo = settingsRepo;
 
-            this._email = new Email();
-            this._pdf = new PDF();
+            this._email = email;
+            this._pdf = pdf;
 
             Task.Run(async () => { this._settings = await this._settingsRepo.GetSettings(); }).Wait();
         }

@@ -14,7 +14,7 @@ namespace InvoiceWebApp.Controllers {
     [Route("api/roles")]
     public class RolesController : Controller
     {
-        private IRoleRepository _repo { get; set; }
+		private readonly IRoleRepository _repo;
 
 		public RolesController(IRoleRepository repo)
         {

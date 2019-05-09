@@ -17,9 +17,9 @@ namespace InvoiceWebApp.Controllers {
     [Route("api/debtors")]
     public class DebtorsController : Controller
     {
-        private IDebtorRepository _repo { get; set; }
-		private IDebtorHasAddressRepository _debtorHasAddressRepo { get; set; }
-		private IAddressRepository _addressRepository { get; set; }
+		private readonly IDebtorRepository _repo;
+		private readonly IDebtorHasAddressRepository _debtorHasAddressRepo;
+		private readonly IAddressRepository _addressRepository;
 
 		public DebtorsController(IDebtorRepository repo, IDebtorHasAddressRepository debtorHasAddressRepo, IAddressRepository addressRepository)
         {

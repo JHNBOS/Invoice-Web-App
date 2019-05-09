@@ -1,20 +1,23 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using InvoiceWebApp.Components.DataContext;
+﻿using InvoiceWebApp.Components.DataContext;
 using InvoiceWebApp.Components.Entities;
 using InvoiceWebApp.Components.Services.Interfaces;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace InvoiceWebApp.Components.Services
-{
-    public class InvoiceItemRepository : IInvoiceItemRepository
-    {
-        private InvoiceContext _context = new InvoiceContext();
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-        public async Task<ICollection<InvoiceItem>> GetByInvoiceNumber(string number)
+namespace InvoiceWebApp.Components.Services {
+	public class InvoiceItemRepository : IInvoiceItemRepository
+    {
+		private readonly InvoiceContext _context;
+
+		public InvoiceItemRepository(InvoiceContext context) {
+			this._context = context;
+		}
+
+		public async Task<ICollection<InvoiceItem>> GetByInvoiceNumber(string number)
         {
             var response = await _context.InvoiceItems.Include(i => i.Invoice).Where(q => q.InvoiceNumber == number).ToListAsync();
             return response;

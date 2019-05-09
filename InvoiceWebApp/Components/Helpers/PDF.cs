@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-
-using InvoiceWebApp.Components.DataContext;
+﻿using InvoiceWebApp.Components.DataContext;
 using InvoiceWebApp.Components.Entities;
 
 using iTextSharp.text;
@@ -14,20 +6,27 @@ using iTextSharp.text.pdf;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace InvoiceWebApp.Components.Helpers
-{
-    public class PDF
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace InvoiceWebApp.Components.Helpers {
+	public class PDF
     {
         private Invoice invoice = null;
         private Debtor debtor = null;
         private List<InvoiceItem> invoiceItems = null;
 
-        private InvoiceContext _context;
+        private readonly InvoiceContext _context;
         private Settings settings;
 
-        public PDF()
+        public PDF(InvoiceContext context)
         {
-            _context = new InvoiceContext();
+            _context = context;
             this.GetSettings();
         }
 

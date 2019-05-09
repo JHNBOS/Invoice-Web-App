@@ -16,7 +16,7 @@ namespace InvoiceWebApp.Controllers {
     [Route("api/items")]
     public class InvoiceItemsController : Controller
     {
-        private IInvoiceItemRepository _repo;
+        private readonly IInvoiceItemRepository _repo;
 
         public InvoiceItemsController(IInvoiceItemRepository repo)
         {

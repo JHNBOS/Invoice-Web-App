@@ -1,21 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using InvoiceWebApp.Components.DataContext;
+﻿using InvoiceWebApp.Components.DataContext;
 using InvoiceWebApp.Components.Entities;
 using InvoiceWebApp.Components.Services.Interfaces;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace InvoiceWebApp.Components.Services
-{
-    public class InvoiceRepository : IInvoiceRepository
-    {
-        private InvoiceContext _context = new InvoiceContext();
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-        public async Task<int> GetCount()
+namespace InvoiceWebApp.Components.Services {
+	public class InvoiceRepository : IInvoiceRepository
+    {
+		private readonly InvoiceContext _context;
+
+		public InvoiceRepository(InvoiceContext context) {
+			this._context = context;
+		}
+
+		public async Task<int> GetCount()
         {
             var response = await _context.Invoices.CountAsync();
             return response;

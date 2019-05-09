@@ -2,20 +2,20 @@
 
 using Microsoft.EntityFrameworkCore;
 
-namespace InvoiceWebApp.Components.DataContext
-{
-    public partial class InvoiceContext : DbContext
+namespace InvoiceWebApp.Components.DataContext {
+	public partial class InvoiceContext : DbContext
     {
-        public InvoiceContext()
-        {
-        }
-
-        public InvoiceContext(DbContextOptions<InvoiceContext> options)
+		public InvoiceContext(DbContextOptions<InvoiceContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<Address> Addresses { get; set; }
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
+		{
+			if (!optionsBuilder.IsConfigured) { }
+		}
+
+		public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Debtor> Debtors { get; set; }
         public virtual DbSet<DebtorHasAddress> DebtorHasAddresses { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
@@ -23,15 +23,6 @@ namespace InvoiceWebApp.Components.DataContext
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Settings> Settings { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql("Server=127.0.0.1;Port=3306;Database=invoice_app;User=johan;Password=root");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
