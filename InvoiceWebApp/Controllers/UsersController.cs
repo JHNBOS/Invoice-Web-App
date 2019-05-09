@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
-using InvoiceWebApp.Components.Entities;
+﻿using InvoiceWebApp.Components.Entities;
 using InvoiceWebApp.Components.Helpers;
-using InvoiceWebApp.Components.Services;
 using InvoiceWebApp.Components.Services.Interfaces;
 using InvoiceWebApp.Controllers.ViewModels;
 
@@ -17,20 +9,26 @@ using Microsoft.Extensions.Primitives;
 
 using Newtonsoft.Json;
 
-namespace InvoiceWebApp.Controllers
-{
-    [EnableCors("AllowAll")]
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace InvoiceWebApp.Controllers {
+	[EnableCors("AllowAll")]
     [Produces("application/json")]
     [Route("api/users")]
     public class UsersController : Controller
     {
-        private IUserRepository _repo;
-        private Email _email;
+        private IUserRepository _repo { get; set; }
+		private Email _email;
 
-        public UsersController()
+        public UsersController(IUserRepository repo)
         {
-            this._repo = new UserRepository();
-            this._email = new Email();
+			this._repo = repo;
+			this._email = new Email();
         }
 
         /// <summary>

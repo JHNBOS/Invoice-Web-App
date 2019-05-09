@@ -1,33 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
-using InvoiceWebApp.Components.Entities;
-using InvoiceWebApp.Components.Services;
+﻿using InvoiceWebApp.Components.Entities;
 using InvoiceWebApp.Components.Services.Interfaces;
 using InvoiceWebApp.Controllers.ViewModels;
 
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
-namespace InvoiceWebApp.Controllers
-{
-    [EnableCors("AllowAll")]
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace InvoiceWebApp.Controllers {
+	[EnableCors("AllowAll")]
     [Produces("application/json")]
     [Route("api/debtors")]
     public class DebtorsController : Controller
     {
-        private IDebtorRepository _repo;
-        private IDebtorHasAddressRepository _debtorHasAddressRepo;
-        private IAddressRepository _addressRepository;
+        private IDebtorRepository _repo { get; set; }
+		private IDebtorHasAddressRepository _debtorHasAddressRepo { get; set; }
+		private IAddressRepository _addressRepository { get; set; }
 
-        public DebtorsController()
+		public DebtorsController(IDebtorRepository repo, IDebtorHasAddressRepository debtorHasAddressRepo, IAddressRepository addressRepository)
         {
-            this._repo = new DebtorRepository();
-            this._debtorHasAddressRepo = new DebtorHasAddressRepository();
-            this._addressRepository = new AddressRepository();
+			this._repo = repo;
+			this._debtorHasAddressRepo = debtorHasAddressRepo;
+            this._addressRepository = addressRepository;
         }
 
         /// <summary>

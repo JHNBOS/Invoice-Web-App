@@ -2,7 +2,8 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-
+using InvoiceWebApp.Components.Services;
+using InvoiceWebApp.Components.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -50,7 +51,17 @@ namespace InvoiceWebApp
                 options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
 
-            services.AddMvc().AddSessionStateTempDataProvider();
+			// Singleton repos
+			services.AddSingleton<IAddressRepository, AddressRepository>();
+			services.AddSingleton<IDebtorHasAddressRepository, DebtorHasAddressRepository>();
+			services.AddSingleton<IDebtorRepository, DebtorRepository>();
+			services.AddSingleton<IInvoiceItemRepository, InvoiceItemRepository>();
+			services.AddSingleton<IInvoiceRepository, InvoiceRepository>();
+			services.AddSingleton<IRoleRepository, RoleRepository>();
+			services.AddSingleton<ISettingRepository, SettingRepository>();
+			services.AddSingleton<IUserRepository, UserRepository>();
+
+			services.AddMvc().AddSessionStateTempDataProvider().AddControllersAsServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

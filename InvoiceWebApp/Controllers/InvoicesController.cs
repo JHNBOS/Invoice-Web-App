@@ -1,37 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-
-using InvoiceWebApp.Components.Entities;
+﻿using InvoiceWebApp.Components.Entities;
 using InvoiceWebApp.Components.Helpers;
-using InvoiceWebApp.Components.Services;
 using InvoiceWebApp.Components.Services.Interfaces;
 using InvoiceWebApp.Controllers.ViewModels;
 
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
-namespace InvoiceWebApp.Controllers
-{
-    [EnableCors("AllowAll")]
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace InvoiceWebApp.Controllers {
+	[EnableCors("AllowAll")]
     [Produces("application/json")]
     [Route("api/invoices")]
     public class InvoicesController : Controller
     {
-        private IInvoiceRepository _repo;
-        private ISettingRepository _settingsRepo;
-        private Settings _settings;
+        private IInvoiceRepository _repo { get; set; }
+		private ISettingRepository _settingsRepo { get; set; }
+		private Settings _settings;
         private Email _email;
         private PDF _pdf;
 
-        public InvoicesController()
+        public InvoicesController(IInvoiceRepository repo, ISettingRepository settingsRepo)
         {
-            this._repo = new InvoiceRepository();
-            this._settingsRepo = new SettingRepository();
+			this._repo = repo;
+			this._settingsRepo = settingsRepo;
 
             this._email = new Email();
             this._pdf = new PDF();

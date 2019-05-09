@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using InvoiceWebApp.Components.Entities;
-using InvoiceWebApp.Components.Services;
+﻿using InvoiceWebApp.Components.Entities;
 using InvoiceWebApp.Components.Services.Interfaces;
 using InvoiceWebApp.Controllers.ViewModels;
 
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
-namespace InvoiceWebApp.Controllers
-{
-    [EnableCors("AllowAll")]
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace InvoiceWebApp.Controllers {
+	[EnableCors("AllowAll")]
     [Produces("application/json")]
     [Route("api/address")]
     public class AddressesController : Controller
     {
-        private IAddressRepository _repo;
+        private IAddressRepository _repo { get; set; }
 
-        public AddressesController()
+		public AddressesController(IAddressRepository repo)
         {
-            this._repo = new AddressRepository();
+            this._repo = repo;
         }
 
         /// <summary>

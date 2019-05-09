@@ -1,39 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-
-using InvoiceWebApp.Components.Entities;
-using InvoiceWebApp.Components.Services;
+﻿using InvoiceWebApp.Components.Entities;
 using InvoiceWebApp.Components.Services.Interfaces;
 using InvoiceWebApp.Controllers.ViewModels;
 
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 
 using Newtonsoft.Json;
 
-namespace InvoiceWebApp.Controllers
-{
-    [EnableCors("AllowAll")]
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace InvoiceWebApp.Controllers {
+	[EnableCors("AllowAll")]
     [Produces("application/json")]
     [Route("api/settings")]
     public class SettingsController : Controller
     {
-        private ISettingRepository _repo;
+        private ISettingRepository _repo { get; set; }
 
-        public SettingsController()
+		public SettingsController(ISettingRepository repo)
         {
-            this._repo = new SettingRepository();
-        }
+			this._repo = repo;
+		}
 
-        /// <summary>
-        /// Gets all settings
-        /// </summary>
-        [HttpGet("get")]
+		/// <summary>
+		/// Gets all settings
+		/// </summary>
+		[HttpGet("get")]
         [ProducesResponseType(typeof(IEnumerable<SettingsViewModel>), 200)]
         [ProducesResponseType(typeof(void), 500)]
         public async Task<IActionResult> Get()

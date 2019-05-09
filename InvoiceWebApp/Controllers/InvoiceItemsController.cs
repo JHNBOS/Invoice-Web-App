@@ -1,29 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using InvoiceWebApp.Components.Entities;
-using InvoiceWebApp.Components.Services;
+﻿using InvoiceWebApp.Components.Entities;
 using InvoiceWebApp.Components.Services.Interfaces;
 using InvoiceWebApp.Controllers.ViewModels;
 
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
-namespace InvoiceWebApp.Controllers
-{
-    [EnableCors("AllowAll")]
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace InvoiceWebApp.Controllers {
+	[EnableCors("AllowAll")]
     [Produces("application/json")]
     [Route("api/items")]
     public class InvoiceItemsController : Controller
     {
         private IInvoiceItemRepository _repo;
 
-        public InvoiceItemsController()
+        public InvoiceItemsController(IInvoiceItemRepository repo)
         {
-            this._repo = new InvoiceItemRepository();
-        }
+			this._repo = repo;
+		}
 
         /// <summary>
         /// Gets a list with all invoice items by invoice number.

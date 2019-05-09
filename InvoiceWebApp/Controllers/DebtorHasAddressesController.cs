@@ -1,34 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using InvoiceWebApp.Components.Entities;
-using InvoiceWebApp.Components.Services;
+﻿using InvoiceWebApp.Components.Entities;
 using InvoiceWebApp.Components.Services.Interfaces;
 using InvoiceWebApp.Controllers.Viewmodels;
 
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
-namespace InvoiceWebApp.Controllers
-{
-    [EnableCors("AllowAll")]
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace InvoiceWebApp.Controllers {
+	[EnableCors("AllowAll")]
     [Produces("application/json")]
     [Route("api/has_address")]
     public class DebtorHasAddressesController : Controller
     {
-        private IDebtorHasAddressRepository _repo;
+        private IDebtorHasAddressRepository _repo { get; set; }
 
-        public DebtorHasAddressesController()
+        public DebtorHasAddressesController(IDebtorHasAddressRepository repo)
         {
-            this._repo = new DebtorHasAddressRepository();
-        }
+			this._repo = repo;
+		}
 
-        /// <summary>
-        /// Gets all relations between debtors and addresses.
-        /// </summary>
-        [HttpGet("getAll")]
+		/// <summary>
+		/// Gets all relations between debtors and addresses.
+		/// </summary>
+		[HttpGet("getAll")]
         [ProducesResponseType(typeof(IEnumerable<DebtorHasAddressViewModel>), 200)]
         [ProducesResponseType(typeof(void), 400)]
         [ProducesResponseType(typeof(void), 500)]
